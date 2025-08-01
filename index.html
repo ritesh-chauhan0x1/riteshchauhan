@@ -3,404 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ritesh Chauhan - Interactive Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            overflow-x: hidden;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Theme Variables */
-        :root {
-            --primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-bg: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --accent: #ff6b6b;
-            --glow: rgba(102, 126, 234, 0.4);
-        }
-
-        .theme-dark {
-            --primary-bg: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0f0f23 100%);
-            --secondary-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --accent: #00d4aa;
-            --glow: rgba(0, 212, 170, 0.3);
-        }
-
-        .theme-neon {
-            --primary-bg: linear-gradient(135deg, #0f0f23 0%, #1a0033 50%, #0d0221 100%);
-            --secondary-bg: rgba(255, 0, 255, 0.1);
-            --text-primary: #ff00ff;
-            --text-secondary: #00ffff;
-            --accent: #ffff00;
-            --glow: rgba(255, 0, 255, 0.5);
-        }
-
-        .theme-ocean {
-            --primary-bg: linear-gradient(135deg, #2196F3 0%, #21CBF3 50%, #00BCD4 100%);
-            --secondary-bg: rgba(255, 255, 255, 0.15);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.9);
-            --accent: #FF5722;
-            --glow: rgba(33, 150, 243, 0.4);
-        }
-
-        .theme-sunset {
-            --primary-bg: linear-gradient(135deg, #ff7e5f 0%, #feb47b 50%, #ff6a88 100%);
-            --secondary-bg: rgba(255, 255, 255, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.9);
-            --accent: #4facfe;
-            --glow: rgba(255, 126, 95, 0.4);
-        }
-
-        /* Background and Layout */
-        .main-container {
-            min-height: 100vh;
-            background: var(--primary-bg);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* Animated Background Particles */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .particle:nth-child(odd) {
-            animation-delay: -2s;
-            animation-direction: reverse;
-        }
-
-        .particle:nth-child(even) {
-            animation-delay: -4s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(-100px) rotate(180deg);
-                opacity: 1;
-            }
-        }
-
-        /* Main Content */
-        .content {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-            padding: 2rem;
-        }
-
-        .name {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 900;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px var(--glow);
-            animation: glow 2s ease-in-out infinite alternate;
-            letter-spacing: -0.02em;
-            line-height: 0.9;
-            background: linear-gradient(45deg, var(--text-primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 20px var(--glow);
-            }
-            to {
-                text-shadow: 0 0 30px var(--glow), 0 0 40px var(--glow);
-            }
-        }
-
-        .title {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            opacity: 0;
-            animation: slideUp 1s ease-out 0.5s forwards;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .description {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            line-height: 1.6;
-            opacity: 0;
-            animation: slideUp 1s ease-out 1s forwards;
-        }
-
-        /* Interactive Elements */
-        .interactive-area {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-            opacity: 0;
-            animation: slideUp 1s ease-out 1.5s forwards;
-        }
-
-        .theme-button {
-            padding: 1rem 2rem;
-            background: var(--secondary-bg);
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .theme-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border-color: var(--text-primary);
-        }
-
-        .theme-button:active {
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        .theme-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .theme-button:hover::before {
-            left: 100%;
-        }
-
-        /* Floating Geometric Shapes */
-        .geometric-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-            animation: rotate 20s linear infinite;
-        }
-
-        .shape:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            width: 100px;
-            height: 100px;
-            background: var(--accent);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation-duration: 15s;
-        }
-
-        .shape:nth-child(2) {
-            top: 20%;
-            right: 15%;
-            width: 80px;
-            height: 80px;
-            background: var(--text-primary);
-            border-radius: 50%;
-            animation-duration: 25s;
-            animation-direction: reverse;
-        }
-
-        .shape:nth-child(3) {
-            bottom: 15%;
-            left: 20%;
-            width: 120px;
-            height: 120px;
-            background: var(--accent);
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-            animation-duration: 18s;
-        }
-
-        .shape:nth-child(4) {
-            bottom: 25%;
-            right: 10%;
-            width: 60px;
-            height: 60px;
-            background: var(--text-secondary);
-            transform: rotate(45deg);
-            animation-duration: 22s;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg) translateX(50px) rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg) translateX(50px) rotate(-360deg);
-            }
-        }
-
-        /* Mouse Cursor Effect */
-        .cursor-glow {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, var(--accent), transparent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1000;
-            transition: transform 0.1s ease-out;
-            mix-blend-mode: difference;
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 2s forwards;
-        }
-
-        .scroll-arrow {
-            display: block;
-            margin: 0.5rem auto;
-            width: 2px;
-            height: 30px;
-            background: var(--accent);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .interactive-area {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .theme-button {
-                width: 200px;
-            }
-
-            .content {
-                padding: 1rem;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeOut 1s ease-out 2s forwards;
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.2em;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.4;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-    </style>
+    <title>Ritesh Chauhan - Full Stack Developer | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="loading">
@@ -409,7 +15,262 @@
 
     <div class="cursor-glow"></div>
 
-    <div class="main-container">
+    <!-- Admin Login Icon -->
+    <div class="admin-icon" id="adminIcon" title="Admin Login">
+        ⚙️
+    </div>
+
+    <!-- Theme Switcher - Left Side -->
+    <div class="theme-switcher">
+        <div class="theme-icon" data-theme="default" title="Cosmic">🌌</div>
+        <div class="theme-icon" data-theme="dark" title="Dark Matter">🌑</div>
+        <div class="theme-icon" data-theme="neon" title="Neon Cyber">🌈</div>
+        <div class="theme-icon" data-theme="ocean" title="Ocean Depths">🌊</div>
+        <div class="theme-icon" data-theme="sunset" title="Sunset Vibes">🌅</div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h2>🔐 Admin Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard hidden">
+        <div class="dashboard-header">
+            <h2>🛠️ Admin Dashboard</h2>
+            <div class="header-actions">
+                <button onclick="previewChanges()" class="btn btn-preview">👀 Preview</button>
+                <button onclick="exportData()" class="btn btn-export">📥 Export</button>
+                <button onclick="importData()" class="btn btn-import">📤 Import</button>
+                <button onclick="resetToDefaults()" class="btn btn-reset">🔄 Reset</button>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+        </div>
+        
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="profile">👤 Profile</button>
+            <button class="tab-btn" data-tab="content">📝 Content</button>
+            <button class="tab-btn" data-tab="projects">🚀 Projects</button>
+            <button class="tab-btn" data-tab="skills">⚡ Skills</button>
+            <button class="tab-btn" data-tab="social">🌐 Social</button>
+            <button class="tab-btn" data-tab="hobbies">🎮 Hobbies</button>
+            <button class="tab-btn" data-tab="achievements">🏆 Achievements</button>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Profile Tab -->
+            <div id="profile-tab" class="tab-content active">
+                <h3>Profile Information</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="editName">Full Name:</label>
+                        <input type="text" id="editName" value="Ritesh Chauhan">
+                    </div>
+                    <div class="form-group">
+                        <label for="editTitle">Title/Position:</label>
+                        <input type="text" id="editTitle" value="Full Stack Developer & CSE Student">
+                    </div>
+                    <div class="form-group">
+                        <label for="editLocation">Location:</label>
+                        <input type="text" id="editLocation" value="Birgunj, Nepal">
+                    </div>
+                    <div class="form-group">
+                        <label for="editEducation">Current Education:</label>
+                        <input type="text" id="editEducation" value="4th Year B.Tech CSE at KIIT">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editPhoto">Profile Photo URL:</label>
+                    <input type="url" id="editPhoto" placeholder="Enter image URL">
+                    <small>Leave empty to use emoji avatar</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editBio">Bio/Description:</label>
+                    <textarea id="editBio" rows="4">🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal
+Passionate about creating innovative digital solutions and bringing ideas to life through code.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resumeUpload">Upload Resume PDF:</label>
+                    <input type="file" id="resumeUpload" accept=".pdf">
+                    <small>Current: No file uploaded</small>
+                </div>
+                
+                <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+            </div>
+
+            <!-- Content Tab -->
+            <div id="content-tab" class="tab-content">
+                <h3>About Me Content</h3>
+                <div class="form-group">
+                    <label for="editAbout">About Me Description:</label>
+                    <textarea id="editAbout" rows="8">Hello! I'm Ritesh, a passionate Computer Science Engineering student from Nepal, currently pursuing my B.Tech at KIIT University. Born and raised in the vibrant city of Birgunj, I discovered my love for technology and programming during my early college years.</textarea>
+                </div>
+                
+                <div class="stats-editor">
+                    <h4>Profile Statistics</h4>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="yearsInTech">Years in Tech:</label>
+                            <input type="number" id="yearsInTech" value="4">
+                        </div>
+                        <div class="form-group">
+                            <label for="projectsCount">Projects Completed:</label>
+                            <input type="number" id="projectsCount" value="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="leetcodeCount">LeetCode Solved:</label>
+                            <input type="number" id="leetcodeCount" value="100">
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="saveContent()">Save Content</button>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="projects-tab" class="tab-content">
+                <h3>Manage Projects</h3>
+                <div class="project-manager">
+                    <div class="projects-list" id="projectsList">
+                        <!-- Projects will be loaded dynamically -->
+                    </div>
+                    <button class="btn btn-primary" onclick="addNewProject()">+ Add New Project</button>
+                </div>
+            </div>
+
+            <!-- Skills Tab -->
+            <div id="skills-tab" class="tab-content">
+                <h3>Manage Skills</h3>
+                <div class="skills-manager">
+                    <div class="skill-categories" id="skillCategories">
+                        <!-- Skills will be loaded dynamically -->
+                    </div>
+                    <button class="btn btn-primary" onclick="addNewSkill()">+ Add New Skill</button>
+                </div>
+            </div>
+
+            <!-- Social Tab -->
+            <div id="social-tab" class="tab-content">
+                <h3>Social Media Links</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="instagramUrl">Instagram:</label>
+                        <input type="url" id="instagramUrl" value="https://instagram.com/riteshchauhan_15">
+                    </div>
+                    <div class="form-group">
+                        <label for="facebookUrl">Facebook:</label>
+                        <input type="url" id="facebookUrl" value="https://facebook.com/riteshchauhan_15">
+                    </div>
+                    <div class="form-group">
+                        <label for="githubUrl">GitHub:</label>
+                        <input type="url" id="githubUrl" value="https://github.com/ritesh-chauhan0x1">
+                    </div>
+                    <div class="form-group">
+                        <label for="leetcodeUrl">LeetCode:</label>
+                        <input type="url" id="leetcodeUrl" value="https://leetcode.com/u/riteshchauhn_15">
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsappUrl">WhatsApp:</label>
+                        <input type="url" id="whatsappUrl" value="https://wa.me/+919337940768">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailUrl">Email:</label>
+                        <input type="email" id="emailUrl" value="22054368@kiit.ac.in">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="saveSocial()">Save Social Links</button>
+            </div>
+
+            <!-- Hobbies Tab -->
+            <div id="hobbies-tab" class="tab-content">
+                <h3>Hobbies & Interests</h3>
+                <div class="hobbies-manager">
+                    <div class="hobbies-list" id="hobbiesList">
+                        <!-- Hobbies will be loaded dynamically -->
+                    </div>
+                    <div class="add-hobby">
+                        <input type="text" id="newHobby" placeholder="Enter hobby/interest">
+                        <input type="text" id="newHobbyIcon" placeholder="Emoji icon">
+                        <button class="btn btn-primary" onclick="addHobby()">Add Hobby</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Tab -->
+            <div id="achievements-tab" class="tab-content">
+                <h3>Achievements & Awards</h3>
+                <div class="achievements-manager">
+                    <div class="achievements-list" id="achievementsList">
+                        <!-- Achievements will be loaded dynamically -->
+                    </div>
+                    <div class="add-achievement">
+                        <input type="text" id="newAchievement" placeholder="Achievement title">
+                        <input type="text" id="newAchievementDesc" placeholder="Description">
+                        <input type="text" id="newAchievementDate" placeholder="Date (YYYY)">
+                        <button class="btn btn-primary" onclick="addAchievement()">Add Achievement</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Navigation -->
+    <nav class="social-nav">
+        <a href="https://instagram.com/riteshchauhan_15" class="social-link instagram" target="_blank" title="Instagram">
+            📷
+        </a>
+        <a href="https://facebook.com/riteshchauhan_15" class="social-link facebook" target="_blank" title="Facebook">
+            📘
+        </a>
+        <a href="https://github.com/ritesh-chauhan0x1" class="social-link github" target="_blank" title="GitHub">
+            💻
+        </a>
+        <a href="https://leetcode.com/u/riteshchauhn_15" class="social-link leetcode" target="_blank" title="LeetCode">
+            🏆
+        </a>
+        <a href="https://wa.me/+919337940768" class="social-link whatsapp" target="_blank" title="WhatsApp">
+            💬
+        </a>
+        <a href="mailto:22054368@kiit.ac.in" class="social-link gmail" target="_blank" title="Gmail">
+            📧
+        </a>
+    </nav>
+
+    <!-- Navigation Menu -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#home" class="logo">RC</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#resume" class="resume-btn">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
         <div class="particles"></div>
         
         <div class="geometric-shapes">
@@ -419,235 +280,400 @@
             <div class="shape"></div>
         </div>
 
-        <div class="content">
+        <div class="hero-content">
             <h1 class="name">RITESH CHAUHAN</h1>
-            <p class="title">Creative Developer & Digital Artist</p>
+            <p class="title">Full Stack Developer & CSE Student</p>
             <p class="description">
-                Crafting immersive digital experiences through innovative design and cutting-edge technology. 
-                Welcome to my interactive universe where creativity meets functionality.
+                🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal
+                <br>Passionate about creating innovative digital solutions and bringing ideas to life through code.
             </p>
             
-            <div class="interactive-area">
-                <button class="theme-button" data-theme="default">Cosmic</button>
-                <button class="theme-button" data-theme="dark">Dark Matter</button>
-                <button class="theme-button" data-theme="neon">Neon Cyber</button>
-                <button class="theme-button" data-theme="ocean">Ocean Depths</button>
-                <button class="theme-button" data-theme="sunset">Sunset Vibes</button>
+            <div class="cta-buttons">
+                <a href="#about" class="btn btn-primary">Explore My Journey</a>
+                <a href="#resume" class="btn btn-secondary">Download Resume</a>
             </div>
         </div>
 
         <div class="scroll-indicator">
-            <span>Explore Themes</span>
+            <span>Scroll to Explore</span>
             <div class="scroll-arrow"></div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // Theme System
-        const themeButtons = document.querySelectorAll('.theme-button');
-        const body = document.body;
-
-        themeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const theme = this.dataset.theme;
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">About Me</h2>
+            <div class="about-content">
+                <div class="profile-card reveal">
+                    <div class="profile-avatar">👨‍💻</div>
+                    <h3>Ritesh Chauhan</h3>
+                    <p class="profile-location">📍 From Birgunj, Nepal</p>
+                    <p class="profile-status">🎓 4th Year B.Tech CSE at KIIT</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Years in Tech</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">LeetCode Solved</span>
+                        </div>
+                    </div>
+                </div>
                 
-                // Remove all theme classes
-                body.classList.remove('theme-dark', 'theme-neon', 'theme-ocean', 'theme-sunset');
+                <div class="about-text reveal">
+                    <h3>My Journey 🚀</h3>
+                    <p>
+                        Hello! I'm Ritesh, a passionate Computer Science Engineering student from Nepal, currently pursuing my B.Tech 
+                        at KIIT University. Born and raised in the vibrant city of Birgunj, I discovered my love for technology 
+                        and programming during my early college years.
+                    </p>
+                    <p>
+                        My journey in tech started with curiosity about how websites and applications work. This curiosity transformed 
+                        into a deep passion for full-stack development, where I enjoy both the creative aspects of frontend design 
+                        and the logical challenges of backend development.
+                    </p>
+                    <p>
+                        🎯 <strong>Current Focus:</strong> Building scalable web applications, mastering data structures & algorithms, 
+                        and contributing to open-source projects. I'm particularly interested in modern web technologies like React, 
+                        Node.js, and cloud computing.
+                    </p>
+                    <p>
+                        When I'm not coding, you'll find me exploring new technologies, participating in hackathons, or enjoying 
+                        college life with friends. I believe in continuous learning and am always excited to take on new challenges!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category reveal">
+                    <h3>💻 Frontend Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">HTML5/CSS3 <span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="95"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">JavaScript (ES6+) <span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">React.js <span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Vue.js <span>75%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <h3>⚙️ Backend Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">Node.js <span>88%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Python <span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Express.js <span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Java <span>75%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <h3>🗄️ Database & Tools</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">MongoDB <span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">MySQL <span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Git/GitHub <span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Docker <span>70%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <h3>🚀 Other Technologies</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">Data Structures & Algorithms <span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">System Design <span>75%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Cloud Platforms (AWS) <span>70%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Machine Learning <span>65%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Education & College Life</h2>
+            <div class="education-timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon">🎓</div>
+                    <div class="timeline-content">
+                        <h3>Bachelor of Technology - Computer Science Engineering</h3>
+                        <h4>Kalinga Institute of Industrial Technology (KIIT), Bhubaneswar</h4>
+                        <span class="timeline-date">2021 - 2025 (Expected)</span>
+                        <p>Currently in 4th year with a focus on Full Stack Development, Data Structures & Algorithms, and Software Engineering.</p>
+                        <div class="highlights">
+                            <span class="highlight">CGPA: 8.5+</span>
+                            <span class="highlight">Dean's List</span>
+                            <span class="highlight">Tech Club Member</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon">📚</div>
+                    <div class="timeline-content">
+                        <h3>Higher Secondary Education</h3>
+                        <h4>Birgunj, Nepal</h4>
+                        <span class="timeline-date">2019 - 2021</span>
+                        <p>Completed +2 Science with Mathematics, Physics, Chemistry, and Biology. Developed strong analytical and problem-solving skills.</p>
+                        <div class="highlights">
+                            <span class="highlight">Science Stream</span>
+                            <span class="highlight">Mathematics Excellence</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="college-life reveal">
+                    <h3>🏫 College Life Highlights</h3>
+                    <div class="college-grid">
+                        <div class="college-item">
+                            <div class="college-icon">👥</div>
+                            <h4>Tech Communities</h4>
+                            <p>Active member of coding clubs and tech communities at KIIT</p>
+                        </div>
+                        <div class="college-item">
+                            <div class="college-icon">🏆</div>
+                            <h4>Hackathons</h4>
+                            <p>Participated in multiple hackathons and coding competitions</p>
+                        </div>
+                        <div class="college-item">
+                            <div class="college-icon">📖</div>
+                            <h4>Research Projects</h4>
+                            <p>Working on innovative projects in web development and AI</p>
+                        </div>
+                        <div class="college-item">
+                            <div class="college-icon">🌟</div>
+                            <h4>Leadership</h4>
+                            <p>Led team projects and mentored junior students</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-icon">🌐</div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-stack e-commerce application with React frontend and Node.js backend, featuring user authentication, payment integration, and admin dashboard.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Stripe</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-icon">📱</div>
+                    <h3>Task Management App</h3>
+                    <p>Responsive task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">Socket.io</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal featured-project">
+                    <div class="project-icon">🎓</div>
+                    <h3>Kiitians Finder</h3>
+                    <p>A comprehensive student directory platform for KIIT University that allows searching student details by roll number, accessing contact information, email, course details, and academic information. Built specifically for the KIIT community.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Express.js</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://kiit.pages.dev" class="btn btn-primary" target="_blank">Live Demo</a>
+                        <a href="https://github.com/ritesh-chauhan0x1/kiitians-finder" class="btn btn-secondary" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-icon">📊</div>
+                    <h3>Data Visualization Dashboard</h3>
+                    <p>Interactive dashboard for data analysis and visualization with real-time charts, filters, and export functionality.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">D3.js</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-icon">🔐</div>
+                    <h3>Blockchain Voting System</h3>
+                    <p>Secure voting system built on blockchain technology ensuring transparency and immutability of votes.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Solidity</span>
+                        <span class="tech-tag">Web3.js</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Ethereum</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">GitHub</a>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-icon">🎮</div>
+                    <h3>Interactive Portfolio</h3>
+                    <p>This very portfolio you're viewing! Built with modern web technologies and featuring smooth animations and responsive design.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Animations</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Live Demo</a>
+                        <a href="#" class="btn btn-secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Resume</h2>
+            <div class="resume-content reveal">
+                <div class="resume-preview">
+                    <div class="resume-header">
+                        <h3>📄 My Resume</h3>
+                        <p>Download my latest resume to know more about my experience, skills, and achievements.</p>
+                    </div>
+                    <div class="resume-actions">
+                        <a href="#" class="btn btn-primary resume-download" id="downloadResume">
+                            📥 Download PDF
+                        </a>
+                        <a href="#" class="btn btn-secondary" id="viewResume">
+                            👁️ View Online
+                        </a>
+                    </div>
+                </div>
                 
-                // Add new theme class (except for default)
-                if (theme !== 'default') {
-                    body.classList.add(`theme-${theme}`);
-                }
+                <div class="resume-highlights">
+                    <h4>Resume Highlights</h4>
+                    <ul>
+                        <li>🎓 B.Tech Computer Science Engineering Student (4th Year)</li>
+                        <li>💻 Full Stack Web Developer</li>
+                        <li>🏆 100+ LeetCode Problems Solved</li>
+                        <li>🚀 50+ Projects Completed</li>
+                        <li>🌟 Active in Tech Communities</li>
+                        <li>📍 Available for Internships & Full-time Opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                // Add click animation
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Get In Touch</h2>
+            <div class="contact-content reveal">
+                <p>Let's connect and discuss opportunities, collaborations, or just have a chat about technology!</p>
+                <div class="contact-links">
+                    <a href="mailto:22054368@kiit.ac.in" class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <h4>Email</h4>
+                        <span>22054368@kiit.ac.in</span>
+                    </a>
+                    <a href="https://wa.me/+919337940768" class="contact-item" target="_blank">
+                        <div class="contact-icon">💬</div>
+                        <h4>WhatsApp</h4>
+                        <span>+91 93379 40768</span>
+                    </a>
+                    <a href="https://github.com/ritesh-chauhan0x1" class="contact-item" target="_blank">
+                        <div class="contact-icon">💻</div>
+                        <h4>GitHub</h4>
+                        <span>@ritesh-chauhan0x1</span>
+                    </a>
+                    <a href="https://leetcode.com/u/riteshchauhn_15" class="contact-item" target="_blank">
+                        <div class="contact-icon">🏆</div>
+                        <h4>LeetCode</h4>
+                        <span>@riteshchauhn_15</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                // Trigger particles burst
-                createParticlesBurst(event.clientX, event.clientY);
-            });
-
-            // Hover effect
-            button.addEventListener('mouseenter', function() {
-                createHoverParticles(this);
-            });
-        });
-
-        // Cursor Glow Effect
-        const cursorGlow = document.querySelector('.cursor-glow');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            
-            cursorGlow.style.left = cursorX - 10 + 'px';
-            cursorGlow.style.top = cursorY - 10 + 'px';
-            
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Dynamic Particles System
-        function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            const particleCount = 20;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random size and position
-                const size = Math.random() * 8 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                
-                // Random animation delay
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Particles Burst Effect
-        function createParticlesBurst(x, y) {
-            const burstCount = 12;
-            
-            for (let i = 0; i < burstCount; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'fixed';
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                particle.style.width = '4px';
-                particle.style.height = '4px';
-                particle.style.background = 'var(--accent)';
-                particle.style.borderRadius = '50%';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '1001';
-                
-                const angle = (i / burstCount) * Math.PI * 2;
-                const velocity = 100 + Math.random() * 50;
-                const vx = Math.cos(angle) * velocity;
-                const vy = Math.sin(angle) * velocity;
-                
-                document.body.appendChild(particle);
-                
-                let particleX = x;
-                let particleY = y;
-                let opacity = 1;
-                
-                function animateParticle() {
-                    particleX += vx * 0.02;
-                    particleY += vy * 0.02;
-                    opacity -= 0.02;
-                    
-                    particle.style.left = particleX + 'px';
-                    particle.style.top = particleY + 'px';
-                    particle.style.opacity = opacity;
-                    
-                    if (opacity > 0) {
-                        requestAnimationFrame(animateParticle);
-                    } else {
-                        particle.remove();
-                    }
-                }
-                
-                animateParticle();
-            }
-        }
-
-        // Hover Particles
-        function createHoverParticles(element) {
-            const rect = element.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.style.position = 'fixed';
-                    particle.style.left = centerX + (Math.random() - 0.5) * 50 + 'px';
-                    particle.style.top = centerY + (Math.random() - 0.5) * 50 + 'px';
-                    particle.style.width = '2px';
-                    particle.style.height = '2px';
-                    particle.style.background = 'var(--text-primary)';
-                    particle.style.borderRadius = '50%';
-                    particle.style.pointerEvents = 'none';
-                    particle.style.zIndex = '1001';
-                    particle.style.opacity = '0.8';
-                    
-                    document.body.appendChild(particle);
-                    
-                    particle.animate([
-                        { transform: 'translateY(0px)', opacity: 0.8 },
-                        { transform: 'translateY(-30px)', opacity: 0 }
-                    ], {
-                        duration: 1000,
-                        easing: 'ease-out'
-                    }).onfinish = () => particle.remove();
-                }, i * 100);
-            }
-        }
-
-        // Parallax Effect for Geometric Shapes
-        document.addEventListener('mousemove', (e) => {
-            const shapes = document.querySelectorAll('.shape');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            shapes.forEach((shape, index) => {
-                const speed = (index + 1) * 0.5;
-                const moveX = (x - 0.5) * speed * 50;
-                const moveY = (y - 0.5) * speed * 50;
-                
-                shape.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${index * 90}deg)`;
-            });
-        });
-
-        // Text Animation on Click
-        const nameElement = document.querySelector('.name');
-        nameElement.addEventListener('click', function() {
-            this.style.animation = 'none';
-            setTimeout(() => {
-                this.style.animation = 'glow 0.5s ease-in-out';
-            }, 10);
-            
-            // Create text explosion effect
-            createParticlesBurst(
-                window.innerWidth / 2, 
-                this.getBoundingClientRect().top + this.offsetHeight / 2
-            );
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // Add entrance animation delay to elements
-            const animatedElements = document.querySelectorAll('.name, .title, .description, .interactive-area');
-            animatedElements.forEach((el, index) => {
-                el.style.animationDelay = (index * 0.3) + 's';
-            });
-        });
-
-        // Performance optimization - limit particle animations on mobile
-        if (window.innerWidth < 768) {
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach((particle, index) => {
-                if (index > 10) particle.remove();
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
