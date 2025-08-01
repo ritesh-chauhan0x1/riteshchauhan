@@ -74,6 +74,10 @@ body {
     box-shadow: 0 6px 20px var(--shadow);
 }
 
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
 .theme-toggle i {
     color: var(--accent);
     font-size: 1.2rem;

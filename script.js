@@ -297,11 +297,12 @@ function saveProfile() {
         education: document.getElementById('editEducation').value,
         photo: document.getElementById('editPhoto').value,
         bio: document.getElementById('editBio').value,
-        resumeUrl: '' // Will be handled by file upload
+        resumeUrl: document.getElementById('resumeUpload').value || 'https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link'
     };
     
     localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(profileData));
     updatePortfolioDisplay();
+    updateResumeLinks(profileData.resumeUrl);
     showMessage('Profile updated successfully!', 'success');
 }
 
@@ -529,6 +530,32 @@ function updateSocialLinks() {
     if (contactLinks[0]) contactLinks[0].href = `mailto:${social.email}`;
     if (contactLinks[0] && contactLinks[0].querySelector('span')) {
         contactLinks[0].querySelector('span').textContent = social.email;
+    }
+}
+
+function updateResumeLinks(resumeUrl) {
+    // Update resume download and view links
+    const downloadResume = document.getElementById('downloadResume');
+    const viewResume = document.getElementById('viewResume');
+    
+    if (downloadResume && resumeUrl) {
+        // Convert Google Drive view link to download link
+        const fileId = resumeUrl.match(/\/file\/d\/([a-zA-Z0-9-_]+)/);
+        if (fileId) {
+            downloadResume.href = `https://drive.google.com/uc?export=download&id=${fileId[1]}`;
+        } else {
+            downloadResume.href = resumeUrl;
+        }
+    }
+    
+    if (viewResume && resumeUrl) {
+        viewResume.href = resumeUrl;
+    }
+    
+    // Update hero section resume button
+    const heroResumeBtn = document.querySelector('.cta-buttons .btn-secondary');
+    if (heroResumeBtn && resumeUrl) {
+        heroResumeBtn.href = resumeUrl;
     }
 }
 
@@ -904,63 +931,37 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeDefaultMemories();
 });
 
-// Theme System
-const themeIcons = document.querySelectorAll('.theme-icon');
-const body = document.body;
+// Simple Theme Toggle - Light/Dark Mode Only
+function toggleTheme() {
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+    
+    // Toggle between light and dark mode
+    if (body.classList.contains('theme-dark')) {
+        // Switch to light mode
+        body.classList.remove('theme-dark');
+        themeIcon.className = 'fas fa-moon';
+        localStorage.setItem('portfolioTheme', 'light');
+    } else {
+        // Switch to dark mode
+        body.classList.add('theme-dark');
+        themeIcon.className = 'fas fa-sun';
+        localStorage.setItem('portfolioTheme', 'dark');
+    }
+}
 
-themeIcons.forEach(icon => {
-    icon.addEventListener('click', function() {
-        const theme = this.dataset.theme;
-        
-        // Remove active class from all icons
-        themeIcons.forEach(i => i.classList.remove('active'));
-        // Add active class to clicked icon
-        this.classList.add('active');
-        
-        // Remove all theme classes
-        body.classList.remove('theme-dark', 'theme-neon', 'theme-ocean', 'theme-sunset');
-        
-        // Add new theme class (except for default)
-        if (theme !== 'default') {
-            body.classList.add(`theme-${theme}`);
-        }
-
-        // Add click animation
-        this.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-            this.style.transform = '';
-        }, 150);
-
-        // Trigger particles burst
-        createParticlesBurst(
-            this.getBoundingClientRect().left + 25,
-            this.getBoundingClientRect().top + 25
-        );
-        
-        // Save theme preference
-        localStorage.setItem('portfolioTheme', theme);
-    });
-
-    // Hover effect
-    icon.addEventListener('mouseenter', function() {
-        createHoverParticles(this);
-    });
-});
-
-// Load saved theme
+// Load saved theme on page load
 document.addEventListener('DOMContentLoaded', function() {
     const savedTheme = localStorage.getItem('portfolioTheme');
-    if (savedTheme) {
-        const themeIcon = document.querySelector(`[data-theme="${savedTheme}"]`);
-        if (themeIcon) {
-            themeIcon.click();
-        }
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (savedTheme === 'dark') {
+        body.classList.add('theme-dark');
+        if (themeIcon) themeIcon.className = 'fas fa-sun';
     } else {
-        // Set ocean theme as default
-        const oceanTheme = document.querySelector('[data-theme="ocean"]');
-        if (oceanTheme) {
-            oceanTheme.click();
-        }
+        body.classList.remove('theme-dark');
+        if (themeIcon) themeIcon.className = 'fas fa-moon';
     }
 });
 
