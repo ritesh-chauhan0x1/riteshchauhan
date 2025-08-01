@@ -1,89 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ritesh Chauhan</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      transition: background 0.6s ease;
-      background-color: #ffffff;
-      color: #000000;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritesh Chauhan - Interactive Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      font-weight: bold;
-      cursor: pointer;
-      position: relative;
-      z-index: 1;
-    }
+        body {
+            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      background-color: inherit;
-      z-index: 0;
-      pointer-events: none;
-    }
+        /* Theme Variables */
+        :root {
+            --primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --accent: #ff6b6b;
+            --glow: rgba(102, 126, 234, 0.4);
+        }
 
-    .dark {
-      background-color: #1e1e1e;
-      color: #ffffff;
-    }
+        .theme-dark {
+            --primary-bg: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0f0f23 100%);
+            --secondary-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent: #00d4aa;
+            --glow: rgba(0, 212, 170, 0.3);
+        }
 
-    .circle.animate {
-      animation: zoom 0.8s ease forwards;
-    }
+        .theme-neon {
+            --primary-bg: linear-gradient(135deg, #0f0f23 0%, #1a0033 50%, #0d0221 100%);
+            --secondary-bg: rgba(255, 0, 255, 0.1);
+            --text-primary: #ff00ff;
+            --text-secondary: #00ffff;
+            --accent: #ffff00;
+            --glow: rgba(255, 0, 255, 0.5);
+        }
 
-    @keyframes zoom {
-      0% {
-        transform: scale(0);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(50);
-        opacity: 1;
-      }
-    }
-  </style>
+        .theme-ocean {
+            --primary-bg: linear-gradient(135deg, #2196F3 0%, #21CBF3 50%, #00BCD4 100%);
+            --secondary-bg: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.9);
+            --accent: #FF5722;
+            --glow: rgba(33, 150, 243, 0.4);
+        }
+
+        .theme-sunset {
+            --primary-bg: linear-gradient(135deg, #ff7e5f 0%, #feb47b 50%, #ff6a88 100%);
+            --secondary-bg: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.9);
+            --accent: #4facfe;
+            --glow: rgba(255, 126, 95, 0.4);
+        }
+
+        /* Background and Layout */
+        .main-container {
+            min-height: 100vh;
+            background: var(--primary-bg);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(odd) {
+            animation-delay: -2s;
+            animation-direction: reverse;
+        }
+
+        .particle:nth-child(even) {
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Main Content */
+        .content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .name {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px var(--glow);
+            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+            background: linear-gradient(45deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px var(--glow);
+            }
+            to {
+                text-shadow: 0 0 30px var(--glow), 0 0 40px var(--glow);
+            }
+        }
+
+        .title {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: slideUp 1s ease-out 1s forwards;
+        }
+
+        /* Interactive Elements */
+        .interactive-area {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 1.5s forwards;
+        }
+
+        .theme-button {
+            padding: 1rem 2rem;
+            background: var(--secondary-bg);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--text-primary);
+        }
+
+        .theme-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .theme-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .theme-button:hover::before {
+            left: 100%;
+        }
+
+        /* Floating Geometric Shapes */
+        .geometric-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-duration: 15s;
+        }
+
+        .shape:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            animation-duration: 18s;
+        }
+
+        .shape:nth-child(4) {
+            bottom: 25%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            background: var(--text-secondary);
+            transform: rotate(45deg);
+            animation-duration: 22s;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg) translateX(50px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translateX(50px) rotate(-360deg);
+            }
+        }
+
+        /* Mouse Cursor Effect */
+        .cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: transform 0.1s ease-out;
+            mix-blend-mode: difference;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2s forwards;
+        }
+
+        .scroll-arrow {
+            display: block;
+            margin: 0.5rem auto;
+            width: 2px;
+            height: 30px;
+            background: var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .interactive-area {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .theme-button {
+                width: 200px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeOut 1s ease-out 2s forwards;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container" id="text">Ritesh Chauhan</div>
+    <div class="loading">
+        <div class="loading-text">LOADING...</div>
+    </div>
 
-  <script>
-    const body = document.body;
-    const container = document.getElementById('text');
+    <div class="cursor-glow"></div>
 
-    container.addEventListener('click', function (e) {
-      const circle = document.createElement('div');
-      circle.classList.add('circle');
-      const size = Math.max(window.innerWidth, window.innerHeight) * 2;
-      circle.style.width = circle.style.height = size + 'px';
-      circle.style.left = (e.clientX - size / 2) + 'px';
-      circle.style.top = (e.clientY - size / 2) + 'px';
-      circle.style.backgroundColor = getComputedStyle(body).backgroundColor;
-      circle.classList.add('animate');
-      document.body.appendChild(circle);
+    <div class="main-container">
+        <div class="particles"></div>
+        
+        <div class="geometric-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
 
-      setTimeout(() => {
-        body.classList.toggle('dark');
-      }, 150);
+        <div class="content">
+            <h1 class="name">RITESH CHAUHAN</h1>
+            <p class="title">Creative Developer & Digital Artist</p>
+            <p class="description">
+                Crafting immersive digital experiences through innovative design and cutting-edge technology. 
+                Welcome to my interactive universe where creativity meets functionality.
+            </p>
+            
+            <div class="interactive-area">
+                <button class="theme-button" data-theme="default">Cosmic</button>
+                <button class="theme-button" data-theme="dark">Dark Matter</button>
+                <button class="theme-button" data-theme="neon">Neon Cyber</button>
+                <button class="theme-button" data-theme="ocean">Ocean Depths</button>
+                <button class="theme-button" data-theme="sunset">Sunset Vibes</button>
+            </div>
+        </div>
 
-      setTimeout(() => {
-        circle.remove();
-      }, 800);
-    });
-  </script>
+        <div class="scroll-indicator">
+            <span>Explore Themes</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+
+    <script>
+        // Theme System
+        const themeButtons = document.querySelectorAll('.theme-button');
+        const body = document.body;
+
+        themeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const theme = this.dataset.theme;
+                
+                // Remove all theme classes
+                body.classList.remove('theme-dark', 'theme-neon', 'theme-ocean', 'theme-sunset');
+                
+                // Add new theme class (except for default)
+                if (theme !== 'default') {
+                    body.classList.add(`theme-${theme}`);
+                }
+
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+
+                // Trigger particles burst
+                createParticlesBurst(event.clientX, event.clientY);
+            });
+
+            // Hover effect
+            button.addEventListener('mouseenter', function() {
+                createHoverParticles(this);
+            });
+        });
+
+        // Cursor Glow Effect
+        const cursorGlow = document.querySelector('.cursor-glow');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            
+            cursorGlow.style.left = cursorX - 10 + 'px';
+            cursorGlow.style.top = cursorY - 10 + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Dynamic Particles System
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size and position
+                const size = Math.random() * 8 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Particles Burst Effect
+        function createParticlesBurst(x, y) {
+            const burstCount = 12;
+            
+            for (let i = 0; i < burstCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = 'var(--accent)';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1001';
+                
+                const angle = (i / burstCount) * Math.PI * 2;
+                const velocity = 100 + Math.random() * 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                document.body.appendChild(particle);
+                
+                let particleX = x;
+                let particleY = y;
+                let opacity = 1;
+                
+                function animateParticle() {
+                    particleX += vx * 0.02;
+                    particleY += vy * 0.02;
+                    opacity -= 0.02;
+                    
+                    particle.style.left = particleX + 'px';
+                    particle.style.top = particleY + 'px';
+                    particle.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animateParticle);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                
+                animateParticle();
+            }
+        }
+
+        // Hover Particles
+        function createHoverParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.style.position = 'fixed';
+                    particle.style.left = centerX + (Math.random() - 0.5) * 50 + 'px';
+                    particle.style.top = centerY + (Math.random() - 0.5) * 50 + 'px';
+                    particle.style.width = '2px';
+                    particle.style.height = '2px';
+                    particle.style.background = 'var(--text-primary)';
+                    particle.style.borderRadius = '50%';
+                    particle.style.pointerEvents = 'none';
+                    particle.style.zIndex = '1001';
+                    particle.style.opacity = '0.8';
+                    
+                    document.body.appendChild(particle);
+                    
+                    particle.animate([
+                        { transform: 'translateY(0px)', opacity: 0.8 },
+                        { transform: 'translateY(-30px)', opacity: 0 }
+                    ], {
+                        duration: 1000,
+                        easing: 'ease-out'
+                    }).onfinish = () => particle.remove();
+                }, i * 100);
+            }
+        }
+
+        // Parallax Effect for Geometric Shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const moveX = (x - 0.5) * speed * 50;
+                const moveY = (y - 0.5) * speed * 50;
+                
+                shape.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${index * 90}deg)`;
+            });
+        });
+
+        // Text Animation on Click
+        const nameElement = document.querySelector('.name');
+        nameElement.addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'glow 0.5s ease-in-out';
+            }, 10);
+            
+            // Create text explosion effect
+            createParticlesBurst(
+                window.innerWidth / 2, 
+                this.getBoundingClientRect().top + this.offsetHeight / 2
+            );
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Add entrance animation delay to elements
+            const animatedElements = document.querySelectorAll('.name, .title, .description, .interactive-area');
+            animatedElements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.3) + 's';
+            });
+        });
+
+        // Performance optimization - limit particle animations on mobile
+        if (window.innerWidth < 768) {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                if (index > 10) particle.remove();
+            });
+        }
+    </script>
 </body>
 </html>
