@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAdminSystem();
     loadPortfolioData();
     
+    // Initialize the projects and photos on page load
+    setTimeout(() => {
+        loadProjectsToPublic();
+        loadPhotosToPublic();
+    }, 1000);
+    
     // Check if already logged in
     if (localStorage.getItem(STORAGE_KEYS.isLoggedIn) === 'true') {
         showDashboard();
@@ -172,26 +178,30 @@ function loadDashboardData() {
     const social = JSON.parse(localStorage.getItem(STORAGE_KEYS.social));
 
     // Load profile data
-    document.getElementById('editName').value = profile.name;
-    document.getElementById('editTitle').value = profile.title;
-    document.getElementById('editLocation').value = profile.location;
-    document.getElementById('editEducation').value = profile.education;
-    document.getElementById('editPhoto').value = profile.photo;
-    document.getElementById('editBio').value = profile.bio;
+    if (document.getElementById('editName')) document.getElementById('editName').value = profile.name;
+    if (document.getElementById('editTitle')) document.getElementById('editTitle').value = profile.title;
+    if (document.getElementById('editLocation')) document.getElementById('editLocation').value = profile.location;
+    if (document.getElementById('editEducation')) document.getElementById('editEducation').value = profile.education;
+    if (document.getElementById('editPhoto')) document.getElementById('editPhoto').value = profile.photo;
+    if (document.getElementById('editBio')) document.getElementById('editBio').value = profile.bio;
+    if (document.getElementById('resumeUpload')) document.getElementById('resumeUpload').value = profile.resumeUrl || 'https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link';
 
     // Load content data
-    document.getElementById('editAbout').value = content.about;
-    document.getElementById('yearsInTech').value = content.stats.yearsInTech;
-    document.getElementById('projectsCount').value = content.stats.projects;
-    document.getElementById('leetcodeCount').value = content.stats.leetcode;
+    if (document.getElementById('editAbout')) document.getElementById('editAbout').value = content.about;
+    if (document.getElementById('yearsInTech')) document.getElementById('yearsInTech').value = content.stats.yearsInTech;
+    if (document.getElementById('projectsCount')) document.getElementById('projectsCount').value = content.stats.projects;
+    if (document.getElementById('leetcodeCount')) document.getElementById('leetcodeCount').value = content.stats.leetcode;
 
     // Load social data
-    document.getElementById('instagramUrl').value = social.instagram;
-    document.getElementById('facebookUrl').value = social.facebook;
-    document.getElementById('githubUrl').value = social.github;
-    document.getElementById('leetcodeUrl').value = social.leetcode;
-    document.getElementById('whatsappUrl').value = social.whatsapp;
-    document.getElementById('emailUrl').value = social.email;
+    if (document.getElementById('instagramUrl')) document.getElementById('instagramUrl').value = social.instagram;
+    if (document.getElementById('facebookUrl')) document.getElementById('facebookUrl').value = social.facebook;
+    if (document.getElementById('githubUrl')) document.getElementById('githubUrl').value = social.github;
+    if (document.getElementById('leetcodeUrl')) document.getElementById('leetcodeUrl').value = social.leetcode;
+    if (document.getElementById('whatsappUrl')) document.getElementById('whatsappUrl').value = social.whatsapp;
+    if (document.getElementById('emailUrl')) document.getElementById('emailUrl').value = social.email;
+    
+    // Load uploaded photos
+    loadUploadedPhotos();
 }
 
 function loadTabData(tab) {
@@ -562,6 +572,127 @@ function updateResumeLinks(resumeUrl) {
 function loadPortfolioData() {
     updatePortfolioDisplay();
     updateSocialLinks();
+    loadProjectsToPublic();
+    loadMemoriesToPublic();
+    loadPhotosToPublic();
+}
+
+// Load projects to public section
+function loadProjectsToPublic() {
+    const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects)) || [];
+    const projectsGrid = document.querySelector('.projects-grid');
+    
+    if (projectsGrid && projects.length > 0) {
+        projectsGrid.innerHTML = projects.map(project => `
+            <div class="project-card ${project.featured ? 'featured-project' : ''} reveal">
+                <div class="project-icon">${project.icon || '🚀'}</div>
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="project-tech">
+                    ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+                <div class="project-links">
+                    <a href="${project.liveUrl}" class="btn btn-primary" target="_blank">Live Demo</a>
+                    <a href="${project.githubUrl}" class="btn btn-secondary" target="_blank">GitHub</a>
+                </div>
+            </div>
+        `).join('');
+        
+        // Re-trigger reveal animations
+        setTimeout(() => {
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.classList.add('animate');
+            });
+        }, 500);
+    }
+}
+
+// Load photos to public section
+function loadPhotosToPublic() {
+    const photos = JSON.parse(localStorage.getItem('portfolioPhotos')) || [];
+    const photosGrid = document.getElementById('photosGrid');
+    
+    if (photosGrid) {
+        if (photos.length > 0) {
+            photosGrid.innerHTML = photos.map(photo => `
+                <div class="photo-item">
+                    <img src="${photo.url}" alt="${photo.title}" loading="lazy">
+                    ${photo.title ? `<div class="photo-caption">${photo.title}</div>` : ''}
+                </div>
+            `).join('');
+        } else {
+            photosGrid.innerHTML = `
+                <div class="photo-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Photos will be uploaded by admin</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Photo upload functionality
+function addPhoto() {
+    const photoUpload = document.getElementById('photoUpload');
+    const photoTitle = document.getElementById('photoTitle');
+    
+    if (photoUpload.files.length === 0) {
+        showMessage('Please select at least one photo!', 'error');
+        return;
+    }
+    
+    Array.from(photoUpload.files).forEach(file => {
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photos = JSON.parse(localStorage.getItem('portfolioPhotos')) || [];
+                photos.push({
+                    url: e.target.result,
+                    title: photoTitle.value || '',
+                    id: Date.now() + Math.random()
+                });
+                localStorage.setItem('portfolioPhotos', JSON.stringify(photos));
+                loadPhotosToPublic();
+                loadUploadedPhotos();
+                showMessage('Photo uploaded successfully!', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Reset form
+    photoUpload.value = '';
+    photoTitle.value = '';
+}
+
+// Load uploaded photos in admin
+function loadUploadedPhotos() {
+    const photos = JSON.parse(localStorage.getItem('portfolioPhotos')) || [];
+    const uploadedPhotos = document.getElementById('uploadedPhotos');
+    
+    if (uploadedPhotos) {
+        uploadedPhotos.innerHTML = photos.map((photo, index) => `
+            <div class="uploaded-photo-item">
+                <img src="${photo.url}" alt="${photo.title}">
+                <div class="photo-actions">
+                    <button class="photo-delete-btn" onclick="deletePhoto(${index})">&times;</button>
+                </div>
+                ${photo.title ? `<div class="photo-caption">${photo.title}</div>` : ''}
+            </div>
+        `).join('');
+    }
+}
+
+// Delete photo
+function deletePhoto(index) {
+    if (confirm('Are you sure you want to delete this photo?')) {
+        const photos = JSON.parse(localStorage.getItem('portfolioPhotos')) || [];
+        photos.splice(index, 1);
+        localStorage.setItem('portfolioPhotos', JSON.stringify(photos));
+        loadPhotosToPublic();
+        loadUploadedPhotos();
+        showMessage('Photo deleted successfully!', 'success');
+    }
 }
 
 // Message System
@@ -940,18 +1071,20 @@ function toggleTheme() {
     if (body.classList.contains('theme-dark')) {
         // Switch to light mode
         body.classList.remove('theme-dark');
-        themeIcon.className = 'fas fa-moon';
+        if (themeIcon) themeIcon.className = 'fas fa-moon';
         localStorage.setItem('portfolioTheme', 'light');
+        showMessage('Light mode activated! ☀️', 'success');
     } else {
         // Switch to dark mode
         body.classList.add('theme-dark');
-        themeIcon.className = 'fas fa-sun';
+        if (themeIcon) themeIcon.className = 'fas fa-sun';
         localStorage.setItem('portfolioTheme', 'dark');
+        showMessage('Dark mode activated! 🌙', 'success');
     }
 }
 
-// Load saved theme on page load
-document.addEventListener('DOMContentLoaded', function() {
+// Load saved theme on page load - Enhanced
+function initializeTheme() {
     const savedTheme = localStorage.getItem('portfolioTheme');
     const body = document.body;
     const themeIcon = document.getElementById('theme-icon');
@@ -963,6 +1096,12 @@ document.addEventListener('DOMContentLoaded', function() {
         body.classList.remove('theme-dark');
         if (themeIcon) themeIcon.className = 'fas fa-moon';
     }
+}
+
+// Initialize theme immediately and on DOM load
+initializeTheme();
+document.addEventListener('DOMContentLoaded', function() {
+    initializeTheme();
 });
 
 // Social Media Links Interactions

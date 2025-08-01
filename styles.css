@@ -29,6 +29,8 @@ body {
     --success: #28a745;
     --warning: #ffc107;
     --danger: #dc3545;
+    --primary-color: #007bff;
+    --glow: rgba(0, 123, 255, 0.3);
 }
 
 .theme-dark {
@@ -41,6 +43,8 @@ body {
     --accent-secondary: #1c7ed6;
     --shadow: rgba(0, 0, 0, 0.3);
     --border: #404040;
+    --primary-color: #1e90ff;
+    --glow: rgba(30, 144, 255, 0.3);
 }
 
 /* Background and Layout */
@@ -178,17 +182,20 @@ body {
     width: 100%;
 }
 
-/* Photos Section */
+/* Photos Section - Vertical Layout */
 .photos-section {
     padding: 6rem 2rem 4rem;
     background: var(--secondary-bg);
 }
 
 .photos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
     margin-top: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .photo-item {
@@ -197,6 +204,7 @@ body {
     overflow: hidden;
     box-shadow: 0 5px 15px var(--shadow);
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .photo-item:hover {
@@ -206,14 +214,17 @@ body {
 
 .photo-item img {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
+    display: block;
 }
 
 .photo-caption {
-    padding: 1rem;
+    padding: 1.5rem;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 1rem;
+    text-align: center;
+    background: var(--card-bg);
 }
 
 .photo-placeholder {
@@ -224,9 +235,10 @@ body {
     background: var(--card-bg);
     border: 2px dashed var(--border);
     border-radius: 15px;
-    padding: 3rem;
+    padding: 4rem 2rem;
     text-align: center;
     min-height: 200px;
+    width: 100%;
 }
 
 .photo-placeholder i {
@@ -238,6 +250,7 @@ body {
 .photo-placeholder p {
     color: var(--text-secondary);
     font-style: italic;
+    font-size: 1.1rem;
 }
 
 /* Photo Uploader in Admin */
@@ -305,12 +318,15 @@ body {
 }
 
 .name {
-    font-size: clamp(3rem, 8vw, 8rem);
+    font-size: clamp(2.5rem, 8vw, 6rem);
     font-weight: 900;
     color: var(--text-primary);
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
-    line-height: 0.9;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
 }
 
 @keyframes fadeInUp {
@@ -1293,6 +1309,26 @@ body {
     .item-actions {
         width: 100%;
         justify-content: flex-end;
+    }
+    
+    /* Hero responsive */
+    .name {
+        font-size: clamp(2rem, 6vw, 4rem);
+        white-space: normal;
+        line-height: 1.2;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .photos-grid {
+        margin-top: 2rem;
+        gap: 1.5rem;
+    }
+    
+    .photo-item img {
+        height: 250px;
     }
 }
 
