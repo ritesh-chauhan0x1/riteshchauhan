@@ -14,59 +14,59 @@ body {
 
 /* Theme Variables */
 :root {
-    --primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --secondary-bg: rgba(255, 255, 255, 0.1);
-    --card-bg: rgba(255, 255, 255, 0.15);
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.8);
-    --accent: #ff6b6b;
-    --accent-secondary: #4ecdc4;
-    --glow: rgba(102, 126, 234, 0.4);
-    --shadow: rgba(0, 0, 0, 0.2);
-}
-
-.theme-dark {
-    --primary-bg: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #0f0f23 100%);
+    --primary-bg: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     --secondary-bg: rgba(255, 255, 255, 0.05);
     --card-bg: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.7);
-    --accent: #00d4aa;
-    --accent-secondary: #ff6b95;
-    --glow: rgba(0, 212, 170, 0.3);
+    --accent: #3498db;
+    --accent-secondary: #2980b9;
+    --glow: rgba(52, 152, 219, 0.2);
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.theme-dark {
+    --primary-bg: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    --secondary-bg: rgba(255, 255, 255, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent: #4a90e2;
+    --accent-secondary: #357abd;
+    --glow: rgba(74, 144, 226, 0.2);
 }
 
 .theme-neon {
-    --primary-bg: linear-gradient(135deg, #0f0f23 0%, #1a0033 50%, #0d0221 100%);
-    --secondary-bg: rgba(255, 0, 255, 0.1);
-    --card-bg: rgba(255, 0, 255, 0.15);
-    --text-primary: #ff00ff;
-    --text-secondary: #00ffff;
-    --accent: #ffff00;
-    --accent-secondary: #ff0080;
-    --glow: rgba(255, 0, 255, 0.5);
+    --primary-bg: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+    --secondary-bg: rgba(100, 100, 255, 0.1);
+    --card-bg: rgba(100, 100, 255, 0.08);
+    --text-primary: #e6e6ff;
+    --text-secondary: #b3b3e6;
+    --accent: #6c5ce7;
+    --accent-secondary: #5a4fcf;
+    --glow: rgba(108, 92, 231, 0.2);
 }
 
 .theme-ocean {
-    --primary-bg: linear-gradient(135deg, #2196F3 0%, #21CBF3 50%, #00BCD4 100%);
-    --secondary-bg: rgba(255, 255, 255, 0.15);
-    --card-bg: rgba(255, 255, 255, 0.2);
+    --primary-bg: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+    --secondary-bg: rgba(255, 255, 255, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.9);
-    --accent: #FF5722;
-    --accent-secondary: #FFC107;
-    --glow: rgba(33, 150, 243, 0.4);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent: #00b894;
+    --accent-secondary: #00a085;
+    --glow: rgba(0, 184, 148, 0.2);
 }
 
 .theme-sunset {
-    --primary-bg: linear-gradient(135deg, #ff7e5f 0%, #feb47b 50%, #ff6a88 100%);
-    --secondary-bg: rgba(255, 255, 255, 0.2);
-    --card-bg: rgba(255, 255, 255, 0.25);
+    --primary-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    --secondary-bg: rgba(255, 255, 255, 0.05);
+    --card-bg: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.9);
-    --accent: #4facfe;
-    --accent-secondary: #00f2fe;
-    --glow: rgba(255, 126, 95, 0.4);
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent: #fd79a8;
+    --accent-secondary: #e84393;
+    --glow: rgba(253, 121, 168, 0.2);
 }
 
 /* Background and Layout */
@@ -172,23 +172,13 @@ body {
     font-weight: 900;
     color: var(--text-primary);
     margin-bottom: 1rem;
-    text-shadow: 0 0 30px var(--glow);
-    animation: glow 2s ease-in-out infinite alternate, fadeInUp 1s ease-out;
+    text-shadow: 0 0 20px var(--glow);
     letter-spacing: -0.02em;
     line-height: 0.9;
     background: linear-gradient(45deg, var(--text-primary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 20px var(--glow);
-    }
-    to {
-        text-shadow: 0 0 30px var(--glow), 0 0 40px var(--glow);
-    }
 }
 
 @keyframes fadeInUp {
@@ -208,19 +198,6 @@ body {
     margin-bottom: 2rem;
     font-weight: 300;
     letter-spacing: 0.1em;
-    opacity: 0;
-    animation: slideUp 1s ease-out 0.5s forwards;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .description {
@@ -229,8 +206,6 @@ body {
     max-width: 600px;
     margin: 0 auto 3rem;
     line-height: 1.6;
-    opacity: 0;
-    animation: slideUp 1s ease-out 1s forwards;
 }
 
 /* Section Styles */
@@ -298,7 +273,6 @@ body {
     justify-content: center;
     font-size: 3rem;
     color: white;
-    animation: rotate 10s linear infinite;
 }
 
 @keyframes rotate {
@@ -375,17 +349,9 @@ body {
 .skill-category h3::before {
     content: '⚡';
     font-size: 1.2rem;
-    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
+
 
 .skill-item {
     margin-bottom: 1rem;
@@ -412,16 +378,6 @@ body {
     border-radius: 2px;
     width: 0;
     transition: width 1.5s ease-in-out;
-    animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200px 0;
-    }
-    100% {
-        background-position: 200px 0;
-    }
 }
 
 /* Projects Section */
@@ -463,7 +419,6 @@ body {
     border-radius: 15px;
     font-size: 0.7rem;
     font-weight: 600;
-    animation: pulse 2s infinite;
 }
 
 .project-card::before {
@@ -487,18 +442,18 @@ body {
 }
 
 .project-card.featured-project.animate {
-    transform: scale(1.05);
+    transform: scale(1);
     opacity: 1;
 }
 
 .project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px var(--shadow);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px var(--shadow);
 }
 
 .project-card.featured-project:hover {
-    transform: translateY(-15px) scale(1.07);
-    box-shadow: 0 25px 50px var(--glow);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px var(--glow);
 }
 
 .project-icon {
@@ -511,7 +466,6 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
@@ -577,12 +531,10 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    position: relative;
-    overflow: hidden;
 }
 
 .btn-primary {
-    background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
+    background: var(--accent);
     color: white;
 }
 
@@ -594,7 +546,7 @@ body {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Contact Section */
@@ -650,26 +602,28 @@ body {
     position: fixed;
     top: 2rem;
     left: 2rem;
-    width: 50px;
-    height: 50px;
-    background: var(--secondary-bg);
+    width: 70px;
+    height: 70px;
+    background: var(--accent);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s ease;
     z-index: 1001;
-    color: var(--text-primary);
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .admin-icon:hover {
-    transform: scale(1.1);
-    border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(1.15) rotate(90deg);
+    border-color: white;
+    background: var(--accent-secondary);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* Modal Styles */
@@ -1166,16 +1120,15 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     color: var(--text-primary);
 }
 
 .theme-icon:hover {
-    transform: scale(1.2) translateX(5px);
+    transform: scale(1.1);
     border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .theme-icon.active {
@@ -1184,23 +1137,7 @@ body {
     color: white;
 }
 
-.theme-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.theme-icon:hover::before {
-    opacity: 0.2;
-}
-
-/* Animated Background Elements */
+/* Animated Background Elements - Simplified */
 .particles {
     position: absolute;
     top: 0;
@@ -1215,27 +1152,27 @@ body {
     position: absolute;
     background: var(--accent);
     border-radius: 50%;
-    opacity: 0.6;
-    animation: float 6s ease-in-out infinite;
+    opacity: 0.3;
+    animation: float 12s ease-in-out infinite;
 }
 
 .particle:nth-child(odd) {
-    animation-delay: -2s;
+    animation-delay: -4s;
     animation-direction: reverse;
 }
 
 .particle:nth-child(even) {
-    animation-delay: -4s;
+    animation-delay: -8s;
 }
 
 @keyframes float {
     0%, 100% {
         transform: translateY(0) rotate(0deg);
-        opacity: 0.6;
+        opacity: 0.2;
     }
     50% {
-        transform: translateY(-100px) rotate(180deg);
-        opacity: 1;
+        transform: translateY(-50px) rotate(180deg);
+        opacity: 0.4;
     }
 }
 
@@ -1338,16 +1275,6 @@ body {
     font-size: 2rem;
     font-weight: 300;
     letter-spacing: 0.2em;
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.4;
-    }
-    50% {
-        opacity: 1;
-    }
 }
 
 @keyframes fadeOut {
@@ -1474,8 +1401,6 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 3rem;
-    opacity: 0;
-    animation: slideUp 1s ease-out 1.5s forwards;
 }
 
 /* Profile Card Enhancements */
@@ -1541,7 +1466,6 @@ body {
     font-size: 1.5rem;
     margin-right: 2rem;
     flex-shrink: 0;
-    animation: pulse 2s infinite;
 }
 
 .timeline-content {
@@ -1677,7 +1601,7 @@ body {
 }
 
 .resume-download {
-    animation: pulse 2s infinite;
+    position: relative;
 }
 
 .resume-highlights {
@@ -1721,14 +1645,18 @@ body {
 /* Navigation Menu Styles */
 .resume-btn {
     background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 1rem 2rem;
+    border-radius: 25px;
     color: white !important;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
 }
 
 .resume-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
 }

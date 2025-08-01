@@ -1003,71 +1003,55 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Cursor Glow Effect
+// Cursor Glow Effect - Disabled for cleaner look
 const cursorGlow = document.querySelector('.cursor-glow');
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.1;
-    cursorY += (mouseY - cursorY) * 0.1;
-    
-    if (cursorGlow) {
-        cursorGlow.style.left = cursorX - 10 + 'px';
-        cursorGlow.style.top = cursorY - 10 + 'px';
-    }
-    
-    requestAnimationFrame(animateCursor);
+if (cursorGlow) {
+    cursorGlow.style.display = 'none';
 }
-animateCursor();
 
-// Dynamic Particles System
+// Dynamic Particles System - Simplified
 function createParticles() {
     const particlesContainer = document.querySelector('.particles');
     if (!particlesContainer) return;
     
-    const particleCount = window.innerWidth < 768 ? 10 : 20;
+    // Reduce particle count significantly
+    const particleCount = window.innerWidth < 768 ? 3 : 6;
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
-        const size = Math.random() * 8 + 2;
+        const size = Math.random() * 4 + 2;
         particle.style.width = size + 'px';
         particle.style.height = size + 'px';
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
         
         particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        particle.style.animationDuration = (Math.random() * 6 + 8) + 's';
         
         particlesContainer.appendChild(particle);
     }
 }
 
-// Particles Burst Effect
+// Particles Burst Effect - Simplified
 function createParticlesBurst(x, y) {
-    const burstCount = 12;
+    const burstCount = 6; // Reduced from 12
     
     for (let i = 0; i < burstCount; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'fixed';
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
+        particle.style.width = '3px';
+        particle.style.height = '3px';
         particle.style.background = 'var(--accent)';
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '1001';
         
         const angle = (i / burstCount) * Math.PI * 2;
-        const velocity = 100 + Math.random() * 50;
+        const velocity = 50 + Math.random() * 25; // Reduced velocity
         const vx = Math.cos(angle) * velocity;
         const vy = Math.sin(angle) * velocity;
         
@@ -1078,9 +1062,9 @@ function createParticlesBurst(x, y) {
         let opacity = 1;
         
         function animateParticle() {
-            particleX += vx * 0.02;
-            particleY += vy * 0.02;
-            opacity -= 0.02;
+            particleX += vx * 0.015; // Slower movement
+            particleY += vy * 0.015;
+            opacity -= 0.03; // Faster fade
             
             particle.style.left = particleX + 'px';
             particle.style.top = particleY + 'px';
@@ -1097,53 +1081,26 @@ function createParticlesBurst(x, y) {
     }
 }
 
-// Hover Particles
+// Hover Particles - Disabled for cleaner experience
 function createHoverParticles(element) {
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    for (let i = 0; i < 5; i++) {
-        setTimeout(() => {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.left = centerX + (Math.random() - 0.5) * 50 + 'px';
-            particle.style.top = centerY + (Math.random() - 0.5) * 50 + 'px';
-            particle.style.width = '2px';
-            particle.style.height = '2px';
-            particle.style.background = 'var(--text-primary)';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '1001';
-            particle.style.opacity = '0.8';
-            
-            document.body.appendChild(particle);
-            
-            particle.animate([
-                { transform: 'translateY(0px)', opacity: 0.8 },
-                { transform: 'translateY(-30px)', opacity: 0 }
-            ], {
-                duration: 1000,
-                easing: 'ease-out'
-            }).onfinish = () => particle.remove();
-        }, i * 100);
-    }
+    // Disabled to reduce visual clutter
+    return;
 }
 
-// Parallax Effect for Geometric Shapes
-document.addEventListener('mousemove', (e) => {
-    const shapes = document.querySelectorAll('.shape');
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    
-    shapes.forEach((shape, index) => {
-        const speed = (index + 1) * 0.5;
-        const moveX = (x - 0.5) * speed * 50;
-        const moveY = (y - 0.5) * speed * 50;
-        
-        shape.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${index * 90}deg)`;
-    });
-});
+// Parallax Effect for Geometric Shapes - Disabled for cleaner look
+// document.addEventListener('mousemove', (e) => {
+//     const shapes = document.querySelectorAll('.shape');
+//     const x = e.clientX / window.innerWidth;
+//     const y = e.clientY / window.innerHeight;
+//     
+//     shapes.forEach((shape, index) => {
+//         const speed = (index + 1) * 0.5;
+//         const moveX = (x - 0.5) * speed * 50;
+//         const moveY = (y - 0.5) * speed * 50;
+//         
+//         shape.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${index * 90}deg)`;
+//     });
+// });
 
 // Scroll Reveal Animation
 function revealOnScroll() {
