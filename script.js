@@ -901,6 +901,7 @@ function initializeDefaultProjects() {
 document.addEventListener('DOMContentLoaded', function() {
     initializeDefaultSkills();
     initializeDefaultProjects();
+    initializeDefaultMemories();
 });
 
 // Theme System
@@ -1803,6 +1804,157 @@ window.portfolioAPI = {
         console.table(analytics);
     }
 };
+
+// Memory Management System
+const MEMORY_STORAGE_KEY = 'portfolioMemories';
+
+// Initialize default memories
+function initializeDefaultMemories() {
+    const savedMemories = localStorage.getItem(MEMORY_STORAGE_KEY);
+    if (!savedMemories) {
+        const defaultMemories = {
+            childhood: [],
+            hostel: [],
+            school: []
+        };
+        localStorage.setItem(MEMORY_STORAGE_KEY, JSON.stringify(defaultMemories));
+    }
+    loadMemoriesToPublic();
+}
+
+// Add memory function
+function addMemory(category) {
+    const videoInput = document.getElementById(`${category}Video`);
+    const titleInput = document.getElementById(`${category}Title`);
+    const descInput = document.getElementById(`${category}Desc`);
+    
+    if (!videoInput.files.length || !titleInput.value) {
+        alert('Please select a video and enter a title');
+        return;
+    }
+    
+    const file = videoInput.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const memory = {
+            id: Date.now(),
+            title: titleInput.value,
+            description: descInput.value,
+            videoData: e.target.result,
+            dateAdded: new Date().toISOString(),
+            category: category
+        };
+        
+        // Save to localStorage
+        const memories = JSON.parse(localStorage.getItem(MEMORY_STORAGE_KEY) || '{}');
+        if (!memories[category]) memories[category] = [];
+        memories[category].push(memory);
+        localStorage.setItem(MEMORY_STORAGE_KEY, JSON.stringify(memories));
+        
+        // Clear inputs
+        videoInput.value = '';
+        titleInput.value = '';
+        descInput.value = '';
+        
+        // Reload memories
+        loadMemoriesToAdmin();
+        loadMemoriesToPublic();
+        
+        showMessage('Memory added successfully!', 'success');
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+// Load memories to admin dashboard
+function loadMemoriesToAdmin() {
+    const memories = JSON.parse(localStorage.getItem(MEMORY_STORAGE_KEY) || '{}');
+    
+    ['childhood', 'hostel', 'school'].forEach(category => {
+        const container = document.getElementById(`${category}Memories`);
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (memories[category] && memories[category].length > 0) {
+            memories[category].forEach(memory => {
+                const memoryDiv = document.createElement('div');
+                memoryDiv.className = 'memory-item';
+                memoryDiv.innerHTML = `
+                    <video controls>
+                        <source src="${memory.videoData}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="memory-item-title">${memory.title}</div>
+                    <div class="memory-item-desc">${memory.description}</div>
+                    <div class="memory-item-actions">
+                        <button class="memory-action-btn delete-memory" onclick="deleteMemory('${category}', ${memory.id})" title="Delete">🗑️</button>
+                    </div>
+                `;
+                container.appendChild(memoryDiv);
+            });
+        } else {
+            container.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">No memories added yet</p>';
+        }
+    });
+}
+
+// Load memories to public section
+function loadMemoriesToPublic() {
+    const memories = JSON.parse(localStorage.getItem(MEMORY_STORAGE_KEY) || '{}');
+    
+    const categoryMap = {
+        childhood: 'publicChildhoodMemories',
+        hostel: 'publicHostelMemories',
+        school: 'publicSchoolMemories'
+    };
+    
+    Object.entries(categoryMap).forEach(([category, containerId]) => {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (memories[category] && memories[category].length > 0) {
+            memories[category].forEach(memory => {
+                const memoryDiv = document.createElement('div');
+                memoryDiv.className = 'memory-video-item';
+                memoryDiv.innerHTML = `
+                    <video controls>
+                        <source src="${memory.videoData}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="memory-video-title">${memory.title}</div>
+                    <div class="memory-video-desc">${memory.description}</div>
+                `;
+                container.appendChild(memoryDiv);
+            });
+        } else {
+            container.innerHTML = '<p style="color: var(--text-secondary); text-align: center; font-style: italic;">No memories to display yet</p>';
+        }
+    });
+}
+
+// Delete memory function
+function deleteMemory(category, memoryId) {
+    if (!confirm('Are you sure you want to delete this memory?')) return;
+    
+    const memories = JSON.parse(localStorage.getItem(MEMORY_STORAGE_KEY) || '{}');
+    if (memories[category]) {
+        memories[category] = memories[category].filter(memory => memory.id !== memoryId);
+        localStorage.setItem(MEMORY_STORAGE_KEY, JSON.stringify(memories));
+        loadMemoriesToAdmin();
+        loadMemoriesToPublic();
+        showMessage('Memory deleted successfully!', 'success');
+    }
+}
+
+// Load saved memories
+function loadSavedMemories() {
+    loadMemoriesToAdmin();
+    loadMemoriesToPublic();
+}
 
 // Service Worker registration for PWA capabilities (if service-worker.js exists)
 if ('serviceWorker' in navigator) {

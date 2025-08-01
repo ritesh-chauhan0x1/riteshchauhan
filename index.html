@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ritesh Chauhan - Full Stack Developer | Portfolio</title>
+    <title>Ritesh Chauhan - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="loading">
-        <div class="loading-text">LOADING...</div>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-text">Connecting with Ritesh...</div>
     </div>
 
-    <div class="cursor-glow"></div>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </div>
 
     <!-- Admin Login Icon -->
     <div class="admin-icon" id="adminIcon" title="Admin Login">
-        ⚙️
-    </div>
-
-    <!-- Theme Switcher - Left Side -->
-    <div class="theme-switcher">
-        <div class="theme-icon" data-theme="default" title="Cosmic">🌌</div>
-        <div class="theme-icon" data-theme="dark" title="Dark Matter">🌑</div>
-        <div class="theme-icon" data-theme="neon" title="Neon Cyber">🌈</div>
-        <div class="theme-icon" data-theme="ocean" title="Ocean Depths">🌊</div>
-        <div class="theme-icon" data-theme="sunset" title="Sunset Vibes">🌅</div>
+        <i class="fas fa-cog"></i>
     </div>
 
     <!-- Admin Login Modal -->
@@ -63,12 +58,13 @@
         
         <div class="dashboard-tabs">
             <button class="tab-btn active" data-tab="profile">👤 Profile</button>
-            <button class="tab-btn" data-tab="content">📝 Content</button>
+            <button class="tab-btn" data-tab="photos">� Photos</button>
+            <button class="tab-btn" data-tab="content">� Content</button>
             <button class="tab-btn" data-tab="projects">🚀 Projects</button>
             <button class="tab-btn" data-tab="skills">⚡ Skills</button>
-            <button class="tab-btn" data-tab="social">🌐 Social</button>
-            <button class="tab-btn" data-tab="hobbies">🎮 Hobbies</button>
-            <button class="tab-btn" data-tab="achievements">🏆 Achievements</button>
+            <button class="tab-btn" data-tab="social">� Social</button>
+            <button class="tab-btn" data-tab="memories">� Memories</button>
+            <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
         </div>
 
         <div class="dashboard-content">
@@ -95,9 +91,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="editPhoto">Profile Photo URL:</label>
-                    <input type="url" id="editPhoto" placeholder="Enter image URL">
-                    <small>Leave empty to use emoji avatar</small>
+                    <label for="editPhoto">Profile Photo:</label>
+                    <input type="file" id="editPhoto" accept="image/*">
+                    <small>Upload your profile picture</small>
                 </div>
                 
                 <div class="form-group">
@@ -113,6 +109,20 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 </div>
                 
                 <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+            </div>
+
+            <!-- Photos Tab -->
+            <div id="photos-tab" class="tab-content">
+                <h3>Photo Gallery Management</h3>
+                <div class="photo-uploader">
+                    <input type="file" id="photoUpload" accept="image/*" multiple>
+                    <label for="photoUpload" class="upload-btn">📸 Upload Photos</label>
+                    <input type="text" id="photoTitle" placeholder="Photo title/caption">
+                    <button class="btn btn-primary" onclick="addPhoto()">Add Photo</button>
+                </div>
+                <div class="uploaded-photos" id="uploadedPhotos">
+                    <!-- Uploaded photos will appear here -->
+                </div>
             </div>
 
             <!-- Content Tab -->
@@ -228,28 +238,76 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                     </div>
                 </div>
             </div>
+
+            <!-- Memories Tab -->
+            <div id="memories-tab" class="tab-content">
+                <h3>Memory Management</h3>
+                <div class="memory-categories">
+                    <div class="memory-category">
+                        <h4>🧸 Childhood Memories</h4>
+                        <div class="memory-uploader">
+                            <input type="file" id="childhoodVideo" accept="video/*" multiple>
+                            <label for="childhoodVideo" class="upload-btn">Upload Videos</label>
+                            <input type="text" id="childhoodTitle" placeholder="Memory title">
+                            <textarea id="childhoodDesc" placeholder="Memory description"></textarea>
+                            <button class="btn btn-primary" onclick="addMemory('childhood')">Add Childhood Memory</button>
+                        </div>
+                        <div id="childhoodMemories" class="memories-list">
+                            <!-- Childhood memories will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="memory-category">
+                        <h4>🏠 Hostel Memories</h4>
+                        <div class="memory-uploader">
+                            <input type="file" id="hostelVideo" accept="video/*" multiple>
+                            <label for="hostelVideo" class="upload-btn">Upload Videos</label>
+                            <input type="text" id="hostelTitle" placeholder="Memory title">
+                            <textarea id="hostelDesc" placeholder="Memory description"></textarea>
+                            <button class="btn btn-primary" onclick="addMemory('hostel')">Add Hostel Memory</button>
+                        </div>
+                        <div id="hostelMemories" class="memories-list">
+                            <!-- Hostel memories will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="memory-category">
+                        <h4>🎓 School Memories</h4>
+                        <div class="memory-uploader">
+                            <input type="file" id="schoolVideo" accept="video/*" multiple>
+                            <label for="schoolVideo" class="upload-btn">Upload Videos</label>
+                            <input type="text" id="schoolTitle" placeholder="Memory title">
+                            <textarea id="schoolDesc" placeholder="Memory description"></textarea>
+                            <button class="btn btn-primary" onclick="addMemory('school')">Add School Memory</button>
+                        </div>
+                        <div id="schoolMemories" class="memories-list">
+                            <!-- School memories will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Social Media Navigation -->
     <nav class="social-nav">
         <a href="https://instagram.com/riteshchauhan_15" class="social-link instagram" target="_blank" title="Instagram">
-            📷
+            <i class="fab fa-instagram"></i>
         </a>
         <a href="https://facebook.com/riteshchauhan_15" class="social-link facebook" target="_blank" title="Facebook">
-            📘
+            <i class="fab fa-facebook-f"></i>
         </a>
         <a href="https://github.com/ritesh-chauhan0x1" class="social-link github" target="_blank" title="GitHub">
-            💻
+            <i class="fab fa-github"></i>
         </a>
         <a href="https://leetcode.com/u/riteshchauhn_15" class="social-link leetcode" target="_blank" title="LeetCode">
-            🏆
+            <span class="leetcode-text">LC</span>
         </a>
         <a href="https://wa.me/+919337940768" class="social-link whatsapp" target="_blank" title="WhatsApp">
-            💬
+            <i class="fab fa-whatsapp"></i>
         </a>
         <a href="mailto:22054368@kiit.ac.in" class="social-link gmail" target="_blank" title="Gmail">
-            📧
+            <i class="far fa-envelope"></i>
         </a>
     </nav>
 
@@ -258,28 +316,35 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
         <div class="nav-content">
             <a href="#home" class="logo">RC</a>
             <ul class="nav-links">
+                <li><a href="#photos">Photos</a></li>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#memories">Memories</a></li>
                 <li><a href="#resume" class="resume-btn">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Photos Section -->
+    <section id="photos" class="photos-section">
+        <div class="container">
+            <h2 class="section-title">My Gallery</h2>
+            <div class="photos-grid" id="photosGrid">
+                <!-- Photos will be loaded dynamically -->
+                <div class="photo-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Photos will be uploaded by admin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="particles"></div>
-        
-        <div class="geometric-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-
         <div class="hero-content">
             <h1 class="name">RITESH CHAUHAN</h1>
             <p class="title">Full Stack Developer & CSE Student</p>
@@ -293,11 +358,6 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 <a href="#resume" class="btn btn-secondary">Download Resume</a>
             </div>
         </div>
-
-        <div class="scroll-indicator">
-            <span>Scroll to Explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
     </section>
 
     <!-- About Section -->
@@ -306,10 +366,10 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
             <h2 class="section-title reveal">About Me</h2>
             <div class="about-content">
                 <div class="profile-card reveal">
-                    <div class="profile-avatar">👨‍💻</div>
+                    <div class="profile-avatar"></div>
                     <h3>Ritesh Chauhan</h3>
-                    <p class="profile-location">📍 From Birgunj, Nepal</p>
-                    <p class="profile-status">🎓 4th Year B.Tech CSE at KIIT</p>
+                    <p class="profile-location">From Birgunj, Nepal</p>
+                    <p class="profile-status">4th Year B.Tech CSE at KIIT</p>
                     <div class="profile-stats">
                         <div class="stat">
                             <span class="stat-number">4</span>
@@ -508,42 +568,11 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
         <div class="container">
             <h2 class="section-title reveal">Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card reveal">
-                    <div class="project-icon">🌐</div>
-                    <h3>E-Commerce Platform</h3>
-                    <p>Full-stack e-commerce application with React frontend and Node.js backend, featuring user authentication, payment integration, and admin dashboard.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">Stripe</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="#" class="btn btn-secondary">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-icon">📱</div>
-                    <h3>Task Management App</h3>
-                    <p>Responsive task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">Socket.io</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="#" class="btn btn-secondary">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card reveal featured-project">
+                <!-- Featured Project -->
+                <div class="project-card featured-project">
                     <div class="project-icon">🎓</div>
                     <h3>Kiitians Finder</h3>
-                    <p>A comprehensive student directory platform for KIIT University that allows searching student details by roll number, accessing contact information, email, course details, and academic information. Built specifically for the KIIT community.</p>
+                    <p>A comprehensive student directory platform for KIIT University that allows searching student details by roll number, accessing contact information, email, course details, and academic information.</p>
                     <div class="project-tech">
                         <span class="tech-tag">React</span>
                         <span class="tech-tag">Node.js</span>
@@ -556,51 +585,123 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                     </div>
                 </div>
 
-                <div class="project-card reveal">
-                    <div class="project-icon">📊</div>
-                    <h3>Data Visualization Dashboard</h3>
-                    <p>Interactive dashboard for data analysis and visualization with real-time charts, filters, and export functionality.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">D3.js</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Pandas</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="#" class="btn btn-secondary">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-icon">🔐</div>
-                    <h3>Blockchain Voting System</h3>
-                    <p>Secure voting system built on blockchain technology ensuring transparency and immutability of votes.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Solidity</span>
-                        <span class="tech-tag">Web3.js</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Ethereum</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="#" class="btn btn-secondary">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-icon">🎮</div>
-                    <h3>Interactive Portfolio</h3>
-                    <p>This very portfolio you're viewing! Built with modern web technologies and featuring smooth animations and responsive design.</p>
+                <!-- Portfolio Website -->
+                <div class="project-card">
+                    <div class="project-icon">🌐</div>
+                    <h3>Personal Portfolio</h3>
+                    <p>Modern and responsive portfolio website showcasing my skills, projects, and journey as a full-stack developer. Built with clean design and smooth interactions.</p>
                     <div class="project-tech">
                         <span class="tech-tag">HTML5</span>
                         <span class="tech-tag">CSS3</span>
                         <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Animations</span>
+                        <span class="tech-tag">Responsive</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://riteshchauhan.pages.dev" class="btn btn-primary" target="_blank">Live Demo</a>
+                        <a href="https://github.com/ritesh-chauhan0x1/riteshchauhan" class="btn btn-secondary" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Web Development Projects -->
+                <div class="project-card">
+                    <div class="project-icon">💻</div>
+                    <h3>React Todo App</h3>
+                    <p>A feature-rich todo application built with React, including task management, categories, due dates, and local storage persistence.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">LocalStorage</span>
+                        <span class="tech-tag">Hooks</span>
                     </div>
                     <div class="project-links">
                         <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="#" class="btn btn-secondary">GitHub</a>
+                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Data Structures -->
+                <div class="project-card">
+                    <div class="project-icon">📊</div>
+                    <h3>DSA Solutions</h3>
+                    <p>Comprehensive collection of Data Structures and Algorithms solutions in multiple programming languages with detailed explanations.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">Algorithms</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">View Solutions</a>
+                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- API Projects -->
+                <div class="project-card">
+                    <div class="project-icon">🔗</div>
+                    <h3>REST API Collection</h3>
+                    <p>Various REST API projects including authentication systems, CRUD operations, and microservices architecture implementations.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">Documentation</a>
+                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Apps -->
+                <div class="project-card">
+                    <div class="project-icon">📱</div>
+                    <h3>Mobile App Projects</h3>
+                    <p>Cross-platform mobile applications developed using React Native and Flutter, focusing on user experience and performance.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Redux</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn btn-primary">App Store</a>
+                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memories Section -->
+    <section id="memories" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">My Memories</h2>
+            <div class="memories-grid">
+                <div class="memory-category-card reveal">
+                    <div class="memory-icon">🧸</div>
+                    <h3>Childhood Memories</h3>
+                    <p>Sweet memories from my childhood days in Birgunj, Nepal</p>
+                    <div class="memory-videos" id="publicChildhoodMemories">
+                        <!-- Videos will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="memory-category-card reveal">
+                    <div class="memory-icon">🏠</div>
+                    <h3>Hostel Life</h3>
+                    <p>Fun moments and friendships made during my hostel life at KIIT</p>
+                    <div class="memory-videos" id="publicHostelMemories">
+                        <!-- Videos will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="memory-category-card reveal">
+                    <div class="memory-icon">🎓</div>
+                    <h3>School Days</h3>
+                    <p>Memorable moments from my school days and academic journey</p>
+                    <div class="memory-videos" id="publicSchoolMemories">
+                        <!-- Videos will be loaded here -->
                     </div>
                 </div>
             </div>
