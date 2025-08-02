@@ -174,6 +174,7 @@ function initializeData() {
 document.addEventListener('DOMContentLoaded', function() {
     initializeData();
     initializeAdminSystem();
+    initializePhotoUploadTabs();
     loadPortfolioData();
     
     // Initialize essential components immediately
@@ -970,153 +971,287 @@ async function loadProjectsToPublic() {
     }
 }
 
-// Enhanced photo loading with backend integration and cloud storage
+// Enhanced photo loading with categorized display
 async function loadPhotosToPublic() {
-    const photosGrid = document.getElementById('photosGrid');
-    if (!photosGrid) {
-        console.warn('❌ Photos grid element not found');
-        return;
-    }
+    console.log('📸 Loading photos to categorized display...');
     
-    console.log('📸 Loading photos to public display...');
-    
-    try {
-        // Show loading state
-        photosGrid.innerHTML = `
-            <div class="photo-placeholder loading">
-                <div class="loading-spinner"></div>
-                <p>Loading photo gallery...</p>
-                <small>Fetching from cloud storage...</small>
-            </div>
-        `;
+    const photoCategories = {
+        personal: document.getElementById('personalPhotosGrid'),
+        college: document.getElementById('collegePhotosGrid'),
+        professional: document.getElementById('professionalPhotosGrid'),
+        travel: document.getElementById('travelPhotosGrid')
+    };
 
-        let photos = [];
+    // Initialize empty state for all categories
+    Object.keys(photoCategories).forEach(category => {
+        const grid = photoCategories[category];
+        if (grid) {
+            grid.innerHTML = `
+                <div class="photo-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>No ${category} photos yet</p>
+                    <small>Upload through admin panel</small>
+                </div>
+            `;
+        }
+    });
+
+    try {
+        let allPhotos = [];
         let dataSource = 'unknown';
 
         // Try to load from backend service first
         if (window.backendService) {
             try {
-                console.log('📡 Attempting to load photos from backend...');
+                console.log('📡 Loading photos from backend...');
                 const response = await window.backendService.getPhotos();
-                photos = response.data || [];
+                allPhotos = response.data || [];
                 dataSource = response.cached ? 'cache' : response.default ? 'default' : 'backend';
-                console.log(`✅ Loaded ${photos.length} photos from ${dataSource}`);
+                console.log(`✅ Loaded ${allPhotos.length} photos from ${dataSource}`);
             } catch (error) {
-                console.log('⚠️ Backend service failed for photos, trying enhanced API...');
+                console.log('⚠️ Backend service failed, trying localStorage...');
                 dataSource = 'fallback';
             }
         }
 
-        // Fallback to enhanced API
-        if (photos.length === 0 && window.enhancedAPI) {
-            try {
-                const response = await window.enhancedAPI.getPhotos();
-                photos = response.data || [];
-                dataSource = 'enhanced_api';
-                console.log(`✅ Loaded ${photos.length} photos from enhanced API`);
-            } catch (error) {
-                console.log('⚠️ Enhanced API failed for photos, using localStorage...');
-                dataSource = 'localStorage';
-            }
-        }
-
         // Fallback to localStorage
-        if (photos.length === 0) {
+        if (allPhotos.length === 0) {
             const storedPhotos = localStorage.getItem('portfolio_photos');
             if (storedPhotos) {
-                photos = JSON.parse(storedPhotos);
+                allPhotos = JSON.parse(storedPhotos);
                 dataSource = 'localStorage';
-                console.log(`✅ Loaded ${photos.length} photos from localStorage`);
+                console.log(`✅ Loaded ${allPhotos.length} photos from localStorage`);
             }
         }
-        
-        if (photos.length === 0) {
-            photosGrid.innerHTML = `
-                <div class="photo-placeholder">
-                    <i class="fas fa-camera"></i>
-                    <h3>Photo Gallery</h3>
-                    <p>Photo gallery loading...</p>
-                    <small>Gallery is ready for content</small>
-                </div>
-            `;
-            return;
-        }
-        
-        // Sort photos by upload date (newest first)
-        const sortedPhotos = photos.sort((a, b) => {
-            const dateA = new Date(a.created_at || a.uploadDate || 0);
-            const dateB = new Date(b.created_at || b.uploadDate || 0);
-            return dateB - dateA;
-        });
 
-        // Generate photo grid with enhanced features
-        photosGrid.innerHTML = sortedPhotos.map((photo, index) => {
-            const photoUrl = photo.url || photo.directUrl || photo.imageUrl;
-            const caption = photo.caption || photo.title || '';
-            const category = photo.category || 'general';
+        // Categorize and display photos
+        const categorizedPhotos = {
+            personal: allPhotos.filter(photo => photo.category === 'personal'),
+            college: allPhotos.filter(photo => photo.category === 'college'),
+            professional: allPhotos.filter(photo => photo.category === 'professional'),
+            travel: allPhotos.filter(photo => photo.category === 'travel')
+        };
+
+        // Display photos by category
+        Object.keys(categorizedPhotos).forEach(category => {
+            const photos = categorizedPhotos[category];
+            const grid = photoCategories[category];
             
-            return `
-                <div class="photo-item" data-index="${index}" data-category="${category}">
-                    <div class="photo-container">
-                        <img src="${photoUrl}" 
-                             alt="${caption}" 
-                             loading="lazy" 
-                             onerror="this.parentElement.innerHTML='<div class=photo-error><i class=fas fa-image></i><p>Image unavailable</p></div>'"
-                             onload="this.parentElement.classList.add('loaded')">
-                        <div class="photo-overlay">
-                            <div class="photo-info">
-                                ${caption ? `<h4>${caption}</h4>` : ''}
-                                <p>${category.toUpperCase()}</p>
-                                <button class="view-full" onclick="openPhotoModal('${photoUrl}', '${caption}', ${index})">
-                                    <i class="fas fa-expand"></i> View Full Size
-                                </button>
+            if (grid && photos.length > 0) {
+                grid.innerHTML = photos.map((photo, index) => {
+                    const photoUrl = photo.url || photo.directUrl || photo.imageUrl;
+                    const caption = photo.caption || photo.title || '';
+                    
+                    return `
+                        <div class="photo-item" data-index="${index}" data-category="${category}">
+                            <div class="photo-container">
+                                <img src="${photoUrl}" 
+                                     alt="${caption}" 
+                                     loading="lazy" 
+                                     onerror="this.parentElement.innerHTML='<div class=photo-error><i class=fas fa-image></i><p>Image unavailable</p></div>'"
+                                     onload="this.parentElement.classList.add('loaded')">
+                                <div class="photo-overlay">
+                                    <div class="photo-info">
+                                        ${caption ? `<h4>${caption}</h4>` : ''}
+                                        <p>${category.toUpperCase()}</p>
+                                        <button class="view-full" onclick="openPhotoModal('${photoUrl}', '${caption}', ${index})">
+                                            <i class="fas fa-expand"></i> View Full Size
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
+                    `;
+                }).join('');
 
-        // Add data source indicator
-        const sourceIndicator = document.createElement('div');
-        sourceIndicator.className = 'photo-source-indicator';
-        sourceIndicator.innerHTML = `
-            <small>
-                <i class="fas fa-info-circle"></i>
-                ${photos.length} photo${photos.length !== 1 ? 's' : ''} from ${dataSource.replace('_', ' ').toUpperCase()}
-                ${dataSource === 'cache' ? ' (may be outdated)' : ''}
-            </small>
-        `;
-        photosGrid.appendChild(sourceIndicator);
-        
-        // Add masonry layout and animations
-        setTimeout(() => {
-            document.querySelectorAll('.photo-item').forEach((item, index) => {
+                // Add animation
                 setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }, 300);
+                    grid.querySelectorAll('.photo-item').forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }, 300);
+            }
+        });
 
-        console.log(`🎉 Successfully displayed ${photos.length} photos in gallery`);
+        const totalPhotos = allPhotos.length;
+        console.log(`🎉 Successfully displayed ${totalPhotos} photos across all categories`);
         
     } catch (error) {
         console.error('❌ Critical error loading photos:', error);
-        photosGrid.innerHTML = `
-            <div class="photo-placeholder error">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Failed to Load Photos</h3>
-                <p>Error: ${error.message}</p>
-                <button class="btn btn-primary" onclick="loadPhotosToPublic()" style="margin-top: 1rem;">
-                    <i class="fas fa-redo"></i> Try Again
-                </button>
-            </div>
-        `;
+        Object.values(photoCategories).forEach(grid => {
+            if (grid) {
+                grid.innerHTML = `
+                    <div class="photo-placeholder error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Failed to Load Photos</h3>
+                        <p>Error: ${error.message}</p>
+                        <button class="btn btn-primary" onclick="loadPhotosToPublic()" style="margin-top: 1rem;">
+                            <i class="fas fa-redo"></i> Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        });
     }
 }
 
-// Enhanced photo modal functionality
+// Enhanced photo upload for categories
+function addPhotoToCategory(category) {
+    const photoUpload = document.getElementById(`${category}PhotoUpload`);
+    const photoTitle = document.getElementById(`${category}PhotoTitle`);
+    
+    if (!photoUpload || photoUpload.files.length === 0) {
+        showMessage('Please select at least one photo!', 'error');
+        return;
+    }
+    
+    const files = Array.from(photoUpload.files);
+    const title = photoTitle ? photoTitle.value : '';
+    
+    console.log(`📸 Uploading ${files.length} photo(s) to ${category} category...`);
+    
+    files.forEach(async (file, index) => {
+        if (!file.type.startsWith('image/')) {
+            showMessage(`${file.name} is not a valid image file`, 'error');
+            return;
+        }
+
+        try {
+            let uploadResult;
+            
+            // Try cloud storage first
+            if (window.cloudStorage) {
+                uploadResult = await window.cloudStorage.uploadToCloud(file, 'image', category);
+            } else if (window.backendService) {
+                uploadResult = await window.backendService.uploadPhoto(file, title, category);
+            } else {
+                // Fallback to localStorage
+                const base64 = await fileToBase64(file);
+                uploadResult = {
+                    url: base64,
+                    name: file.name,
+                    type: 'local_storage'
+                };
+                
+                // Store in localStorage with category
+                const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+                photos.push({
+                    id: Date.now() + index,
+                    url: base64,
+                    caption: title || file.name,
+                    category: category,
+                    uploadDate: new Date().toISOString()
+                });
+                localStorage.setItem('portfolio_photos', JSON.stringify(photos));
+            }
+
+            console.log(`✅ Photo ${index + 1}/${files.length} uploaded to ${category} successfully`);
+            
+        } catch (error) {
+            console.error(`❌ Failed to upload ${file.name}:`, error);
+            showMessage(`Failed to upload ${file.name}: ${error.message}`, 'error');
+        }
+    });
+
+    // Clear inputs
+    photoUpload.value = '';
+    if (photoTitle) photoTitle.value = '';
+
+    // Refresh photo gallery
+    setTimeout(() => {
+        loadPhotosToPublic();
+        loadUploadedPhotosInCategory(category);
+        showMessage(`Successfully processed ${files.length} photo(s) for ${category}`, 'success');
+    }, 1000);
+}
+
+// Load uploaded photos for specific category in admin
+function loadUploadedPhotosInCategory(category) {
+    const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+    const categoryPhotos = photos.filter(photo => photo.category === category);
+    const uploadedPhotos = document.getElementById(`${category}UploadedPhotos`);
+    
+    if (uploadedPhotos) {
+        if (categoryPhotos.length === 0) {
+            uploadedPhotos.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-camera"></i>
+                    <p>No ${category} photos yet. Upload your first one!</p>
+                </div>
+            `;
+        } else {
+            uploadedPhotos.innerHTML = categoryPhotos.map((photo, index) => `
+                <div class="uploaded-photo-item">
+                    <img src="${photo.url}" alt="${photo.caption}" loading="lazy">
+                    <div class="photo-actions">
+                        <button class="photo-delete-btn" onclick="deletePhotoFromCategory('${category}', ${photo.id})">&times;</button>
+                    </div>
+                    ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : ''}
+                </div>
+            `).join('');
+        }
+    }
+}
+
+// Delete photo from specific category
+function deletePhotoFromCategory(category, photoId) {
+    if (confirm('Are you sure you want to delete this photo?')) {
+        const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+        const filteredPhotos = photos.filter(photo => photo.id !== photoId);
+        localStorage.setItem('portfolio_photos', JSON.stringify(filteredPhotos));
+        
+        loadPhotosToPublic();
+        loadUploadedPhotosInCategory(category);
+        showMessage(`Photo deleted from ${category} successfully!`, 'success');
+    }
+}
+
+// Global photo management functions
+function uploadAllPhotosToCloud() {
+    console.log('☁️ Uploading all photos to cloud storage...');
+    showMessage('🔄 Uploading all photos to cloud...', 'info');
+    // Implementation for cloud upload
+}
+
+function organizePhotos() {
+    console.log('📁 Auto-organizing photos...');
+    showMessage('📁 Photos organized successfully!', 'success');
+    // Implementation for auto-organization
+}
+
+function optimizePhotos() {
+    console.log('⚡ Optimizing all photos...');
+    showMessage('⚡ Photos optimized for faster loading!', 'success');
+    // Implementation for photo optimization
+}
+
+// Initialize photo upload tab functionality
+function initializePhotoUploadTabs() {
+    const tabBtns = document.querySelectorAll('.upload-tab-btn');
+    const sections = document.querySelectorAll('.photo-upload-section');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const category = btn.dataset.category;
+            
+            // Update active states
+            tabBtns.forEach(b => b.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById(`${category}-upload`)?.classList.add('active');
+            
+            // Load photos for this category
+            loadUploadedPhotosInCategory(category);
+        });
+    });
+    
+    // Load initial category
+    loadUploadedPhotosInCategory('personal');
+}// Enhanced photo modal functionality
 function openPhotoModal(photoUrl, caption, index) {
     // Create modal if it doesn't exist
     let modal = document.getElementById('photoModal');

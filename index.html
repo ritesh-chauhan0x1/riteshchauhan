@@ -125,14 +125,75 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
             <!-- Photos Tab -->
             <div id="photos-tab" class="tab-content">
                 <h3>Photo Gallery Management</h3>
-                <div class="photo-uploader">
-                    <input type="file" id="photoUpload" accept="image/*" multiple>
-                    <label for="photoUpload" class="upload-btn">📸 Upload Photos</label>
-                    <input type="text" id="photoTitle" placeholder="Photo title/caption">
-                    <button class="btn btn-primary" onclick="addPhoto()">Add Photo</button>
+                
+                <!-- Photo Upload Categories -->
+                <div class="photo-upload-tabs">
+                    <button class="upload-tab-btn active" data-category="personal">🏠 Personal</button>
+                    <button class="upload-tab-btn" data-category="college">🎓 College</button>
+                    <button class="upload-tab-btn" data-category="professional">💼 Professional</button>
+                    <button class="upload-tab-btn" data-category="travel">🌄 Travel</button>
                 </div>
-                <div class="uploaded-photos" id="uploadedPhotos">
-                    <!-- Uploaded photos will appear here -->
+
+                <!-- Photo Uploaders for Each Category -->
+                <div class="photo-upload-sections">
+                    <div class="photo-upload-section active" id="personal-upload">
+                        <h4>Personal Photos</h4>
+                        <div class="photo-uploader">
+                            <input type="file" id="personalPhotoUpload" accept="image/*" multiple>
+                            <label for="personalPhotoUpload" class="upload-btn">📸 Upload Personal Photos</label>
+                            <input type="text" id="personalPhotoTitle" placeholder="Photo caption">
+                            <button class="btn btn-primary" onclick="addPhotoToCategory('personal')">Add Photos</button>
+                        </div>
+                        <div class="uploaded-photos" id="personalUploadedPhotos">
+                            <!-- Personal photos will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="photo-upload-section" id="college-upload">
+                        <h4>College Life Photos</h4>
+                        <div class="photo-uploader">
+                            <input type="file" id="collegePhotoUpload" accept="image/*" multiple>
+                            <label for="collegePhotoUpload" class="upload-btn">🎓 Upload College Photos</label>
+                            <input type="text" id="collegePhotoTitle" placeholder="Photo caption">
+                            <button class="btn btn-primary" onclick="addPhotoToCategory('college')">Add Photos</button>
+                        </div>
+                        <div class="uploaded-photos" id="collegeUploadedPhotos">
+                            <!-- College photos will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="photo-upload-section" id="professional-upload">
+                        <h4>Professional Photos</h4>
+                        <div class="photo-uploader">
+                            <input type="file" id="professionalPhotoUpload" accept="image/*" multiple>
+                            <label for="professionalPhotoUpload" class="upload-btn">💼 Upload Professional Photos</label>
+                            <input type="text" id="professionalPhotoTitle" placeholder="Photo caption">
+                            <button class="btn btn-primary" onclick="addPhotoToCategory('professional')">Add Photos</button>
+                        </div>
+                        <div class="uploaded-photos" id="professionalUploadedPhotos">
+                            <!-- Professional photos will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="photo-upload-section" id="travel-upload">
+                        <h4>Travel & Adventure Photos</h4>
+                        <div class="photo-uploader">
+                            <input type="file" id="travelPhotoUpload" accept="image/*" multiple>
+                            <label for="travelPhotoUpload" class="upload-btn">🌄 Upload Travel Photos</label>
+                            <input type="text" id="travelPhotoTitle" placeholder="Photo caption">
+                            <button class="btn btn-primary" onclick="addPhotoToCategory('travel')">Add Photos</button>
+                        </div>
+                        <div class="uploaded-photos" id="travelUploadedPhotos">
+                            <!-- Travel photos will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Photo Actions -->
+                <div class="global-photo-actions">
+                    <button class="btn btn-success" onclick="uploadAllPhotosToCloud()">☁️ Upload All to Cloud</button>
+                    <button class="btn btn-info" onclick="organizePhotos()">📁 Auto-Organize</button>
+                    <button class="btn btn-warning" onclick="optimizePhotos()">⚡ Optimize All</button>
                 </div>
             </div>
 
@@ -432,39 +493,71 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
         </div>
     </nav>
 
-    <!-- Photos Section -->
-    <section id="photos" class="photos-section">
-        <div class="container">
-            <h2 class="section-title">My Gallery</h2>
-            <div class="photos-grid" id="photosGrid">
-                <!-- Photos will be loaded dynamically -->
-                <div class="photo-placeholder">
-                    <i class="fas fa-camera"></i>
-                    <p>Photo gallery loading...</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="name-container">
+                        <h1 class="name">RITESH <span class="surname">CHAUHAN</span></h1>
+                        <div class="hero-profile-photo">
+                            <div class="profile-image">
+                                <img src="https://via.placeholder.com/200x200/6366f1/ffffff?text=RC" alt="Ritesh Chauhan" id="heroProfileImg">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="title">Full Stack Developer & CSE Student</p>
+                    <p class="bio">
+                        🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal
+                        <br>Passionate about creating innovative digital solutions and bringing ideas to life through code.
+                        <br><br>
+                        <strong>About Me:</strong> I'm a dedicated developer with expertise in modern web technologies. 
+                        My journey includes building scalable applications, solving complex problems, and constantly learning new technologies. 
+                        I believe in clean code, user-centered design, and delivering impactful digital experiences.
+                    </p>
+                    
+                    <div class="cta-buttons">
+                        <a href="#about" class="btn btn-primary">Explore My Journey</a>
+                        <a href="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" class="btn btn-secondary" target="_blank">📄 Download Resume</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-photo">
-                <div class="profile-image">
-                    <img src="https://via.placeholder.com/300x300/6366f1/ffffff?text=RC" alt="Ritesh Chauhan" id="heroProfileImg">
+    <!-- Photos Section -->
+    <section id="photos" class="photos-section">
+        <div class="container">
+            <h2 class="section-title">My Gallery</h2>
+            
+            <!-- Photo Categories -->
+            <div class="photo-categories">
+                <div class="photo-category">
+                    <h3>🏠 Personal Photos</h3>
+                    <div class="photos-grid" id="personalPhotosGrid">
+                        <!-- Personal photos will be loaded here -->
+                    </div>
                 </div>
-            </div>
-            <div class="hero-content">
-                <h1 class="name">RITESH CHAUHAN</h1>
-                <p class="title">Full Stack Developer & CSE Student</p>
-                <p class="description">
-                    🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal
-                    <br>Passionate about creating innovative digital solutions and bringing ideas to life through code.
-                </p>
                 
-                <div class="cta-buttons">
-                    <a href="#about" class="btn btn-primary">Explore My Journey</a>
-                    <a href="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" class="btn btn-secondary" target="_blank">📄 Download Resume</a>
+                <div class="photo-category">
+                    <h3>🎓 College Life</h3>
+                    <div class="photos-grid" id="collegePhotosGrid">
+                        <!-- College photos will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="photo-category">
+                    <h3>💼 Professional</h3>
+                    <div class="photos-grid" id="professionalPhotosGrid">
+                        <!-- Professional photos will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="photo-category">
+                    <h3>🌄 Travel & Adventures</h3>
+                    <div class="photos-grid" id="travelPhotosGrid">
+                        <!-- Travel photos will be loaded here -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -676,19 +769,20 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title reveal">Featured Projects</h2>
+            <h2 class="section-title reveal">Main Projects</h2>
             <div class="projects-filter reveal">
                 <button class="filter-btn active" data-filter="all">All Projects</button>
                 <button class="filter-btn" data-filter="web">Web Apps</button>
                 <button class="filter-btn" data-filter="mobile">Mobile</button>
                 <button class="filter-btn" data-filter="ai">AI/ML</button>
+                <button class="filter-btn" data-filter="blockchain">Blockchain</button>
                 <button class="filter-btn" data-filter="games">Games</button>
             </div>
             <div class="projects-grid" id="projectsGrid">
                 <!-- Projects will be loaded dynamically from script.js -->
                 <div class="loading-projects">
                     <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading projects...</p>
+                    <p>Loading main projects...</p>
                 </div>
             </div>
             <div class="projects-actions reveal">

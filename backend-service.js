@@ -65,11 +65,10 @@ class BackendService {
             const isRunning = await this.checkBackendConnection();
             
             if (!isRunning) {
-                console.log('📱 Backend not detected, using offline mode');
-                this.showOfflineNotice();
+                console.log('📱 Backend not detected, working offline');
             }
         } catch (error) {
-            console.log('📱 Running in offline mode');
+            console.log('📱 Working offline');
         }
     }
 
@@ -96,18 +95,18 @@ class BackendService {
         if (status === 'connected') {
             statusIndicator.style.background = '#4CAF50';
             statusIndicator.style.color = 'white';
-            statusIndicator.innerHTML = '🟢 Backend Connected';
+            statusIndicator.innerHTML = '🟢 Connected';
             setTimeout(() => statusIndicator.style.opacity = '0', 3000);
         } else {
-            // Hide status indicator when offline instead of showing offline mode
+            // Hide status indicator completely
             statusIndicator.style.opacity = '0';
         }
     }
 
-    // Show offline notice
+    // Show offline notice - removed for cleaner UI
     showOfflineNotice() {
-        // Offline notice removed - silent mode
-        console.log('📱 Working in offline mode');
+        // Silent mode - no UI disruption
+        console.log('📱 Working in background mode');
     }
 
     // Enhanced API request with retry logic

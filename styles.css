@@ -311,68 +311,135 @@ body {
     cursor: pointer;
     font-size: 0.7rem;
 }
-/* Hero Section */
+/* Hero Section Enhanced Layout */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     padding: 2rem;
     background: var(--primary-bg);
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-container {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
     max-width: 1200px;
     width: 100%;
+    margin: 0 auto;
 }
 
-.hero-photo {
-    flex: 0 0 300px;
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
 }
 
-.profile-image {
-    width: 300px;
-    height: 300px;
+.hero-text {
+    flex: 1;
+    max-width: 800px;
+}
+
+.name-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.name {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.surname {
+    color: var(--accent);
+    display: inline-block;
+}
+
+.hero-profile-photo {
+    flex-shrink: 0;
+}
+
+.hero-profile-photo .profile-image {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid var(--accent);
-    box-shadow: 0 0 40px var(--glow);
-    position: relative;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
     transition: all 0.3s ease;
 }
 
-.profile-image:hover {
+.hero-profile-photo .profile-image:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 60px var(--glow);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
 }
 
-.profile-image img {
+.hero-profile-photo .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.hero-content {
-    flex: 1;
-    text-align: left;
-    z-index: 10;
-    position: relative;
+.title {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--accent);
+    font-weight: 600;
+    margin: 1rem 0;
 }
 
-.name {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 900;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-align: center;
+.bio {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 1.5rem 0 2rem;
+    max-width: 700px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .name-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .hero-profile-photo .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .name {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
 }
 
 @keyframes fadeInUp {
@@ -2955,3 +3022,234 @@ body {
 }
 
 /* Removed offline mode indicators for cleaner UI */
+
+/* Photo Categories Section */
+.photos-section {
+    padding: 5rem 0;
+    background: var(--secondary-bg);
+}
+
+.photo-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.photo-category {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.photo-category:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.photo-category h3 {
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--secondary-bg);
+    aspect-ratio: 1;
+    transition: all 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.photo-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.photo-container:hover img {
+    transform: scale(1.05);
+}
+
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(99, 102, 241, 0.8),
+        rgba(168, 85, 247, 0.8)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1;
+}
+
+.photo-info {
+    text-align: center;
+    color: white;
+    padding: 1rem;
+}
+
+.photo-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.photo-info p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.view-full {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-full:hover {
+    background: white;
+    color: var(--accent);
+}
+
+/* Admin Photo Upload Sections */
+.photo-upload-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.upload-tab-btn {
+    background: var(--secondary-bg);
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-tab-btn.active,
+.upload-tab-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.photo-upload-sections {
+    position: relative;
+}
+
+.photo-upload-section {
+    display: none;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.photo-upload-section.active {
+    display: block;
+}
+
+.photo-upload-section h4 {
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.global-photo-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--secondary-bg);
+    border-radius: 12px;
+}
+
+.global-photo-actions .btn {
+    flex: 1;
+    max-width: 200px;
+    min-width: 150px;
+}
+
+/* Empty state for photo categories */
+.photo-category .photos-grid:empty::after {
+    content: "📸 No photos yet. Add some through the admin panel!";
+    display: block;
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    background: var(--secondary-bg);
+    border-radius: 12px;
+    border: 2px dashed var(--border);
+}
+
+@media (max-width: 768px) {
+    .photo-upload-tabs {
+        justify-content: center;
+    }
+    
+    .upload-tab-btn {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+    }
+    
+    .global-photo-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .global-photo-actions .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
