@@ -25,7 +25,7 @@
 }
 
 .loading-text {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 400;
     color: var(--text-primary);
     letter-spacing: 3px;
@@ -123,6 +123,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    padding-bottom: 8rem; /* Make room for social nav at bottom */
     text-align: center;
 }
 
@@ -143,11 +144,11 @@ body {
 /* Social Media Navigation */
 .social-nav {
     position: fixed;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
     z-index: 100;
 }
@@ -235,28 +236,6 @@ body {
 }
 
 /* Mobile Responsive */
-@media (min-width: 769px) {
-    /* Desktop specific styles */
-    .social-nav {
-        top: 50%;
-        right: 3rem;
-    }
-    
-    .social-link {
-        width: 55px;
-        height: 55px;
-    }
-    
-    .social-link i {
-        font-size: 1.3rem;
-    }
-    
-    .loading-text {
-        font-size: 2.5rem;
-        letter-spacing: 4px;
-    }
-}
-
 @media (max-width: 768px) {
     .theme-toggle {
         top: 1rem;
@@ -267,16 +246,6 @@ body {
 
     .theme-toggle i {
         font-size: 1.1rem;
-    }
-
-    .social-nav {
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        top: auto;
-        transform: translateX(-50%);
-        flex-direction: row;
-        gap: 0.75rem;
     }
 
     .social-link {
@@ -297,9 +266,8 @@ body {
         padding: 0 1rem;
     }
 
-    .main-content {
-        padding: 1rem;
-        padding-bottom: 8rem; /* Make room for mobile social nav */
+    .social-nav {
+        gap: 0.75rem;
     }
 }
 
