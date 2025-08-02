@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ritesh Chauhan - Portfolio</title>
-    <li                    <div class="form-group">
-                        <label for="leetcodeUrl">LeetCode URL:</label>
-                        <input type="url" id="leetcodeUrl" value="https://leetcode.com/u/riteshchauhan_15">
-                    </div>el="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -829,5 +826,249 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <script src="navigation.js"></script>
     <script src="verification.js"></script>
     <script src="script.js"></script>
+    <script src="debug.js"></script>
+    
+    <!-- CSS Fallback and Error Prevention -->
+    <script>
+        // Check if CSS loaded properly
+        function checkCSSLoaded() {
+            const testEl = document.createElement('div');
+            testEl.style.cssText = 'color: var(--text-primary, #000); position: absolute; visibility: hidden;';
+            document.body.appendChild(testEl);
+            
+            const computedColor = window.getComputedStyle(testEl).color;
+            document.body.removeChild(testEl);
+            
+            // If CSS variables aren't working, add fallback styles
+            if (computedColor === 'rgb(0, 0, 0)' || computedColor === '#000' || !computedColor) {
+                console.warn('CSS variables not loaded, applying fallback styles...');
+                addFallbackStyles();
+            }
+        }
+        
+        function addFallbackStyles() {
+            const fallbackCSS = `
+                <style id="fallback-styles">
+                    body { 
+                        background: #ffffff !important; 
+                        color: #000000 !important; 
+                        font-family: Inter, sans-serif !important;
+                    }
+                    .theme-dark { 
+                        background: #121212 !important; 
+                        color: #ffffff !important; 
+                    }
+                    .btn-primary { 
+                        background: #007bff !important; 
+                        color: white !important; 
+                    }
+                    .nav { 
+                        background: rgba(255,255,255,0.95) !important; 
+                    }
+                    .theme-dark .nav { 
+                        background: rgba(18,18,18,0.95) !important; 
+                    }
+                </style>
+            `;
+            document.head.insertAdjacentHTML('beforeend', fallbackCSS);
+        }
+    </script>
+    
+    <!-- Initialize Portfolio after all scripts are loaded -->
+    <script>
+        // Enhanced initialization with detailed logging
+        let initializationStatus = {
+            domLoaded: false,
+            cssLoaded: false,
+            jsLoaded: false,
+            portfolioInitialized: false
+        };
+
+        // Check CSS loading
+        function checkCSSLoaded() {
+            const testEl = document.createElement('div');
+            testEl.style.cssText = 'color: var(--text-primary, #000); position: absolute; visibility: hidden;';
+            document.body.appendChild(testEl);
+            
+            const computedColor = window.getComputedStyle(testEl).color;
+            document.body.removeChild(testEl);
+            
+            const cssWorking = computedColor && computedColor !== 'var(--text-primary)';
+            initializationStatus.cssLoaded = cssWorking;
+            
+            if (!cssWorking) {
+                console.warn('🎨 CSS variables not loaded, applying fallback styles...');
+                addFallbackStyles();
+            } else {
+                console.log('✅ CSS loaded successfully');
+            }
+            return cssWorking;
+        }
+        
+        function addFallbackStyles() {
+            const fallbackCSS = `
+                <style id="fallback-styles">
+                    body { 
+                        background: #ffffff !important; 
+                        color: #000000 !important; 
+                        font-family: Inter, sans-serif !important;
+                        line-height: 1.6 !important;
+                    }
+                    .theme-dark { 
+                        background: #121212 !important; 
+                        color: #ffffff !important; 
+                    }
+                    .btn-primary { 
+                        background: #007bff !important; 
+                        color: white !important; 
+                        padding: 0.75rem 1.5rem !important;
+                        border-radius: 25px !important;
+                        text-decoration: none !important;
+                        display: inline-block !important;
+                    }
+                    .nav { 
+                        background: rgba(255,255,255,0.95) !important; 
+                        position: fixed !important;
+                        top: 0 !important;
+                        width: 100% !important;
+                        z-index: 100 !important;
+                        padding: 1rem 2rem !important;
+                    }
+                    .theme-dark .nav { 
+                        background: rgba(18,18,18,0.95) !important; 
+                    }
+                    .section { 
+                        padding: 6rem 2rem 4rem !important; 
+                    }
+                    .project-card {
+                        background: #f8f9fa !important;
+                        padding: 2rem !important;
+                        border-radius: 15px !important;
+                        margin-bottom: 2rem !important;
+                    }
+                    .theme-dark .project-card {
+                        background: #2d2d2d !important;
+                    }
+                </style>
+            `;
+            document.head.insertAdjacentHTML('beforeend', fallbackCSS);
+        }
+
+        // Check JavaScript functions
+        function checkJSLoaded() {
+            const criticalFunctions = ['initializePortfolio', 'initializeTheme', 'loadProjectsToPublic'];
+            const loaded = criticalFunctions.some(func => typeof window[func] === 'function');
+            initializationStatus.jsLoaded = loaded;
+            
+            if (loaded) {
+                console.log('✅ JavaScript functions loaded successfully');
+            } else {
+                console.warn('⚠️ Some JavaScript functions missing');
+            }
+            return loaded;
+        }
+
+        // Main initialization function
+        function initializeEverything() {
+            console.log('🚀 Starting portfolio initialization...');
+            
+            initializationStatus.domLoaded = document.readyState !== 'loading';
+            checkCSSLoaded();
+            checkJSLoaded();
+            
+            console.log('📊 Initialization Status:', initializationStatus);
+            
+            // Try to initialize portfolio
+            try {
+                if (typeof initializePortfolio === 'function') {
+                    console.log('🎯 Calling initializePortfolio...');
+                    initializePortfolio();
+                    initializationStatus.portfolioInitialized = true;
+                } else {
+                    console.log('🔄 Using fallback initialization...');
+                    // Fallback initialization
+                    if (typeof initializeData === 'function') {
+                        console.log('📂 Initializing data...');
+                        initializeData();
+                    }
+                    if (typeof initializeTheme === 'function') {
+                        console.log('🎨 Initializing theme...');
+                        initializeTheme();
+                    }
+                    if (typeof loadProjectsToPublic === 'function') {
+                        console.log('🚀 Loading projects...');
+                        loadProjectsToPublic();
+                    }
+                    if (typeof loadPhotosToPublic === 'function') {
+                        console.log('📸 Loading photos...');
+                        loadPhotosToPublic();
+                    }
+                    if (typeof initializeScrollAnimations === 'function') {
+                        console.log('🎬 Initializing animations...');
+                        initializeScrollAnimations();
+                    }
+                    initializationStatus.portfolioInitialized = true;
+                }
+                
+                console.log('✅ Portfolio initialization completed successfully!');
+                
+            } catch (error) {
+                console.error('❌ Error during initialization:', error);
+                // Still try to show basic functionality
+                document.body.style.visibility = 'visible';
+            }
+            
+            // Remove loading screen
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) {
+                    console.log('🎭 Hiding loading screen...');
+                    loading.style.opacity = '0';
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        console.log('✅ Loading screen hidden');
+                    }, 500);
+                }
+            }, 1000);
+            
+            // Final status report
+            setTimeout(() => {
+                console.log('📋 Final Status Report:', initializationStatus);
+                if (initializationStatus.portfolioInitialized) {
+                    console.log('🎉 Portfolio is ready!');
+                } else {
+                    console.warn('⚠️ Portfolio may not be fully functional');
+                }
+            }, 2000);
+        }
+        
+        // Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('📄 DOM Content Loaded');
+                setTimeout(initializeEverything, 100);
+            });
+        } else {
+            console.log('📄 DOM already loaded');
+            setTimeout(initializeEverything, 100);
+        }
+        
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            console.error('🚨 Portfolio Error:', e.error?.message || e.message);
+            if (e.error && e.error.message && e.error.message.includes('CSS')) {
+                addFallbackStyles();
+            }
+        });
+
+        // Loading screen timeout safety
+        setTimeout(() => {
+            const loading = document.getElementById('loading');
+            if (loading && loading.style.display !== 'none') {
+                console.warn('⏰ Loading screen timeout - force hiding');
+                loading.style.display = 'none';
+            }
+        }, 10000);
+    </script>
 </body>
 </html>
