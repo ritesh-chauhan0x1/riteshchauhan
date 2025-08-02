@@ -3360,64 +3360,89 @@ function createProjectCard(project) {
     return card;
 }
 
-// Google Drive Setup Functions
+// Google Drive API Key Setup Functions
 function setupGoogleDrive() {
-    console.log('🔗 Setting up Google Drive for rites.chauhan11@gmail.com...');
+    console.log('🔗 Setting up Google Drive API Key for rites.chauhan11@gmail.com...');
     
-    // Show loading state
-    const statusText = document.getElementById('driveStatusText');
-    const statusDot = document.getElementById('driveStatusDot');
+    // Check if API key is already set
+    const currentKey = localStorage.getItem('google_drive_api_key');
     
-    if (statusText) statusText.textContent = 'Starting OAuth flow...';
-    if (statusDot) statusDot.textContent = '🟡';
+    if (currentKey && currentKey !== 'YOUR_GOOGLE_DRIVE_API_KEY') {
+        const useExisting = confirm('Google Drive API key already exists. Use existing key?');
+        if (useExisting) {
+            testGoogleDrive();
+            return;
+        }
+    }
     
-    // Open Google OAuth flow
-    window.open('/auth/google', '_blank', 'width=600,height=600');
+    // Prompt for API key
+    const apiKey = prompt(`� Enter your Google Drive API Key:
+
+📋 To get your API key:
+1. Go to: https://console.cloud.google.com/
+2. Sign in with: rites.chauhan11@gmail.com
+3. Create project & enable Google Drive API
+4. Create API Key credential
+5. Copy the key and paste it here
+
+Enter API Key:`);
     
-    showMessage('🔗 Google Drive OAuth flow opened in new window. Complete authentication and copy tokens to .env file.', 'info');
+    if (apiKey && apiKey.trim() && apiKey !== 'YOUR_GOOGLE_DRIVE_API_KEY') {
+        // Store API key
+        localStorage.setItem('google_drive_api_key', apiKey.trim());
+        
+        // Update cloud storage configuration
+        if (window.cloudStorage) {
+            window.cloudStorage.driveConfig.apiKey = apiKey.trim();
+            window.cloudStorage.checkConnection();
+        }
+        
+        showMessage('🔑 API Key saved! Testing connection...', 'success');
+        
+        // Test connection
+        setTimeout(() => {
+            testGoogleDrive();
+        }, 1000);
+        
+    } else if (apiKey === null) {
+        showMessage('❌ Setup cancelled', 'info');
+    } else {
+        showMessage('❌ Invalid API key provided', 'error');
+    }
 }
 
 function testGoogleDrive() {
-    console.log('🧪 Testing Google Drive connection...');
+    console.log('🧪 Testing Google Drive API connection...');
     
-    fetch('/api/google-drive/status')
-        .then(response => response.json())
-        .then(data => {
-            const statusText = document.getElementById('driveStatusText');
-            const statusDot = document.getElementById('driveStatusDot');
-            const connectionStatus = document.getElementById('connectionStatus');
-            
-            if (data.configured) {
-                if (statusText) statusText.textContent = 'Connected to Google Drive';
-                if (statusDot) statusDot.textContent = '🟢';
-                if (connectionStatus) connectionStatus.textContent = 'Connected and working';
-                showMessage('✅ Google Drive is connected and working!', 'success');
-            } else {
-                if (statusText) statusText.textContent = 'Setup required';
-                if (statusDot) statusDot.textContent = '🔴';
-                if (connectionStatus) connectionStatus.textContent = 'OAuth tokens needed';
-                showMessage('⚠️ Google Drive setup incomplete. Missing OAuth tokens.', 'warning');
-            }
-            
-            console.log('Google Drive Status:', data);
-        })
-        .catch(error => {
-            console.error('Failed to test Google Drive:', error);
-            showMessage('❌ Failed to test Google Drive connection', 'error');
-        });
+    if (window.cloudStorage) {
+        window.cloudStorage.checkConnection()
+            .then(isConnected => {
+                if (isConnected) {
+                    showMessage('✅ Google Drive connected successfully!', 'success');
+                } else {
+                    showMessage('❌ Google Drive connection failed. Check API key.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Test failed:', error);
+                showMessage('❌ Connection test failed', 'error');
+            });
+    } else {
+        showMessage('❌ Cloud storage not initialized', 'error');
+    }
 }
 
 function openGoogleDriveGuide() {
-    console.log('📖 Opening Google Drive setup guide...');
+    console.log('📖 Opening Google Drive API setup guide...');
     
-    // Create a popup with the setup guide
+    // Create a popup with the API key setup guide
     const guideWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes');
     
     guideWindow.document.write(`
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Google Drive Setup Guide - rites.chauhan11@gmail.com</title>
+            <title>Google Drive API Key Setup - rites.chauhan11@gmail.com</title>
             <style>
                 body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
                 .highlight { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; }
@@ -3426,61 +3451,79 @@ function openGoogleDriveGuide() {
                 .error { color: #dc3545; }
                 code { background: #f1f1f1; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
                 .step { margin: 20px 0; padding: 15px; border-left: 4px solid #007bff; background: #f8f9fa; }
+                .copy-btn { background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
             </style>
         </head>
         <body>
-            <h1>🚀 Google Drive Setup for rites.chauhan11@gmail.com</h1>
+            <h1>� Google Drive API Key Setup</h1>
+            <h2>For: rites.chauhan11@gmail.com</h2>
             
-            <div class="highlight">
+            <div class="highlight success">
                 <h3>✅ Pre-configured Settings:</h3>
                 <ul>
                     <li><strong>Email:</strong> rites.chauhan11@gmail.com</li>
                     <li><strong>Folder ID:</strong> 1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg</li>
-                    <li><strong>Storage Type:</strong> google-drive</li>
+                    <li><strong>Method:</strong> API Key (simpler than OAuth)</li>
                 </ul>
             </div>
             
             <div class="step">
                 <h3>Step 1: Google Cloud Console</h3>
                 <ol>
-                    <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li><a href="https://console.cloud.google.com/" target="_blank">Open Google Cloud Console</a></li>
                     <li>Sign in with <strong>rites.chauhan11@gmail.com</strong></li>
-                    <li>Create a new project: "Ritesh Portfolio"</li>
+                    <li>Create project: "Ritesh Portfolio API"</li>
                     <li>Enable Google Drive API</li>
                 </ol>
             </div>
             
             <div class="step">
-                <h3>Step 2: Create OAuth Credentials</h3>
+                <h3>Step 2: Create API Key</h3>
                 <ol>
                     <li>Go to APIs & Services → Credentials</li>
-                    <li>Create OAuth client ID (Web application)</li>
-                    <li>Add redirect URI: <code>http://localhost:3000/auth/google/callback</code></li>
-                    <li>Copy Client ID and Client Secret</li>
+                    <li>Click "Create Credentials" → "API Key"</li>
+                    <li>Copy the generated API key</li>
+                    <li>Click "Restrict Key" for security</li>
                 </ol>
             </div>
             
             <div class="step">
-                <h3>Step 3: Update .env File</h3>
+                <h3>Step 3: Restrict API Key (Security)</h3>
                 <div class="highlight">
-                    <pre>GOOGLE_CLIENT_ID=your-client-id-here
-GOOGLE_CLIENT_SECRET=your-client-secret-here</pre>
+                    <p><strong>Application restrictions:</strong> HTTP referrers (websites)</p>
+                    <p><strong>Website restrictions:</strong></p>
+                    <ul>
+                        <li>http://localhost:3000/*</li>
+                        <li>https://localhost:3000/*</li>
+                        <li>https://riteshchauhan.pages.dev/*</li>
+                    </ul>
+                    <p><strong>API restrictions:</strong> Google Drive API</p>
                 </div>
             </div>
             
             <div class="step">
-                <h3>Step 4: Complete OAuth Flow</h3>
+                <h3>Step 4: Test in Portfolio</h3>
                 <ol>
-                    <li>Save .env file and restart server</li>
-                    <li>Click "Complete OAuth Setup" in admin panel</li>
-                    <li>Authorize with rites.chauhan11@gmail.com</li>
-                    <li>Copy generated tokens to .env file</li>
+                    <li>Go back to your portfolio admin panel</li>
+                    <li>Click "Complete OAuth Setup" (will prompt for API key)</li>
+                    <li>Paste your API key</li>
+                    <li>Test the connection</li>
                 </ol>
             </div>
             
             <div class="highlight success">
                 <h3>🎉 Success!</h3>
-                <p>Your portfolio will automatically upload photos and files to your Google Drive!</p>
+                <p>Your portfolio will now upload files directly to your Google Drive!</p>
+                <p><strong>Folder:</strong> <a href="https://drive.google.com/drive/folders/1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg" target="_blank">Open Portfolio Folder</a></p>
+            </div>
+            
+            <div class="highlight warning">
+                <h3>⚠️ Security Notes:</h3>
+                <ul>
+                    <li>API key is stored in browser localStorage</li>
+                    <li>Restrict the key to your domains only</li>
+                    <li>You can revoke the key anytime in Google Cloud Console</li>
+                </ul>
             </div>
         </body>
         </html>
@@ -3496,7 +3539,7 @@ function openGoogleDriveFolder() {
     const folderUrl = `https://drive.google.com/drive/folders/${folderId}`;
     
     window.open(folderUrl, '_blank');
-    showMessage('📁 Google Drive folder opened in new tab', 'info');
+    showMessage('📁 Portfolio folder opened in Google Drive', 'info');
 }
 
 // Update hero profile image

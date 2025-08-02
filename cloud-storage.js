@@ -7,15 +7,69 @@ class CloudStorageManager {
         this.baseURL = 'http://localhost:3000/api';
         this.token = localStorage.getItem('portfolio_token');
         
-        // Google Drive configuration for rites.chauhan11@gmail.com
+        // Google Drive API configuration for rites.chauhan11@gmail.com
         this.driveConfig = {
             folderId: '1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg', // Ritesh's Portfolio folder ID
             email: 'rites.chauhan11@gmail.com',
-            apiKey: 'YOUR_GOOGLE_DRIVE_API_KEY', // Replace with your API key
-            baseUrl: 'https://www.googleapis.com/drive/v3'
+            apiKey: this.getApiKey(), // Get from environment or prompt user
+            baseUrl: 'https://www.googleapis.com/drive/v3',
+            uploadUrl: 'https://www.googleapis.com/upload/drive/v3/files'
         };
         
+        this.connectionStatus = 'disconnected';
         this.initializeUploadHandlers();
+        this.checkConnection();
+    }
+
+    // Get API key from environment or localStorage
+    getApiKey() {
+        // Try to get from localStorage first (user input)
+        const storedKey = localStorage.getItem('google_drive_api_key');
+        if (storedKey) return storedKey;
+        
+        // Fallback to environment variable
+        return 'YOUR_GOOGLE_DRIVE_API_KEY'; // Will be replaced with actual key
+    }
+
+    // Check Google Drive connection status
+    async checkConnection() {
+        try {
+            const response = await fetch(`${this.driveConfig.baseUrl}/about?fields=user&key=${this.driveConfig.apiKey}`);
+            
+            if (response.ok) {
+                const data = await response.json();
+                this.connectionStatus = 'connected';
+                console.log(`✅ Google Drive connected for: ${data.user.emailAddress}`);
+                this.updateConnectionStatus('connected', `Connected: ${data.user.emailAddress}`);
+                return true;
+            } else {
+                throw new Error(`API Error: ${response.status}`);
+            }
+        } catch (error) {
+            console.warn('⚠️ Google Drive connection failed:', error.message);
+            this.connectionStatus = 'disconnected';
+            this.updateConnectionStatus('disconnected', 'API Key needed');
+            return false;
+        }
+    }
+
+    // Update connection status in UI
+    updateConnectionStatus(status, message) {
+        const statusDot = document.getElementById('driveStatusDot');
+        const statusText = document.getElementById('driveStatusText');
+        const connectionStatus = document.getElementById('connectionStatus');
+        
+        if (statusDot) {
+            statusDot.textContent = status === 'connected' ? '🟢' : '🔴';
+        }
+        
+        if (statusText) {
+            statusText.textContent = message;
+        }
+        
+        if (connectionStatus) {
+            connectionStatus.textContent = status === 'connected' ? 'Connected and Ready' : 'API Key Required';
+        }
     }
 
     // Initialize upload event handlers
@@ -67,49 +121,89 @@ class CloudStorageManager {
         }
     }
 
-    // Upload to Google Drive
+    // Upload to Google Drive using API key
     async uploadToGoogleDrive(file, type, category, progressCallback) {
-        return new Promise((resolve, reject) => {
-            const metadata = {
-                name: `${Date.now()}-${file.name}`,
-                parents: [this.driveConfig.folderId]
-            };
-
-            const form = new FormData();
-            form.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
-            form.append('file', file);
-
-            const xhr = new XMLHttpRequest();
-            
-            xhr.upload.addEventListener('progress', (e) => {
-                if (e.lengthComputable && progressCallback) {
-                    const percentComplete = (e.loaded / e.total) * 100;
-                    progressCallback(percentComplete);
+        return new Promise(async (resolve, reject) => {
+            try {
+                // Check connection first
+                const isConnected = await this.checkConnection();
+                if (!isConnected) {
+                    throw new Error('Google Drive not connected. API key required.');
                 }
-            });
 
-            xhr.addEventListener('load', () => {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    resolve({
-                        success: true,
-                        url: `https://drive.google.com/file/d/${response.id}/view`,
-                        directUrl: `https://drive.google.com/uc?id=${response.id}`,
-                        id: response.id,
-                        name: response.name,
-                        type: 'google_drive'
+                // Step 1: Create file metadata
+                const metadata = {
+                    name: `${Date.now()}-${file.name}`,
+                    parents: [this.driveConfig.folderId],
+                    description: `Portfolio ${category} uploaded from rites.chauhan11@gmail.com`
+                };
+
+                // Step 2: Upload file using resumable upload
+                const boundary = '-------314159265358979323846';
+                const delimiter = "\r\n--" + boundary + "\r\n";
+                const close_delim = "\r\n--" + boundary + "--";
+
+                let body = delimiter +
+                    'Content-Type: application/json\r\n\r\n' +
+                    JSON.stringify(metadata) +
+                    delimiter +
+                    'Content-Type: ' + file.type + '\r\n\r\n';
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const fileData = e.target.result;
+                    body += fileData + close_delim;
+
+                    const xhr = new XMLHttpRequest();
+                    
+                    xhr.upload.addEventListener('progress', (e) => {
+                        if (e.lengthComputable && progressCallback) {
+                            const percentComplete = (e.loaded / e.total) * 100;
+                            progressCallback(percentComplete);
+                        }
                     });
-                } else {
-                    reject(new Error(`Google Drive upload failed with status: ${xhr.status}`));
-                }
-            });
 
-            xhr.addEventListener('error', () => {
-                reject(new Error('Google Drive upload network error'));
-            });
+                    xhr.addEventListener('load', () => {
+                        if (xhr.status === 200 || xhr.status === 201) {
+                            try {
+                                const response = JSON.parse(xhr.responseText);
+                                
+                                // Make file publicly viewable
+                                const fileId = response.id;
+                                const publicUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+                                
+                                resolve({
+                                    success: true,
+                                    url: publicUrl,
+                                    viewUrl: `https://drive.google.com/file/d/${fileId}/view`,
+                                    id: fileId,
+                                    name: response.name,
+                                    type: 'google_drive'
+                                });
+                            } catch (parseError) {
+                                reject(new Error('Failed to parse Google Drive response'));
+                            }
+                        } else {
+                            reject(new Error(`Google Drive upload failed: ${xhr.status} - ${xhr.responseText}`));
+                        }
+                    });
 
-            xhr.open('POST', `${this.driveConfig.baseUrl}/files?uploadType=multipart&key=${this.driveConfig.apiKey}`);
-            xhr.send(form);
+                    xhr.addEventListener('error', () => {
+                        reject(new Error('Network error during Google Drive upload'));
+                    });
+
+                    const uploadUrl = `${this.driveConfig.uploadUrl}?uploadType=multipart&key=${this.driveConfig.apiKey}`;
+                    xhr.open('POST', uploadUrl);
+                    xhr.setRequestHeader('Content-Type', 'multipart/related; boundary="' + boundary + '"');
+                    xhr.send(body);
+                };
+
+                reader.readAsBinaryString(file);
+
+            } catch (error) {
+                console.error('❌ Google Drive upload error:', error);
+                reject(error);
+            }
         });
     }
 
