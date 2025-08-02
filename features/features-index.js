@@ -4,6 +4,7 @@ class FeaturesIndex {
         this.customCursorEnabled = false;
         this.konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
         this.konamiIndex = 0;
+        this.currentCategory = 'interactive';
         
         this.init();
     }
@@ -12,7 +13,9 @@ class FeaturesIndex {
         this.setupAnimations();
         this.setupKonamiCode();
         this.setupScrollAnimations();
+        this.setupCategoryNavigation();
         this.createParticleBackground();
+        this.animateStats();
     }
 
     setupAnimations() {
@@ -20,7 +23,93 @@ class FeaturesIndex {
         const cards = document.querySelectorAll('.feature-card');
         cards.forEach((card, index) => {
             card.style.animationDelay = `${index * 0.1}s`;
+            
+            // Add hover effects
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = 'none';
+            });
         });
+    }
+
+    setupCategoryNavigation() {
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const categories = document.querySelectorAll('.feature-category');
+        
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetCategory = btn.dataset.category;
+                
+                // Update active nav button
+                navBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show target category
+                categories.forEach(cat => {
+                    cat.classList.remove('active');
+                    if (cat.dataset.category === targetCategory) {
+                        setTimeout(() => cat.classList.add('active'), 100);
+                    }
+                });
+                
+                this.currentCategory = targetCategory;
+            });
+        });
+    }
+
+    animateStats() {
+        const stats = document.querySelectorAll('.stat-number');
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = target.textContent;
+                    this.animateNumber(target, finalValue);
+                }
+            });
+        }, observerOptions);
+
+        stats.forEach(stat => observer.observe(stat));
+    }
+
+    animateNumber(element, finalValue) {
+        if (finalValue === '∞') {
+            let count = 0;
+            const interval = setInterval(() => {
+                element.textContent = count;
+                count += Math.floor(Math.random() * 50) + 10;
+                if (count > 500) {
+                    clearInterval(interval);
+                    element.textContent = '∞';
+                }
+            }, 50);
+            return;
+        }
+
+        const numericValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+        let current = 0;
+        const increment = numericValue / 50;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= numericValue) {
+                current = numericValue;
+                clearInterval(timer);
+            }
+            element.textContent = finalValue.includes('%') ? 
+                `${Math.floor(current)}%` : 
+                `${Math.floor(current)}+`;
+        }, 30);
     }
 
     setupKonamiCode() {
@@ -381,6 +470,128 @@ function activateKonamiCode() {
     }, 10000);
 }
 
+// Global functions for button interactions
+function scrollToFeatures() {
+    document.getElementById('features-showcase').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+}
+
+function openFeature(url) {
+    if (url.startsWith('#')) {
+        // Scroll to section
+        const element = document.querySelector(url);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    } else {
+        // Open new page
+        window.open(url, '_blank');
+    }
+}
+
+function contactMe() {
+    window.open('mailto:rites.chauhan11@gmail.com?subject=Let\'s Build Something Amazing!&body=Hi Ritesh,%0D%0A%0D%0AI was impressed by your interactive portfolio features and would love to discuss a collaboration opportunity.%0D%0A%0D%0ABest regards', '_blank');
+}
+
+function demonstrateTheme() {
+    const body = document.body;
+    const originalBg = body.style.background;
+    
+    // Theme transition animation
+    body.style.transition = 'all 1s ease';
+    body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+    
+    setTimeout(() => {
+        body.style.background = 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)';
+    }, 1000);
+    
+    setTimeout(() => {
+        body.style.background = originalBg || '#0f0f0f';
+        body.style.transition = '';
+    }, 2000);
+}
+
+function demonstrate3D() {
+    const cards = document.querySelectorAll('.feature-card');
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.transform = 'perspective(1000px) rotateX(10deg) rotateY(10deg) translateZ(20px)';
+            card.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.3)';
+            
+            setTimeout(() => {
+                card.style.transform = '';
+                card.style.boxShadow = '';
+            }, 1500);
+        }, index * 200);
+    });
+}
+
+function demonstrateMorphing(button) {
+    const originalText = button.innerHTML;
+    const originalStyle = button.style.cssText;
+    
+    // Morph to loading state
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+    button.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+    button.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+        // Morph to success state
+        button.innerHTML = '<i class="fas fa-check"></i> Complete!';
+        button.style.background = 'linear-gradient(135deg, #00ff87, #60efff)';
+        button.style.transform = 'scale(1.05)';
+        
+        setTimeout(() => {
+            // Return to original state
+            button.innerHTML = originalText;
+            button.style.cssText = originalStyle;
+        }, 2000);
+    }, 2000);
+}
+
+function revealSecret(type) {
+    const messages = {
+        snake: 'Type "snake" in the terminal to play the hidden Snake game! 🐍',
+        konami: 'Try the Konami Code: ↑↑↓↓←→←→BA 🎮'
+    };
+    
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        z-index: 10000;
+        max-width: 300px;
+        animation: slideInRight 0.5s ease;
+    `;
+    toast.textContent = messages[type] || 'Secret revealed!';
+    
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 5000);
+}
+
+function showKonamiHint() {
+    revealSecret('konami');
+}
+
+function enterMatrix() {
+    window.featuresIndex?.enterMatrix();
+}
+
+function enableCustomCursor() {
+    if (window.featuresIndex) {
+        window.featuresIndex.customCursorEnabled = !window.featuresIndex.customCursorEnabled;
+        window.featuresIndex.toggleCustomCursor();
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.featuresIndex = new FeaturesIndex();
@@ -483,5 +694,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    console.log('🎮 Features Index loaded successfully!');
 });

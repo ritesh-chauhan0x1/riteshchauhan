@@ -4,41 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Features - Ritesh Chauhan Portfolio</title>
+    <meta name="description" content="Explore cutting-edge interactive features including AI voice assistant, terminal interface, live code playground, and more innovative web technologies.">
+    <meta name="keywords" content="Interactive Portfolio, Web Features, Voice Assistant, Terminal Interface, Live Coding, JavaScript, CSS3 Animations">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Interactive Features - Ritesh Chauhan Portfolio">
+    <meta property="og:description" content="Discover innovative interactive features showcasing modern web development capabilities">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face&auto=format&q=80">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="features-index.css?v=1.0">
-    <link rel="stylesheet" href="animations.css?v=1.0">
-    <script src="../navigation.js?v=1.0"></script>
+    <link rel="stylesheet" href="features-index.css?v=2.0">
+    <link rel="stylesheet" href="animations.css?v=2.0">
 </head>
 <body>
     <div class="features-container">
         <header class="features-header">
             <div class="header-content">
+                <div class="floating-elements">
+                    <div class="floating-icon">💻</div>
+                    <div class="floating-icon">🚀</div>
+                    <div class="floating-icon">⚡</div>
+                    <div class="floating-icon">🎨</div>
+                </div>
                 <h1>🚀 Interactive Portfolio Features</h1>
                 <p>Discover the cutting-edge features that make this portfolio stand out</p>
                 <div class="feature-stats">
-                    <div class="stat">
-                        <span class="stat-number">12+</span>
+                    <div class="stat" data-count="15">
+                        <span class="stat-number">15+</span>
                         <span class="stat-label">Interactive Features</span>
                     </div>
-                    <div class="stat">
+                    <div class="stat" data-count="100">
                         <span class="stat-number">100%</span>
                         <span class="stat-label">Custom Built</span>
                     </div>
-                    <div class="stat">
+                    <div class="stat" data-count="999">
                         <span class="stat-number">∞</span>
                         <span class="stat-label">Possibilities</span>
                     </div>
                 </div>
+                <div class="header-actions">
+                    <button class="header-btn primary" onclick="scrollToFeatures()">
+                        <i class="fas fa-rocket"></i> Explore Features
+                    </button>
+                    <button class="header-btn secondary" onclick="openFeature('../index.html')">
+                        <i class="fas fa-home"></i> Back to Portfolio
+                    </button>
+                </div>
             </div>
         </header>
 
-        <section class="features-showcase">
-            <div class="feature-category">
-                <h2>🎮 Interactive Experiences</h2>
+        <section class="features-showcase" id="features-showcase">
+            <div class="showcase-nav">
+                <button class="nav-btn active" data-category="interactive">🎮 Interactive</button>
+                <button class="nav-btn" data-category="visual">✨ Visual Effects</button>
+                <button class="nav-btn" data-category="micro">🎯 Micro-Interactions</button>
+                <button class="nav-btn" data-category="easter">🎮 Easter Eggs</button>
+                <button class="nav-btn" data-category="realtime">📊 Real-Time</button>
+            </div>
+
+            <div class="feature-category active" data-category="interactive">
+                <h2><i class="fas fa-gamepad"></i> Interactive Experiences</h2>
                 <div class="features-grid">
-                    <div class="feature-card" data-feature="live-playground">
+                    <div class="feature-card enhanced" data-feature="live-playground">
                         <div class="feature-icon">💻</div>
+                        <div class="feature-badge">Featured</div>
                         <h3>Live Code Playground</h3>
                         <p>Interactive coding environment showcasing mini-applications with real-time editing and preview</p>
                         <div class="feature-highlights">
@@ -46,36 +77,71 @@
                             <span class="highlight">5 Demo Apps</span>
                             <span class="highlight">Code Sharing</span>
                         </div>
+                        <div class="feature-preview">
+                            <div class="preview-screen">
+                                <div class="code-lines">
+                                    <div class="code-line"></div>
+                                    <div class="code-line short"></div>
+                                    <div class="code-line"></div>
+                                </div>
+                            </div>
+                        </div>
                         <button class="feature-btn" onclick="openFeature('live-playground.html')">
-                            Explore Playground ▶️
+                            <i class="fas fa-play"></i> Explore Playground
                         </button>
                     </div>
 
-                    <div class="feature-card" data-feature="terminal">
+                    <div class="feature-card enhanced" data-feature="terminal">
                         <div class="feature-icon">⌨️</div>
+                        <div class="feature-badge popular">Popular</div>
                         <h3>Terminal-Style About Me</h3>
                         <p>Unique command-line interface for exploring personal information with authentic terminal experience</p>
                         <div class="feature-highlights">
-                            <span class="highlight">20+ Commands</span>
+                            <span class="highlight">25+ Commands</span>
                             <span class="highlight">Typing Animation</span>
                             <span class="highlight">Command History</span>
                         </div>
+                        <div class="feature-preview">
+                            <div class="terminal-screen">
+                                <div class="terminal-header">
+                                    <div class="terminal-buttons">
+                                        <span class="btn red"></span>
+                                        <span class="btn yellow"></span>
+                                        <span class="btn green"></span>
+                                    </div>
+                                </div>
+                                <div class="terminal-content">
+                                    <span class="prompt">$ whoami</span>
+                                    <div class="cursor blink"></div>
+                                </div>
+                            </div>
+                        </div>
                         <button class="feature-btn" onclick="openFeature('terminal-about.html')">
-                            Access Terminal 🖥️
+                            <i class="fas fa-terminal"></i> Access Terminal
                         </button>
                     </div>
 
-                    <div class="feature-card" data-feature="voice-assistant">
+                    <div class="feature-card enhanced" data-feature="voice-assistant">
                         <div class="feature-icon">🤖</div>
-                        <h3>AI Voice Assistant</h3>
+                        <div class="feature-badge new">New</div>
+                        <h3>AI Voice Assistant - RIYA</h3>
                         <p>Intelligent voice-powered assistant that responds with fun facts and information about my journey</p>
                         <div class="feature-highlights">
                             <span class="highlight">Voice Recognition</span>
                             <span class="highlight">Natural Responses</span>
                             <span class="highlight">AI Knowledge</span>
                         </div>
+                        <div class="feature-preview">
+                            <div class="voice-visualizer">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                        </div>
                         <button class="feature-btn" onclick="openFeature('voice-assistant.html')">
-                            Meet RIYA 🎙️
+                            <i class="fas fa-microphone"></i> Meet RIYA
                         </button>
                     </div>
                 </div>
@@ -324,6 +390,30 @@
 
     <div class="confetti-container" id="confettiContainer"></div>
     
-    <script src="features-index.js?v=1.0"></script>
+    <!-- Enhanced Features JavaScript -->
+    <script src="features-index.js?v=2.0"></script>
+    
+    <!-- Add CSS animations for better performance -->
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .feature-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    </style>
 </body>
 </html>

@@ -66,13 +66,13 @@ body {
     position: relative;
 }
 
-/* Theme Toggle - Simple Light/Dark Mode */
+/* Theme Toggle - Enhanced Design */
 .theme-toggle {
     position: fixed;
     top: 2rem;
     right: 2rem;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     background: var(--card-bg);
     border: 2px solid var(--border);
     border-radius: 50%;
@@ -83,11 +83,13 @@ body {
     transition: all 0.3s ease;
     z-index: 1001;
     box-shadow: 0 4px 15px var(--shadow);
+    backdrop-filter: blur(10px);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px var(--shadow);
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 25px var(--shadow);
+    border-color: var(--accent);
 }
 
 .theme-toggle:active {
@@ -96,8 +98,13 @@ body {
 
 .theme-toggle i {
     color: var(--accent);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     transition: all 0.3s ease;
+}
+
+.theme-toggle:hover i {
+    color: var(--accent-secondary);
+    transform: rotate(-10deg);
 }
 
 /* Admin Icon */
@@ -317,14 +324,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 4rem 2rem;
     background: var(--primary-bg);
     position: relative;
     overflow: hidden;
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto;
 }
@@ -334,31 +341,33 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .hero-text {
     flex: 1;
-    max-width: 800px;
+    max-width: 900px;
+    width: 100%;
 }
 
 .name-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1rem;
+    gap: 3rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
 }
 
 .name {
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-size: clamp(3rem, 8vw, 5rem);
     font-weight: 900;
     color: var(--text-primary);
     margin: 0;
     letter-spacing: -0.02em;
     line-height: 1.1;
-    order: 2; /* Name comes after photo */
+    order: 2;
+    text-transform: uppercase;
 }
 
 .surname {
@@ -368,48 +377,53 @@ body {
 
 .hero-profile-photo {
     flex-shrink: 0;
-    order: 1; /* Photo comes first */
+    order: 1;
 }
 
 .hero-profile-photo .profile-image {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid var(--accent);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    border: 5px solid var(--accent);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .hero-profile-photo .profile-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+    transform: scale(1.08) rotate(5deg);
+    box-shadow: 0 20px 50px rgba(99, 102, 241, 0.5);
 }
 
 .hero-profile-photo .profile-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .title {
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
     color: var(--accent);
     font-weight: 600;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .bio {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    line-height: 1.6;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    line-height: 1.7;
     color: var(--text-secondary);
-    margin: 1.5rem 0 2rem;
-    max-width: 700px;
+    margin: 2rem 0 3rem;
+    max-width: 800px;
+    text-align: center;
 }
 
 .cta-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 2rem;
@@ -417,36 +431,57 @@ body {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+    .hero {
+        padding: 2rem 1rem;
+        min-height: 90vh;
+    }
+    
     .name-container {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
         text-align: center;
     }
     
     .name {
-        font-size: 2.5rem;
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
         text-align: center;
-        order: 2; /* Name stays below photo on mobile */
+        order: 2;
     }
     
     .hero-profile-photo {
-        order: 1; /* Photo stays on top on mobile */
+        order: 1;
     }
     
     .hero-profile-photo .profile-image {
-        width: 100px;
-        height: 100px;
+        width: 140px;
+        height: 140px;
+        border-width: 4px;
+    }
+    
+    .title {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        margin: 1rem 0;
+    }
+    
+    .bio {
+        font-size: clamp(1rem, 4vw, 1.2rem);
+        margin: 1.5rem 0 2rem;
+        padding: 0 1rem;
     }
     
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
     }
     
     .cta-buttons .btn {
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
     }
+}
     
     .social-nav {
         right: 1rem;
@@ -460,6 +495,7 @@ body {
     }
 }
 
+/* Enhanced Animations and Visual Effects */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -469,6 +505,79 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+    }
+    50% {
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+    }
+}
+
+/* Apply animations to hero elements */
+.hero-content {
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-profile-photo {
+    animation: fadeInLeft 1s ease-out 0.3s both;
+}
+
+.name {
+    animation: fadeInRight 1s ease-out 0.5s both;
+}
+
+.title {
+    animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+.bio {
+    animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.cta-buttons {
+    animation: fadeInUp 1s ease-out 1.1s both;
+}
+
+.hero-profile-photo .profile-image {
+    animation: glow 3s ease-in-out infinite;
+}
+
+.social-nav {
+    animation: fadeInRight 1s ease-out 1.3s both;
 }
 
 .title {
@@ -877,21 +986,25 @@ body {
 }
 
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2rem;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    font-size: 1rem;
+    min-width: 160px;
 }
 
 .btn-primary {
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
     color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
 
 .btn-secondary {
@@ -900,9 +1013,25 @@ body {
     border: 2px solid var(--accent);
 }
 
+.btn-outline {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent));
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+}
+
+.btn-outline:hover {
+    background: var(--accent);
+    color: white;
 }
 
 /* Contact Section */
@@ -987,7 +1116,7 @@ body {
 .social-nav {
     position: fixed;
     top: 50%;
-    right: 2rem;
+    right: 1.5rem;
     transform: translateY(-50%);
     z-index: 1000;
     display: flex;
@@ -996,8 +1125,8 @@ body {
 }
 
 .social-link {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -1008,7 +1137,7 @@ body {
     overflow: hidden;
     text-decoration: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
@@ -1684,9 +1813,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--primary-bg);
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
     z-index: 10000;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: opacity 0.5s ease;
@@ -1694,9 +1824,27 @@ body {
 
 .loading-text {
     color: var(--text-primary);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
     letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.loading::before {
+    content: '';
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--border);
+    border-top: 4px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 2rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Website Building Services Section */
@@ -1992,8 +2140,9 @@ body {
     }
     
     .social-nav {
-        top: 1rem;
+        top: 50%;
         right: 1rem;
+        transform: translateY(-50%);
         gap: 0.5rem;
     }
     
@@ -2005,48 +2154,108 @@ body {
 
 @media (max-width: 480px) {
     .about-content {
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
+        text-align: center;
     }
     
     .profile-card {
-        padding: 1rem;
+        padding: 1.5rem;
+        margin: 0 auto;
     }
     
     .profile-avatar {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 1rem;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1rem;
     }
     
     .profile-avatar::before {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .about-text h3 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        text-align: center;
     }
     
     .about-text p {
         font-size: 0.95rem;
+        text-align: center;
     }
     
     .hero {
         padding: 1rem;
+        min-height: 85vh;
+    }
+    
+    .hero-content {
+        gap: 2rem;
+    }
+    
+    .name-container {
+        gap: 1rem;
+    }
+    
+    .name {
+        font-size: clamp(2rem, 12vw, 3rem);
+    }
+    
+    .hero-profile-photo .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .title {
+        font-size: clamp(1.1rem, 5vw, 1.5rem);
+    }
+    
+    .bio {
+        font-size: clamp(0.95rem, 4vw, 1.1rem);
+        padding: 0 0.5rem;
+    }
+    
+    .cta-buttons .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+        min-width: 140px;
     }
     
     .section {
         padding: 3rem 1rem;
     }
     
-    .theme-icon {
-        width: 35px;
-        height: 35px;
+    .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle i {
         font-size: 1rem;
+    }
+    
+    .social-nav {
+        top: 50%;
+        right: 0.5rem;
+        transform: translateY(-50%);
+        gap: 0.8rem;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
     }
     
     .college-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
     }
 }
 
