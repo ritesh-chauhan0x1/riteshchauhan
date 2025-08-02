@@ -144,7 +144,7 @@ body {
 .social-nav {
     position: fixed;
     right: 2rem;
-    top: 70%;
+    top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -235,6 +235,28 @@ body {
 }
 
 /* Mobile Responsive */
+@media (min-width: 769px) {
+    /* Desktop specific styles */
+    .social-nav {
+        top: 50%;
+        right: 3rem;
+    }
+    
+    .social-link {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .social-link i {
+        font-size: 1.3rem;
+    }
+    
+    .loading-text {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+}
+
 @media (max-width: 768px) {
     .theme-toggle {
         top: 1rem;
