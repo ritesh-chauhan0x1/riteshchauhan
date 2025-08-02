@@ -915,7 +915,6 @@ async function loadProjectsToPublic() {
                                 </a>
                             ` : ''}
                         </div>
-                        ${dataSource !== 'backend' ? '<div class="project-status offline">Offline Mode</div>' : ''}
                     </div>
                 `;
             }).join('');
@@ -1036,9 +1035,8 @@ async function loadPhotosToPublic() {
                 <div class="photo-placeholder">
                     <i class="fas fa-camera"></i>
                     <h3>Photo Gallery</h3>
-                    <p>Photos will appear here once uploaded by admin</p>
+                    <p>Photo gallery loading...</p>
                     <small>Gallery is ready for content</small>
-                    ${dataSource !== 'backend' ? '<div class="offline-indicator">📱 Offline Mode</div>' : ''}
                 </div>
             `;
             return;
@@ -3069,7 +3067,7 @@ function loadPhotosToPublic() {
             photosGrid.innerHTML = `
                 <div class="photo-placeholder">
                     <i class="fas fa-camera"></i>
-                    <p>Photos will be uploaded by admin</p>
+                    <p>Photo gallery loading...</p>
                 </div>
             `;
             return;

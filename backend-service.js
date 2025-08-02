@@ -99,35 +99,15 @@ class BackendService {
             statusIndicator.innerHTML = '🟢 Backend Connected';
             setTimeout(() => statusIndicator.style.opacity = '0', 3000);
         } else {
-            statusIndicator.style.background = '#FF9800';
-            statusIndicator.style.color = 'white';
-            statusIndicator.innerHTML = '🟡 Offline Mode';
-            statusIndicator.style.opacity = '1';
+            // Hide status indicator when offline instead of showing offline mode
+            statusIndicator.style.opacity = '0';
         }
     }
 
     // Show offline notice
     showOfflineNotice() {
-        const notice = document.createElement('div');
-        notice.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, #FF9800, #F57C00);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            z-index: 10000;
-            font-weight: 600;
-        `;
-        notice.innerHTML = `
-            📱 Running in offline mode - Some features may be limited. 
-            <button onclick="location.reload()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 15px; margin-left: 10px; cursor: pointer;">
-                🔄 Retry Connection
-            </button>
-        `;
-        document.body.appendChild(notice);
+        // Offline notice removed - silent mode
+        console.log('📱 Working in offline mode');
     }
 
     // Enhanced API request with retry logic

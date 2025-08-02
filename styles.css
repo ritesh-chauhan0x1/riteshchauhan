@@ -2954,21 +2954,4 @@ body {
     margin-right: 0.5rem;
 }
 
-/* Project and photo status indicators */
-.project-status,
-.offline-indicator {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 152, 0, 0.9);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-.project-status.offline,
-.offline-indicator {
-    background: rgba(158, 158, 158, 0.9);
-}
+/* Removed offline mode indicators for cleaner UI */
