@@ -112,7 +112,7 @@ body {
 .social-nav {
     position: fixed;
     right: 2rem;
-    top: 60%;
+    top: 70%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
