@@ -396,25 +396,36 @@ body {
     margin: 0 auto;
 }
 
-/* About Section */
+/* About Section - Enhanced Layout */
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 4rem;
-    align-items: center;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+    .about-content {
+        grid-template-columns: 350px 1fr;
+        gap: 4rem;
+    }
 }
 
 .profile-card {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    padding: 3rem;
+    padding: 2rem;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transform: translateX(-100px);
     opacity: 0;
     transition: all 0.8s ease;
     box-shadow: 0 20px 40px var(--shadow);
+    position: sticky;
+    top: 2rem;
 }
 
 .profile-card.animate {
@@ -1524,9 +1535,26 @@ body {
     }
     
     .about-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 250px 1fr;
         gap: 2rem;
     }
+    
+    .profile-card {
+        position: static;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .about-content {
+        grid-template-columns: 300px 1fr;
+        gap: 3rem;
+    }
+    
+    .profile-card {
+        padding: 1.5rem;
+    }
+}
     
     .skills-grid,
     .projects-grid {
@@ -1591,6 +1619,33 @@ body {
 }
 
 @media (max-width: 480px) {
+    .about-content {
+        grid-template-columns: 200px 1fr;
+        gap: 1.5rem;
+    }
+    
+    .profile-card {
+        padding: 1rem;
+    }
+    
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+    }
+    
+    .profile-avatar::before {
+        font-size: 1.5rem;
+    }
+    
+    .about-text h3 {
+        font-size: 1.4rem;
+    }
+    
+    .about-text p {
+        font-size: 0.95rem;
+    }
+    
     .hero {
         padding: 1rem;
     }

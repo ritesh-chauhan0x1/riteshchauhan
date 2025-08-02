@@ -41,7 +41,7 @@ const DEFAULT_DATA = {
         instagram: 'https://instagram.com/riteshchauhan_15',
         facebook: 'https://facebook.com/riteshchauhan_15',
         github: 'https://github.com/ritesh-chauhan0x1',
-        leetcode: 'https://leetcode.com/u/riteshchauhn_15',
+        leetcode: 'https://leetcode.com/u/riteshchauhan_15',
         whatsapp: 'https://wa.me/+919337940768',
         email: '22054368@kiit.ac.in'
     },

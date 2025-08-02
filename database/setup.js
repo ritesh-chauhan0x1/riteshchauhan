@@ -230,7 +230,7 @@ async function insertDefaultData(connection) {
         ['instagram', 'https://instagram.com/riteshchauhan_15', 'fab fa-instagram'],
         ['facebook', 'https://facebook.com/riteshchauhan_15', 'fab fa-facebook'],
         ['github', 'https://github.com/ritesh-chauhan0x1', 'fab fa-github'],
-        ['leetcode', 'https://leetcode.com/u/riteshchauhn_15', 'fas fa-code'],
+        ['leetcode', 'https://leetcode.com/u/riteshchauhan_15', 'fas fa-code'],
         ['whatsapp', 'https://wa.me/+919337940768', 'fab fa-whatsapp'],
         ['gmail', '22054368@kiit.ac.in', 'far fa-envelope']
     ];
