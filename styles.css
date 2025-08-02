@@ -358,6 +358,7 @@ body {
     margin: 0;
     letter-spacing: -0.02em;
     line-height: 1.1;
+    order: 2; /* Name comes after photo */
 }
 
 .surname {
@@ -367,6 +368,7 @@ body {
 
 .hero-profile-photo {
     flex-shrink: 0;
+    order: 1; /* Photo comes first */
 }
 
 .hero-profile-photo .profile-image {
@@ -421,14 +423,19 @@ body {
         text-align: center;
     }
     
-    .hero-profile-photo .profile-image {
-        width: 100px;
-        height: 100px;
-    }
-    
     .name {
         font-size: 2.5rem;
         text-align: center;
+        order: 2; /* Name stays below photo on mobile */
+    }
+    
+    .hero-profile-photo {
+        order: 1; /* Photo stays on top on mobile */
+    }
+    
+    .hero-profile-photo .profile-image {
+        width: 100px;
+        height: 100px;
     }
     
     .cta-buttons {
@@ -439,6 +446,17 @@ body {
     .cta-buttons .btn {
         width: 100%;
         max-width: 280px;
+    }
+    
+    .social-nav {
+        right: 1rem;
+        gap: 0.8rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 }
 
@@ -969,7 +987,7 @@ body {
 .social-nav {
     position: fixed;
     top: 50%;
-    right: 6rem;
+    right: 2rem;
     transform: translateY(-50%);
     z-index: 1000;
     display: flex;

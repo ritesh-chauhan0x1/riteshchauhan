@@ -72,35 +72,11 @@ class BackendService {
         }
     }
 
-    // Show connection status
+    // Show connection status - completely hidden for clean UI
     showConnectionStatus(status) {
-        let statusIndicator = document.getElementById('connectionStatus');
-        if (!statusIndicator) {
-            statusIndicator = document.createElement('div');
-            statusIndicator.id = 'connectionStatus';
-            statusIndicator.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                padding: 8px 15px;
-                border-radius: 20px;
-                z-index: 9999;
-                font-size: 12px;
-                font-weight: 600;
-                transition: all 0.3s ease;
-            `;
-            document.body.appendChild(statusIndicator);
-        }
-
-        if (status === 'connected') {
-            statusIndicator.style.background = '#4CAF50';
-            statusIndicator.style.color = 'white';
-            statusIndicator.innerHTML = '🟢 Connected';
-            setTimeout(() => statusIndicator.style.opacity = '0', 3000);
-        } else {
-            // Hide status indicator completely
-            statusIndicator.style.opacity = '0';
-        }
+        // Status checking happens silently in background
+        console.log(`� Connection status: ${status}`);
+        // No UI indicators shown to keep interface clean
     }
 
     // Show offline notice - removed for cleaner UI
