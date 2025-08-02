@@ -27,7 +27,8 @@ const DEFAULT_DATA = {
         education: '4th Year B.Tech CSE at KIIT',
         photo: '',
         bio: '🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal\nPassionate about creating innovative digital solutions and bringing ideas to life through code.',
-        resumeUrl: ''
+        resumeUrl: '',
+        resumeHighlights: '• 4th Year B.Tech CSE Student at KIIT University\n• Full Stack Developer with 4+ years of experience\n• Solved 100+ problems on LeetCode\n• Built 50+ projects including web apps and APIs\n• Proficient in React, Node.js, Python, JavaScript\n• Experience with MySQL, MongoDB, AWS Cloud Services'
     },
     content: {
         about: 'Hello! I\'m Ritesh, a passionate Computer Science Engineering student from Nepal, currently pursuing my B.Tech at KIIT University. Born and raised in the vibrant city of Birgunj, I discovered my love for technology and programming during my early college years.',
@@ -389,6 +390,7 @@ function loadDashboardData() {
     if (document.getElementById('editPhoto')) document.getElementById('editPhoto').value = profile.photo;
     if (document.getElementById('editBio')) document.getElementById('editBio').value = profile.bio;
     if (document.getElementById('resumeUpload')) document.getElementById('resumeUpload').value = profile.resumeUrl || 'https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link';
+    if (document.getElementById('resumeHighlights')) document.getElementById('resumeHighlights').value = profile.resumeHighlights || '• 4th Year B.Tech CSE Student at KIIT University\n• Full Stack Developer with 4+ years of experience\n• Solved 100+ problems on LeetCode\n• Built 50+ projects including web apps and APIs\n• Proficient in React, Node.js, Python, JavaScript\n• Experience with MySQL, MongoDB, AWS Cloud Services';
 
     // Load content data
     if (document.getElementById('editAbout')) document.getElementById('editAbout').value = content.about;
@@ -523,7 +525,8 @@ function saveProfile() {
         education: document.getElementById('editEducation').value,
         photo: document.getElementById('editPhoto').value,
         bio: document.getElementById('editBio').value,
-        resumeUrl: document.getElementById('resumeUpload').value || 'https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link'
+        resumeUrl: document.getElementById('resumeUpload').value || 'https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link',
+        resumeHighlights: document.getElementById('resumeHighlights').value || '• 4th Year B.Tech CSE Student at KIIT University\n• Full Stack Developer with 4+ years of experience\n• Solved 100+ problems on LeetCode\n• Built 50+ projects including web apps and APIs\n• Proficient in React, Node.js, Python, JavaScript\n• Experience with MySQL, MongoDB, AWS Cloud Services'
     };
     
     localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(profileData));

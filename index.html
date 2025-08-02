@@ -23,7 +23,7 @@
     </div>
 
     <!-- Admin Login Icon -->
-    <div class="admin-icon" id="adminIcon" title="Click to open Admin Login (Username: Ritesh, Password: Ritesh@4368@)">
+    <div class="admin-icon" id="adminIcon" title="Admin Access">
         <i class="fas fa-cog"></i>
     </div>
 
@@ -32,13 +32,6 @@
         <div class="modal-content">
             <span class="close" id="closeLogin">&times;</span>
             <h2>🔐 Admin Login</h2>
-            <div class="login-info">
-                <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                    <strong>Demo Credentials:</strong><br>
-                    Username: <code>Ritesh</code><br>
-                    Password: <code>Ritesh@4368@</code>
-                </p>
-            </div>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Username:</label>
@@ -116,6 +109,17 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                     <label for="resumeUpload">Resume PDF Link:</label>
                     <input type="url" id="resumeUpload" value="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" placeholder="Enter your Google Drive resume link">
                     <small>Current resume: Google Drive Link</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="resumeHighlights">Resume Highlights:</label>
+                    <textarea id="resumeHighlights" rows="6" placeholder="Key achievements and highlights for resume">• 4th Year B.Tech CSE Student at KIIT University
+• Full Stack Developer with 4+ years of experience
+• Solved 100+ problems on LeetCode
+• Built 50+ projects including web apps and APIs
+• Proficient in React, Node.js, Python, JavaScript
+• Experience with MySQL, MongoDB, AWS Cloud Services</textarea>
+                    <small>Add key points to highlight in your resume</small>
                 </div>
                 
                 <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
@@ -333,7 +337,7 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#memories">Memories</a></li>
-                <li><a href="features/index.html" class="features-btn">🎮 Interactive Features</a></li>
+                <li><a href="features/index.html" class="features-btn">🚀 Main Projects</a></li>
                 <li><a href="#resume" class="resume-btn">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -588,10 +592,10 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
         </div>
     </section>
 
-    <!-- Interactive Features Section -->
+    <!-- Main Projects Section -->
     <section id="interactive-features" class="section features-showcase">
         <div class="container">
-            <h2 class="section-title reveal">🎮 Interactive Features</h2>
+            <h2 class="section-title reveal">🚀 Main Projects</h2>
             <p class="section-subtitle reveal">Experience cutting-edge web technologies in action</p>
             
             <div class="features-grid">
@@ -646,7 +650,7 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
 
             <div class="features-cta">
                 <a href="features/index.html" class="btn btn-gradient btn-large">
-                    🚀 Explore All Features
+                    🚀 Explore All Main Projects
                 </a>
                 <p class="cta-hint">Try the Konami code (↑↑↓↓←→←→BA) for a surprise! 🎮</p>
             </div>
@@ -707,18 +711,6 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                         </a>
                     </div>
                 </div>
-                
-                <div class="resume-highlights">
-                    <h4>Resume Highlights</h4>
-                    <ul>
-                        <li>🎓 B.Tech Computer Science Engineering Student (4th Year)</li>
-                        <li>💻 Full Stack Web Developer</li>
-                        <li>🏆 100+ LeetCode Problems Solved</li>
-                        <li>🚀 50+ Projects Completed</li>
-                        <li>🌟 Active in Tech Communities</li>
-                        <li>📍 Available for Internships & Full-time Opportunities</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -750,6 +742,85 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                         <h4>LeetCode</h4>
                         <span>@riteshchauhan_15</span>
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Website Building Services Section -->
+    <section id="build-website" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">🌟 Want Your Own Amazing Website?</h2>
+            <div class="build-website-content reveal">
+                <div class="service-description">
+                    <h3>I Can Build Your Dream Website!</h3>
+                    <p>Inspired by this portfolio? I can create a stunning, modern, and interactive website tailored to your needs. Whether you're a business, professional, or creative individual, let's bring your vision to life!</p>
+                    
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <div class="service-icon">💻</div>
+                            <h4>Custom Portfolio Websites</h4>
+                            <p>Professional portfolios with interactive features, animations, and modern design</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">🏢</div>
+                            <h4>Business Websites</h4>
+                            <p>Complete business websites with admin panels, contact forms, and SEO optimization</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">🛍️</div>
+                            <h4>E-Commerce Solutions</h4>
+                            <p>Full-featured online stores with payment integration and inventory management</p>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon">📱</div>
+                            <h4>Responsive Design</h4>
+                            <p>Mobile-first websites that look perfect on all devices and screen sizes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="features-included">
+                        <h4>✨ What You Get:</h4>
+                        <ul>
+                            <li>🎨 Modern, responsive design</li>
+                            <li>⚡ Fast loading and optimized performance</li>
+                            <li>🔧 Easy-to-use admin panel</li>
+                            <li>📱 Mobile-friendly interface</li>
+                            <li>🛡️ Secure and reliable hosting setup</li>
+                            <li>📈 SEO optimization for better visibility</li>
+                            <li>🎮 Interactive features and animations</li>
+                            <li>📞 Ongoing support and maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <div class="pricing-highlight">
+                        <h3>💎 Affordable Pricing</h3>
+                        <p>Starting from <strong>₹15,000</strong> for a complete website</p>
+                        <small>Includes design, development, hosting setup, and 3 months support</small>
+                    </div>
+                    
+                    <div class="contact-cta">
+                        <h4>Ready to Start Your Project?</h4>
+                        <p>Send me a message with your requirements and let's discuss how I can help bring your vision to life!</p>
+                        
+                        <div class="contact-buttons">
+                            <a href="mailto:22054368@kiit.ac.in?subject=Website Development Inquiry&body=Hi Ritesh,%0A%0AI'm interested in getting a website built. Here are my requirements:%0A%0A- Type of website: %0A- Key features needed: %0A- Timeline: %0A- Budget range: %0A%0ALooking forward to discussing this project with you!%0A%0ABest regards," 
+                               class="btn btn-primary" target="_blank">
+                                📧 Email Me Your Requirements
+                            </a>
+                            <a href="https://wa.me/+919337940768?text=Hi%20Ritesh!%20I%20saw%20your%20amazing%20portfolio%20and%20I'm%20interested%20in%20getting%20a%20website%20built.%20Can%20we%20discuss%20my%20requirements?" 
+                               class="btn btn-secondary" target="_blank">
+                                💬 WhatsApp Me
+                            </a>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <p>"Working with Ritesh was fantastic! He delivered exactly what I envisioned and more. The website is fast, beautiful, and easy to manage."</p>
+                            <small>- Happy Client</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
