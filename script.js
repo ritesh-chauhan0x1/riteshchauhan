@@ -805,71 +805,481 @@ function loadPortfolioData() {
     loadPhotosToPublic();
 }
 
-// Load projects to public section
-function loadProjectsToPublic() {
-    const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects)) || [];
+// Enhanced project loading with backend integration and improved error handling
+async function loadProjectsToPublic() {
     const projectsGrid = document.querySelector('#projectsGrid');
     
-    if (projectsGrid) {
+    if (!projectsGrid) {
+        console.warn('❌ Projects grid element not found');
+        return;
+    }
+
+    console.log('🚀 Loading projects to public display...');
+
+    try {
+        // Show loading state with better styling
+        projectsGrid.innerHTML = `
+            <div class="loading-projects">
+                <div class="loading-spinner"></div>
+                <p>Loading amazing projects...</p>
+                <small>Connecting to backend...</small>
+            </div>
+        `;
+
+        let projects = [];
+        let dataSource = 'unknown';
+
+        // Try to load from backend service first
+        if (window.backendService) {
+            try {
+                console.log('📡 Attempting to load from backend...');
+                const response = await window.backendService.getProjects();
+                projects = response.data || [];
+                dataSource = response.cached ? 'cache' : response.default ? 'default' : 'backend';
+                console.log(`✅ Loaded ${projects.length} projects from ${dataSource}`);
+            } catch (error) {
+                console.log('⚠️ Backend service failed, trying enhanced API...');
+                dataSource = 'fallback';
+            }
+        }
+
+        // Fallback to enhanced API
+        if (projects.length === 0 && window.enhancedAPI) {
+            try {
+                const response = await window.enhancedAPI.getProjects();
+                projects = response.data || [];
+                dataSource = 'enhanced_api';
+                console.log(`✅ Loaded ${projects.length} projects from enhanced API`);
+            } catch (error) {
+                console.log('⚠️ Enhanced API failed, using localStorage...');
+                dataSource = 'localStorage';
+            }
+        }
+
+        // Fallback to localStorage
+        if (projects.length === 0) {
+            const storedProjects = localStorage.getItem(STORAGE_KEYS.projects);
+            if (storedProjects) {
+                projects = JSON.parse(storedProjects);
+                dataSource = 'localStorage';
+                console.log(`✅ Loaded ${projects.length} projects from localStorage`);
+            }
+        }
+
+        // Final fallback to default data
+        if (projects.length === 0) {
+            projects = DEFAULT_DATA.projects || [];
+            dataSource = 'default';
+            console.log(`✅ Using ${projects.length} default projects`);
+        }
+
         if (projects.length > 0) {
-            projectsGrid.innerHTML = projects.map(project => `
-                <div class="project-card ${project.featured ? 'featured-project' : ''} reveal">
-                    <div class="project-icon">${project.icon || '🚀'}</div>
-                    <h3>${project.title}</h3>
-                    <p>${project.description}</p>
-                    <div class="project-tech">
-                        ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+            // Sort projects: featured first, then by date/order
+            const sortedProjects = projects.sort((a, b) => {
+                // Featured projects first
+                if ((a.isFeatured || a.featured) && !(b.isFeatured || b.featured)) return -1;
+                if (!(a.isFeatured || a.featured) && (b.isFeatured || b.featured)) return 1;
+                
+                // Then by sort order if available
+                if (a.sortOrder !== undefined && b.sortOrder !== undefined) {
+                    return a.sortOrder - b.sortOrder;
+                }
+                
+                // Finally by creation date
+                return new Date(b.created_at || b.createdAt || 0) - new Date(a.created_at || a.createdAt || 0);
+            });
+
+            // Generate project cards with enhanced styling
+            projectsGrid.innerHTML = sortedProjects.map((project, index) => {
+                const technologies = project.technologies || project.tech || [];
+                const isValidUrl = (url) => url && (url.startsWith('http') || url.startsWith('//'));
+                
+                return `
+                    <div class="project-card ${project.isFeatured || project.featured ? 'featured-project' : ''} reveal" data-index="${index}">
+                        <div class="project-icon">${project.icon || '🚀'}</div>
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <div class="project-tech">
+                            ${technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                        <div class="project-links">
+                            ${isValidUrl(project.liveUrl) ? `
+                                <a href="${project.liveUrl}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    ${project.category === 'algorithms' || project.category === 'api' ? 'View Project' : 'Live Demo'}
+                                </a>
+                            ` : ''}
+                            ${isValidUrl(project.githubUrl) ? `
+                                <a href="${project.githubUrl}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            ` : ''}
+                        </div>
+                        ${dataSource !== 'backend' ? '<div class="project-status offline">Offline Mode</div>' : ''}
                     </div>
-                    <div class="project-links">
-                        <a href="${project.liveUrl}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                            ${project.category === 'algorithms' || project.category === 'api' ? 'View Project' : 'Live Demo'}
-                        </a>
-                        <a href="${project.githubUrl}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
             
-            // Re-trigger reveal animations
+            // Add data source indicator
+            const sourceIndicator = document.createElement('div');
+            sourceIndicator.className = 'data-source-indicator';
+            sourceIndicator.innerHTML = `
+                <small>
+                    <i class="fas fa-info-circle"></i>
+                    Data source: ${dataSource.replace('_', ' ').toUpperCase()}
+                    ${dataSource === 'cache' ? ' (may be outdated)' : ''}
+                </small>
+            `;
+            projectsGrid.appendChild(sourceIndicator);
+            
+            // Enhanced reveal animations
             setTimeout(() => {
                 document.querySelectorAll('.project-card').forEach((card, index) => {
                     setTimeout(() => {
                         card.classList.add('animate');
+                        card.style.animationDelay = `${index * 0.1}s`;
                     }, index * 100);
                 });
-            }, 500);
+            }, 300);
+
+            console.log(`🎉 Successfully displayed ${projects.length} projects`);
         } else {
             projectsGrid.innerHTML = `
                 <div class="project-placeholder">
                     <i class="fas fa-folder-open"></i>
-                    <p>No projects available. Add some projects through the admin panel.</p>
+                    <h3>No Projects Available</h3>
+                    <p>Projects are being loaded or there might be a connection issue.</p>
+                    <button class="btn btn-primary" onclick="loadProjectsToPublic()" style="margin-top: 1rem;">
+                        <i class="fas fa-refresh"></i> Retry Loading
+                    </button>
                 </div>
             `;
+            console.log('⚠️ No projects to display');
         }
+    } catch (error) {
+        console.error('❌ Critical error loading projects:', error);
+        projectsGrid.innerHTML = `
+            <div class="project-placeholder error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Failed to Load Projects</h3>
+                <p>Error: ${error.message}</p>
+                <button class="btn btn-primary" onclick="loadProjectsToPublic()" style="margin-top: 1rem;">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+            </div>
+        `;
     }
 }
 
-// Load photos to public section
-function loadPhotosToPublic() {
-    const photos = JSON.parse(localStorage.getItem('portfolioPhotos')) || [];
+// Enhanced photo loading with backend integration and cloud storage
+async function loadPhotosToPublic() {
     const photosGrid = document.getElementById('photosGrid');
+    if (!photosGrid) {
+        console.warn('❌ Photos grid element not found');
+        return;
+    }
     
-    if (photosGrid) {
-        if (photos.length > 0) {
-            photosGrid.innerHTML = photos.map(photo => `
-                <div class="photo-item">
-                    <img src="${photo.url}" alt="${photo.title}" loading="lazy">
-                    ${photo.title ? `<div class="photo-caption">${photo.title}</div>` : ''}
-                </div>
-            `).join('');
-        } else {
+    console.log('📸 Loading photos to public display...');
+    
+    try {
+        // Show loading state
+        photosGrid.innerHTML = `
+            <div class="photo-placeholder loading">
+                <div class="loading-spinner"></div>
+                <p>Loading photo gallery...</p>
+                <small>Fetching from cloud storage...</small>
+            </div>
+        `;
+
+        let photos = [];
+        let dataSource = 'unknown';
+
+        // Try to load from backend service first
+        if (window.backendService) {
+            try {
+                console.log('📡 Attempting to load photos from backend...');
+                const response = await window.backendService.getPhotos();
+                photos = response.data || [];
+                dataSource = response.cached ? 'cache' : response.default ? 'default' : 'backend';
+                console.log(`✅ Loaded ${photos.length} photos from ${dataSource}`);
+            } catch (error) {
+                console.log('⚠️ Backend service failed for photos, trying enhanced API...');
+                dataSource = 'fallback';
+            }
+        }
+
+        // Fallback to enhanced API
+        if (photos.length === 0 && window.enhancedAPI) {
+            try {
+                const response = await window.enhancedAPI.getPhotos();
+                photos = response.data || [];
+                dataSource = 'enhanced_api';
+                console.log(`✅ Loaded ${photos.length} photos from enhanced API`);
+            } catch (error) {
+                console.log('⚠️ Enhanced API failed for photos, using localStorage...');
+                dataSource = 'localStorage';
+            }
+        }
+
+        // Fallback to localStorage
+        if (photos.length === 0) {
+            const storedPhotos = localStorage.getItem('portfolio_photos');
+            if (storedPhotos) {
+                photos = JSON.parse(storedPhotos);
+                dataSource = 'localStorage';
+                console.log(`✅ Loaded ${photos.length} photos from localStorage`);
+            }
+        }
+        
+        if (photos.length === 0) {
             photosGrid.innerHTML = `
                 <div class="photo-placeholder">
                     <i class="fas fa-camera"></i>
-                    <p>Photos will be uploaded by admin</p>
+                    <h3>Photo Gallery</h3>
+                    <p>Photos will appear here once uploaded by admin</p>
+                    <small>Gallery is ready for content</small>
+                    ${dataSource !== 'backend' ? '<div class="offline-indicator">📱 Offline Mode</div>' : ''}
                 </div>
             `;
+            return;
         }
+        
+        // Sort photos by upload date (newest first)
+        const sortedPhotos = photos.sort((a, b) => {
+            const dateA = new Date(a.created_at || a.uploadDate || 0);
+            const dateB = new Date(b.created_at || b.uploadDate || 0);
+            return dateB - dateA;
+        });
+
+        // Generate photo grid with enhanced features
+        photosGrid.innerHTML = sortedPhotos.map((photo, index) => {
+            const photoUrl = photo.url || photo.directUrl || photo.imageUrl;
+            const caption = photo.caption || photo.title || '';
+            const category = photo.category || 'general';
+            
+            return `
+                <div class="photo-item" data-index="${index}" data-category="${category}">
+                    <div class="photo-container">
+                        <img src="${photoUrl}" 
+                             alt="${caption}" 
+                             loading="lazy" 
+                             onerror="this.parentElement.innerHTML='<div class=photo-error><i class=fas fa-image></i><p>Image unavailable</p></div>'"
+                             onload="this.parentElement.classList.add('loaded')">
+                        <div class="photo-overlay">
+                            <div class="photo-info">
+                                ${caption ? `<h4>${caption}</h4>` : ''}
+                                <p>${category.toUpperCase()}</p>
+                                <button class="view-full" onclick="openPhotoModal('${photoUrl}', '${caption}', ${index})">
+                                    <i class="fas fa-expand"></i> View Full Size
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Add data source indicator
+        const sourceIndicator = document.createElement('div');
+        sourceIndicator.className = 'photo-source-indicator';
+        sourceIndicator.innerHTML = `
+            <small>
+                <i class="fas fa-info-circle"></i>
+                ${photos.length} photo${photos.length !== 1 ? 's' : ''} from ${dataSource.replace('_', ' ').toUpperCase()}
+                ${dataSource === 'cache' ? ' (may be outdated)' : ''}
+            </small>
+        `;
+        photosGrid.appendChild(sourceIndicator);
+        
+        // Add masonry layout and animations
+        setTimeout(() => {
+            document.querySelectorAll('.photo-item').forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }, 300);
+
+        console.log(`🎉 Successfully displayed ${photos.length} photos in gallery`);
+        
+    } catch (error) {
+        console.error('❌ Critical error loading photos:', error);
+        photosGrid.innerHTML = `
+            <div class="photo-placeholder error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Failed to Load Photos</h3>
+                <p>Error: ${error.message}</p>
+                <button class="btn btn-primary" onclick="loadPhotosToPublic()" style="margin-top: 1rem;">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+            </div>
+        `;
     }
+}
+
+// Enhanced photo modal functionality
+function openPhotoModal(photoUrl, caption, index) {
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('photoModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'photoModal';
+        modal.className = 'photo-modal';
+        modal.innerHTML = `
+            <div class="modal-backdrop" onclick="closePhotoModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closePhotoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-image-container">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <h3 id="modalCaption"></h3>
+                    <div class="modal-controls">
+                        <button onclick="previousPhoto()" class="nav-btn">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <button onclick="nextPhoto()" class="nav-btn">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    // Set current photo
+    window.currentPhotoIndex = index;
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    
+    modalImage.src = photoUrl;
+    modalCaption.textContent = caption || 'Photo';
+    
+    // Show modal
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    // Add animation
+    setTimeout(() => modal.classList.add('active'), 10);
+}
+
+function closePhotoModal() {
+    const modal = document.getElementById('photoModal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+}
+
+function previousPhoto() {
+    const photos = document.querySelectorAll('.photo-item img');
+    if (photos.length > 0) {
+        window.currentPhotoIndex = (window.currentPhotoIndex - 1 + photos.length) % photos.length;
+        const photo = photos[window.currentPhotoIndex];
+        document.getElementById('modalImage').src = photo.src;
+        document.getElementById('modalCaption').textContent = photo.alt || 'Photo';
+    }
+}
+
+function nextPhoto() {
+    const photos = document.querySelectorAll('.photo-item img');
+    if (photos.length > 0) {
+        window.currentPhotoIndex = (window.currentPhotoIndex + 1) % photos.length;
+        const photo = photos[window.currentPhotoIndex];
+        document.getElementById('modalImage').src = photo.src;
+        document.getElementById('modalCaption').textContent = photo.alt || 'Photo';
+    }
+}
+
+// Enhanced photo upload handling
+function addPhoto() {
+    const fileInput = document.getElementById('photoUpload');
+    const titleInput = document.getElementById('photoTitle');
+    
+    if (!fileInput.files.length) {
+        showMessage('Please select photo files to upload', 'error');
+        return;
+    }
+
+    const files = Array.from(fileInput.files);
+    const title = titleInput.value.trim();
+
+    console.log(`📤 Starting upload of ${files.length} photo(s)...`);
+
+    files.forEach(async (file, index) => {
+        try {
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                throw new Error(`${file.name} is not a valid image file`);
+            }
+
+            // Validate file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                throw new Error(`${file.name} is too large (max 10MB)`);
+            }
+
+            let uploadResult;
+            
+            // Try cloud storage first
+            if (window.cloudStorage) {
+                uploadResult = await window.cloudStorage.uploadToCloud(file, 'image', 'gallery');
+            } else if (window.backendService) {
+                uploadResult = await window.backendService.uploadPhoto(file, title, 'gallery');
+            } else {
+                // Fallback to localStorage for offline mode
+                const base64 = await fileToBase64(file);
+                uploadResult = {
+                    url: base64,
+                    name: file.name,
+                    type: 'local_storage'
+                };
+                
+                // Store in localStorage
+                const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+                photos.push({
+                    id: Date.now() + index,
+                    url: base64,
+                    caption: title || file.name,
+                    category: 'gallery',
+                    uploadDate: new Date().toISOString()
+                });
+                localStorage.setItem('portfolio_photos', JSON.stringify(photos));
+            }
+
+            console.log(`✅ Photo ${index + 1}/${files.length} uploaded successfully`);
+            
+        } catch (error) {
+            console.error(`❌ Failed to upload ${file.name}:`, error);
+            showMessage(`Failed to upload ${file.name}: ${error.message}`, 'error');
+        }
+    });
+
+    // Clear inputs
+    fileInput.value = '';
+    titleInput.value = '';
+
+    // Refresh photo gallery
+    setTimeout(() => {
+        loadPhotosToPublic();
+        showMessage(`Successfully processed ${files.length} photo(s)`, 'success');
+    }, 1000);
+}
+
+// Helper function to convert file to base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
 }
 
 // Photo upload functionality

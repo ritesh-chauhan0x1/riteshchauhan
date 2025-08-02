@@ -9,10 +9,14 @@ const fs = require('fs');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const { body, validationResult } = require('express-validator');
+const UnifiedStorage = require('./storage/unified-storage');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Initialize Storage System
+const fileStorage = new UnifiedStorage();
 
 // Security Middleware
 app.use(helmet({
@@ -27,9 +31,16 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
-// CORS Configuration
+// CORS Configuration - Updated for local development
 const corsOptions = {
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+    origin: [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:5500',
+        'http://127.0.0.1:5500',
+        'file://',
+        null // For local file:// protocol
+    ],
     credentials: true,
     optionsSuccessStatus: 200
 };
