@@ -11,7 +11,7 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-content">
-            <h2 class="loading-text">connecting with ritesh...</h2>
+            <h2 class="loading-text">connecting with Ritesh...</h2>
         </div>
     </div>
 
@@ -91,7 +91,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
             
-            // Hide loading screen after 1.5 seconds
+            // Hide loading screen after 2.5 seconds
             setTimeout(function() {
                 const loadingScreen = document.getElementById('loading-screen');
                 if (loadingScreen) {
@@ -100,7 +100,7 @@
                         loadingScreen.style.display = 'none';
                     }, 500);
                 }
-            }, 1500);
+            }, 2500);
         });
 
         // Social Media Links Interactions
