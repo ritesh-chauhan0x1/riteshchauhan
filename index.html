@@ -8,6 +8,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2 class="loading-text">connecting with ritesh...</h2>
+        </div>
+    </div>
+
     <!-- Theme Toggle -->
     <div class="theme-toggle" onclick="toggleTheme()">
         <i class="fas fa-moon" id="theme-icon"></i>
@@ -83,6 +91,17 @@
         initializeTheme();
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
+            
+            // Hide loading screen after 2.5 seconds
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(function() {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }
+            }, 2500);
         });
 
         // Social Media Links Interactions
