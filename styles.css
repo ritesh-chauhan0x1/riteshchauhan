@@ -338,25 +338,21 @@ body {
 
 .hero-content {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 3rem;
+    justify-content: space-between;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .hero-text {
     flex: 1;
-    max-width: 900px;
-    width: 100%;
+    max-width: 600px;
+    text-align: left;
 }
 
 .name-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
     margin-bottom: 2rem;
-    flex-wrap: wrap;
 }
 
 .name {
@@ -366,23 +362,22 @@ body {
     margin: 0;
     letter-spacing: -0.02em;
     line-height: 1.1;
-    order: 2;
     text-transform: uppercase;
 }
 
 .surname {
-    color: var(--accent);
+    color: var(--text-primary);
     display: inline-block;
 }
 
 .hero-profile-photo {
     flex-shrink: 0;
-    order: 1;
+    order: 2;
 }
 
 .hero-profile-photo .profile-image {
-    width: 160px;
-    height: 160px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     overflow: hidden;
     border: 5px solid var(--accent);
@@ -410,6 +405,7 @@ body {
     margin: 1.5rem 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-align: left;
 }
 
 .bio {
@@ -418,13 +414,13 @@ body {
     color: var(--text-secondary);
     margin: 2rem 0 3rem;
     max-width: 800px;
-    text-align: center;
+    text-align: left;
 }
 
 .cta-buttons {
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 2rem;
 }
@@ -436,16 +432,42 @@ body {
         min-height: 90vh;
     }
     
-    .name-container {
+    .hero-content {
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 2rem;
         text-align: center;
+    }
+    
+    .hero-text {
+        text-align: center;
+        order: 2;
+        max-width: 100%;
+    }
+    
+    .hero-profile-photo {
+        order: 1;
+    }
+    
+    .hero-profile-photo .profile-image {
+        width: 180px;
+        height: 180px;
     }
     
     .name {
         font-size: clamp(2.2rem, 10vw, 3.5rem);
         text-align: center;
-        order: 2;
+    }
+    
+    .title {
+        text-align: center;
+    }
+    
+    .bio {
+        text-align: center;
+    }
+    
+    .cta-buttons {
+        justify-content: center;
     }
     
     .hero-profile-photo {
@@ -553,11 +575,11 @@ body {
 }
 
 .hero-profile-photo {
-    animation: fadeInLeft 1s ease-out 0.3s both;
+    animation: fadeInRight 1s ease-out 0.3s both;
 }
 
 .name {
-    animation: fadeInRight 1s ease-out 0.5s both;
+    animation: fadeInLeft 1s ease-out 0.5s both;
 }
 
 .title {
