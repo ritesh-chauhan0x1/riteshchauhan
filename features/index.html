@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Features - Ritesh Chauhan Portfolio</title>
+    <link rel="stylesheet" href="features-index.css">
+    <link rel="stylesheet" href="animations.css">
+    <script src="../navigation.js"></script>
+</head>
+<body>
+    <div class="features-container">
+        <header class="features-header">
+            <div class="header-content">
+                <h1>🚀 Interactive Portfolio Features</h1>
+                <p>Discover the cutting-edge features that make this portfolio stand out</p>
+                <div class="feature-stats">
+                    <div class="stat">
+                        <span class="stat-number">12+</span>
+                        <span class="stat-label">Interactive Features</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Custom Built</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Possibilities</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="features-showcase">
+            <div class="feature-category">
+                <h2>🎮 Interactive Experiences</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-feature="live-playground">
+                        <div class="feature-icon">💻</div>
+                        <h3>Live Code Playground</h3>
+                        <p>Interactive coding environment showcasing mini-applications with real-time editing and preview</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Real-time Preview</span>
+                            <span class="highlight">5 Demo Apps</span>
+                            <span class="highlight">Code Sharing</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('live-playground.html')">
+                            Explore Playground ▶️
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="terminal">
+                        <div class="feature-icon">⌨️</div>
+                        <h3>Terminal-Style About Me</h3>
+                        <p>Unique command-line interface for exploring personal information with authentic terminal experience</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">20+ Commands</span>
+                            <span class="highlight">Typing Animation</span>
+                            <span class="highlight">Command History</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('terminal-about.html')">
+                            Access Terminal 🖥️
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="voice-assistant">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI Voice Assistant</h3>
+                        <p>Intelligent voice-powered assistant that responds with fun facts and information about my journey</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Voice Recognition</span>
+                            <span class="highlight">Natural Responses</span>
+                            <span class="highlight">AI Knowledge</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('voice-assistant.html')">
+                            Meet RIYA 🎙️
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-category">
+                <h2>✨ Visual Effects & Animations</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-feature="theme-zoom">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Zoom-Based Theme Switch</h3>
+                        <p>Innovative theme toggle with smooth zoom transitions and dynamic color adjustments</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Smooth Transitions</span>
+                            <span class="highlight">CSS Variables</span>
+                            <span class="highlight">Memory Persistence</span>
+                        </div>
+                        <button class="feature-btn" onclick="demonstrateTheme()">
+                            See Demo 🌓
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="parallax">
+                        <div class="feature-icon">📜</div>
+                        <h3>Parallax Storytelling</h3>
+                        <p>Scroll-triggered parallax effects that narrate the coding journey with immersive visuals</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Scroll Triggered</span>
+                            <span class="highlight">Story Timeline</span>
+                            <span class="highlight">Smooth Animations</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('#parallax-story')">
+                            Experience Story 📖
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="3d-hover">
+                        <div class="feature-icon">🎯</div>
+                        <h3>3D Hover Effects</h3>
+                        <p>Dynamic 3D transformations on project cards with realistic lighting and shadow effects</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">3D Transforms</span>
+                            <span class="highlight">Realistic Shadows</span>
+                            <span class="highlight">Smooth Physics</span>
+                        </div>
+                        <button class="feature-btn" onclick="demonstrate3D()">
+                            Try Hover Effects 🎨
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-category">
+                <h2>🎯 Micro-Interactions</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-feature="morphing-buttons">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Morphing Progress Buttons</h3>
+                        <p>Buttons that transform into progress indicators with smooth animations and status feedback</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">State Transitions</span>
+                            <span class="highlight">Progress Tracking</span>
+                            <span class="highlight">Visual Feedback</span>
+                        </div>
+                        <button class="feature-btn morphing-demo" onclick="demonstrateMorphing(this)">
+                            Test Morphing 🔄
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="confetti">
+                        <div class="feature-icon">🎉</div>
+                        <h3>Confetti Celebrations</h3>
+                        <p>Delightful confetti animations triggered on resume download and achievement unlocks</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Canvas Animation</span>
+                            <span class="highlight">Physics Engine</span>
+                            <span class="highlight">Color Variations</span>
+                        </div>
+                        <button class="feature-btn" onclick="triggerConfetti()">
+                            Celebrate! 🎊
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="custom-cursor">
+                        <div class="feature-icon">👆</div>
+                        <h3>Dynamic Custom Cursor</h3>
+                        <p>Interactive cursor that changes appearance and behavior in different hover zones</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Zone Detection</span>
+                            <span class="highlight">Smooth Following</span>
+                            <span class="highlight">Context Awareness</span>
+                        </div>
+                        <button class="feature-btn" onclick="enableCustomCursor()">
+                            Activate Cursor ✨
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-category">
+                <h2>🎮 Hidden Easter Eggs</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-feature="terminal-game">
+                        <div class="feature-icon">🐍</div>
+                        <h3>Hidden Terminal Game</h3>
+                        <p>Classic Snake game hidden in the terminal interface, activated by secret commands</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Secret Command</span>
+                            <span class="highlight">High Scores</span>
+                            <span class="highlight">ASCII Graphics</span>
+                        </div>
+                        <button class="feature-btn" onclick="revealSecret('snake')">
+                            Reveal Secret 🔍
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="konami-code">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Konami Code Surprise</h3>
+                        <p>Classic gaming easter egg that unlocks special animations and hidden content</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Key Sequence</span>
+                            <span class="highlight">Hidden Content</span>
+                            <span class="highlight">Gaming Nostalgia</span>
+                        </div>
+                        <button class="feature-btn" onclick="showKonamiHint()">
+                            Get Hint 🎯
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="matrix-mode">
+                        <div class="feature-icon">💊</div>
+                        <h3>Matrix Mode</h3>
+                        <p>Transform the entire site into a Matrix-style digital rain effect with green code streams</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Digital Rain</span>
+                            <span class="highlight">Full Screen Effect</span>
+                            <span class="highlight">Red/Blue Pill Choice</span>
+                        </div>
+                        <button class="feature-btn" onclick="enterMatrix()">
+                            Take the Red Pill 💊
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-category">
+                <h2>📊 Real-Time Elements</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-feature="github-heatmap">
+                        <div class="feature-icon">📈</div>
+                        <h3>Live GitHub Activity</h3>
+                        <p>Real-time GitHub contribution heatmap showing coding activity and commit patterns</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Live Data</span>
+                            <span class="highlight">Visual Heatmap</span>
+                            <span class="highlight">Activity Trends</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('#github-activity')">
+                            View Activity 📊
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="skill-timeline">
+                        <div class="feature-icon">⏱️</div>
+                        <h3>Tech Stack Evolution</h3>
+                        <p>Interactive timeline showing how technical skills have grown and evolved over time</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">Interactive Timeline</span>
+                            <span class="highlight">Skill Progression</span>
+                            <span class="highlight">Animated Milestones</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('#skills-timeline')">
+                            Explore Timeline 🗓️
+                        </button>
+                    </div>
+
+                    <div class="feature-card" data-feature="typing-stats">
+                        <div class="feature-icon">⌨️</div>
+                        <h3>Live Typing Statistics</h3>
+                        <p>Real-time display of typing speed, accuracy, and coding productivity metrics</p>
+                        <div class="feature-highlights">
+                            <span class="highlight">WPM Tracking</span>
+                            <span class="highlight">Accuracy Metrics</span>
+                            <span class="highlight">Productivity Stats</span>
+                        </div>
+                        <button class="feature-btn" onclick="openFeature('live-playground.html#typing-test')">
+                            Test Typing Speed ⚡
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="implementation-showcase">
+            <h2>🛠️ Technical Implementation</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h3>Frontend Technologies</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Vanilla JavaScript</span>
+                        <span class="tech-tag">CSS3 Animations</span>
+                        <span class="tech-tag">HTML5 Canvas</span>
+                        <span class="tech-tag">Web APIs</span>
+                        <span class="tech-tag">CSS Variables</span>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <h3>Interactive Features</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Speech Recognition</span>
+                        <span class="tech-tag">Speech Synthesis</span>
+                        <span class="tech-tag">CodeMirror Editor</span>
+                        <span class="tech-tag">Intersection Observer</span>
+                        <span class="tech-tag">RequestAnimationFrame</span>
+                    </div>
+                </div>
+                <div class="tech-item">
+                    <h3>Performance Optimizations</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Lazy Loading</span>
+                        <span class="tech-tag">Debounced Events</span>
+                        <span class="tech-tag">GPU Acceleration</span>
+                        <span class="tech-tag">Memory Management</span>
+                        <span class="tech-tag">Progressive Enhancement</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="features-footer">
+            <div class="footer-content">
+                <h3>🎯 Ready to Experience Something Amazing?</h3>
+                <p>These features showcase my passion for creating engaging, interactive user experiences. Each feature demonstrates different aspects of modern web development and creative problem-solving.</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn primary" onclick="openFeature('../index.html')">
+                        Back to Portfolio 🏠
+                    </button>
+                    <button class="cta-btn secondary" onclick="contactMe()">
+                        Let's Build Together 🤝
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="confetti-container" id="confettiContainer"></div>
+    
+    <script src="features-index.js"></script>
+</body>
+</html>

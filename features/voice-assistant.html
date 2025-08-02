@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant - Ritesh Chauhan</title>
+    <link rel="stylesheet" href="voice-assistant.css">
+</head>
+<body>
+    <div class="assistant-container">
+        <div class="assistant-header">
+            <div class="assistant-avatar">
+                <div class="avatar-circle">
+                    <div class="avatar-face">🤖</div>
+                </div>
+                <div class="voice-indicator" id="voiceIndicator">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </div>
+            <div class="assistant-info">
+                <h1>RIYA - AI Assistant</h1>
+                <p>Ritesh's Interactive Voice Assistant</p>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Ready to assist</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="conversation-area" id="conversationArea">
+            <div class="message assistant-message">
+                <div class="message-bubble">
+                    <p>Hi! I'm RIYA, Ritesh's AI assistant. I can tell you all about his journey, skills, and projects. Try asking me something!</p>
+                </div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <div class="voice-controls">
+                <button class="voice-btn" id="voiceBtn" title="Click to speak">
+                    <span class="mic-icon">🎤</span>
+                    <span class="btn-text">Tap to speak</span>
+                </button>
+                <button class="mute-btn" id="muteBtn" title="Toggle voice responses">
+                    <span class="volume-icon">🔊</span>
+                </button>
+            </div>
+            
+            <div class="text-input-area">
+                <input type="text" id="textInput" placeholder="Or type your question here..." autocomplete="off">
+                <button class="send-btn" id="sendBtn">
+                    <span>📤</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="suggestion-chips">
+            <h3>💡 Try asking:</h3>
+            <div class="chips-container">
+                <button class="chip" onclick="askQuestion('Tell me about Ritesh')">About Ritesh</button>
+                <button class="chip" onclick="askQuestion('What are his skills?')">Skills</button>
+                <button class="chip" onclick="askQuestion('Show me his projects')">Projects</button>
+                <button class="chip" onclick="askQuestion('How can I contact him?')">Contact Info</button>
+                <button class="chip" onclick="askQuestion('What is his education?')">Education</button>
+                <button class="chip" onclick="askQuestion('Tell me a fun fact')">Fun Fact</button>
+                <button class="chip" onclick="askQuestion('What makes him unique?')">Why hire him?</button>
+                <button class="chip" onclick="askQuestion('Show his achievements')">Achievements</button>
+            </div>
+        </div>
+
+        <div class="features-panel">
+            <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-text">
+                    <h4>Smart Responses</h4>
+                    <p>AI-powered answers about Ritesh's background</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🗣️</div>
+                <div class="feature-text">
+                    <h4>Voice Interaction</h4>
+                    <p>Speak naturally and get voice responses</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💡</div>
+                <div class="feature-text">
+                    <h4>Interactive Learning</h4>
+                    <p>Discover insights about skills and projects</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="voice-visualization" id="voiceVisualization">
+        <canvas id="visualizerCanvas"></canvas>
+    </div>
+
+    <script src="voice-assistant.js"></script>
+</body>
+</html>

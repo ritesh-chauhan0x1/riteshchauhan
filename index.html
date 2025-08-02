@@ -20,7 +20,7 @@
     </div>
 
     <!-- Admin Login Icon -->
-    <div class="admin-icon" id="adminIcon" title="Admin Login">
+    <div class="admin-icon" id="adminIcon" title="Click to open Admin Login (Username: Ritesh, Password: Ritesh@4368@)">
         <i class="fas fa-cog"></i>
     </div>
 
@@ -29,16 +29,23 @@
         <div class="modal-content">
             <span class="close" id="closeLogin">&times;</span>
             <h2>🔐 Admin Login</h2>
+            <div class="login-info">
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                    <strong>Demo Credentials:</strong><br>
+                    Username: <code>Ritesh</code><br>
+                    Password: <code>Ritesh@4368@</code>
+                </p>
+            </div>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
+                    <input type="text" id="username" name="username" required placeholder="Enter username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" required placeholder="Enter password">
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">🚀 Login to Dashboard</button>
             </form>
         </div>
     </div>
@@ -323,6 +330,7 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#memories">Memories</a></li>
+                <li><a href="features/index.html" class="features-btn">🎮 Interactive Features</a></li>
                 <li><a href="#resume" class="resume-btn">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -567,159 +575,77 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title reveal">Featured Projects</h2>
-            <div class="projects-grid">
-                <!-- Featured Project - Kiitians Finder -->
-                <div class="project-card featured-project">
-                    <div class="project-icon">🎓</div>
-                    <h3>Kiitians Finder</h3>
-                    <p>A comprehensive student directory platform for KIIT University that allows searching student details by roll number, accessing contact information, email, course details, and academic information.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">Express.js</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://kiit.pages.dev" class="btn btn-primary" target="_blank">Live Demo</a>
-                        <a href="https://github.com/ritesh-chauhan0x1/kiitians-finder" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded dynamically from script.js -->
+                <div class="loading-projects">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading projects...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Features Section -->
+    <section id="interactive-features" class="section features-showcase">
+        <div class="container">
+            <h2 class="section-title reveal">🎮 Interactive Features</h2>
+            <p class="section-subtitle reveal">Experience cutting-edge web technologies in action</p>
+            
+            <div class="features-grid">
+                <div class="feature-card reveal" onclick="window.open('features/live-playground.html', '_blank')">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Live Code Playground</h3>
+                    <p>Interactive coding environment with 5 demo applications including Calculator, Todo App, Weather Widget, and more!</p>
+                    <div class="feature-tech">CodeMirror • JavaScript • Canvas</div>
+                    <div class="feature-status">Ready to Code</div>
                 </div>
 
-                <!-- Portfolio Website -->
-                <div class="project-card">
-                    <div class="project-icon">🌐</div>
-                    <h3>Personal Portfolio</h3>
-                    <p>Modern and responsive portfolio website showcasing my skills, projects, and journey as a full-stack developer. Built with clean design and smooth interactions.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Responsive</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://riteshchauhan.pages.dev" class="btn btn-primary" target="_blank">Live Demo</a>
-                        <a href="https://github.com/ritesh-chauhan0x1/riteshchauhan" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
+                <div class="feature-card reveal" onclick="window.open('features/terminal-about.html', '_blank')">
+                    <div class="feature-icon">💻</div>
+                    <h3>Terminal About Me</h3>
+                    <p>Authentic terminal interface with 20+ interactive commands. Type 'help' to explore my journey through command line!</p>
+                    <div class="feature-tech">Terminal Emulation • ASCII Art • Command Processing</div>
+                    <div class="feature-status">$ Ready</div>
                 </div>
 
-                <!-- Web Development Project -->
-                <div class="project-card">
-                    <div class="project-icon">💻</div>
-                    <h3>E-Commerce Platform</h3>
-                    <p>Full-stack e-commerce web application with user authentication, product management, shopping cart functionality, and secure payment integration.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">Stripe</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
+                <div class="feature-card reveal" onclick="window.open('features/voice-assistant.html', '_blank')">
+                    <div class="feature-icon">🎤</div>
+                    <h3>Voice Assistant (RIYA)</h3>
+                    <p>AI-powered voice assistant with speech recognition and natural language responses about my coding journey.</p>
+                    <div class="feature-tech">Speech API • AI Responses • Voice Synthesis</div>
+                    <div class="feature-status">Listening...</div>
                 </div>
 
-                <!-- Task Management App -->
-                <div class="project-card">
-                    <div class="project-icon">📋</div>
-                    <h3>Task Management System</h3>
-                    <p>Collaborative task management application with real-time updates, drag-and-drop functionality, team collaboration, and progress tracking.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">Socket.io</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MySQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live Demo</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
+                <div class="feature-card reveal" onclick="window.open('features/parallax-story.html', '_blank')">
+                    <div class="feature-icon">📖</div>
+                    <h3>Parallax Story</h3>
+                    <p>Scroll-triggered parallax storytelling showcasing my coding journey from first "Hello World" to full-stack development.</p>
+                    <div class="feature-tech">Parallax Effects • Scroll Animations • Interactive Timeline</div>
+                    <div class="feature-status">Chapter 1/5</div>
                 </div>
 
-                <!-- Data Structures & Algorithms -->
-                <div class="project-card">
-                    <div class="project-icon">📊</div>
-                    <h3>DSA Solutions Repository</h3>
-                    <p>Comprehensive collection of Data Structures and Algorithms solutions in multiple programming languages with detailed explanations and time complexity analysis.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">Algorithms</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">View Solutions</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
+                <div class="feature-card reveal" onclick="revealSecret('snake')">
+                    <div class="feature-icon">🐍</div>
+                    <h3>Hidden Snake Game</h3>
+                    <p>Classic retro Snake game with achievements, multiple difficulty levels, and modern visual effects. An Easter egg for developers!</p>
+                    <div class="feature-tech">Canvas • Game Logic • Local Storage</div>
+                    <div class="feature-status">Secret Game</div>
                 </div>
 
-                <!-- API Development -->
-                <div class="project-card">
-                    <div class="project-icon">🔗</div>
-                    <h3>REST API Collection</h3>
-                    <p>Various REST API projects including authentication systems, CRUD operations, microservices architecture, and comprehensive API documentation.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">MongoDB</span>
-                        <span class="tech-tag">JWT</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Documentation</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
+                <div class="feature-card reveal" onclick="window.open('features/index.html', '_blank')">
+                    <div class="feature-icon">✨</div>
+                    <h3>Features Showcase</h3>
+                    <p>Comprehensive gallery of all interactive elements, animations, and advanced web technologies implemented in this portfolio.</p>
+                    <div class="feature-tech">Modern Web APIs • CSS3 Animations • Interactive Demos</div>
+                    <div class="feature-status">Full Gallery</div>
                 </div>
+            </div>
 
-                <!-- Mobile Development -->
-                <div class="project-card">
-                    <div class="project-icon">📱</div>
-                    <h3>Mobile App Projects</h3>
-                    <p>Cross-platform mobile applications developed using React Native and Flutter, focusing on user experience, performance optimization, and native features.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">React Native</span>
-                        <span class="tech-tag">Flutter</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">Redux</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">App Store</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
-                </div>
-
-                <!-- Machine Learning Project -->
-                <div class="project-card">
-                    <div class="project-icon">🤖</div>
-                    <h3>AI & Machine Learning</h3>
-                    <p>Machine learning and AI projects including predictive models, data analysis, neural networks, and intelligent automation systems.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                        <span class="tech-tag">Pandas</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">View Models</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
-                </div>
-
-                <!-- Blockchain Project -->
-                <div class="project-card">
-                    <div class="project-icon">🔐</div>
-                    <h3>Blockchain Applications</h3>
-                    <p>Blockchain-based applications including smart contracts, decentralized applications (DApps), cryptocurrency projects, and Web3 integrations.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Solidity</span>
-                        <span class="tech-tag">Web3.js</span>
-                        <span class="tech-tag">Ethereum</span>
-                        <span class="tech-tag">React</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="btn btn-primary">Live DApp</a>
-                        <a href="https://github.com/ritesh-chauhan0x1" class="btn btn-secondary" target="_blank">GitHub</a>
-                    </div>
-                </div>
+            <div class="features-cta">
+                <a href="features/index.html" class="btn btn-gradient btn-large">
+                    🚀 Explore All Features
+                </a>
+                <p class="cta-hint">Try the Konami code (↑↑↓↓←→←→BA) for a surprise! 🎮</p>
             </div>
         </div>
     </section>
@@ -826,6 +752,8 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
         </div>
     </section>
 
+    <script src="navigation.js"></script>
+    <script src="verification.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Hidden Easter Egg</title>
+    <link rel="stylesheet" href="snake-game.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🐍 Retro Snake Game</h1>
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="label">Score:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">High Score:</span>
+                    <span id="highScore">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Level:</span>
+                    <span id="level">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div class="game-overlay" id="gameOverlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">Snake Game</h2>
+                    <p id="overlayMessage">Use WASD or Arrow Keys to move</p>
+                    <button id="startButton" onclick="startGame()">Start Game</button>
+                    <div class="controls-info">
+                        <h3>Controls:</h3>
+                        <p>W / ↑ - Move Up</p>
+                        <p>A / ← - Move Left</p>
+                        <p>S / ↓ - Move Down</p>
+                        <p>D / → - Move Right</p>
+                        <p>Space - Pause/Resume</p>
+                        <p>R - Restart</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button onclick="togglePause()" id="pauseButton">Pause</button>
+            <button onclick="restartGame()">Restart</button>
+            <button onclick="toggleSound()" id="soundButton">🔊 Sound</button>
+            <select id="difficultySelect" onchange="changeDifficulty()">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+                <option value="insane">Insane</option>
+            </select>
+        </div>
+
+        <div class="mobile-controls">
+            <div class="dpad">
+                <button class="dpad-btn up" onclick="changeDirection('up')">↑</button>
+                <div class="dpad-middle">
+                    <button class="dpad-btn left" onclick="changeDirection('left')">←</button>
+                    <button class="dpad-btn right" onclick="changeDirection('right')">→</button>
+                </div>
+                <button class="dpad-btn down" onclick="changeDirection('down')">↓</button>
+            </div>
+        </div>
+
+        <div class="game-info">
+            <h3>🏆 Achievements</h3>
+            <div class="achievements" id="achievements">
+                <div class="achievement locked" data-achievement="firstFood">
+                    <span class="icon">🍎</span>
+                    <span class="text">First Bite</span>
+                </div>
+                <div class="achievement locked" data-achievement="score50">
+                    <span class="icon">⭐</span>
+                    <span class="text">Score 50</span>
+                </div>
+                <div class="achievement locked" data-achievement="score100">
+                    <span class="icon">💎</span>
+                    <span class="text">Century</span>
+                </div>
+                <div class="achievement locked" data-achievement="level5">
+                    <span class="icon">🚀</span>
+                    <span class="text">Speed Demon</span>
+                </div>
+                <div class="achievement locked" data-achievement="length20">
+                    <span class="icon">🐍</span>
+                    <span class="text">Long Snake</span>
+                </div>
+                <div class="achievement locked" data-achievement="noWalls">
+                    <span class="icon">👻</span>
+                    <span class="text">Ghost Mode</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html" class="btn-back">← Back to Features</a>
+        </div>
+    </div>
+
+    <script src="snake-game.js"></script>
+</body>
+</html>

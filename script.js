@@ -56,6 +56,107 @@ const DEFAULT_DATA = {
         { title: '100+ LeetCode Problems', description: 'Solved complex algorithmic challenges', date: '2024' },
         { title: 'Hackathon Participant', description: 'Multiple coding competitions', date: '2023-2024' },
         { title: 'Open Source Contributor', description: 'Contributing to various projects', date: '2024' }
+    ],
+    projects: [
+        {
+            id: 1,
+            title: 'Kiitians Finder',
+            description: 'A comprehensive student directory platform for KIIT University that allows searching student details by roll number, accessing contact information, email, course details, and academic information.',
+            icon: '🎓',
+            tech: ['React', 'Node.js', 'MongoDB', 'Express.js'],
+            liveUrl: 'https://kiit.pages.dev',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/kiitians-finder',
+            featured: true,
+            category: 'web'
+        },
+        {
+            id: 2,
+            title: 'Personal Portfolio',
+            description: 'Modern and responsive portfolio website showcasing my skills, projects, and journey as a full-stack developer. Built with clean design and smooth interactions.',
+            icon: '🌐',
+            tech: ['HTML5', 'CSS3', 'JavaScript', 'Node.js', 'MySQL'],
+            liveUrl: 'https://riteshchauhan.pages.dev',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/riteshchauhan',
+            featured: false,
+            category: 'web'
+        },
+        {
+            id: 3,
+            title: 'DSA Solutions Repository',
+            description: 'Comprehensive collection of Data Structures and Algorithms solutions in multiple programming languages with detailed explanations and time complexity analysis.',
+            icon: '📊',
+            tech: ['Java', 'Python', 'C++', 'Algorithms'],
+            liveUrl: 'https://github.com/ritesh-chauhan0x1/DSA-Solutions',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/DSA-Solutions',
+            featured: false,
+            category: 'algorithms'
+        },
+        {
+            id: 4,
+            title: 'Task Management System',
+            description: 'Collaborative task management application with real-time updates, drag-and-drop functionality, team collaboration, and progress tracking.',
+            icon: '📋',
+            tech: ['Vue.js', 'Socket.io', 'Node.js', 'MySQL'],
+            liveUrl: 'https://github.com/ritesh-chauhan0x1/TaskManager',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/TaskManager',
+            featured: false,
+            category: 'web'
+        },
+        {
+            id: 5,
+            title: 'E-Commerce Platform',
+            description: 'Full-stack e-commerce web application with user authentication, product management, shopping cart functionality, and secure payment integration.',
+            icon: '💻',
+            tech: ['React', 'Express', 'MongoDB', 'Stripe'],
+            liveUrl: 'https://github.com/ritesh-chauhan0x1/ECommerce-Platform',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/ECommerce-Platform',
+            featured: false,
+            category: 'web'
+        },
+        {
+            id: 6,
+            title: 'REST API Collection',
+            description: 'Various REST API projects including authentication systems, CRUD operations, microservices architecture, and comprehensive API documentation.',
+            icon: '🔗',
+            tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
+            liveUrl: 'https://documenter.getpostman.com/view/ritesh-apis',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/REST-APIs',
+            featured: false,
+            category: 'api'
+        },
+        {
+            id: 7,
+            title: 'Mobile App Projects',
+            description: 'Cross-platform mobile applications developed using React Native and Flutter, focusing on user experience, performance optimization, and native features.',
+            icon: '📱',
+            tech: ['React Native', 'Flutter', 'Firebase', 'Redux'],
+            liveUrl: 'https://github.com/ritesh-chauhan0x1/Mobile-Apps',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/Mobile-Apps',
+            featured: false,
+            category: 'mobile'
+        },
+        {
+            id: 8,
+            title: 'AI & Machine Learning',
+            description: 'Machine learning and AI projects including predictive models, data analysis, neural networks, and intelligent automation systems.',
+            icon: '🤖',
+            tech: ['Python', 'TensorFlow', 'Scikit-learn', 'Pandas'],
+            liveUrl: 'https://github.com/ritesh-chauhan0x1/ML-Projects',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/ML-Projects',
+            featured: false,
+            category: 'ai'
+        },
+        {
+            id: 9,
+            title: 'Blockchain Applications',
+            description: 'Blockchain-based applications including smart contracts, decentralized applications (DApps), cryptocurrency projects, and Web3 integrations.',
+            icon: '🔐',
+            tech: ['Solidity', 'Web3.js', 'Ethereum', 'React'],
+            liveUrl: 'https://github.com/ritesh-chauhan0x1/Blockchain-DApps',
+            githubUrl: 'https://github.com/ritesh-chauhan0x1/Blockchain-DApps',
+            featured: false,
+            category: 'blockchain'
+        }
     ]
 };
 
@@ -74,68 +175,171 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAdminSystem();
     loadPortfolioData();
     
-    // Initialize the projects and photos on page load
-    setTimeout(() => {
-        loadProjectsToPublic();
-        loadPhotosToPublic();
-    }, 1000);
+    // Initialize essential components immediately
+    loadProjectsToPublic();
+    loadPhotosToPublic();
+    initializeScrollAnimations();
+    initializeTheme();
     
     // Check if already logged in
     if (localStorage.getItem(STORAGE_KEYS.isLoggedIn) === 'true') {
         showDashboard();
     }
+    
+    // Hide loading screen after everything is loaded
+    setTimeout(() => {
+        const loading = document.getElementById('loading');
+        if (loading) {
+            loading.style.opacity = '0';
+            setTimeout(() => loading.style.display = 'none', 500);
+        }
+    }, 1500);
 });
 
 function initializeAdminSystem() {
+    // Wait for DOM to be fully loaded
+    if (!document.getElementById('adminIcon') || !document.getElementById('loginModal')) {
+        setTimeout(initializeAdminSystem, 100);
+        return;
+    }
+
     const adminIcon = document.getElementById('adminIcon');
     const loginModal = document.getElementById('loginModal');
     const closeLogin = document.getElementById('closeLogin');
     const loginForm = document.getElementById('loginForm');
     const logoutBtn = document.getElementById('logoutBtn');
 
-    // Admin icon click
-    adminIcon.addEventListener('click', () => {
-        loginModal.style.display = 'block';
-        createParticlesBurst(
-            adminIcon.getBoundingClientRect().left + 25,
-            adminIcon.getBoundingClientRect().top + 25
-        );
+    // Debug: Check if elements exist
+    console.log('Admin System Elements:', {
+        adminIcon: !!adminIcon,
+        loginModal: !!loginModal,
+        closeLogin: !!closeLogin,
+        loginForm: !!loginForm
     });
 
-    // Close modal
-    closeLogin.addEventListener('click', () => {
-        loginModal.style.display = 'none';
+    if (!adminIcon || !loginModal || !closeLogin || !loginForm) {
+        console.error('Admin system elements not found!');
+        return;
+    }
+
+    // Admin icon click
+    adminIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Admin icon clicked');
+        loginModal.style.display = 'block';
+        loginModal.style.opacity = '1';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        // Focus on username field
+        setTimeout(() => {
+            const usernameField = document.getElementById('username');
+            if (usernameField) usernameField.focus();
+        }, 100);
+
+        // Create particle effect if function exists
+        if (typeof createParticlesBurst === 'function') {
+            createParticlesBurst(
+                adminIcon.getBoundingClientRect().left + 25,
+                adminIcon.getBoundingClientRect().top + 25
+            );
+        }
     });
+
+    // Close modal function
+    const closeModal = () => {
+        console.log('Closing modal');
+        loginModal.style.display = 'none';
+        loginModal.style.opacity = '0';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+        
+        // Clear form
+        const usernameField = document.getElementById('username');
+        const passwordField = document.getElementById('password');
+        if (usernameField) usernameField.value = '';
+        if (passwordField) passwordField.value = '';
+    };
+
+    // Close modal events
+    closeLogin.addEventListener('click', closeModal);
 
     // Click outside modal to close
-    window.addEventListener('click', (e) => {
+    loginModal.addEventListener('click', (e) => {
         if (e.target === loginModal) {
-            loginModal.style.display = 'none';
+            closeModal();
+        }
+    });
+
+    // Prevent modal content clicks from closing modal
+    const modalContent = loginModal.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    // ESC key to close modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && loginModal.style.display === 'block') {
+            closeModal();
         }
     });
 
     // Login form submission
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        console.log('Login form submitted');
+        
+        const usernameField = document.getElementById('username');
+        const passwordField = document.getElementById('password');
+        
+        if (!usernameField || !passwordField) {
+            console.error('Username or password field not found!');
+            return;
+        }
+
+        const username = usernameField.value.trim();
+        const password = passwordField.value;
+
+        console.log('Login attempt:', { username, passwordLength: password.length });
+        console.log('Expected credentials:', ADMIN_CREDENTIALS);
 
         if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+            console.log('Login successful!');
             localStorage.setItem(STORAGE_KEYS.isLoggedIn, 'true');
-            loginModal.style.display = 'none';
+            closeModal();
             showDashboard();
-            showMessage('Login successful! Welcome to admin dashboard.', 'success');
+            showMessage('🎉 Login successful! Welcome to admin dashboard.', 'success');
+            
+            // Add success animation
+            adminIcon.style.animation = 'pulse 0.5s ease-in-out';
+            setTimeout(() => {
+                adminIcon.style.animation = '';
+            }, 500);
         } else {
-            showMessage('Invalid credentials! Please try again.', 'error');
+            console.log('Login failed - invalid credentials');
+            showMessage('❌ Invalid credentials! Please check username and password.', 'error');
+            
+            // Shake animation for failed login
+            loginForm.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                loginForm.style.animation = '';
+            }, 500);
+            
+            // Clear password field
+            passwordField.value = '';
+            passwordField.focus();
         }
     });
 
-    // Logout
-    logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem(STORAGE_KEYS.isLoggedIn);
-        hideDashboard();
-        showMessage('Logged out successfully!', 'success');
-    });
+    // Logout function
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            console.log('Logout clicked');
+            localStorage.removeItem(STORAGE_KEYS.isLoggedIn);
+            hideDashboard();
+            showMessage('👋 Logged out successfully!', 'success');
+        });
+    }
 
     // Initialize tabs
     initializeTabs();
@@ -225,19 +429,31 @@ function loadProjectsTab() {
     const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects)) || [];
     const projectsList = document.getElementById('projectsList');
     
-    projectsList.innerHTML = projects.map((project, index) => `
-        <div class="project-item">
-            <div>
-                <h4>${project.title}</h4>
-                <p>${project.description}</p>
-                <small>Tech: ${project.tech.join(', ')}</small>
+    if (projects.length > 0) {
+        projectsList.innerHTML = projects.map((project, index) => `
+            <div class="project-item">
+                <div>
+                    <h4>${project.icon || '🚀'} ${project.title} ${project.featured ? '⭐' : ''}</h4>
+                    <p>${project.description}</p>
+                    <small><strong>Tech:</strong> ${project.tech.join(', ')}</small><br>
+                    <small><strong>Category:</strong> ${project.category || 'web'}</small><br>
+                    <small><strong>Live:</strong> <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer">${project.liveUrl}</a></small><br>
+                    <small><strong>GitHub:</strong> <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer">${project.githubUrl}</a></small>
+                </div>
+                <div class="item-actions">
+                    <button class="btn btn-small btn-edit" onclick="editProject(${index})">Edit</button>
+                    <button class="btn btn-small btn-delete" onclick="deleteProject(${index})">Delete</button>
+                </div>
             </div>
-            <div class="item-actions">
-                <button class="btn btn-small btn-edit" onclick="editProject(${index})">Edit</button>
-                <button class="btn btn-small btn-delete" onclick="deleteProject(${index})">Delete</button>
+        `).join('');
+    } else {
+        projectsList.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>No projects yet. Add your first project!</p>
             </div>
-        </div>
-    `).join('');
+        `;
+    }
 }
 
 function loadSkillsTab() {
@@ -353,20 +569,28 @@ function addNewProject() {
     const tech = prompt('Technologies (comma separated):').split(',').map(t => t.trim());
     const liveUrl = prompt('Live Demo URL:') || '#';
     const githubUrl = prompt('GitHub URL:') || '#';
+    const icon = prompt('Project Icon (emoji):') || '🚀';
+    const category = prompt('Category (web/mobile/api/ai/blockchain/algorithms/other):') || 'web';
+    const featured = confirm('Mark as featured project?');
     
     if (title && description) {
         const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects)) || [];
-        projects.push({
+        const newProject = {
+            id: Date.now(), // Simple ID generation
             title,
             description,
+            icon,
             tech,
             liveUrl,
             githubUrl,
-            icon: '🚀'
-        });
+            featured,
+            category
+        };
         
+        projects.push(newProject);
         localStorage.setItem(STORAGE_KEYS.projects, JSON.stringify(projects));
         loadProjectsTab();
+        loadProjectsToPublic(); // Update the public display too
         showMessage('Project added successfully!', 'success');
     }
 }
@@ -443,6 +667,7 @@ function deleteProject(index) {
         projects.splice(index, 1);
         localStorage.setItem(STORAGE_KEYS.projects, JSON.stringify(projects));
         loadProjectsTab();
+        loadProjectsToPublic(); // Update the public display too
         showMessage('Project deleted successfully!', 'success');
     }
 }
@@ -580,30 +805,43 @@ function loadPortfolioData() {
 // Load projects to public section
 function loadProjectsToPublic() {
     const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects)) || [];
-    const projectsGrid = document.querySelector('.projects-grid');
+    const projectsGrid = document.querySelector('#projectsGrid');
     
-    if (projectsGrid && projects.length > 0) {
-        projectsGrid.innerHTML = projects.map(project => `
-            <div class="project-card ${project.featured ? 'featured-project' : ''} reveal">
-                <div class="project-icon">${project.icon || '🚀'}</div>
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="project-tech">
-                    ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+    if (projectsGrid) {
+        if (projects.length > 0) {
+            projectsGrid.innerHTML = projects.map(project => `
+                <div class="project-card ${project.featured ? 'featured-project' : ''} reveal">
+                    <div class="project-icon">${project.icon || '🚀'}</div>
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <div class="project-tech">
+                        ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                    <div class="project-links">
+                        <a href="${project.liveUrl}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                            ${project.category === 'algorithms' || project.category === 'api' ? 'View Project' : 'Live Demo'}
+                        </a>
+                        <a href="${project.githubUrl}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="${project.liveUrl}" class="btn btn-primary" target="_blank">Live Demo</a>
-                    <a href="${project.githubUrl}" class="btn btn-secondary" target="_blank">GitHub</a>
+            `).join('');
+            
+            // Re-trigger reveal animations
+            setTimeout(() => {
+                document.querySelectorAll('.project-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, index * 100);
+                });
+            }, 500);
+        } else {
+            projectsGrid.innerHTML = `
+                <div class="project-placeholder">
+                    <i class="fas fa-folder-open"></i>
+                    <p>No projects available. Add some projects through the admin panel.</p>
                 </div>
-            </div>
-        `).join('');
-        
-        // Re-trigger reveal animations
-        setTimeout(() => {
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.classList.add('animate');
-            });
-        }, 500);
+            `;
+        }
     }
 }
 
@@ -2107,4 +2345,475 @@ if ('serviceWorker' in navigator) {
                 console.log('ServiceWorker registration failed');
             });
     });
+}
+
+// Interactive Features Functions
+function revealSecret(type) {
+    if (type === 'snake') {
+        // Create a modal with the secret reveal
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        `;
+        
+        modal.innerHTML = `
+            <div style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 3rem;
+                border-radius: 20px;
+                text-align: center;
+                max-width: 500px;
+                width: 90%;
+                color: white;
+                animation: slideInUp 0.5s ease-out;
+            ">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🐍</div>
+                <h2 style="margin-bottom: 1rem; font-size: 2rem;">Secret Unlocked!</h2>
+                <p style="margin-bottom: 2rem; line-height: 1.6; opacity: 0.9;">
+                    You've discovered the hidden Snake game! This retro game features:
+                    <br>• Multiple difficulty levels
+                    <br>• Achievement system
+                    <br>• High score tracking
+                    <br>• Retro CRT effects
+                    <br>• Mobile touch controls
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="window.open('features/snake-game.html', '_blank'); this.closest('div').remove();" 
+                            style="
+                                background: rgba(255, 255, 255, 0.2);
+                                border: 2px solid rgba(255, 255, 255, 0.3);
+                                color: white;
+                                padding: 1rem 2rem;
+                                border-radius: 25px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                transition: all 0.3s ease;
+                            "
+                            onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='scale(1.05)'"
+                            onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">
+                        🎮 Play Snake Game
+                    </button>
+                    <button onclick="this.closest('div').remove();" 
+                            style="
+                                background: transparent;
+                                border: 2px solid rgba(255, 255, 255, 0.3);
+                                color: white;
+                                padding: 1rem 2rem;
+                                border-radius: 25px;
+                                cursor: pointer;
+                                font-weight: 600;
+                                transition: all 0.3s ease;
+                            "
+                            onmouseover="this.style.borderColor='rgba(255,255,255,0.6)'; this.style.transform='scale(1.05)'"
+                            onmouseout="this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='scale(1)'">
+                        Close
+                    </button>
+                </div>
+                <div style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7;">
+                    Hint: Try the Terminal About Me and type "snake" command!
+                </div>
+            </div>
+        `;
+        
+        // Add click to close
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+        
+        document.body.appendChild(modal);
+        
+        // Add confetti effect
+        createConfetti();
+    }
+}
+
+function createConfetti() {
+    const colors = ['#667eea', '#764ba2', '#60efff', '#00ff87', '#feca57', '#ff9ff3'];
+    
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.cssText = `
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            left: ${Math.random() * 100}%;
+            top: -10px;
+            z-index: 10001;
+            animation: confettiFall ${2 + Math.random() * 3}s linear forwards;
+        `;
+        
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+}
+
+// Add confetti animation CSS
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `
+    @keyframes confettiFall {
+        0% {
+            transform: translateY(-100vh) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(confettiStyle);
+
+// Initialize Theme System
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    document.body.classList.toggle('theme-dark', savedTheme === 'dark');
+    
+    const themeIcon = document.getElementById('theme-icon');
+    if (themeIcon) {
+        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+}
+
+// Enhanced Toggle Theme Function
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('theme-dark');
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (themeIcon) {
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    
+    localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+    
+    // Add smooth transition effect
+    document.body.style.transition = 'all 0.3s ease';
+    setTimeout(() => {
+        document.body.style.transition = '';
+    }, 300);
+}
+
+// Initialize Scroll Animations
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate', 'active', 'reveal');
+                
+                // Trigger skill bar animations
+                if (entry.target.classList.contains('skill-category')) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 200);
+                    });
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .section-title, .project-card, .skill-category, .timeline-item, .memory-category-card, .feature-card').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Enhanced Project Loading with Better Link Validation
+function loadProjectsToPublic() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    if (!projectsGrid) {
+        console.warn('Projects grid element not found');
+        return;
+    }
+    
+    try {
+        const savedProjects = localStorage.getItem(STORAGE_KEYS.projects);
+        const projects = savedProjects ? JSON.parse(savedProjects) : DEFAULT_DATA.projects;
+        
+        if (!projects || projects.length === 0) {
+            projectsGrid.innerHTML = `
+                <div class="project-placeholder">
+                    <i class="fas fa-folder-open"></i>
+                    <p>No projects available. Admin can add projects from the dashboard.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Sort projects: featured first, then by ID
+        const sortedProjects = projects.sort((a, b) => {
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            return a.id - b.id;
+        });
+        
+        // Validate and fix project URLs
+        const validatedProjects = sortedProjects.map(project => {
+            const validatedProject = { ...project };
+            
+            // Ensure URLs are properly formatted
+            if (validatedProject.liveUrl && !validatedProject.liveUrl.startsWith('http')) {
+                validatedProject.liveUrl = 'https://' + validatedProject.liveUrl;
+            }
+            if (validatedProject.githubUrl && !validatedProject.githubUrl.startsWith('http')) {
+                validatedProject.githubUrl = 'https://' + validatedProject.githubUrl;
+            }
+            
+            return validatedProject;
+        });
+        
+        projectsGrid.innerHTML = validatedProjects.map(project => `
+            <div class="project-card ${project.featured ? 'featured-project' : ''}" data-category="${project.category || 'web'}">
+                <div class="project-icon">${project.icon || '🚀'}</div>
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="project-tech">
+                    ${(project.tech || []).map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+                <div class="project-links">
+                    ${project.liveUrl ? `<a href="${project.liveUrl}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>` : ''}
+                    ${project.githubUrl ? `<a href="${project.githubUrl}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>` : ''}
+                </div>
+            </div>
+        `).join('');
+        
+        // Trigger animations with proper timing
+        setTimeout(() => {
+            projectsGrid.querySelectorAll('.project-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate');
+                }, index * 100);
+            });
+        }, 100);
+        
+        console.log(`✅ Loaded ${validatedProjects.length} projects successfully`);
+        
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        projectsGrid.innerHTML = `
+            <div class="project-placeholder">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Error loading projects. Please refresh the page.</p>
+                <button class="btn btn-primary" onclick="loadProjectsToPublic()" style="margin-top: 1rem;">
+                    <i class="fas fa-refresh"></i> Retry Loading
+                </button>
+            </div>
+        `;
+    }
+}
+
+// Enhanced Photo Loading with Error Handling
+function loadPhotosToPublic() {
+    const photosGrid = document.getElementById('photosGrid');
+    if (!photosGrid) return;
+    
+    try {
+        const savedPhotos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+        
+        if (savedPhotos.length === 0) {
+            photosGrid.innerHTML = `
+                <div class="photo-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Photos will be uploaded by admin</p>
+                </div>
+            `;
+            return;
+        }
+        
+        photosGrid.innerHTML = savedPhotos.map(photo => `
+            <div class="photo-item">
+                <img src="${photo.url}" alt="${photo.title}" loading="lazy">
+                <div class="photo-caption">${photo.title}</div>
+            </div>
+        `).join('');
+        
+    } catch (error) {
+        console.error('Error loading photos:', error);
+        photosGrid.innerHTML = `
+            <div class="photo-placeholder">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Error loading photos. Please refresh the page.</p>
+            </div>
+        `;
+    }
+}
+
+// Smooth Scrolling for Navigation Links
+document.addEventListener('click', function(e) {
+    if (e.target.matches('a[href^="#"]')) {
+        e.preventDefault();
+        const targetId = e.target.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            const offsetTop = targetElement.offsetTop - 80; // Account for fixed nav
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    }
+});
+
+// Secret Easter Egg Functions
+function revealSecret(type) {
+    if (type === 'snake') {
+        // Create confetti effect
+        createConfetti();
+        
+        // Show message
+        setTimeout(() => {
+            const confirmed = confirm('🐍 You found the secret Snake game! Want to play?');
+            if (confirmed) {
+                window.open('features/snake-game.html', '_blank');
+            }
+        }, 1000);
+    }
+}
+
+// Konami Code Easter Egg
+const konamiCodeSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', function(e) {
+    if (e.code === konamiCodeSequence[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCodeSequence.length) {
+            activateKonamiEasterEgg();
+            konamiIndex = 0;
+        }
+    } else {
+        konamiIndex = 0;
+    }
+});
+
+function activateKonamiEasterEgg() {
+    // Matrix mode effect
+    document.body.style.filter = 'hue-rotate(120deg)';
+    createConfetti();
+    
+    // Show message
+    setTimeout(() => {
+        alert('🎮 KONAMI CODE ACTIVATED!\n\n✨ Matrix mode enabled\n🎊 Confetti unleashed\n🐍 Snake game unlocked\n\nYou are a true developer! 🚀');
+        
+        // Reset after 10 seconds
+        setTimeout(() => {
+            document.body.style.filter = '';
+        }, 10000);
+    }, 500);
+}
+
+function createConfetti() {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6c5ce7'];
+    
+    for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                left: ${Math.random() * 100}%;
+                top: -10px;
+                z-index: 10001;
+                animation: confettiFall ${2 + Math.random() * 3}s linear forwards;
+                border-radius: 50%;
+            `;
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.remove();
+                }
+            }, 5000);
+        }, i * 50);
+    }
+}
+
+// Global Error Handler
+window.addEventListener('error', function(e) {
+    console.error('Portfolio Error:', e.error);
+    // You could add user-friendly error reporting here
+});
+
+// Console welcome message
+console.log(`
+🎯 Welcome to Ritesh Chauhan's Portfolio!
+🚀 This portfolio features:
+   • Interactive Code Playground
+   • Terminal-style About Me
+   • Voice Assistant Integration
+   • Dynamic Admin Dashboard
+   • Real-time Theme Switching
+   • Parallax Storytelling
+   • Hidden Easter Eggs
+
+💡 Try the Konami Code for a surprise!
+   ↑ ↑ ↓ ↓ ← → ← → B A
+
+🔧 Admin Access: Username: 'Ritesh', Password: 'Ritesh@4368@'
+`);
+
+// Initialize everything when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePortfolio);
+} else {
+    initializePortfolio();
+}
+
+function initializePortfolio() {
+    console.log('🚀 Portfolio initializing...');
+    
+    // Initialize all components
+    initializeData();
+    initializeTheme();
+    initializeScrollAnimations();
+    loadProjectsToPublic();
+    loadPhotosToPublic();
+    
+    console.log('✅ Portfolio initialized successfully!');
 }
