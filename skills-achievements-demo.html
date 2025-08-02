@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills & Achievements - Ritesh Chauhan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Demo page specific styles */
+        .demo-container {
+            background: var(--primary-bg);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .demo-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+        }
+        
+        .demo-title {
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .demo-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .section-preview {
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .section-preview.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .preview-label {
+            text-align: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Enhanced hover effects */
+        .core-skill-item:hover {
+            animation: skillPulse 0.6s ease-in-out;
+        }
+        
+        @keyframes skillPulse {
+            0%, 100% { transform: translateY(-10px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+        
+        .quality-item:hover {
+            animation: qualityFloat 0.8s ease-in-out;
+        }
+        
+        @keyframes qualityFloat {
+            0%, 100% { transform: translateY(-10px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.03); }
+        }
+        
+        /* Progress indicators */
+        .demo-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .back-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+    
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="demo-title">Skills & Achievements Showcase</h1>
+            <p class="demo-subtitle">
+                Explore the enhanced Skills & Qualities and Achievements & Activities sections 
+                with clean HTML structure, responsive design, and beautiful animations.
+            </p>
+        </div>
+        
+        <!-- Skills Section Demo -->
+        <div class="section-preview" id="skillsPreview">
+            <div class="preview-label">🚀 Core Skills & Expertise</div>
+            <section class="section">
+                <div class="container">
+                    <div class="core-skills-section reveal">
+                        <div class="core-skills-grid">
+                            <div class="core-skill-item">
+                                <div class="skill-icon">📱</div>
+                                <h4>App Development</h4>
+                                <p>Kotlin</p>
+                            </div>
+                            <div class="core-skill-item">
+                                <div class="skill-icon">🔧</div>
+                                <h4>Git & GitHub</h4>
+                                <p>Version Control</p>
+                            </div>
+                            <div class="core-skill-item">
+                                <div class="skill-icon">⚛️</div>
+                                <h4>Frontend Development</h4>
+                                <p>React Basics</p>
+                            </div>
+                            <div class="core-skill-item">
+                                <div class="skill-icon">🧮</div>
+                                <h4>Data Structures & Algorithms</h4>
+                                <p>Problem Solving</p>
+                            </div>
+                            <div class="core-skill-item">
+                                <div class="skill-icon">🐍</div>
+                                <h4>Python</h4>
+                                <p>Programming</p>
+                            </div>
+                            <div class="core-skill-item">
+                                <div class="skill-icon">🤖</div>
+                                <h4>AI & ML</h4>
+                                <p>Machine Learning</p>
+                            </div>
+                            <div class="core-skill-item">
+                                <div class="skill-icon">🎨</div>
+                                <h4>Graphics Designing</h4>
+                                <p>Visual Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Qualities Section Demo -->
+        <div class="section-preview" id="qualitiesPreview">
+            <div class="preview-label">✨ Personal Qualities</div>
+            <section id="qualities" class="section">
+                <div class="container">
+                    <div class="qualities-content reveal">
+                        <div class="qualities-grid">
+                            <div class="quality-item reveal">
+                                <div class="quality-icon">💡</div>
+                                <h3>Creativity</h3>
+                                <p>Innovative thinking and creative problem-solving approaches to develop unique solutions</p>
+                            </div>
+                            <div class="quality-item reveal">
+                                <div class="quality-icon">🤝</div>
+                                <h3>Teamwork</h3>
+                                <p>Strong collaboration skills and ability to work effectively in diverse team environments</p>
+                            </div>
+                            <div class="quality-item reveal">
+                                <div class="quality-icon">🎯</div>
+                                <h3>Consistency</h3>
+                                <p>Reliable performance and steady commitment to delivering quality work consistently</p>
+                            </div>
+                            <div class="quality-item reveal">
+                                <div class="quality-icon">⚡</div>
+                                <h3>Quick Learner</h3>
+                                <p>Rapid adaptation to new technologies and ability to master concepts efficiently</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Achievements Section Demo -->
+        <div class="section-preview" id="achievementsPreview">
+            <div class="preview-label">🏆 Achievements & Activities</div>
+            <section id="achievements-activities" class="section">
+                <div class="container">
+                    <div class="achievements-content reveal">
+                        <div class="achievements-grid">
+                            <div class="achievement-category reveal">
+                                <div class="achievement-header">
+                                    <div class="achievement-icon">🏆</div>
+                                    <h3>Sports Achievements</h3>
+                                </div>
+                                <div class="achievement-content">
+                                    <div class="achievement-highlight">
+                                        <span class="highlight-number">25+</span>
+                                        <span class="highlight-text">Medals Earned</span>
+                                    </div>
+                                    <ul class="achievement-list">
+                                        <li>Represented school in sports and earned over 25 medals</li>
+                                        <li>Demonstrated excellence in athletic performance</li>
+                                        <li>Showcased leadership and competitive spirit in tournaments</li>
+                                        <li>Participated in inter-school and district level competitions</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="achievement-category reveal">
+                                <div class="achievement-header">
+                                    <div class="achievement-icon">🎉</div>
+                                    <h3>Volunteer Activities</h3>
+                                </div>
+                                <div class="achievement-content">
+                                    <div class="achievement-highlight">
+                                        <span class="highlight-number">Multiple</span>
+                                        <span class="highlight-text">Events Organized</span>
+                                    </div>
+                                    <ul class="achievement-list">
+                                        <li>Volunteered in college events and Fest</li>
+                                        <li>Contributed to successful organization of college festivals</li>
+                                        <li>Demonstrated community service and leadership skills</li>
+                                        <li>Enhanced event management and coordination abilities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Features Summary -->
+        <div class="section-preview" id="featuresPreview">
+            <div class="preview-label">✅ Implementation Features</div>
+            <section class="section">
+                <div class="container">
+                    <div style="background: var(--card-bg); border-radius: 20px; padding: 3rem; border: 1px solid var(--border);">
+                        <h3 style="color: var(--accent); text-align: center; margin-bottom: 2rem;">What's Included</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">🎨 Visual Design</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Clean, modern card-based layout</li>
+                                    <li>Consistent with existing portfolio theme</li>
+                                    <li>Beautiful hover animations and effects</li>
+                                    <li>Professional color scheme</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">📱 Responsive Design</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Mobile-first approach</li>
+                                    <li>Adapts to all screen sizes</li>
+                                    <li>Touch-friendly interactions</li>
+                                    <li>Optimized grid layouts</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">⚡ Performance</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Smooth CSS animations</li>
+                                    <li>Optimized loading effects</li>
+                                    <li>Lightweight implementation</li>
+                                    <li>Cross-browser compatibility</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">🔧 Easy to Edit</h4>
+                                <ul style="color: var(--text-secondary); line-height: 1.8;">
+                                    <li>Well-structured HTML</li>
+                                    <li>Modular CSS classes</li>
+                                    <li>Simple content updates</li>
+                                    <li>Clear documentation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill items with delay
+                    const skillItems = entry.target.querySelectorAll('.core-skill-item, .quality-item, .achievement-category');
+                    skillItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('reveal');
+                        }, index * 150);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all section previews
+        document.querySelectorAll('.section-preview').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Progress bar
+        function updateProgressBar() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        }
+        
+        window.addEventListener('scroll', updateProgressBar);
+        
+        // Initial animation
+        setTimeout(() => {
+            document.querySelector('#skillsPreview').classList.add('visible');
+        }, 500);
+        
+        console.log('🎨 Skills & Achievements Demo Page Loaded');
+        console.log('✨ Features: Responsive, Animated, Clean Design');
+    </script>
+</body>
+</html>

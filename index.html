@@ -62,6 +62,8 @@
             <button class="tab-btn" data-tab="content">� Content</button>
             <button class="tab-btn" data-tab="projects">🚀 Projects</button>
             <button class="tab-btn" data-tab="skills">⚡ Skills</button>
+            <button class="tab-btn" data-tab="qualities">🌟 Qualities</button>
+            <button class="tab-btn" data-tab="achievements">🏆 Achievements</button>
             <button class="tab-btn" data-tab="social">� Social</button>
             <button class="tab-btn" data-tab="memories">� Memories</button>
             <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
@@ -92,8 +94,13 @@
                 
                 <div class="form-group">
                     <label for="editPhoto">Profile Photo:</label>
-                    <input type="file" id="editPhoto" accept="image/*">
-                    <small>Upload your profile picture</small>
+                    <div class="photo-upload-container">
+                        <input type="file" id="editPhoto" accept="image/*" onchange="handleProfilePhotoChange(this)">
+                        <button type="button" onclick="uploadProfilePhoto()" class="btn btn-upload">📤 Upload Photo</button>
+                        <div id="photoPreview" class="photo-preview"></div>
+                    </div>
+                    <small>Upload your profile picture (Max 5MB, JPG/PNG/GIF)</small>
+                    <div id="uploadedProfileFiles" class="uploaded-files-section"></div>
                 </div>
                 
                 <div class="form-group">
@@ -295,6 +302,22 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 </div>
             </div>
 
+            <!-- Qualities Tab -->
+            <div id="qualities-tab" class="tab-content">
+                <h3>Personal Qualities Management</h3>
+                <div class="qualities-manager">
+                    <div class="qualities-list" id="qualitiesList">
+                        <!-- Qualities will be loaded dynamically -->
+                    </div>
+                    <div class="add-quality">
+                        <input type="text" id="newQualityTitle" placeholder="Quality title (e.g., Creativity)">
+                        <input type="text" id="newQualityIcon" placeholder="Emoji icon (e.g., 💡)">
+                        <textarea id="newQualityDesc" placeholder="Quality description" rows="3"></textarea>
+                        <button class="btn btn-primary" onclick="addQuality()">Add Quality</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Achievements Tab -->
             <div id="achievements-tab" class="tab-content">
                 <h3>Achievements & Awards</h3>
@@ -483,6 +506,8 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#qualities">Qualities</a></li>
+                <li><a href="#achievements-activities">Achievements</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#memories">Memories</a></li>
@@ -622,84 +647,211 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title reveal">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category reveal">
-                    <h3>💻 Frontend Development</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">HTML5/CSS3 <span>95%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="95"></div></div>
+            
+            <!-- Core Skills Grid -->
+            <div class="core-skills-section reveal">
+                <h3 class="subsection-title">🚀 Core Skills & Expertise</h3>
+                <div class="core-skills-grid">
+                    <div class="core-skill-item">
+                        <div class="skill-icon">📱</div>
+                        <h4>App Development</h4>
+                        <p>Kotlin</p>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">JavaScript (ES6+) <span>90%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                    <div class="core-skill-item">
+                        <div class="skill-icon">🔧</div>
+                        <h4>Git & GitHub</h4>
+                        <p>Version Control</p>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">React.js <span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    <div class="core-skill-item">
+                        <div class="skill-icon">⚛️</div>
+                        <h4>Frontend Development</h4>
+                        <p>React Basics</p>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Vue.js <span>75%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                    <div class="core-skill-item">
+                        <div class="skill-icon">🧮</div>
+                        <h4>Data Structures & Algorithms</h4>
+                        <p>Problem Solving</p>
                     </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <h3>⚙️ Backend Development</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">Node.js <span>88%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
+                    <div class="core-skill-item">
+                        <div class="skill-icon">🐍</div>
+                        <h4>Python</h4>
+                        <p>Programming</p>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Python <span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                    <div class="core-skill-item">
+                        <div class="skill-icon">🤖</div>
+                        <h4>AI & ML</h4>
+                        <p>Machine Learning</p>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Express.js <span>80%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Java <span>75%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
-                    </div>
-                </div>
-
-                <div class="skill-category reveal">
-                    <h3>🗄️ Database & Tools</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">MongoDB <span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">MySQL <span>80%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Git/GitHub <span>90%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Docker <span>70%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                    <div class="core-skill-item">
+                        <div class="skill-icon">🎨</div>
+                        <h4>Graphics Designing</h4>
+                        <p>Visual Design</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="skill-category reveal">
-                    <h3>🚀 Other Technologies</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">Data Structures & Algorithms <span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+            <!-- Technical Skills with Progress Bars -->
+            <div class="technical-skills-section">
+                <h3 class="subsection-title">💻 Technical Proficiency</h3>
+                <div class="skills-grid">
+                    <div class="skill-category reveal">
+                        <h3>💻 Frontend Development</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">HTML5/CSS3 <span>95%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="95"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">JavaScript (ES6+) <span>90%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">React.js <span>75%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Vue.js <span>70%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                        </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">System Design <span>75%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+
+                    <div class="skill-category reveal">
+                        <h3>⚙️ Backend Development</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">Python <span>85%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Node.js <span>80%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Kotlin <span>75%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Java <span>70%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                        </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Cloud Platforms (AWS) <span>70%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+
+                    <div class="skill-category reveal">
+                        <h3>🗄️ Database & Tools</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">Git/GitHub <span>90%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">MongoDB <span>80%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">MySQL <span>75%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Docker <span>65%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div>
+                        </div>
                     </div>
-                    <div class="skill-item">
-                        <div class="skill-name">Machine Learning <span>65%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div>
+
+                    <div class="skill-category reveal">
+                        <h3>🚀 Specialized Skills</h3>
+                        <div class="skill-item">
+                            <div class="skill-name">Data Structures & Algorithms <span>85%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">AI & Machine Learning <span>70%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="70"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Graphics Design <span>75%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Cloud Platforms (AWS) <span>65%</span></div>
+                            <div class="skill-bar"><div class="skill-progress" data-width="65"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Qualities Section -->
+    <section id="qualities" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Personal Qualities</h2>
+            <div class="qualities-content reveal">
+                <p class="section-subtitle">The personal traits that drive my success and help me excel in collaborative environments</p>
+                <div class="qualities-grid">
+                    <div class="quality-item reveal">
+                        <div class="quality-icon">💡</div>
+                        <h3>Creativity</h3>
+                        <p>Innovative thinking and creative problem-solving approaches to develop unique solutions</p>
+                    </div>
+                    <div class="quality-item reveal">
+                        <div class="quality-icon">🤝</div>
+                        <h3>Teamwork</h3>
+                        <p>Strong collaboration skills and ability to work effectively in diverse team environments</p>
+                    </div>
+                    <div class="quality-item reveal">
+                        <div class="quality-icon">🎯</div>
+                        <h3>Consistency</h3>
+                        <p>Reliable performance and steady commitment to delivering quality work consistently</p>
+                    </div>
+                    <div class="quality-item reveal">
+                        <div class="quality-icon">⚡</div>
+                        <h3>Quick Learner</h3>
+                        <p>Rapid adaptation to new technologies and ability to master concepts efficiently</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements & Activities Section -->
+    <section id="achievements-activities" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Achievements & Activities</h2>
+            <div class="achievements-content reveal">
+                <div class="achievements-grid">
+                    <div class="achievement-category reveal">
+                        <div class="achievement-header">
+                            <div class="achievement-icon">🏆</div>
+                            <h3>Sports Achievements</h3>
+                        </div>
+                        <div class="achievement-content">
+                            <div class="achievement-highlight">
+                                <span class="highlight-number">25+</span>
+                                <span class="highlight-text">Medals Earned</span>
+                            </div>
+                            <ul class="achievement-list">
+                                <li>Represented school in sports and earned over 25 medals</li>
+                                <li>Demonstrated excellence in athletic performance</li>
+                                <li>Showcased leadership and competitive spirit in tournaments</li>
+                                <li>Participated in inter-school and district level competitions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="achievement-category reveal">
+                        <div class="achievement-header">
+                            <div class="achievement-icon">🎉</div>
+                            <h3>Volunteer Activities</h3>
+                        </div>
+                        <div class="achievement-content">
+                            <div class="achievement-highlight">
+                                <span class="highlight-number">Multiple</span>
+                                <span class="highlight-text">Events Organized</span>
+                            </div>
+                            <ul class="achievement-list">
+                                <li>Volunteered in college events and Fest</li>
+                                <li>Contributed to successful organization of college festivals</li>
+                                <li>Demonstrated community service and leadership skills</li>
+                                <li>Enhanced event management and coordination abilities</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1037,6 +1189,7 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
         </div>
     </section>
 
+    <script src="upload-manager.js"></script>
     <script src="script.js"></script>
     
     <!-- CSS Fallback and Error Prevention -->

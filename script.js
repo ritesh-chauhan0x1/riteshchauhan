@@ -544,12 +544,15 @@ async function saveProfile() {
             if (heroProfileImg) {
                 heroProfileImg.src = base64;
                 heroProfileImg.alt = profileData.name;
+                console.log('✅ Hero profile image updated from saveProfile()');
             }
             
             // Update other profile images in the page
             const profileAvatars = document.querySelectorAll('.profile-avatar');
             profileAvatars.forEach(avatar => {
                 avatar.style.backgroundImage = `url(${base64})`;
+                avatar.style.backgroundSize = 'cover';
+                avatar.style.backgroundPosition = 'center';
             });
             
             showMessage('Profile photo uploaded successfully!', 'success');
@@ -674,13 +677,32 @@ function addHobby() {
     }
 }
 
+function addQuality() {
+    const title = document.getElementById('newQualityTitle').value;
+    const icon = document.getElementById('newQualityIcon').value;
+    const description = document.getElementById('newQualityDesc').value;
+    
+    if (title && icon && description) {
+        const qualities = JSON.parse(localStorage.getItem(STORAGE_KEYS.qualities)) || [];
+        qualities.push({ title, icon, description });
+        
+        localStorage.setItem(STORAGE_KEYS.qualities, JSON.stringify(qualities));
+        loadQualitiesTab();
+        
+        document.getElementById('newQualityTitle').value = '';
+        document.getElementById('newQualityIcon').value = '';
+        document.getElementById('newQualityDesc').value = '';
+        showMessage('Quality added successfully!', 'success');
+    }
+}
+
 function addAchievement() {
     const title = document.getElementById('newAchievement').value;
     const description = document.getElementById('newAchievementDesc').value;
     const date = document.getElementById('newAchievementDate').value;
     
     if (title && description && date) {
-        const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements));
+        const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements)) || [];
         achievements.push({ title, description, date });
         
         localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements));
@@ -755,11 +777,10 @@ function updatePortfolioDisplay() {
         if (profile.photo) {
             heroProfileImg.src = profile.photo;
             heroProfileImg.alt = profile.name;
+            console.log('✅ Hero profile image loaded from stored profile data');
         } else {
-            // Use default placeholder with user's initials
-            const initials = profile.name.split(' ').map(n => n[0]).join('');
-            heroProfileImg.src = `https://via.placeholder.com/200x200/6366f1/ffffff?text=${initials}`;
-            heroProfileImg.alt = profile.name;
+            // Keep the default Unsplash placeholder if no profile photo is uploaded
+            console.log('ℹ️ No profile photo stored, keeping default placeholder');
         }
     }
     
@@ -3606,6 +3627,25 @@ function updateHeroProfileImage() {
     if (heroImg && profile.photo) {
         heroImg.src = profile.photo;
         heroImg.alt = profile.name;
+        console.log('✅ Hero profile image updated via updateHeroProfileImage()');
+    }
+}
+
+// Helper function to handle profile photo change in form
+function handleProfilePhotoChange(input) {
+    const file = input.files[0];
+    const previewContainer = document.getElementById('photoPreview');
+    
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewContainer.innerHTML = `<img src="${e.target.result}" alt="Profile Preview" style="max-width: 200px; max-height: 200px; border-radius: 10px;">`;
+            previewContainer.classList.add('show');
+        };
+        reader.readAsDataURL(file);
+    } else {
+        previewContainer.classList.remove('show');
+        previewContainer.innerHTML = '';
     }
 }
 

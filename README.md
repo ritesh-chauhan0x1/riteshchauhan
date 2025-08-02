@@ -160,13 +160,25 @@ await admin.addProject(projectData, imageFile);
 
 ### Supported Formats:
 - **Images**: JPG, JPEG, PNG, GIF (max 10MB)
+- **Profile Images**: JPG, JPEG, PNG, GIF (max 5MB for hero section)
 - **Videos**: MP4, AVI, MOV (max 50MB)
+
+### Profile Image Upload:
+The system supports uploading a custom profile image that automatically replaces the hero section placeholder image. When you upload a profile photo through the admin dashboard:
+
+1. **Access Admin Panel**: Click the gear icon and login
+2. **Go to Profile Tab**: Edit your profile information
+3. **Upload Profile Photo**: Select an image file (max 5MB)
+4. **Automatic Update**: The hero section image updates immediately
+5. **Persistent Storage**: Image is stored locally and persists across sessions
 
 ### Storage Structure:
 ```
 uploads/
 ├── photos/           # Gallery photos
 ├── projects/         # Project images
+├── profile/
+│   └── images/       # Profile pictures for hero section
 └── memories/
     ├── childhood/    # Childhood videos
     ├── hostel/       # Hostel memories
