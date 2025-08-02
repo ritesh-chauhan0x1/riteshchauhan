@@ -486,7 +486,6 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                 <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#memories">Memories</a></li>
-                <li><a href="features/index.html" class="features-btn">🚀 Main Projects</a></li>
                 <li><a href="#resume" class="resume-btn">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -769,96 +768,100 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title reveal">Main Projects</h2>
-            <div class="projects-filter reveal">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="web">Web Apps</button>
-                <button class="filter-btn" data-filter="mobile">Mobile</button>
-                <button class="filter-btn" data-filter="ai">AI/ML</button>
-                <button class="filter-btn" data-filter="blockchain">Blockchain</button>
-                <button class="filter-btn" data-filter="games">Games</button>
-            </div>
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Projects will be loaded dynamically from script.js -->
-                <div class="loading-projects">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Loading main projects...</p>
+            <h2 class="section-title reveal">Projects</h2>
+            
+            <!-- Main Projects Subsection -->
+            <div class="projects-subsection">
+                <h3 class="subsection-title reveal">🚀 Main Projects</h3>
+                <p class="section-subtitle reveal">Experience cutting-edge web technologies in action</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card reveal" onclick="window.open('features/live-playground.html', '_blank')">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Live Code Playground</h3>
+                        <p>Interactive coding environment with 5 demo applications including Calculator, Todo App, Weather Widget, and more!</p>
+                        <div class="feature-tech">CodeMirror • JavaScript • Canvas</div>
+                        <div class="feature-status">Ready to Code</div>
+                    </div>
+
+                    <div class="feature-card reveal" onclick="window.open('features/terminal-about.html', '_blank')">
+                        <div class="feature-icon">💻</div>
+                        <h3>Terminal About Me</h3>
+                        <p>Authentic terminal interface with 20+ interactive commands. Type 'help' to explore my journey through command line!</p>
+                        <div class="feature-tech">Terminal Emulation • ASCII Art • Command Processing</div>
+                        <div class="feature-status">$ Ready</div>
+                    </div>
+
+                    <div class="feature-card reveal" onclick="window.open('features/voice-assistant.html', '_blank')">
+                        <div class="feature-icon">🎤</div>
+                        <h3>Voice Assistant (RIYA)</h3>
+                        <p>AI-powered voice assistant with speech recognition and natural language responses about my coding journey.</p>
+                        <div class="feature-tech">Speech API • AI Responses • Voice Synthesis</div>
+                        <div class="feature-status">Listening...</div>
+                    </div>
+
+                    <div class="feature-card reveal" onclick="window.open('features/parallax-story.html', '_blank')">
+                        <div class="feature-icon">📖</div>
+                        <h3>Parallax Story</h3>
+                        <p>Scroll-triggered parallax storytelling showcasing my coding journey from first "Hello World" to full-stack development.</p>
+                        <div class="feature-tech">Parallax Effects • Scroll Animations • Interactive Timeline</div>
+                        <div class="feature-status">Chapter 1/5</div>
+                    </div>
+
+                    <div class="feature-card reveal" onclick="revealSecret('snake')">
+                        <div class="feature-icon">🐍</div>
+                        <h3>Hidden Snake Game</h3>
+                        <p>Classic retro Snake game with achievements, multiple difficulty levels, and modern visual effects. An Easter egg for developers!</p>
+                        <div class="feature-tech">Canvas • Game Logic • Local Storage</div>
+                        <div class="feature-status">Secret Game</div>
+                    </div>
+
+                    <div class="feature-card reveal" onclick="window.open('features/index.html', '_blank')">
+                        <div class="feature-icon">✨</div>
+                        <h3>Features Showcase</h3>
+                        <p>Comprehensive gallery of all interactive elements, animations, and advanced web technologies implemented in this portfolio.</p>
+                        <div class="feature-tech">Modern Web APIs • CSS3 Animations • Interactive Demos</div>
+                        <div class="feature-status">Full Gallery</div>
+                    </div>
+                </div>
+
+                <div class="features-cta">
+                    <a href="features/index.html" class="btn btn-gradient btn-large">
+                        🚀 Explore All Main Projects
+                    </a>
+                    <p class="cta-hint">Try the Konami code (↑↑↓↓←→←→BA) for a surprise! 🎮</p>
                 </div>
             </div>
-            <div class="projects-actions reveal">
-                <button class="btn btn-secondary" onclick="loadMoreProjects()">
-                    <i class="fas fa-plus"></i> Load More Projects
-                </button>
-                <button class="btn btn-outline" onclick="shuffleProjects()">
-                    <i class="fas fa-random"></i> Shuffle View
-                </button>
+
+            <!-- Other Projects Subsection -->
+            <div class="projects-subsection">
+                <h3 class="subsection-title reveal">💼 Other Projects</h3>
+                <div class="projects-filter reveal">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="web">Web Apps</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile</button>
+                    <button class="filter-btn" data-filter="ai">AI/ML</button>
+                    <button class="filter-btn" data-filter="blockchain">Blockchain</button>
+                    <button class="filter-btn" data-filter="games">Games</button>
+                </div>
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Projects will be loaded dynamically from script.js -->
+                    <div class="loading-projects">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading projects...</p>
+                    </div>
+                </div>
+                <div class="projects-actions reveal">
+                    <button class="btn btn-secondary" onclick="loadMoreProjects()">
+                        <i class="fas fa-plus"></i> Load More Projects
+                    </button>
+                    <button class="btn btn-outline" onclick="shuffleProjects()">
+                        <i class="fas fa-random"></i> Shuffle View
+                    </button>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Main Projects Section -->
-    <section id="interactive-features" class="section features-showcase">
-        <div class="container">
-            <h2 class="section-title reveal">🚀 Main Projects</h2>
-            <p class="section-subtitle reveal">Experience cutting-edge web technologies in action</p>
-            
-            <div class="features-grid">
-                <div class="feature-card reveal" onclick="window.open('features/live-playground.html', '_blank')">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Live Code Playground</h3>
-                    <p>Interactive coding environment with 5 demo applications including Calculator, Todo App, Weather Widget, and more!</p>
-                    <div class="feature-tech">CodeMirror • JavaScript • Canvas</div>
-                    <div class="feature-status">Ready to Code</div>
-                </div>
-
-                <div class="feature-card reveal" onclick="window.open('features/terminal-about.html', '_blank')">
-                    <div class="feature-icon">💻</div>
-                    <h3>Terminal About Me</h3>
-                    <p>Authentic terminal interface with 20+ interactive commands. Type 'help' to explore my journey through command line!</p>
-                    <div class="feature-tech">Terminal Emulation • ASCII Art • Command Processing</div>
-                    <div class="feature-status">$ Ready</div>
-                </div>
-
-                <div class="feature-card reveal" onclick="window.open('features/voice-assistant.html', '_blank')">
-                    <div class="feature-icon">🎤</div>
-                    <h3>Voice Assistant (RIYA)</h3>
-                    <p>AI-powered voice assistant with speech recognition and natural language responses about my coding journey.</p>
-                    <div class="feature-tech">Speech API • AI Responses • Voice Synthesis</div>
-                    <div class="feature-status">Listening...</div>
-                </div>
-
-                <div class="feature-card reveal" onclick="window.open('features/parallax-story.html', '_blank')">
-                    <div class="feature-icon">📖</div>
-                    <h3>Parallax Story</h3>
-                    <p>Scroll-triggered parallax storytelling showcasing my coding journey from first "Hello World" to full-stack development.</p>
-                    <div class="feature-tech">Parallax Effects • Scroll Animations • Interactive Timeline</div>
-                    <div class="feature-status">Chapter 1/5</div>
-                </div>
-
-                <div class="feature-card reveal" onclick="revealSecret('snake')">
-                    <div class="feature-icon">🐍</div>
-                    <h3>Hidden Snake Game</h3>
-                    <p>Classic retro Snake game with achievements, multiple difficulty levels, and modern visual effects. An Easter egg for developers!</p>
-                    <div class="feature-tech">Canvas • Game Logic • Local Storage</div>
-                    <div class="feature-status">Secret Game</div>
-                </div>
-
-                <div class="feature-card reveal" onclick="window.open('features/index.html', '_blank')">
-                    <div class="feature-icon">✨</div>
-                    <h3>Features Showcase</h3>
-                    <p>Comprehensive gallery of all interactive elements, animations, and advanced web technologies implemented in this portfolio.</p>
-                    <div class="feature-tech">Modern Web APIs • CSS3 Animations • Interactive Demos</div>
-                    <div class="feature-status">Full Gallery</div>
-                </div>
-            </div>
-
-            <div class="features-cta">
-                <a href="features/index.html" class="btn btn-gradient btn-large">
-                    🚀 Explore All Main Projects
-                </a>
-                <p class="cta-hint">Try the Konami code (↑↑↓↓←→←→BA) for a surprise! 🎮</p>
-            </div>
-        </div>
     </section>
 
     <!-- Memories Section -->

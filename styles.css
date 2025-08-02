@@ -2595,6 +2595,49 @@ body {
     pointer-events: none;
 }
 
+/* Projects Section Organization */
+.projects-subsection {
+    margin: 4rem 0;
+    padding: 2rem 0;
+}
+
+.projects-subsection:first-child {
+    margin-top: 2rem;
+}
+
+.projects-subsection:not(:last-child) {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 4rem;
+}
+
+.subsection-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Responsive adjustments for subsections */
+@media (max-width: 768px) {
+    .projects-subsection {
+        margin: 2rem 0;
+        padding: 1rem 0;
+    }
+    
+    .projects-subsection:not(:last-child) {
+        padding-bottom: 2rem;
+    }
+    
+    .subsection-title {
+        font-size: 2rem;
+    }
+}
+
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -3219,7 +3262,7 @@ body {
 
 /* Empty state for photo categories */
 .photo-category .photos-grid:empty::after {
-    content: "📸 No photos yet. Add some through the admin panel!";
+    content: "📸 No photos in this category yet";
     display: block;
     padding: 3rem;
     text-align: center;

@@ -518,17 +518,55 @@ function loadAchievementsTab() {
 }
 
 // Save Functions
-function saveProfile() {
+async function saveProfile() {
     const profileData = {
         name: document.getElementById('editName').value,
         title: document.getElementById('editTitle').value,
         location: document.getElementById('editLocation').value,
         education: document.getElementById('editEducation').value,
-        photo: document.getElementById('editPhoto').value,
         bio: document.getElementById('editBio').value,
         resumeUrl: document.getElementById('resumeUpload').value || 'https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link',
         resumeHighlights: document.getElementById('resumeHighlights').value || '• 4th Year B.Tech CSE Student at KIIT University\n• Full Stack Developer with 4+ years of experience\n• Solved 100+ problems on LeetCode\n• Built 50+ projects including web apps and APIs\n• Proficient in React, Node.js, Python, JavaScript\n• Experience with MySQL, MongoDB, AWS Cloud Services'
     };
+
+    // Handle profile photo upload
+    const photoInput = document.getElementById('editPhoto');
+    if (photoInput.files && photoInput.files[0]) {
+        try {
+            const file = photoInput.files[0];
+            
+            // Validate file
+            if (!file.type.startsWith('image/')) {
+                throw new Error('Please select a valid image file');
+            }
+            
+            if (file.size > 5 * 1024 * 1024) { // 5MB limit for profile photo
+                throw new Error('Profile photo must be less than 5MB');
+            }
+
+            // Convert to base64 for reliable storage
+            const base64 = await fileToBase64(file);
+            profileData.photo = base64;
+            
+            // Update hero profile image immediately
+            const heroProfileImg = document.getElementById('heroProfileImg');
+            if (heroProfileImg) {
+                heroProfileImg.src = base64;
+                heroProfileImg.alt = profileData.name;
+            }
+            
+            // Update other profile images in the page
+            const profileAvatars = document.querySelectorAll('.profile-avatar');
+            profileAvatars.forEach(avatar => {
+                avatar.style.backgroundImage = `url(${base64})`;
+            });
+            
+            showMessage('Profile photo uploaded successfully!', 'success');
+        } catch (error) {
+            console.error('Profile photo upload error:', error);
+            showMessage(`Profile photo upload failed: ${error.message}`, 'error');
+        }
+    }
     
     localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(profileData));
     updatePortfolioDisplay();
@@ -698,18 +736,40 @@ function deleteAchievement(index) {
 
 // Update Portfolio Display
 function updatePortfolioDisplay() {
-    const profile = JSON.parse(localStorage.getItem(STORAGE_KEYS.profile));
-    const content = JSON.parse(localStorage.getItem(STORAGE_KEYS.content));
+    const profile = JSON.parse(localStorage.getItem(STORAGE_KEYS.profile)) || DEFAULT_DATA.profile;
+    const content = JSON.parse(localStorage.getItem(STORAGE_KEYS.content)) || DEFAULT_DATA.content;
     
-    // Update name and title
-    if (document.querySelector('.name')) {
-        document.querySelector('.name').textContent = profile.name.toUpperCase();
+    // Update hero section name - ensure both parts are visible
+    const nameElement = document.querySelector('.name');
+    if (nameElement) {
+        const nameParts = profile.name.split(' ');
+        if (nameParts.length >= 2) {
+            nameElement.innerHTML = `${nameParts[0]} <span class="surname">${nameParts.slice(1).join(' ')}</span>`;
+        } else {
+            nameElement.textContent = profile.name.toUpperCase();
+        }
     }
+    
+    // Update title and bio
     if (document.querySelector('.title')) {
         document.querySelector('.title').textContent = profile.title;
     }
-    if (document.querySelector('.description')) {
-        document.querySelector('.description').innerHTML = profile.bio;
+    if (document.querySelector('.bio')) {
+        document.querySelector('.bio').innerHTML = profile.bio;
+    }
+    
+    // Update hero profile image
+    const heroProfileImg = document.getElementById('heroProfileImg');
+    if (heroProfileImg) {
+        if (profile.photo) {
+            heroProfileImg.src = profile.photo;
+            heroProfileImg.alt = profile.name;
+        } else {
+            // Use default placeholder with user's initials
+            const initials = profile.name.split(' ').map(n => n[0]).join('');
+            heroProfileImg.src = `https://via.placeholder.com/200x200/6366f1/ffffff?text=${initials}`;
+            heroProfileImg.alt = profile.name;
+        }
     }
     
     // Update profile card
@@ -717,10 +777,10 @@ function updatePortfolioDisplay() {
         document.querySelector('.profile-card h3').textContent = profile.name;
     }
     if (document.querySelector('.profile-location')) {
-        document.querySelector('.profile-location').textContent = `📍 From ${profile.location}`;
+        document.querySelector('.profile-location').textContent = `From ${profile.location}`;
     }
     if (document.querySelector('.profile-status')) {
-        document.querySelector('.profile-status').textContent = `🎓 ${profile.education}`;
+        document.querySelector('.profile-status').textContent = profile.education;
     }
     
     // Update stats
@@ -735,13 +795,20 @@ function updatePortfolioDisplay() {
         aboutText.textContent = content.about;
     }
     
-    // Update profile photo if provided
-    if (profile.photo) {
-        const avatar = document.querySelector('.profile-avatar');
-        if (avatar) {
-            avatar.innerHTML = `<img src="${profile.photo}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+    // Update profile avatars throughout the page
+    const profileAvatars = document.querySelectorAll('.profile-avatar');
+    profileAvatars.forEach(avatar => {
+        if (profile.photo) {
+            avatar.style.backgroundImage = `url(${profile.photo})`;
+            avatar.style.backgroundSize = 'cover';
+            avatar.style.backgroundPosition = 'center';
+        } else {
+            // Use gradient background with initials
+            const initials = profile.name.split(' ').map(n => n[0]).join('');
+            avatar.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 1.2em; font-weight: bold; color: white;">${initials}</div>`;
+            avatar.style.background = 'linear-gradient(135deg, #6366f1, #8b5cf6)';
         }
-    }
+    });
 }
 
 function updateSocialLinks() {
@@ -1120,33 +1187,78 @@ function addPhotoToCategory(category) {
         }
 
         try {
-            let uploadResult;
+            // Always use localStorage for reliable storage
+            const base64 = await fileToBase64(file);
+            const uploadResult = {
+                url: base64,
+                name: file.name,
+                type: 'local_storage',
+                success: true
+            };
             
-            // Try cloud storage first
-            if (window.cloudStorage) {
-                uploadResult = await window.cloudStorage.uploadToCloud(file, 'image', category);
-            } else if (window.backendService) {
-                uploadResult = await window.backendService.uploadPhoto(file, title, category);
-            } else {
-                // Fallback to localStorage
-                const base64 = await fileToBase64(file);
-                uploadResult = {
-                    url: base64,
-                    name: file.name,
-                    type: 'local_storage'
-                };
-                
-                // Store in localStorage with category
-                const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
-                photos.push({
-                    id: Date.now() + index,
-                    url: base64,
-                    caption: title || file.name,
-                    category: category,
-                    uploadDate: new Date().toISOString()
-                });
-                localStorage.setItem('portfolio_photos', JSON.stringify(photos));
-            }
+            // Store in localStorage with category
+            const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+            photos.push({
+                id: Date.now() + index,
+                url: base64,
+                caption: title || file.name,
+                category: category,
+                uploadDate: new Date().toISOString(),
+                filename: file.name
+            });
+            localStorage.setItem('portfolio_photos', JSON.stringify(photos));
+
+            console.log(`✅ Photo ${index + 1}/${files.length} uploaded to ${category} successfully`);
+            
+        } catch (error) {
+            console.error(`❌ Failed to upload ${file.name}:`, error);
+            showMessage(`Failed to upload ${file.name}: ${error.message}`, 'error');
+        }
+    });
+
+    // Clear inputs
+// Enhanced photo upload for categories
+function addPhotoToCategory(category) {
+    const photoUpload = document.getElementById(`${category}PhotoUpload`);
+    const photoTitle = document.getElementById(`${category}PhotoTitle`);
+    
+    if (!photoUpload || photoUpload.files.length === 0) {
+        showMessage('Please select at least one photo!', 'error');
+        return;
+    }
+    
+    const files = Array.from(photoUpload.files);
+    const title = photoTitle ? photoTitle.value : '';
+    
+    console.log(`📸 Uploading ${files.length} photo(s) to ${category} category...`);
+    
+    files.forEach(async (file, index) => {
+        if (!file.type.startsWith('image/')) {
+            showMessage(`${file.name} is not a valid image file`, 'error');
+            return;
+        }
+
+        try {
+            // Always use localStorage for reliable storage
+            const base64 = await fileToBase64(file);
+            const uploadResult = {
+                url: base64,
+                name: file.name,
+                type: 'local_storage',
+                success: true
+            };
+            
+            // Store in localStorage with category
+            const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+            photos.push({
+                id: Date.now() + index,
+                url: base64,
+                caption: title || file.name,
+                category: category,
+                uploadDate: new Date().toISOString(),
+                filename: file.name
+            });
+            localStorage.setItem('portfolio_photos', JSON.stringify(photos));
 
             console.log(`✅ Photo ${index + 1}/${files.length} uploaded to ${category} successfully`);
             
@@ -1160,11 +1272,11 @@ function addPhotoToCategory(category) {
     photoUpload.value = '';
     if (photoTitle) photoTitle.value = '';
 
-    // Refresh photo gallery
+    // Refresh photo gallery for this category
     setTimeout(() => {
         loadPhotosToPublic();
         loadUploadedPhotosInCategory(category);
-        showMessage(`Successfully processed ${files.length} photo(s) for ${category}`, 'success');
+        showMessage(`Successfully uploaded ${files.length} photo(s) to ${category}`, 'success');
     }, 1000);
 }
 
@@ -1172,6 +1284,45 @@ function addPhotoToCategory(category) {
 function loadUploadedPhotosInCategory(category) {
     const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
     const categoryPhotos = photos.filter(photo => photo.category === category);
+    
+    const container = document.getElementById(`${category}UploadedPhotos`);
+    if (!container) return;
+    
+    if (categoryPhotos.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-camera"></i>
+                <p>No photos uploaded for ${category} yet.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = categoryPhotos.map((photo, index) => `
+        <div class="uploaded-photo-item">
+            <img src="${photo.url}" alt="${photo.caption}" loading="lazy">
+            <div class="photo-actions">
+                <button class="photo-delete-btn" onclick="deletePhotoFromCategory('${category}', ${photo.id})">&times;</button>
+            </div>
+            ${photo.caption ? `<div class="photo-caption">${photo.caption}</div>` : ''}
+        </div>
+    `).join('');
+}
+
+// Delete photo from specific category
+function deletePhotoFromCategory(category, photoId) {
+    if (confirm('Are you sure you want to delete this photo?')) {
+        const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+        const updatedPhotos = photos.filter(photo => photo.id !== photoId);
+        
+        localStorage.setItem('portfolio_photos', JSON.stringify(updatedPhotos));
+        
+        // Refresh displays
+        loadPhotosToPublic();
+        loadUploadedPhotosInCategory(category);
+        showMessage('Photo deleted successfully!', 'success');
+    }
+}
     const uploadedPhotos = document.getElementById(`${category}UploadedPhotos`);
     
     if (uploadedPhotos) {
@@ -1331,7 +1482,7 @@ function nextPhoto() {
     }
 }
 
-// Enhanced photo upload handling
+// Enhanced photo upload handling with improved error handling
 function addPhoto() {
     const fileInput = document.getElementById('photoUpload');
     const titleInput = document.getElementById('photoTitle');
@@ -1360,31 +1511,26 @@ function addPhoto() {
 
             let uploadResult;
             
-            // Try cloud storage first
-            if (window.cloudStorage) {
-                uploadResult = await window.cloudStorage.uploadToCloud(file, 'image', 'gallery');
-            } else if (window.backendService) {
-                uploadResult = await window.backendService.uploadPhoto(file, title, 'gallery');
-            } else {
-                // Fallback to localStorage for offline mode
-                const base64 = await fileToBase64(file);
-                uploadResult = {
-                    url: base64,
-                    name: file.name,
-                    type: 'local_storage'
-                };
-                
-                // Store in localStorage
-                const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
-                photos.push({
-                    id: Date.now() + index,
-                    url: base64,
-                    caption: title || file.name,
-                    category: 'gallery',
-                    uploadDate: new Date().toISOString()
-                });
-                localStorage.setItem('portfolio_photos', JSON.stringify(photos));
-            }
+            // Always use localStorage with base64 for reliable storage
+            const base64 = await fileToBase64(file);
+            uploadResult = {
+                url: base64,
+                name: file.name,
+                type: 'local_storage',
+                success: true
+            };
+            
+            // Store in localStorage with proper structure
+            const photos = JSON.parse(localStorage.getItem('portfolio_photos') || '[]');
+            photos.push({
+                id: Date.now() + index,
+                url: base64,
+                caption: title || file.name,
+                category: 'gallery',
+                uploadDate: new Date().toISOString(),
+                filename: file.name
+            });
+            localStorage.setItem('portfolio_photos', JSON.stringify(photos));
 
             console.log(`✅ Photo ${index + 1}/${files.length} uploaded successfully`);
             

@@ -100,24 +100,38 @@ class CloudStorageManager {
         const progressCallback = this.createProgressCallback(file.name);
         
         try {
-            // Try Google Drive first
-            const driveResult = await this.uploadToGoogleDrive(file, type, category, progressCallback);
-            if (driveResult.success) {
-                console.log('✅ Uploaded to Google Drive:', driveResult.url);
-                return driveResult;
-            }
-        } catch (error) {
-            console.warn('⚠️ Google Drive upload failed, using fallback:', error.message);
-        }
-
-        // Fallback to local server
-        try {
+            // Always try local storage first for reliability
             const localResult = await this.uploadToLocalServer(file, type, category, progressCallback);
             console.log('✅ Uploaded to local server:', localResult.url);
             return localResult;
-        } catch (error) {
-            console.error('❌ All upload methods failed:', error);
-            throw new Error('Failed to upload file to any storage provider');
+        } catch (localError) {
+            console.warn('⚠️ Local server upload failed, trying Google Drive:', localError.message);
+            
+            // Fallback to Google Drive
+            try {
+                const driveResult = await this.uploadToGoogleDrive(file, type, category, progressCallback);
+                if (driveResult.success) {
+                    console.log('✅ Uploaded to Google Drive:', driveResult.url);
+                    return driveResult;
+                }
+            } catch (driveError) {
+                console.warn('⚠️ Google Drive upload also failed:', driveError.message);
+            }
+            
+            // Final fallback - convert to base64 and store locally
+            try {
+                const base64 = await this.fileToBase64(file);
+                return {
+                    success: true,
+                    url: base64,
+                    name: file.name,
+                    type: 'localStorage',
+                    id: Date.now()
+                };
+            } catch (base64Error) {
+                console.error('❌ All upload methods failed:', base64Error);
+                throw new Error('Failed to upload file: All storage methods failed');
+            }
         }
     }
 
@@ -493,6 +507,16 @@ class CloudStorageManager {
                 }
             }, 300);
         }, 3000);
+    }
+
+    // Helper function to convert file to base64
+    async fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        });
     }
 }
 
