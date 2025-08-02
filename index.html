@@ -297,6 +297,97 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
                     </div>
                 </div>
             </div>
+
+            <!-- Settings Tab -->
+            <div id="settings-tab" class="tab-content">
+                <h3>⚙️ System Settings</h3>
+                
+                <!-- Google Drive Configuration -->
+                <div class="settings-section">
+                    <h4>☁️ Google Drive Cloud Storage</h4>
+                    <div class="google-drive-status" id="googleDriveStatus">
+                        <div class="status-indicator">
+                            <span class="status-dot" id="driveStatusDot">🔴</span>
+                            <span id="driveStatusText">Checking connection...</span>
+                        </div>
+                        <div class="drive-info">
+                            <p><strong>Account:</strong> rites.chauhan11@gmail.com ✅</p>
+                            <p><strong>Folder ID:</strong> 1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg ✅</p>
+                            <p><strong>Storage Type:</strong> <span id="storageType">google-drive</span> ✅</p>
+                            <p><strong>Status:</strong> <span id="connectionStatus">Ready for setup</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button class="btn btn-primary" id="setupGoogleDrive" onclick="setupGoogleDrive()">
+                            🔗 Complete OAuth Setup
+                        </button>
+                        <button class="btn btn-secondary" id="testGoogleDrive" onclick="testGoogleDrive()">
+                            🧪 Test Connection
+                        </button>
+                        <button class="btn btn-outline" onclick="openGoogleDriveGuide()">
+                            📖 Setup Guide
+                        </button>
+                        <button class="btn btn-success" onclick="openGoogleDriveFolder()">
+                            📁 Open Drive Folder
+                        </button>
+                    </div>
+                    
+                    <div class="settings-help">
+                        <h5>🚀 Quick Setup for rites.chauhan11@gmail.com:</h5>
+                        <ol>
+                            <li>✅ Email configured: <code>rites.chauhan11@gmail.com</code></li>
+                            <li>✅ Folder ID set: <code>1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg</code></li>
+                            <li>⚠️ Need OAuth tokens from Google Cloud Console</li>
+                            <li>🔗 Click "Complete OAuth Setup" to get tokens</li>
+                            <li>📝 Add tokens to .env file and restart server</li>
+                        </ol>
+                        <div class="setup-status">
+                            <p><strong>Current Status:</strong> Pre-configured for your Google Drive account</p>
+                            <p><strong>Next Step:</strong> Complete OAuth authentication</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Information -->
+                <div class="settings-section">
+                    <h4>📊 Storage Information</h4>
+                    <div class="storage-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Photos Uploaded:</span>
+                            <span class="stat-value" id="photosCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Projects Created:</span>
+                            <span class="stat-value" id="projectsCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Memories Stored:</span>
+                            <span class="stat-value" id="memoriesCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Storage Location:</span>
+                            <span class="stat-value" id="storageLocation">Local Server</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Actions -->
+                <div class="settings-section">
+                    <h4>🔧 System Actions</h4>
+                    <div class="settings-actions">
+                        <button class="btn btn-warning" onclick="clearCache()">
+                            🗑️ Clear Cache
+                        </button>
+                        <button class="btn btn-info" onclick="checkSystem()">
+                            🔍 System Check
+                        </button>
+                        <button class="btn btn-success" onclick="backupData()">
+                            💾 Backup Data
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -325,7 +416,7 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <!-- Navigation Menu -->
     <nav class="nav">
         <div class="nav-content">
-            <a href="#home" class="logo">RC</a>
+            <a href="#home" class="logo">Ritesh</a>
             <ul class="nav-links">
                 <li><a href="#photos">Photos</a></li>
                 <li><a href="#home">Home</a></li>
@@ -357,17 +448,24 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="name">RITESH CHAUHAN</h1>
-            <p class="title">Full Stack Developer & CSE Student</p>
-            <p class="description">
-                🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal
-                <br>Passionate about creating innovative digital solutions and bringing ideas to life through code.
-            </p>
-            
-            <div class="cta-buttons">
-                <a href="#about" class="btn btn-primary">Explore My Journey</a>
-                <a href="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" class="btn btn-secondary" target="_blank">📄 Download Resume</a>
+        <div class="hero-container">
+            <div class="hero-photo">
+                <div class="profile-image">
+                    <img src="https://via.placeholder.com/300x300/6366f1/ffffff?text=RC" alt="Ritesh Chauhan" id="heroProfileImg">
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="name">RITESH CHAUHAN</h1>
+                <p class="title">Full Stack Developer & CSE Student</p>
+                <p class="description">
+                    🎓 4th Year B.Tech CSE Student at KIIT University | 🇳🇵 Born in Birgunj, Nepal
+                    <br>Passionate about creating innovative digital solutions and bringing ideas to life through code.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="#about" class="btn btn-primary">Explore My Journey</a>
+                    <a href="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" class="btn btn-secondary" target="_blank">📄 Download Resume</a>
+                </div>
             </div>
         </div>
     </section>
@@ -579,12 +677,27 @@ Passionate about creating innovative digital solutions and bringing ideas to lif
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title reveal">Featured Projects</h2>
+            <div class="projects-filter reveal">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Apps</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="ai">AI/ML</button>
+                <button class="filter-btn" data-filter="games">Games</button>
+            </div>
             <div class="projects-grid" id="projectsGrid">
                 <!-- Projects will be loaded dynamically from script.js -->
                 <div class="loading-projects">
                     <i class="fas fa-spinner fa-spin"></i>
                     <p>Loading projects...</p>
                 </div>
+            </div>
+            <div class="projects-actions reveal">
+                <button class="btn btn-secondary" onclick="loadMoreProjects()">
+                    <i class="fas fa-plus"></i> Load More Projects
+                </button>
+                <button class="btn btn-outline" onclick="shuffleProjects()">
+                    <i class="fas fa-random"></i> Shuffle View
+                </button>
             </div>
         </div>
     </section>

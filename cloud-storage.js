@@ -7,9 +7,10 @@ class CloudStorageManager {
         this.baseURL = 'http://localhost:3000/api';
         this.token = localStorage.getItem('portfolio_token');
         
-        // Google Drive configuration
+        // Google Drive configuration for rites.chauhan11@gmail.com
         this.driveConfig = {
-            folderId: '1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg', // Portfolio folder ID
+            folderId: '1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg', // Ritesh's Portfolio folder ID
+            email: 'rites.chauhan11@gmail.com',
             apiKey: 'YOUR_GOOGLE_DRIVE_API_KEY', // Replace with your API key
             baseUrl: 'https://www.googleapis.com/drive/v3'
         };

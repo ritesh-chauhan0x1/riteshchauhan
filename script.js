@@ -3211,6 +3211,479 @@ console.log(`
 🔧 Admin Access: Username: 'Ritesh', Password: 'Ritesh@4368@'
 `);
 
+// Project filtering and enhanced features
+let currentFilter = 'all';
+let allProjects = [];
+
+function initializeProjectsFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            // Filter projects
+            const filter = btn.getAttribute('data-filter');
+            filterProjects(filter);
+        });
+    });
+}
+
+function filterProjects(filter) {
+    currentFilter = filter;
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach(card => {
+        const category = card.getAttribute('data-category') || 'web';
+        
+        if (filter === 'all' || category === filter) {
+            card.style.display = 'block';
+            card.style.opacity = '0';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, 100);
+        } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 300);
+        }
+    });
+}
+
+function loadMoreProjects() {
+    // Simulate loading more projects
+    const projectsGrid = document.getElementById('projectsGrid');
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'loading-more';
+    loadingDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading more projects...';
+    projectsGrid.appendChild(loadingDiv);
+    
+    setTimeout(() => {
+        // Add some example additional projects
+        const additionalProjects = [
+            {
+                title: 'AI Chatbot',
+                description: 'Intelligent chatbot with natural language processing',
+                category: 'ai',
+                tech: ['Python', 'TensorFlow', 'NLP'],
+                github: '#',
+                demo: '#'
+            },
+            {
+                title: 'Mobile Weather App',
+                description: 'Cross-platform weather application',
+                category: 'mobile',
+                tech: ['React Native', 'API Integration'],
+                github: '#',
+                demo: '#'
+            },
+            {
+                title: 'Puzzle Game',
+                description: 'Interactive puzzle game with levels',
+                category: 'games',
+                tech: ['JavaScript', 'Canvas', 'Game Logic'],
+                github: '#',
+                demo: '#'
+            }
+        ];
+        
+        loadingDiv.remove();
+        additionalProjects.forEach(project => {
+            const projectCard = createProjectCard(project);
+            projectsGrid.appendChild(projectCard);
+        });
+        
+        // Reinitialize filters for new projects
+        filterProjects(currentFilter);
+    }, 1500);
+}
+
+function shuffleProjects() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    const projectCards = Array.from(projectsGrid.querySelectorAll('.project-card'));
+    
+    // Shuffle array
+    for (let i = projectCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [projectCards[i], projectCards[j]] = [projectCards[j], projectCards[i]];
+    }
+    
+    // Clear grid and re-append in new order
+    projectCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.8)';
+    });
+    
+    setTimeout(() => {
+        projectCards.forEach((card, index) => {
+            setTimeout(() => {
+                projectsGrid.appendChild(card);
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, index * 100);
+        });
+    }, 300);
+}
+
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card reveal';
+    card.setAttribute('data-category', project.category);
+    
+    card.innerHTML = `
+        <div class="project-image">
+            <div class="project-placeholder">
+                <i class="fas fa-code"></i>
+            </div>
+        </div>
+        <div class="project-info">
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+            <div class="project-tech">
+                ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+            </div>
+        </div>
+        <div class="project-links">
+            <a href="${project.github}" target="_blank" class="project-btn">
+                <i class="fab fa-github"></i> Code
+            </a>
+            <a href="${project.demo}" target="_blank" class="project-btn">
+                <i class="fas fa-external-link-alt"></i> Demo
+            </a>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Google Drive Setup Functions
+function setupGoogleDrive() {
+    console.log('🔗 Setting up Google Drive for rites.chauhan11@gmail.com...');
+    
+    // Show loading state
+    const statusText = document.getElementById('driveStatusText');
+    const statusDot = document.getElementById('driveStatusDot');
+    
+    if (statusText) statusText.textContent = 'Starting OAuth flow...';
+    if (statusDot) statusDot.textContent = '🟡';
+    
+    // Open Google OAuth flow
+    window.open('/auth/google', '_blank', 'width=600,height=600');
+    
+    showMessage('🔗 Google Drive OAuth flow opened in new window. Complete authentication and copy tokens to .env file.', 'info');
+}
+
+function testGoogleDrive() {
+    console.log('🧪 Testing Google Drive connection...');
+    
+    fetch('/api/google-drive/status')
+        .then(response => response.json())
+        .then(data => {
+            const statusText = document.getElementById('driveStatusText');
+            const statusDot = document.getElementById('driveStatusDot');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            if (data.configured) {
+                if (statusText) statusText.textContent = 'Connected to Google Drive';
+                if (statusDot) statusDot.textContent = '🟢';
+                if (connectionStatus) connectionStatus.textContent = 'Connected and working';
+                showMessage('✅ Google Drive is connected and working!', 'success');
+            } else {
+                if (statusText) statusText.textContent = 'Setup required';
+                if (statusDot) statusDot.textContent = '🔴';
+                if (connectionStatus) connectionStatus.textContent = 'OAuth tokens needed';
+                showMessage('⚠️ Google Drive setup incomplete. Missing OAuth tokens.', 'warning');
+            }
+            
+            console.log('Google Drive Status:', data);
+        })
+        .catch(error => {
+            console.error('Failed to test Google Drive:', error);
+            showMessage('❌ Failed to test Google Drive connection', 'error');
+        });
+}
+
+function openGoogleDriveGuide() {
+    console.log('📖 Opening Google Drive setup guide...');
+    
+    // Create a popup with the setup guide
+    const guideWindow = window.open('', '_blank', 'width=800,height=600,scrollbars=yes');
+    
+    guideWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Google Drive Setup Guide - rites.chauhan11@gmail.com</title>
+            <style>
+                body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+                .highlight { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0; }
+                .success { color: #28a745; }
+                .warning { color: #ffc107; }
+                .error { color: #dc3545; }
+                code { background: #f1f1f1; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+                .step { margin: 20px 0; padding: 15px; border-left: 4px solid #007bff; background: #f8f9fa; }
+            </style>
+        </head>
+        <body>
+            <h1>🚀 Google Drive Setup for rites.chauhan11@gmail.com</h1>
+            
+            <div class="highlight">
+                <h3>✅ Pre-configured Settings:</h3>
+                <ul>
+                    <li><strong>Email:</strong> rites.chauhan11@gmail.com</li>
+                    <li><strong>Folder ID:</strong> 1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg</li>
+                    <li><strong>Storage Type:</strong> google-drive</li>
+                </ul>
+            </div>
+            
+            <div class="step">
+                <h3>Step 1: Google Cloud Console</h3>
+                <ol>
+                    <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li>Sign in with <strong>rites.chauhan11@gmail.com</strong></li>
+                    <li>Create a new project: "Ritesh Portfolio"</li>
+                    <li>Enable Google Drive API</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h3>Step 2: Create OAuth Credentials</h3>
+                <ol>
+                    <li>Go to APIs & Services → Credentials</li>
+                    <li>Create OAuth client ID (Web application)</li>
+                    <li>Add redirect URI: <code>http://localhost:3000/auth/google/callback</code></li>
+                    <li>Copy Client ID and Client Secret</li>
+                </ol>
+            </div>
+            
+            <div class="step">
+                <h3>Step 3: Update .env File</h3>
+                <div class="highlight">
+                    <pre>GOOGLE_CLIENT_ID=your-client-id-here
+GOOGLE_CLIENT_SECRET=your-client-secret-here</pre>
+                </div>
+            </div>
+            
+            <div class="step">
+                <h3>Step 4: Complete OAuth Flow</h3>
+                <ol>
+                    <li>Save .env file and restart server</li>
+                    <li>Click "Complete OAuth Setup" in admin panel</li>
+                    <li>Authorize with rites.chauhan11@gmail.com</li>
+                    <li>Copy generated tokens to .env file</li>
+                </ol>
+            </div>
+            
+            <div class="highlight success">
+                <h3>🎉 Success!</h3>
+                <p>Your portfolio will automatically upload photos and files to your Google Drive!</p>
+            </div>
+        </body>
+        </html>
+    `);
+    
+    guideWindow.document.close();
+}
+
+function openGoogleDriveFolder() {
+    console.log('📁 Opening Google Drive folder...');
+    
+    const folderId = '1BmMRHyBgvfKGOYOH8mZGUJOb8Lk9Y8Kg';
+    const folderUrl = `https://drive.google.com/drive/folders/${folderId}`;
+    
+    window.open(folderUrl, '_blank');
+    showMessage('📁 Google Drive folder opened in new tab', 'info');
+}
+
+// Update hero profile image
+function updateHeroProfileImage() {
+    const profile = getStoredData('profile');
+    const heroImg = document.getElementById('heroProfileImg');
+    
+    if (heroImg && profile.photo) {
+        heroImg.src = profile.photo;
+        heroImg.alt = profile.name;
+    }
+}
+
+// Google Drive Management Functions
+async function checkGoogleDriveStatus() {
+    try {
+        const response = await fetch('/api/google-drive/status');
+        const status = await response.json();
+        
+        const statusDot = document.getElementById('driveStatusDot');
+        const statusText = document.getElementById('driveStatusText');
+        const storageType = document.getElementById('storageType');
+        const setupBtn = document.getElementById('setupGoogleDrive');
+        
+        if (status.configured) {
+            statusDot.textContent = '🟢';
+            statusText.textContent = 'Connected and Ready';
+            storageType.textContent = 'Google Drive (rites.chauhan11@gmail.com)';
+            setupBtn.textContent = '✅ Google Drive Connected';
+            setupBtn.disabled = true;
+        } else {
+            statusDot.textContent = '🔴';
+            statusText.textContent = 'Not Configured';
+            storageType.textContent = 'Local Storage Only';
+            setupBtn.textContent = '🔗 Setup Google Drive';
+            setupBtn.disabled = false;
+        }
+        
+        // Update storage location
+        const storageLocation = document.getElementById('storageLocation');
+        if (storageLocation) {
+            storageLocation.textContent = status.configured ? 'Google Drive' : 'Local Server';
+        }
+        
+        return status;
+    } catch (error) {
+        console.error('Failed to check Google Drive status:', error);
+        
+        const statusDot = document.getElementById('driveStatusDot');
+        const statusText = document.getElementById('driveStatusText');
+        
+        if (statusDot) statusDot.textContent = '⚠️';
+        if (statusText) statusText.textContent = 'Status Unknown';
+    }
+}
+
+function setupGoogleDrive() {
+    // Open OAuth flow in new window
+    const authWindow = window.open(
+        '/auth/google',
+        'google-auth',
+        'width=500,height=600,scrollbars=yes,resizable=yes'
+    );
+    
+    // Check if window was closed
+    const checkClosed = setInterval(() => {
+        if (authWindow.closed) {
+            clearInterval(checkClosed);
+            // Recheck status after auth
+            setTimeout(() => {
+                checkGoogleDriveStatus();
+            }, 2000);
+        }
+    }, 1000);
+}
+
+async function testGoogleDrive() {
+    const testBtn = document.getElementById('testGoogleDrive');
+    const originalText = testBtn.textContent;
+    
+    testBtn.textContent = '🔄 Testing...';
+    testBtn.disabled = true;
+    
+    try {
+        const response = await fetch('/api/google-drive/status');
+        const status = await response.json();
+        
+        if (status.configured) {
+            showNotification('✅ Google Drive connection successful!', 'success');
+        } else {
+            showNotification('⚠️ Google Drive not configured. Click Setup to authenticate.', 'warning');
+        }
+    } catch (error) {
+        showNotification('❌ Failed to test Google Drive connection', 'error');
+    } finally {
+        testBtn.textContent = originalText;
+        testBtn.disabled = false;
+    }
+}
+
+function openGoogleDriveSetup() {
+    // Open setup guide in new tab
+    window.open('/setup-google-drive.html', '_blank');
+}
+
+function clearCache() {
+    if (confirm('Clear all cached data? This will reload the page.')) {
+        localStorage.clear();
+        sessionStorage.clear();
+        showNotification('🗑️ Cache cleared successfully!', 'success');
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    }
+}
+
+async function checkSystem() {
+    const checkBtn = document.querySelector('button[onclick="checkSystem()"]');
+    const originalText = checkBtn.textContent;
+    
+    checkBtn.textContent = '🔄 Checking...';
+    checkBtn.disabled = true;
+    
+    try {
+        // Check various system components
+        const checks = [
+            { name: 'Backend Connection', test: () => fetch('/api/health') },
+            { name: 'Database Connection', test: () => fetch('/api/health') },
+            { name: 'Google Drive Status', test: () => fetch('/api/google-drive/status') },
+            { name: 'Local Storage', test: () => Promise.resolve(localStorage.getItem('test') !== null) }
+        ];
+        
+        let results = '';
+        for (const check of checks) {
+            try {
+                await check.test();
+                results += `✅ ${check.name}: OK\n`;
+            } catch (error) {
+                results += `❌ ${check.name}: Failed\n`;
+            }
+        }
+        
+        alert(`System Check Results:\n\n${results}`);
+    } catch (error) {
+        showNotification('❌ System check failed', 'error');
+    } finally {
+        checkBtn.textContent = originalText;
+        checkBtn.disabled = false;
+    }
+}
+
+async function backupData() {
+    const backupBtn = document.querySelector('button[onclick="backupData()"]');
+    const originalText = backupBtn.textContent;
+    
+    backupBtn.textContent = '💾 Creating Backup...';
+    backupBtn.disabled = true;
+    
+    try {
+        const data = {
+            profile: getStoredData('profile'),
+            projects: getStoredData('projects'),
+            photos: getStoredData('photos'),
+            memories: getStoredData('memories'),
+            social: getStoredData('social'),
+            timestamp: new Date().toISOString()
+        };
+        
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `portfolio-backup-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showNotification('💾 Backup created successfully!', 'success');
+    } catch (error) {
+        showNotification('❌ Backup creation failed', 'error');
+    } finally {
+        backupBtn.textContent = originalText;
+        backupBtn.disabled = false;
+    }
+}
+
 // Initialize everything when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializePortfolio);
@@ -3227,6 +3700,13 @@ function initializePortfolio() {
     initializeScrollAnimations();
     loadProjectsToPublic();
     loadPhotosToPublic();
+    initializeProjectsFilters();
+    updateHeroProfileImage();
+    
+    // Check Google Drive status if in admin mode
+    if (document.getElementById('googleDriveStatus')) {
+        checkGoogleDriveStatus();
+    }
     
     console.log('✅ Portfolio initialized successfully!');
 }

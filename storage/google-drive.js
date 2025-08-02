@@ -5,35 +5,93 @@ const path = require('path');
 class GoogleDriveStorage {
     constructor() {
         this.drive = null;
-        this.folderId = process.env.GDRIVE_FOLDER_ID;
+        this.auth = null;
+        this.folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+        this.email = process.env.GOOGLE_DRIVE_EMAIL || 'rites.chauhan11@gmail.com';
         this.initialize();
     }
 
     async initialize() {
         try {
-            // Google Drive API setup
-            const credentials = {
-                type: 'service_account',
-                project_id: process.env.GOOGLE_PROJECT_ID,
-                private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-                private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-                client_email: process.env.GOOGLE_CLIENT_EMAIL,
-                client_id: process.env.GOOGLE_CLIENT_ID,
-                auth_uri: "https://accounts.google.com/o/oauth2/auth",
-                token_uri: "https://oauth2.googleapis.com/token",
-                auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
-            };
+            console.log(`🔧 Initializing Google Drive for: ${this.email}`);
+            
+            // OAuth2 credentials setup
+            const oauth2Client = new google.auth.OAuth2(
+                process.env.GOOGLE_CLIENT_ID,
+                process.env.GOOGLE_CLIENT_SECRET,
+                'http://localhost:3000/auth/google/callback' // Redirect URI
+            );
 
-            const auth = new google.auth.GoogleAuth({
-                credentials: credentials,
-                scopes: ['https://www.googleapis.com/auth/drive.file']
-            });
-
-            this.drive = google.drive({ version: 'v3', auth });
-            console.log('✅ Google Drive storage initialized');
+            // If we have stored tokens, use them
+            if (process.env.GOOGLE_REFRESH_TOKEN) {
+                oauth2Client.setCredentials({
+                    refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+                    access_token: process.env.GOOGLE_ACCESS_TOKEN
+                });
+                
+                this.auth = oauth2Client;
+                this.drive = google.drive({ version: 'v3', auth: oauth2Client });
+                
+                console.log('✅ Google Drive initialized with stored tokens');
+                
+                // Test the connection
+                await this.testConnection();
+            } else {
+                console.log('⚠️ Google Drive tokens not found. Run setup to authenticate.');
+                this.generateAuthUrl();
+            }
         } catch (error) {
             console.error('❌ Google Drive initialization failed:', error.message);
-            console.log('📁 Falling back to local storage');
+            console.log('📁 Google Drive will be unavailable, falling back to local storage');
+        }
+    }
+
+    generateAuthUrl() {
+        try {
+            const oauth2Client = new google.auth.OAuth2(
+                process.env.GOOGLE_CLIENT_ID,
+                process.env.GOOGLE_CLIENT_SECRET,
+                'http://localhost:3000/auth/google/callback'
+            );
+
+            const scopes = [
+                'https://www.googleapis.com/auth/drive.file',
+                'https://www.googleapis.com/auth/drive.metadata.readonly'
+            ];
+
+            const authUrl = oauth2Client.generateAuthUrl({
+                access_type: 'offline',
+                scope: scopes,
+                prompt: 'consent'
+            });
+
+            console.log('\n🔐 Google Drive Authentication Required:');
+            console.log('📋 Copy this URL and open it in your browser:');
+            console.log('🌐', authUrl);
+            console.log('\n📝 After authorization, you\'ll get tokens to add to your .env file\n');
+            
+            return authUrl;
+        } catch (error) {
+            console.error('❌ Failed to generate auth URL:', error.message);
+            return null;
+        }
+    }
+
+    async testConnection() {
+        try {
+            if (!this.drive) {
+                throw new Error('Google Drive not initialized');
+            }
+
+            const response = await this.drive.about.get({
+                fields: 'user'
+            });
+
+            console.log(`✅ Google Drive connected for: ${response.data.user.emailAddress}`);
+            return true;
+        } catch (error) {
+            console.error('❌ Google Drive connection test failed:', error.message);
+            return false;
         }
     }
 

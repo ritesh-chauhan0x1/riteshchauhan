@@ -7,7 +7,8 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "install-deps": "npm install",
-    "setup-db": "node database/setup.js"
+    "setup-db": "node database/setup.js",
+    "setup-google": "node setup-google-drive.js"
   },
   "keywords": ["portfolio", "api", "nodejs", "express", "mysql"],
   "author": "Ritesh Chauhan",
@@ -23,6 +24,7 @@
     "express-rate-limit": "^6.8.1",
     "helmet": "^7.0.0",
     "express-validator": "^7.0.1",
+    "googleapis": "^128.0.0",
     "cloudinary": "^1.40.0",
     "nodemailer": "^6.9.4"
   },

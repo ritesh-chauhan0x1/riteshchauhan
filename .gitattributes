@@ -1,0 +1,54 @@
+# Git attributes for proper line ending handling
+
+# Text files should use LF in repository, CRLF on Windows checkout
+*.txt text
+*.md text
+*.js text
+*.html text
+*.css text
+*.json text
+*.env text
+*.example text
+*.bat text eol=crlf
+*.sh text eol=lf
+
+# Specific file types
+*.env.example text
+.env text
+.env.* text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+
+# Node.js files
+package.json text
+package-lock.json text
+*.js text
+*.ts text
+*.jsx text
+*.tsx text
+
+# Documentation
+README.md text
+CHANGELOG.md text
+LICENSE text
+*.md text
+
+# Configuration files
+*.yml text
+*.yaml text
+*.xml text
+*.ini text
+*.config text
+
+# Prevent Git from trying to merge certain files
+*.log merge=ours
+node_modules/** -text
+.git/** -text

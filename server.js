@@ -330,6 +330,103 @@ app.post('/api/contact', [
     }
 });
 
+// Google Drive OAuth Routes
+app.get('/auth/google', (req, res) => {
+    try {
+        const GoogleDriveStorage = require('./storage/google-drive');
+        const driveStorage = new GoogleDriveStorage();
+        const authUrl = driveStorage.generateAuthUrl();
+        
+        if (authUrl) {
+            res.redirect(authUrl);
+        } else {
+            res.status(500).json({ error: 'Failed to generate authentication URL' });
+        }
+    } catch (error) {
+        console.error('Google auth error:', error);
+        res.status(500).json({ error: 'Authentication failed' });
+    }
+});
+
+app.get('/auth/google/callback', async (req, res) => {
+    try {
+        const { code } = req.query;
+        
+        if (!code) {
+            return res.status(400).json({ error: 'Authorization code not provided' });
+        }
+
+        const { google } = require('googleapis');
+        const oauth2Client = new google.auth.OAuth2(
+            process.env.GOOGLE_CLIENT_ID,
+            process.env.GOOGLE_CLIENT_SECRET,
+            'http://localhost:3000/auth/google/callback'
+        );
+
+        const { tokens } = await oauth2Client.getToken(code);
+        
+        // Display tokens for user to add to .env file
+        res.send(`
+            <html>
+                <head>
+                    <title>Google Drive Setup Complete</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+                        .token-box { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; font-family: monospace; }
+                        .success { color: #27ae60; }
+                        .warning { color: #f39c12; }
+                    </style>
+                </head>
+                <body>
+                    <h1 class="success">✅ Google Drive Authentication Successful!</h1>
+                    <p>Add these tokens to your <strong>.env</strong> file:</p>
+                    
+                    <h3>Access Token:</h3>
+                    <div class="token-box">GOOGLE_ACCESS_TOKEN=${tokens.access_token}</div>
+                    
+                    <h3>Refresh Token:</h3>
+                    <div class="token-box">GOOGLE_REFRESH_TOKEN=${tokens.refresh_token}</div>
+                    
+                    <h3>Complete .env Configuration:</h3>
+                    <div class="token-box">
+GOOGLE_DRIVE_EMAIL=rites.chauhan11@gmail.com<br>
+GOOGLE_CLIENT_ID=your-google-client-id<br>
+GOOGLE_CLIENT_SECRET=your-google-client-secret<br>
+GOOGLE_ACCESS_TOKEN=${tokens.access_token}<br>
+GOOGLE_REFRESH_TOKEN=${tokens.refresh_token}<br>
+GOOGLE_DRIVE_FOLDER_ID=your-portfolio-folder-id<br>
+STORAGE_TYPE=google-drive
+                    </div>
+                    
+                    <p class="warning">⚠️ <strong>Important:</strong> Restart your server after updating the .env file!</p>
+                    <p><a href="/">← Back to Portfolio</a></p>
+                </body>
+            </html>
+        `);
+        
+    } catch (error) {
+        console.error('Google callback error:', error);
+        res.status(500).json({ error: 'Failed to exchange authorization code' });
+    }
+});
+
+// Google Drive Setup Status
+app.get('/api/google-drive/status', (req, res) => {
+    const hasTokens = !!(process.env.GOOGLE_REFRESH_TOKEN && process.env.GOOGLE_ACCESS_TOKEN);
+    const hasClientId = !!process.env.GOOGLE_CLIENT_ID;
+    const hasClientSecret = !!process.env.GOOGLE_CLIENT_SECRET;
+    
+    res.json({
+        configured: hasTokens && hasClientId && hasClientSecret,
+        hasTokens,
+        hasClientId,
+        hasClientSecret,
+        email: process.env.GOOGLE_DRIVE_EMAIL || 'rites.chauhan11@gmail.com',
+        storageType: process.env.STORAGE_TYPE || 'local',
+        setupUrl: hasClientId && hasClientSecret ? '/auth/google' : null
+    });
+});
+
 // Error handling middleware
 app.use((error, req, res, next) => {
     if (error instanceof multer.MulterError) {
