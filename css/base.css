@@ -153,7 +153,7 @@ body {
 /* Theme Toggle */
 .theme-toggle {
     position: fixed;
-    top: 1rem;
+    top: 5rem;
     right: 1rem;
     width: 45px;
     height: 45px;
