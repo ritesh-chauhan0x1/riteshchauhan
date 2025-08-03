@@ -85,6 +85,9 @@ body {
     transition: all 0.3s ease;
     flex-shrink: 0;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 .nav-brand:hover {
@@ -299,6 +302,11 @@ body {
         padding: 0 1rem;
     }
 
+    .nav-brand {
+        font-size: 1.3rem;
+        max-width: 150px;
+    }
+
     .nav-menu {
         position: fixed;
         top: var(--nav-height);
@@ -340,6 +348,7 @@ body {
         right: 0.75rem;
         width: 40px;
         height: 40px;
+        position: fixed !important;
     }
 
     .theme-toggle i {
@@ -365,12 +374,18 @@ body {
         padding: 0 0.5rem;
     }
 
+    .nav-brand {
+        font-size: 1.2rem;
+        max-width: 120px;
+    }
+
     /* Theme Toggle Extra Small Mobile Positioning */
     .theme-toggle {
         top: calc(var(--nav-height) + 0.25rem);
         right: 0.5rem;
         width: 36px;
         height: 36px;
+        position: fixed !important;
     }
 
     .theme-toggle i {
