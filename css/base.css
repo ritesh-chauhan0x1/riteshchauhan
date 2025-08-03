@@ -87,7 +87,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 300px; /* Increased for desktop to prevent wrapping */
 }
 
 .nav-brand:hover {
@@ -304,7 +304,7 @@ body {
 
     .nav-brand {
         font-size: 1.3rem;
-        max-width: 150px;
+        max-width: 180px; /* Adjusted for mobile to prevent overflow */
     }
 
     .nav-menu {
@@ -349,6 +349,7 @@ body {
         width: 40px;
         height: 40px;
         position: fixed !important;
+        z-index: 1001 !important;
     }
 
     .theme-toggle i {
@@ -376,7 +377,7 @@ body {
 
     .nav-brand {
         font-size: 1.2rem;
-        max-width: 120px;
+        max-width: 160px; /* Further optimized for very small screens */
     }
 
     /* Theme Toggle Extra Small Mobile Positioning */
@@ -386,6 +387,7 @@ body {
         width: 36px;
         height: 36px;
         position: fixed !important;
+        z-index: 1001 !important;
     }
 
     .theme-toggle i {
