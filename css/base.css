@@ -72,6 +72,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
+    flex-wrap: nowrap;
+    min-width: 0;
 }
 
 /* Logo/Brand */
@@ -81,6 +83,8 @@ body {
     color: var(--accent);
     text-decoration: none;
     transition: all 0.3s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .nav-brand:hover {
@@ -92,8 +96,11 @@ body {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    min-width: 0;
 }
 
 .nav-item {
@@ -257,6 +264,33 @@ body {
 .leetcode-text {
     font-weight: bold;
     font-size: 0.9rem;
+}
+
+/* Desktop Responsive */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+    
+    .nav-menu {
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav-menu {
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav-container {
+        padding: 0 3rem;
+    }
 }
 
 /* Mobile Responsive */
