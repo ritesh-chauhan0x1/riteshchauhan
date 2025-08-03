@@ -160,7 +160,7 @@ body {
 /* Theme Toggle */
 .theme-toggle {
     position: fixed;
-    top: 5rem;
+    top: calc(var(--nav-height) + 1rem);
     right: 1rem;
     width: 45px;
     height: 45px;
@@ -334,6 +334,18 @@ body {
         transform: rotate(-45deg) translate(7px, -6px);
     }
 
+    /* Theme Toggle Mobile Positioning */
+    .theme-toggle {
+        top: calc(var(--nav-height) + 0.5rem);
+        right: 0.75rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .theme-toggle i {
+        font-size: 1rem;
+    }
+
     .social-link {
         width: 45px;
         height: 45px;
@@ -351,6 +363,18 @@ body {
 @media (max-width: 480px) {
     .nav-container {
         padding: 0 0.5rem;
+    }
+
+    /* Theme Toggle Extra Small Mobile Positioning */
+    .theme-toggle {
+        top: calc(var(--nav-height) + 0.25rem);
+        right: 0.5rem;
+        width: 36px;
+        height: 36px;
+    }
+
+    .theme-toggle i {
+        font-size: 0.9rem;
     }
 
     .social-link {
