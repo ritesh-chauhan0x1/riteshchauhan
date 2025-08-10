@@ -210,7 +210,7 @@ class PortfolioBase {
                 <a href="https://github.com/ritesh-chauhan0x1" class="social-link github" target="_blank" title="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://leetcode.com/u/riteshchauhan_15" class="social-link leetcode" target="_blank" title="LeetCode">
+                <a href="https://leetcode.com/u/riteshchauhn_15" class="social-link leetcode" target="_blank" title="LeetCode">
                     <span class="leetcode-text">LC</span>
                 </a>
                 <a href="https://wa.me/+919337940768" class="social-link whatsapp" target="_blank" title="WhatsApp">
