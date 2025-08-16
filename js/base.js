@@ -100,8 +100,9 @@ class PortfolioBase {
                             Projects <i class="fas fa-chevron-down dropdown-icon"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="projects.html#web" class="dropdown-link">Web Projects</a></li>
-                            <li><a href="projects.html#mobile" class="dropdown-link">App Projects</a></li>
+                            <li><a href="projects.html" class="dropdown-link">All Projects</a></li>
+                            <li><a href="web-projects.html" class="dropdown-link">Web Applications</a></li>
+                            <li><a href="app-projects.html" class="dropdown-link">Mobile Apps</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -145,8 +146,11 @@ class PortfolioBase {
             // Remove active class from all links
             link.classList.remove('active');
             
-            // Add active class to current page link
+            // Add active class to current page link or projects parent for project pages
             if (linkPage === this.currentPage) {
+                link.classList.add('active');
+            } else if ((this.currentPage === 'web-projects' || this.currentPage === 'app-projects') && linkPage === 'projects') {
+                // Highlight Projects menu for individual project pages
                 link.classList.add('active');
             }
         });
