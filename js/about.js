@@ -1,6 +1,6 @@
 /**
- * About Page JavaScript
- * Handles about page specific functionality and animations
+ * About Page JavaScript - Professional Version
+ * Handles about page specific functionality and professional animations
  */
 
 class AboutPage {
@@ -13,16 +13,17 @@ class AboutPage {
      */
     init() {
         this.setupAnimations();
+        this.setupImageGallery();
         this.setupSkillsAnimation();
-        this.setupProfileImage();
+        this.setupTimelineAnimation();
         this.setupInteractiveElements();
+        this.setupImageZoom();
     }
 
     /**
      * Setup scroll animations for elements
      */
     setupAnimations() {
-        // Animate elements when they come into view
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -33,13 +34,22 @@ class AboutPage {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    
+                    // Add staggered animation for child elements
+                    const children = entry.target.querySelectorAll('.skill-tag, .achievement-card, .timeline-item');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
                 }
             });
         }, observerOptions);
 
         // Target elements for animation
         const animatedElements = document.querySelectorAll(
-            '.about-intro, .skills-section, .interests-section, .skill-category, .interest-card'
+            '.profile-section, .about-content, .content-section, .image-gallery'
         );
 
         animatedElements.forEach(el => {
@@ -48,238 +58,425 @@ class AboutPage {
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
+
+        // Animate child elements
+        const childElements = document.querySelectorAll('.skill-tag, .achievement-card, .timeline-item');
+        childElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.4s ease';
+        });
     }
 
     /**
-     * Setup skills animation with staggered effect
+     * Setup image gallery with enhanced interactions
+     */
+    setupImageGallery() {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const profileImage = document.querySelector('.profile-image');
+
+        // Add click events to gallery images
+        galleryItems.forEach((item, index) => {
+            const img = item.querySelector('.gallery-img');
+            
+            item.addEventListener('click', () => {
+                this.openImageModal(img.src, `Professional Photo ${index + 2}`);
+            });
+
+            // Add hover effect data
+            item.setAttribute('data-title', `Professional Photo ${index + 2}`);
+        });
+
+        // Add click event to profile image
+        if (profileImage) {
+            profileImage.addEventListener('click', () => {
+                const img = profileImage.querySelector('img');
+                this.openImageModal(img.src, 'Ritesh Chauhan - Professional Photo');
+            });
+        }
+
+        // Create modal for image viewing
+        this.createImageModal();
+    }
+
+    /**
+     * Create image modal for full-size viewing
+     */
+    createImageModal() {
+        const modal = document.createElement('div');
+        modal.className = 'image-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <img class="modal-image" src="" alt="">
+                <div class="modal-caption"></div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Add modal styles
+        const modalStyles = document.createElement('style');
+        modalStyles.textContent = `
+            .image-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1000;
+                display: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .image-modal.active {
+                display: flex;
+                opacity: 1;
+            }
+
+            .modal-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                cursor: pointer;
+            }
+
+            .modal-content {
+                position: relative;
+                margin: auto;
+                max-width: 90%;
+                max-height: 90%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                z-index: 1001;
+            }
+
+            .modal-close {
+                position: absolute;
+                top: -50px;
+                right: 0;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                transition: color 0.3s ease;
+            }
+
+            .modal-close:hover {
+                color: var(--accent);
+            }
+
+            .modal-image {
+                max-width: 100%;
+                max-height: 80vh;
+                object-fit: contain;
+                border-radius: 10px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            }
+
+            .modal-caption {
+                color: white;
+                text-align: center;
+                margin-top: 1rem;
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+        `;
+        document.head.appendChild(modalStyles);
+
+        // Setup modal events
+        const overlay = modal.querySelector('.modal-overlay');
+        const closeBtn = modal.querySelector('.modal-close');
+
+        overlay.addEventListener('click', () => this.closeImageModal());
+        closeBtn.addEventListener('click', () => this.closeImageModal());
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                this.closeImageModal();
+            }
+        });
+    }
+
+    /**
+     * Open image modal
+     */
+    openImageModal(src, caption) {
+        const modal = document.querySelector('.image-modal');
+        const modalImage = modal.querySelector('.modal-image');
+        const modalCaption = modal.querySelector('.modal-caption');
+
+        modalImage.src = src;
+        modalCaption.textContent = caption;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * Close image modal
+     */
+    closeImageModal() {
+        const modal = document.querySelector('.image-modal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    /**
+     * Setup enhanced skills animation
      */
     setupSkillsAnimation() {
         const skillTags = document.querySelectorAll('.skill-tag');
         
-        skillTags.forEach((tag, index) => {
-            tag.style.opacity = '0';
-            tag.style.transform = 'scale(0.8)';
-            tag.style.transition = 'all 0.3s ease';
-            
-            // Staggered animation
-            setTimeout(() => {
-                tag.style.opacity = '1';
-                tag.style.transform = 'scale(1)';
-            }, index * 100);
-        });
-
         // Add click effects to skill tags
         skillTags.forEach(tag => {
             tag.addEventListener('click', () => {
-                tag.style.animation = 'pulse 0.5s ease';
+                tag.style.animation = 'skillPulse 0.5s ease';
                 setTimeout(() => {
                     tag.style.animation = '';
                 }, 500);
             });
+
+            // Add hover sound effect simulation
+            tag.addEventListener('mouseenter', () => {
+                tag.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+
+            tag.addEventListener('mouseleave', () => {
+                tag.style.transform = 'translateY(0) scale(1)';
+            });
         });
 
-        // Add pulse animation CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.1); }
-                100% { transform: scale(1); }
+        // Add skill pulse animation
+        const skillStyles = document.createElement('style');
+        skillStyles.textContent = `
+            @keyframes skillPulse {
+                0% { transform: translateY(-2px) scale(1); }
+                50% { transform: translateY(-2px) scale(1.15); }
+                100% { transform: translateY(-2px) scale(1); }
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(skillStyles);
     }
 
     /**
-     * Setup profile image interactions
+     * Setup timeline animation
      */
-    setupProfileImage() {
-        const profileImg = document.getElementById('profile-img');
-        const profileContainer = document.querySelector('.profile-image');
-
-        if (profileImg && profileContainer) {
-            // Add hover effect
-            profileContainer.addEventListener('mouseenter', () => {
-                profileImg.style.transform = 'scale(1.05)';
-                profileImg.style.transition = 'transform 0.3s ease';
-            });
-
-            profileContainer.addEventListener('mouseleave', () => {
-                profileImg.style.transform = 'scale(1)';
-            });
-
-            // Add click effect
-            profileContainer.addEventListener('click', () => {
-                profileContainer.style.animation = 'profileBounce 0.6s ease';
-                setTimeout(() => {
-                    profileContainer.style.animation = '';
-                }, 600);
-            });
-
-            // Add profile bounce animation
-            const bounceStyle = document.createElement('style');
-            bounceStyle.textContent = `
-                @keyframes profileBounce {
-                    0%, 100% { transform: translateY(0) scale(1); }
-                    25% { transform: translateY(-10px) scale(1.02); }
-                    50% { transform: translateY(-5px) scale(1.01); }
-                    75% { transform: translateY(-2px) scale(1.005); }
+    setupTimelineAnimation() {
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
                 }
-            `;
-            document.head.appendChild(bounceStyle);
-        }
+            });
+        }, { threshold: 0.3 });
+
+        timelineItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.2}s`;
+            timelineObserver.observe(item);
+        });
     }
 
     /**
-     * Setup interactive elements and tooltips
+     * Setup interactive elements
      */
     setupInteractiveElements() {
-        // Add tooltips to fact icons
-        const factIcons = document.querySelectorAll('.fact i');
-        factIcons.forEach(icon => {
-            icon.addEventListener('mouseenter', () => {
-                icon.style.transform = 'scale(1.2) rotate(10deg)';
-                icon.style.transition = 'all 0.3s ease';
-            });
-
-            icon.addEventListener('mouseleave', () => {
-                icon.style.transform = 'scale(1) rotate(0deg)';
+        // Add hover effects to contact details
+        const detailItems = document.querySelectorAll('.detail-item');
+        detailItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const text = item.querySelector('span').textContent;
+                
+                // Copy to clipboard if it's email or phone
+                if (text.includes('@') || text.includes('+')) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.showToast('Copied to clipboard!');
+                    }).catch(() => {
+                        console.log('Could not copy to clipboard');
+                    });
+                }
             });
         });
 
-        // Add interest card interactions
-        const interestCards = document.querySelectorAll('.interest-card');
-        interestCards.forEach(card => {
-            const icon = card.querySelector('i');
-            
+        // Add achievement card interactions
+        const achievementCards = document.querySelectorAll('.achievement-card');
+        achievementCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
-                if (icon) {
-                    icon.style.transform = 'scale(1.1) rotate(5deg)';
-                    icon.style.transition = 'all 0.3s ease';
-                }
+                const icon = card.querySelector('.achievement-icon');
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
             });
 
             card.addEventListener('mouseleave', () => {
-                if (icon) {
-                    icon.style.transform = 'scale(1) rotate(0deg)';
-                }
+                const icon = card.querySelector('.achievement-icon');
+                icon.style.transform = 'scale(1) rotate(0deg)';
             });
         });
-
-        // Add typing effect to intro text
-        this.setupTypingEffect();
     }
 
     /**
-     * Setup typing effect for introduction text
+     * Setup image zoom functionality
      */
-    setupTypingEffect() {
-        const introHeading = document.querySelector('.intro-text h2');
-        if (introHeading) {
-            const originalText = introHeading.textContent;
-            introHeading.textContent = '';
-            
-            let index = 0;
-            const typeInterval = setInterval(() => {
-                if (index < originalText.length) {
-                    introHeading.textContent += originalText.charAt(index);
-                    index++;
-                } else {
-                    clearInterval(typeInterval);
-                }
-            }, 100);
-        }
-    }
-
-    /**
-     * Add smooth scrolling between sections
-     */
-    setupSmoothScrolling() {
-        const sections = document.querySelectorAll('.about-intro, .skills-section, .interests-section');
+    setupImageZoom() {
+        const images = document.querySelectorAll('.profile-image img, .gallery-img');
         
-        // Add navigation dots (optional)
-        const navDots = document.createElement('div');
-        navDots.className = 'section-nav';
-        navDots.style.cssText = `
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 100;
+        images.forEach(img => {
+            img.addEventListener('mouseenter', () => {
+                img.style.cursor = 'zoom-in';
+            });
+        });
+    }
+
+    /**
+     * Show toast notification
+     */
+    showToast(message) {
+        // Remove existing toast
+        const existingToast = document.querySelector('.toast-notification');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = message;
+        
+        // Add toast styles
+        const toastStyles = document.createElement('style');
+        toastStyles.textContent = `
+            .toast-notification {
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                background: var(--accent);
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .toast-notification.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        `;
+        document.head.appendChild(toastStyles);
+
+        document.body.appendChild(toast);
+        
+        // Show toast
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    /**
+     * Add smooth section navigation
+     */
+    setupSectionNavigation() {
+        const sections = document.querySelectorAll('.content-section');
+        
+        // Create floating navigation
+        const navContainer = document.createElement('div');
+        navContainer.className = 'section-navigation';
+        navContainer.innerHTML = `
+            <div class="nav-dots">
+                ${Array.from(sections).map((_, index) => 
+                    `<div class="nav-dot" data-section="${index}"></div>`
+                ).join('')}
+            </div>
         `;
 
-        sections.forEach((section, index) => {
-            const dot = document.createElement('div');
-            dot.style.cssText = `
+        document.body.appendChild(navContainer);
+
+        // Add navigation styles
+        const navStyles = document.createElement('style');
+        navStyles.textContent = `
+            .section-navigation {
+                position: fixed;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 100;
+            }
+
+            .nav-dots {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-dot {
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
-                background: var(--text-secondary);
+                background: rgba(var(--accent-rgb), 0.3);
                 cursor: pointer;
                 transition: all 0.3s ease;
-            `;
-            
-            dot.addEventListener('click', () => {
-                section.scrollIntoView({ behavior: 'smooth' });
-            });
+            }
 
-            navDots.appendChild(dot);
+            .nav-dot:hover,
+            .nav-dot.active {
+                background: var(--accent);
+                transform: scale(1.2);
+            }
+
+            @media (max-width: 768px) {
+                .section-navigation {
+                    display: none;
+                }
+            }
+        `;
+        document.head.appendChild(navStyles);
+
+        // Setup navigation functionality
+        const navDots = document.querySelectorAll('.nav-dot');
+        navDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            });
         });
 
-        document.body.appendChild(navDots);
-    }
-
-    /**
-     * Add random fun facts rotation
-     */
-    setupFunFacts() {
-        const additionalFacts = [
-            { icon: 'fas fa-coffee', text: 'Coffee enthusiast' },
-            { icon: 'fas fa-globe', text: 'Love to travel' },
-            { icon: 'fas fa-gamepad', text: 'Gaming in free time' },
-            { icon: 'fas fa-heart', text: 'Open source contributor' }
-        ];
-
-        const factsContainer = document.querySelector('.quick-facts');
-        if (factsContainer) {
-            let currentFactIndex = 0;
-            
-            setInterval(() => {
-                if (additionalFacts.length > 0) {
-                    const randomFact = additionalFacts[currentFactIndex % additionalFacts.length];
-                    
-                    const factElement = document.createElement('div');
-                    factElement.className = 'fact fun-fact';
-                    factElement.innerHTML = `
-                        <i class="${randomFact.icon}"></i>
-                        <span>${randomFact.text}</span>
-                    `;
-                    factElement.style.opacity = '0';
-                    factElement.style.transform = 'translateX(-20px)';
-                    factElement.style.transition = 'all 0.5s ease';
-                    
-                    factsContainer.appendChild(factElement);
-                    
-                    setTimeout(() => {
-                        factElement.style.opacity = '1';
-                        factElement.style.transform = 'translateX(0)';
-                    }, 100);
-                    
-                    setTimeout(() => {
-                        factElement.style.opacity = '0';
-                        factElement.style.transform = 'translateX(20px)';
-                        setTimeout(() => {
-                            factElement.remove();
-                        }, 500);
-                    }, 3000);
-                    
-                    currentFactIndex++;
+        // Highlight active section
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(sections).indexOf(entry.target);
+                    navDots.forEach(dot => dot.classList.remove('active'));
+                    if (navDots[index]) {
+                        navDots[index].classList.add('active');
+                    }
                 }
-            }, 5000);
-        }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => sectionObserver.observe(section));
     }
 }
 
@@ -291,4 +488,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-console.log('👤 About Page Script Loaded');
+console.log('👤 Professional About Page Script Loaded');
