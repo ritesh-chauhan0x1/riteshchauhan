@@ -18,6 +18,7 @@ class AboutPage {
         this.setupTimelineAnimation();
         this.setupInteractiveElements();
         this.setupImageZoom();
+        this.setupProfessionalFeatures();
     }
 
     /**
@@ -477,6 +478,106 @@ class AboutPage {
         }, { threshold: 0.5 });
 
         sections.forEach(section => sectionObserver.observe(section));
+    }
+
+    /**
+     * Setup professional features and interactions
+     */
+    setupProfessionalFeatures() {
+        // Add contact info click functionality
+        this.setupContactInteractions();
+        
+        // Add skill tag interactions
+        this.setupSkillInteractions();
+        
+        // Add professional animations
+        this.setupProfessionalAnimations();
+        
+        // Setup section navigation
+        this.setupSectionNavigation();
+    }
+
+    /**
+     * Setup contact information interactions
+     */
+    setupContactInteractions() {
+        const contactItems = document.querySelectorAll('.detail-item');
+        
+        contactItems.forEach(item => {
+            const span = item.querySelector('span');
+            const text = span.textContent;
+            
+            // Add click to copy functionality for email and phone
+            if (text.includes('@') || text.includes('+91')) {
+                item.style.cursor = 'pointer';
+                item.title = `Click to copy ${text}`;
+                
+                item.addEventListener('click', () => {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.showToast(`${text} copied to clipboard!`);
+                        
+                        // Visual feedback
+                        item.style.background = 'var(--accent)';
+                        item.style.color = 'white';
+                        
+                        setTimeout(() => {
+                            item.style.background = '';
+                            item.style.color = '';
+                        }, 1000);
+                    }).catch(() => {
+                        this.showToast('Failed to copy to clipboard');
+                    });
+                });
+            }
+        });
+    }
+
+    /**
+     * Setup skill tag interactions
+     */
+    setupSkillInteractions() {
+        const skillTags = document.querySelectorAll('.skill-tag');
+        
+        skillTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // Add pulse animation
+                tag.style.animation = 'skillPulse 0.6s ease-out';
+                
+                setTimeout(() => {
+                    tag.style.animation = '';
+                }, 600);
+                
+                // Show skill info
+                const skillName = tag.textContent;
+                this.showToast(`${skillName} - One of my key technical skills!`);
+            });
+        });
+    }
+
+    /**
+     * Setup professional animations
+     */
+    setupProfessionalAnimations() {
+        // Add scroll-triggered animations for achievement cards
+        const achievementCards = document.querySelectorAll('.achievement-card');
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0) scale(1)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        achievementCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px) scale(0.95)';
+            card.style.transition = 'all 0.6s ease';
+            cardObserver.observe(card);
+        });
     }
 }
 
