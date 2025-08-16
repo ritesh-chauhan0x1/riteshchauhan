@@ -61,7 +61,7 @@ class PortfolioBase {
     }
 
     /**
-     * Create navigation HTML structure
+     * Create navigation HTML structure with dropdown menus
      */
     createNavigation() {
         const nav = document.createElement('nav');
@@ -70,16 +70,53 @@ class PortfolioBase {
             <div class="nav-container">
                 <a href="index.html" class="nav-brand">Ritesh Chauhan</a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item"><a href="index.html" class="nav-link" data-page="home">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link" data-page="about">About</a></li>
-                    <li class="nav-item"><a href="career.html" class="nav-link" data-page="career">Career</a></li>
-                    <li class="nav-item"><a href="education.html" class="nav-link" data-page="education">Education</a></li>
-                    <li class="nav-item"><a href="projects.html" class="nav-link" data-page="projects">Projects</a></li>
-                    <li class="nav-item"><a href="resume.html" class="nav-link" data-page="resume">Resume</a></li>
-                    <li class="nav-item"><a href="certification.html" class="nav-link" data-page="certification">Certification</a></li>
-                    <li class="nav-item"><a href="awards.html" class="nav-link" data-page="awards">Awards</a></li>
-                    <li class="nav-item"><a href="achievements.html" class="nav-link" data-page="achievements">Achievements</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" data-page="home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link" data-page="about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="career.html" class="nav-link" data-page="career">
+                            Career <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="career.html#internship" class="dropdown-link">Internship</a></li>
+                            <li><a href="career.html#experience" class="dropdown-link">Job Experience</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="education.html" class="nav-link" data-page="education">
+                            Education <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="education.html#school" class="dropdown-link">School</a></li>
+                            <li><a href="education.html#college" class="dropdown-link">College</a></li>
+                            <li><a href="education.html#courses" class="dropdown-link">Courses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="projects.html" class="nav-link" data-page="projects">
+                            Projects <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="projects.html#web" class="dropdown-link">Web Projects</a></li>
+                            <li><a href="projects.html#mobile" class="dropdown-link">App Projects</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="achievements.html" class="nav-link" data-page="achievements">
+                            Achievements <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="certification.html" class="dropdown-link">Certificates</a></li>
+                            <li><a href="awards.html" class="dropdown-link">Awards</a></li>
+                            <li><a href="achievements.html#recognition" class="dropdown-link">Recognition</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+                    </li>
                 </ul>
                 <div class="nav-toggle" id="nav-toggle">
                     <span></span>
@@ -91,6 +128,9 @@ class PortfolioBase {
         
         // Insert navigation at the beginning of body
         document.body.insertBefore(nav, document.body.firstChild);
+        
+        // Setup dropdown functionality
+        this.setupDropdownMenus();
     }
 
     /**
@@ -126,7 +166,7 @@ class PortfolioBase {
             });
 
             // Close mobile menu when clicking on a link
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navLinks = document.querySelectorAll('.nav-link, .dropdown-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     navToggle.classList.remove('active');
@@ -134,6 +174,63 @@ class PortfolioBase {
                 });
             });
         }
+    }
+
+    /**
+     * Setup dropdown menu functionality
+     */
+    setupDropdownMenus() {
+        const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
+        
+        dropdownItems.forEach(dropdown => {
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+            let hoverTimeout;
+
+            // Desktop hover behavior
+            dropdown.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimeout);
+                dropdownMenu.classList.add('show');
+                dropdown.querySelector('.dropdown-icon').style.transform = 'rotate(180deg)';
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+                hoverTimeout = setTimeout(() => {
+                    dropdownMenu.classList.remove('show');
+                    dropdown.querySelector('.dropdown-icon').style.transform = 'rotate(0deg)';
+                }, 150); // Small delay for better UX
+            });
+
+            // Mobile click behavior
+            const navLink = dropdown.querySelector('.nav-link');
+            navLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const isOpen = dropdownMenu.classList.contains('show');
+                    
+                    // Close all other dropdowns
+                    dropdownItems.forEach(item => {
+                        item.querySelector('.dropdown-menu').classList.remove('show');
+                        item.querySelector('.dropdown-icon').style.transform = 'rotate(0deg)';
+                    });
+
+                    // Toggle current dropdown
+                    if (!isOpen) {
+                        dropdownMenu.classList.add('show');
+                        dropdown.querySelector('.dropdown-icon').style.transform = 'rotate(180deg)';
+                    }
+                }
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-item.dropdown')) {
+                dropdownItems.forEach(dropdown => {
+                    dropdown.querySelector('.dropdown-menu').classList.remove('show');
+                    dropdown.querySelector('.dropdown-icon').style.transform = 'rotate(0deg)';
+                });
+            }
+        });
     }
 
     /**
