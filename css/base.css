@@ -8,7 +8,6 @@
 }
 
 body {
-    overflow-x: hidden;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     transition: all 0.3s ease;
     scroll-behavior: smooth;
@@ -74,8 +73,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    flex-wrap: nowrap;
-    min-width: 0;
+    position: relative;
 }
 
 /* Logo/Brand */
@@ -87,9 +85,6 @@ body {
     transition: all 0.3s ease;
     flex-shrink: 0;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 300px; /* Increased for desktop to prevent wrapping */
 }
 
 .nav-brand:hover {
@@ -103,9 +98,7 @@ body {
     list-style: none;
     gap: 1.5rem;
     align-items: center;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    min-width: 0;
+    flex-wrap: wrap;
 }
 
 .nav-item {
@@ -136,7 +129,7 @@ body {
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
-    z-index: 1001;
+    z-index: 9999;
     list-style: none;
     padding: 0.5rem 0;
     margin: 0;
@@ -393,7 +386,6 @@ body {
 
     .nav-brand {
         font-size: 1.3rem;
-        max-width: 180px; /* Adjusted for mobile to prevent overflow */
     }
 
     .nav-menu {
@@ -409,7 +401,6 @@ body {
         padding-top: 2rem;
         gap: 1rem;
         transition: left 0.3s ease;
-        overflow-y: auto;
     }
 
     .nav-menu.active {
