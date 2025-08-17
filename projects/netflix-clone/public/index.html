@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Netflix Clone - Stream your favorite movies and TV shows" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Open Graph tags for social media -->
+    <meta property="og:title" content="Netflix Clone" />
+    <meta property="og:description" content="Stream your favorite movies and TV shows" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:url" content="https://netflix-clone-ritesh.vercel.app" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Netflix Clone" />
+    <meta name="twitter:description" content="Stream your favorite movies and TV shows" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Preconnect to external domains for better performance -->
+    <link rel="preconnect" href="https://api.themoviedb.org" />
+    <link rel="preconnect" href="https://image.tmdb.org" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    
+    <title>Netflix Clone - Stream Movies & TV Shows</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+    <!-- Loading fallback -->
+    <div id="loading-fallback" style="display: none;">
+      <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+        <h2>Netflix</h2>
+        <p>Loading your entertainment...</p>
+      </div>
+    </div>
+    
+    <script>
+      // Show loading fallback if app takes too long to load
+      setTimeout(function() {
+        if (document.getElementById('root').children.length === 0) {
+          document.getElementById('loading-fallback').style.display = 'block';
+        }
+      }, 3000);
+    </script>
+  </body>
+</html>
