@@ -29,39 +29,110 @@
         <link rel="stylesheet" href="css/home.css?v=20250817">
         <link rel="stylesheet" href="styles-new.css?v=20250817">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <body style="background: #f8f9fa; overflow: hidden;">
-        <!-- CLEAN SLATE: Loading and home markup removed. Ready for new implementation. -->
-        </body>
+        <style>
+        .colorful-loading-bar {
             background: linear-gradient(90deg, #ff1744, #00e676, #00b0ff, #ffea00, #7c4dff, #ff1744);
             background-size: 400% 100%;
             animation: colorful-bar-move 2s linear infinite;
-        </style>
-        <style>
+        }
         @keyframes colorful-bar-move {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-        .code-block {
-            background: #23272e;
-            color: #fff;
-            border-radius: 12px;
-            padding: 18px 24px;
-            font-family: 'Fira Mono', 'Consolas', 'Roboto Mono', monospace;
-            font-size: 1.1rem;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-            margin-bottom: 32px;
-            max-width: 600px;
-            width: 100%;
-            overflow-x: auto;
-        }
-        .code-block .hl-keyword { color: #00b0ff; }
-        .code-block .hl-string { color: #ffea00; }
-        .code-block .hl-func { color: #00e676; }
-        .code-block .hl-comment { color: #7c4dff; }
-        .code-block .hl-builtin { color: #ff1744; }
         </style>
 </head>
-<body>
-
+<body style="background: #f8f9fa;">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-center">
+            <div class="loading-text">Connecting with Ritesh . . .</div>
+            <div class="colorful-loading-bar"><div class="colorful-bar"></div></div>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <div id="main-content" style="display:none; min-height:100vh; background:#fff; z-index:100;">
+        <!-- Navbar -->
+        <nav class="navbar" id="navbar" style="z-index:1001;">
+            <div class="nav-container">
+                <a href="index.html" class="nav-brand" id="nav-brand">&lt;/&gt; Ritesh Chauhan</a>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link" data-page="home">Home</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link" data-page="about">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="index.html" class="nav-link" data-page="projects">Projects <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Web Apps</a></li>
+                            <li><a href="index.html" class="dropdown-link">Mobile Apps</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="index.html" class="nav-link" data-page="career">Career/Education <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Career</a></li>
+                            <li><a href="index.html" class="dropdown-link">Education</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="index.html" class="nav-link" data-page="achievements">Achievements <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html" class="dropdown-link">Certificates</a></li>
+                            <li><a href="index.html" class="dropdown-link">Awards</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="index.html" class="nav-link resume-btn" target="_blank">Resume</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Home Section -->
+        <main>
+            <section id="home" class="home-section" style="background:#f5f7fa; min-height:80vh; display:flex; align-items:center; justify-content:center;">
+                <h1 style="font-size:2.5rem; color:#23272e;">Welcome to Ritesh Chauhan's Portfolio</h1>
+            </section>
+        </main>
+        <!-- Resume Section -->
+        <section class="resume-section" style="background: rgba(255,255,255,0.12); border-radius: 18px; padding: 32px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); margin: 40px auto 32px auto; max-width: 420px; width: 100%;">
+            <h2 style="color: #23272e; font-size: 2rem; margin-bottom: 18px; text-align: center;">Download My Resume</h2>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="margin-bottom: 12px;"><a href="https://drive.google.com/file/d/112lV-aj8wEpzoV6cvhOQ2k1pScAH8vfd/view?usp=drive_link" target="_blank" style="color: #00e676; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 1</a></li>
+                <li style="margin-bottom: 12px;"><a href="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" target="_blank" style="color: #00b0ff; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 2</a></li>
+                <li style="margin-bottom: 12px;"><a href="https://drive.google.com/file/d/1n1kH_hoxxqWWtxN--vV373jntxo81iEe/view?usp=drive_link" target="_blank" style="color: #ffea00; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 3</a></li>
+                <li style="margin-bottom: 12px;"><a href="https://docs.google.com/document/d/1qpK7u2kZKGBr9LNstSZY6FSkpThcchWb/edit?usp=drive_link&ouid=102737902431314668662&rtpof=true&sd=true" target="_blank" style="color: #ff1744; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 4</a></li>
+                <li><a href="https://drive.google.com/file/d/112lV-aj8wEpzoV6cvhOQ2k1pScAH8vfd/view?usp=drive_link" target="_blank" style="color: #7c4dff; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 5</a></li>
+            </ul>
+        </section>
+    </div>
+    <script>
+    // Loading screen logic: fade out after 2s, then show main content
+    window.addEventListener('DOMContentLoaded', function() {
+        var loadingScreen = document.getElementById('loading-screen');
+        var mainContent = document.getElementById('main-content');
+        if (loadingScreen) {
+            loadingScreen.style.position = 'fixed';
+            loadingScreen.style.top = 0;
+            loadingScreen.style.left = 0;
+            loadingScreen.style.width = '100vw';
+            loadingScreen.style.height = '100vh';
+            loadingScreen.style.background = '#f8f9fa';
+            loadingScreen.style.zIndex = 2000;
+            loadingScreen.style.display = 'flex';
+            loadingScreen.style.alignItems = 'center';
+            loadingScreen.style.justifyContent = 'center';
+            loadingScreen.style.overflow = 'hidden';
+        }
+        setTimeout(function() {
+            if (loadingScreen) {
+                loadingScreen.style.transition = 'opacity 0.5s';
+                loadingScreen.style.opacity = '0';
+                setTimeout(function() {
+                    if (loadingScreen.parentNode) loadingScreen.parentNode.removeChild(loadingScreen);
+                    if (mainContent) {
+                        mainContent.style.display = '';
+                        mainContent.style.opacity = '1';
+                    }
+                }, 500);
+            }
+        }, 2000);
+    });
+    </script>
 </body>
 </html>

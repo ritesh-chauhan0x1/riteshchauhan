@@ -48,6 +48,56 @@
 	0% { background-position: 0% 50%; }
 	100% { background-position: 100% 50%; }
 }
+/* Loading Screen - Full Viewport, Centered, No Scrollbars */
+.loading-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #f8f9fa;
+	z-index: 2000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: opacity 0.5s;
+}
+.loading-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.loading-text {
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: #23272e;
+	letter-spacing: 0.5px;
+	margin-bottom: 18px;
+	font-family: 'Poppins', 'Roboto', Arial, sans-serif;
+}
+.colorful-loading-bar {
+	width: 220px;
+	height: 10px;
+	background: #eee;
+	border-radius: 8px;
+	margin: 0 auto;
+	overflow: hidden;
+	box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+	position: relative;
+}
+.colorful-bar {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, #ff1744, #00e676, #00b0ff, #ffea00, #7c4dff, #ff1744);
+	background-size: 400% 100%;
+	animation: colorful-bar-move 2s linear infinite;
+}
+@keyframes colorful-bar-move {
+	0% { background-position: 0% 50%; }
+	100% { background-position: 100% 50%; }
+}
 @media (max-width: 768px) {
 	.loading-text {
 		font-size: 1.1rem;
