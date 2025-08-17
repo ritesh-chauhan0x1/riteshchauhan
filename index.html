@@ -18,34 +18,97 @@
     <link rel="canonical" href="https://ritesh-chauhan0x1.github.io/riteshchauhan/">
     <title>Ritesh Chauhan - Full-Stack Developer Portfolio | 39+ Projects</title>
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="css/base.css?v=20250817" as="style">
-    <link rel="preload" href="css/home.css?v=20250817" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/base.css?v=20250817">
-    <link rel="stylesheet" href="css/home.css?v=20250817">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <!-- Preload critical resources -->
+        <link rel="preload" href="css/base.css?v=20250817" as="style">
+        <link rel="preload" href="css/home.css?v=20250817" as="style">
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="css/base.css?v=20250817">
+        <link rel="stylesheet" href="css/home.css?v=20250817">
+        <link rel="stylesheet" href="styles-new.css?v=20250817">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <body>
+            <!-- Floating Social Icons -->
+            <div class="floating-social-icons">
+                <a href="https://github.com/riteshchauhan" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/riteshchauhan" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/riteshchauhan" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:riteshchauhan@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <!-- Loading Screen -->
+            <div id="loading-screen" class="loading-screen">
+                <div class="loading-text">Connecting with Ritesh ...</div>
+                <div class="colorful-loading-bar"><div class="colorful-bar"></div></div>
+            </div>
+            <!-- Main Content -->
+            <div id="main-content" style="display:none;">
+                <nav id="navbar"></nav>
+                <main>
+                    <section id="home" class="home-section">
+                        <div>
+                            <img src="WhatsApp Image 2025-08-02 at 23.44.41.jpeg" alt="Ritesh Chauhan" class="profile-pic">
+                        </div>
+                        <div class="bio-section">
+                            <h1>Ritesh Chauhan</h1>
+                            <h2>Full Stack Developer &amp; Tech Enthusiast</h2>
+                            <p class="summary">Building modern web &amp; mobile apps, automating workflows, and sharing knowledge. Passionate about open source, clean code, and impactful products.</p>
+                            <p>Welcome to my portfolio! I specialize in JavaScript, Python, and cloud-native development. I love solving real-world problems with code and collaborating on innovative projects.</p>
+                            <div class="code-block">
+    <span class="hl-comment">// My favorite snippet</span><br>
+    <span class="hl-keyword">function</span> <span class="hl-func">buildSomethingAwesome</span>() {<br>
+      &nbsp;&nbsp;<span class="hl-keyword">return</span> <span class="hl-string">"Code. Deploy. Repeat."</span>;<br>
+    }
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <script src="script.js?v=20250817"></script>
+        </body>
+            background: linear-gradient(90deg, #ff1744, #00e676, #00b0ff, #ffea00, #7c4dff, #ff1744);
+            background-size: 400% 100%;
+            animation: colorful-bar-move 2s linear infinite;
+        }
+        @keyframes colorful-bar-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .code-block {
+            background: #23272e;
+            color: #fff;
+            border-radius: 12px;
+            padding: 18px 24px;
+            font-family: 'Fira Mono', 'Consolas', 'Roboto Mono', monospace;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+            margin-bottom: 32px;
+            max-width: 600px;
+            width: 100%;
+            overflow-x: auto;
+        }
+        .code-block .hl-keyword { color: #00b0ff; }
+        .code-block .hl-string { color: #ffea00; }
+        .code-block .hl-func { color: #00e676; }
+        .code-block .hl-comment { color: #7c4dff; }
+        .code-block .hl-builtin { color: #ff1744; }
+        </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-content">
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-            </div>
-            <h2 class="loading-text">Connecting with Ritesh...</h2>
-            <div class="loading-progress">
-                <div class="progress-bar"></div>
+            <h2 class="loading-text">Connecting with Ritesh ...</h2>
+            <div class="colorful-loading-bar">
+                <div class="colorful-bar"></div>
             </div>
         </div>
     </div>
 
     <!-- Navigation will be inserted by JavaScript -->
 
-    <!-- Full-page background photo -->
-    <div class="home-bg-photo" style="background: url('1.jpeg') center center/cover no-repeat; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;"></div>
+
 
     <!-- Main Content Area -->
     <main class="main-content">
@@ -79,7 +142,7 @@
     <!-- JavaScript - Optimized Loading -->
         <script defer src="js/base.js?v=20250817"></script>
         <script>
-        // Hide loading screen after 1.3 seconds
+        // Hide loading screen after 2 seconds
         window.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 var loadingScreen = document.getElementById('loading-screen');
@@ -90,7 +153,7 @@
                         loadingScreen.style.display = 'none';
                     }, 400);
                 }
-            }, 1300);
+            }, 2000);
         });
         </script>
 </body>

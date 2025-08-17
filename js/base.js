@@ -68,13 +68,24 @@ class PortfolioBase {
         nav.className = 'navbar';
         nav.innerHTML = [
             '<div class="nav-container">',
-                '<a href="index.html" class="nav-brand"><i class="fas fa-code"></i> <span style="font-weight:700;letter-spacing:1px;">Ritesh Chauhan</span></a>',
+                // Brand left, clickable
+                '<a href="index.html" class="nav-brand" id="nav-brand">&lt;/&gt; Ritesh Chauhan</a>',
                 '<ul class="nav-menu" id="nav-menu">',
                     '<li class="nav-item">',
                         '<a href="index.html" class="nav-link" data-page="home"><i class="fas fa-home"></i> Home</a>',
                     '</li>',
                     '<li class="nav-item">',
                         '<a href="about.html" class="nav-link" data-page="about"><i class="fas fa-user"></i> About</a>',
+                    '</li>',
+                    // Projects dropdown
+                    '<li class="nav-item dropdown">',
+                        '<a href="#" class="nav-link" data-page="projects">',
+                            '<i class="fas fa-project-diagram"></i> Projects <i class="fas fa-chevron-down dropdown-icon"></i>',
+                        '</a>',
+                        '<ul class="dropdown-menu">',
+                            '<li><a href="web-projects.html" class="dropdown-link"><i class="fas fa-globe"></i> Web Apps</a></li>',
+                            '<li><a href="app-projects.html" class="dropdown-link"><i class="fas fa-mobile-alt"></i> Mobile Apps</a></li>',
+                        '</ul>',
                     '</li>',
                     '<li class="nav-item dropdown">',
                         '<a href="career.html" class="nav-link" data-page="career">',
@@ -93,16 +104,6 @@ class PortfolioBase {
                             '<li><a href="education.html#school" class="dropdown-link"><i class="fas fa-school"></i> School</a></li>',
                             '<li><a href="education.html#college" class="dropdown-link"><i class="fas fa-university"></i> College</a></li>',
                             '<li><a href="university.html" class="dropdown-link"><i class="fas fa-university"></i> University</a></li>',
-                        '</ul>',
-                    '</li>',
-                    // Projects dropdown before Contact
-                    '<li class="nav-item dropdown">',
-                        '<a href="#" class="nav-link" data-page="projects">',
-                            '<i class="fas fa-project-diagram"></i> Projects <i class="fas fa-chevron-down dropdown-icon"></i>',
-                        '</a>',
-                        '<ul class="dropdown-menu">',
-                            '<li><a href="web-projects.html" class="dropdown-link"><i class="fas fa-globe"></i> Web Projects</a></li>',
-                            '<li><a href="app-projects.html" class="dropdown-link"><i class="fas fa-mobile-alt"></i> App Projects</a></li>',
                         '</ul>',
                     '</li>',
                     '<li class="nav-item dropdown">',
@@ -126,6 +127,16 @@ class PortfolioBase {
                 '</div>',
             '</div>'
         ].join('');
+        // Make brand clickable to refresh homepage
+        setTimeout(() => {
+          const brand = document.getElementById('nav-brand');
+          if (brand) {
+            brand.addEventListener('click', function(e) {
+              e.preventDefault();
+              window.location.href = 'index.html';
+            });
+          }
+        }, 100);
         
         // Insert navigation into nav-wrapper for loading effect
         const navWrapper = document.getElementById('nav-wrapper');
