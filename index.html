@@ -12,18 +12,209 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-content">
+            <div class="loading-spinner-3d">
+                <div class="spinner-cube">
+                    <div class="cube-face front"></div>
+                    <div class="cube-face back"></div>
+                    <div class="cube-face right"></div>
+                    <div class="cube-face left"></div>
+                    <div class="cube-face top"></div>
+                    <div class="cube-face bottom"></div>
+                </div>
+            </div>
             <h2 class="loading-text">Connecting with Ritesh...</h2>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
         </div>
     </div>
 
     <!-- Navigation will be inserted by JavaScript -->
 
+    <!-- 3D Floating Particles Background -->
+    <div class="particles-container" id="particles-container"></div>
+
     <!-- Main Content Area -->
     <main class="main-content">
-        <div class="content-center">
-            <h1>Ritesh Chauhan</h1>
-            <p>Welcome to my portfolio. Connect with me on social media and explore my work.</p>
-        </div>
+        <!-- Hero Section with 3D Effects -->
+        <section class="hero-section">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                    <div class="shape shape-5"></div>
+                </div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="profile-card-3d" id="profile-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="profile-image-container">
+                                <div class="profile-image">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="status-indicator"></div>
+                            </div>
+                            <h1 class="profile-name">Ritesh Chauhan</h1>
+                            <p class="profile-title">Full Stack Developer & Designer</p>
+                            <div class="tech-stack-preview">
+                                <span class="tech-icon"><i class="fab fa-react"></i></span>
+                                <span class="tech-icon"><i class="fab fa-node-js"></i></span>
+                                <span class="tech-icon"><i class="fab fa-python"></i></span>
+                                <span class="tech-icon"><i class="fab fa-docker"></i></span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-back-content">
+                                <h3>Let's Connect!</h3>
+                                <p>Ready to bring your ideas to life with cutting-edge technology.</p>
+                                <div class="contact-quick">
+                                    <a href="mailto:rites.chauhan11@gmail.com" class="contact-btn">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="tel:+91-9337940768" class="contact-btn">
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                    <a href="https://linkedin.com/in/ritesh-chauhan" class="contact-btn">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-text">
+                    <h2 class="hero-title">
+                        <span class="title-line">Building Digital</span>
+                        <span class="title-line highlight">Experiences</span>
+                        <span class="title-line">That Matter</span>
+                    </h2>
+                    <p class="hero-description">
+                        Crafting innovative web and mobile applications with modern technologies. 
+                        Transforming ideas into reality through code, design, and passion.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="projects.html" class="btn-3d btn-primary">
+                            <span class="btn-text">View My Work</span>
+                            <span class="btn-icon"><i class="fas fa-rocket"></i></span>
+                        </a>
+                        <a href="contact.html" class="btn-3d btn-secondary">
+                            <span class="btn-text">Get In Touch</span>
+                            <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <h3 class="section-title">By the Numbers</h3>
+                <div class="stats-grid">
+                    <div class="stat-card-3d" data-value="25">
+                        <div class="stat-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card-3d" data-value="8">
+                        <div class="stat-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Technologies</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card-3d" data-value="3">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Years Experience</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card-3d" data-value="100">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">% Passion</div>
+                        <div class="stat-bar">
+                            <div class="stat-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Work Preview -->
+        <section class="featured-work">
+            <div class="container">
+                <h3 class="section-title">Featured Work</h3>
+                <div class="work-showcase">
+                    <div class="work-card-3d">
+                        <div class="work-preview">
+                            <div class="preview-screen">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h4>Web Applications</h4>
+                            <p>15+ Modern web apps built with React, Node.js, and more</p>
+                            <a href="web-projects.html" class="work-link">
+                                Explore Web Projects <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="work-card-3d">
+                        <div class="work-preview">
+                            <div class="preview-phone">
+                                <div class="phone-screen">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h4>Mobile Applications</h4>
+                            <p>12+ Cross-platform apps for iOS and Android</p>
+                            <a href="app-projects.html" class="work-link">
+                                Explore Mobile Apps <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="cta-background">
+                <div class="cta-particles"></div>
+            </div>
+            <div class="container">
+                <div class="cta-content">
+                    <h3 class="cta-title">Ready to Start Your Project?</h3>
+                    <p class="cta-description">Let's collaborate and bring your vision to life with innovative solutions.</p>
+                    <a href="contact.html" class="cta-button">
+                        <span class="cta-text">Start Collaboration</span>
+                        <span class="cta-icon"><i class="fas fa-rocket"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Social Media Navigation will be inserted by JavaScript -->

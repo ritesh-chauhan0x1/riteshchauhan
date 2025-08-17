@@ -1,0 +1,57 @@
+{
+  "name": "youtube-clone",
+  "version": "1.0.0",
+  "description": "Complete YouTube replica with video uploads, comments, likes, and subscriptions",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "nodemon server/index.js",
+    "dev": "concurrently \"npm run server\" \"npm start\""
+  },
+  "keywords": [
+    "youtube",
+    "clone",
+    "react",
+    "video",
+    "streaming",
+    "upload",
+    "social-media"
+  ],
+  "author": "Ritesh Chauhan",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.15.0",
+    "axios": "^1.5.0",
+    "socket.io-client": "^4.7.2",
+    "date-fns": "^2.30.0",
+    "react-player": "^2.13.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-hot-toast": "^2.4.1",
+    "framer-motion": "^10.16.4"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "nodemon": "^3.0.1",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7"
+  },
+  "proxy": "http://localhost:5000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
