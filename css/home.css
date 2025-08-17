@@ -10,8 +10,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     display: flex;
     align-items: center;
@@ -28,6 +28,13 @@
 .loading-content {
     text-align: center;
     transform: translateZ(50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    min-height: 300px;
 }
 
 .loading-spinner-3d {

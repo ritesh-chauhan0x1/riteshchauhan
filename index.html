@@ -77,6 +77,21 @@
     <!-- Social Media Navigation will be inserted by JavaScript -->
 
     <!-- JavaScript - Optimized Loading -->
-    <script defer src="js/base.js?v=20250817"></script>
+        <script defer src="js/base.js?v=20250817"></script>
+        <script>
+        // Hide loading screen after 1.3 seconds
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    loadingScreen.style.pointerEvents = 'none';
+                    setTimeout(function() {
+                        loadingScreen.style.display = 'none';
+                    }, 400);
+                }
+            }, 1300);
+        });
+        </script>
 </body>
 </html>
