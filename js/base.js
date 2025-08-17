@@ -117,8 +117,13 @@ class PortfolioBase {
             '</div>'
         ].join('');
         
-        // Insert navigation at the beginning of body
-        document.body.insertBefore(nav, document.body.firstChild);
+        // Insert navigation into nav-wrapper for loading effect
+        const navWrapper = document.getElementById('nav-wrapper');
+        if (navWrapper) {
+            navWrapper.appendChild(nav);
+        } else {
+            document.body.insertBefore(nav, document.body.firstChild);
+        }
         
         // Setup dropdown functionality
         this.setupDropdownMenus();
