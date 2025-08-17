@@ -53,42 +53,65 @@
     <div id="main-content" style="display:none; min-height:100vh; background:#fff; z-index:100;">
         <!-- Navbar -->
         <nav class="navbar" id="navbar" style="z-index:1001;">
-            <div class="nav-container">
-                <a href="index.html" class="nav-brand" id="nav-brand">&lt;/&gt; Ritesh Chauhan</a>
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item"><a href="index.html" class="nav-link" data-page="home">Home</a></li>
-                    <li class="nav-item"><a href="index.html" class="nav-link" data-page="about">About</a></li>
+            <div class="nav-container" style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;">
+                <div style="flex:1;display:flex;align-items:center;">
+                    <a href="#home" class="nav-brand" id="nav-brand">&lt;/&gt; Ritesh Chauhan</a>
+                </div>
+                <ul class="nav-menu" id="nav-menu" style="display:flex;align-items:center;gap:1.5rem;">
+                    <li class="nav-item"><a href="#home" class="nav-link" data-page="home">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link" data-page="about">About</a></li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-page="projects">Projects <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <a href="#projects" class="nav-link" data-page="projects">Projects <i class="fas fa-chevron-down dropdown-icon"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="web-projects.html" class="dropdown-link">Web Projects</a></li>
-                            <li><a href="app-projects.html" class="dropdown-link">App Projects</a></li>
+                            <li><a href="#web-projects" class="dropdown-link">Web Projects</a></li>
+                            <li><a href="#mobile-projects" class="dropdown-link">Mobile Projects</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a href="index.html" class="nav-link" data-page="career">Career/Education <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html" class="dropdown-link">Career</a></li>
-                            <li><a href="index.html" class="dropdown-link">Education</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="index.html" class="nav-link" data-page="achievements">Achievements <i class="fas fa-chevron-down dropdown-icon"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="index.html" class="dropdown-link">Certificates</a></li>
-                            <li><a href="index.html" class="dropdown-link">Awards</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a href="index.html" class="nav-link resume-btn" target="_blank">Resume</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                    <li class="nav-item"><a href="resume.pdf" class="nav-link resume-btn" target="_blank">Resume</a></li>
                 </ul>
             </div>
         </nav>
         <!-- Home Section -->
         <main>
-            <section id="home" class="home-section" style="background:#f5f7fa; min-height:80vh; display:flex; align-items:center; justify-content:center;">
-                <h1 style="font-size:2.5rem; color:#23272e;">Welcome to Ritesh Chauhan's Portfolio</h1>
+            <section id="home" class="home-section" style="background:#f5f7fa; min-height:80vh; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <h1 style="font-size:2.5rem; color:#23272e;">Ritesh Chauhan</h1>
+                <h2 style="font-size:1.3rem; color:#00b0ff; margin:10px 0 18px 0;">Full Stack Developer & Tech Enthusiast</h2>
+                <p style="max-width:500px; text-align:center; color:#444; font-size:1.1rem;">Building modern web & mobile apps, automating workflows, and sharing knowledge. Passionate about open source, clean code, and impactful products.</p>
+                <div style="margin:24px 0;display:flex;gap:18px;">
+                    <a href="https://github.com/riteshchauhan" target="_blank" title="GitHub"><i class="fab fa-github" style="color:#23272e;font-size:2rem;"></i></a>
+                    <a href="https://linkedin.com/in/riteshchauhan" target="_blank" title="LinkedIn"><i class="fab fa-linkedin" style="color:#0077b5;font-size:2rem;"></i></a>
+                    <a href="https://twitter.com/riteshchauhan" target="_blank" title="Twitter"><i class="fab fa-twitter" style="color:#1da1f2;font-size:2rem;"></i></a>
+                    <a href="mailto:riteshchauhan@gmail.com" title="Email"><i class="fas fa-envelope" style="color:#ff1744;font-size:2rem;"></i></a>
+                </div>
             </section>
         </main>
+    <script>
+    // Navbar dropdown hover (Projects)
+    document.addEventListener('DOMContentLoaded', function() {
+        var dropdown = document.querySelector('.nav-item.dropdown');
+        if (dropdown) {
+            dropdown.addEventListener('mouseenter', function() {
+                var menu = dropdown.querySelector('.dropdown-menu');
+                if(menu) menu.style.display = 'block';
+            });
+            dropdown.addEventListener('mouseleave', function() {
+                var menu = dropdown.querySelector('.dropdown-menu');
+                if(menu) menu.style.display = 'none';
+            });
+        }
+        // Prevent full page reload for nav links (SPA-like)
+        document.querySelectorAll('.nav-link, .dropdown-link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                if(link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    var target = document.querySelector(link.getAttribute('href'));
+                    if(target) target.scrollIntoView({behavior:'smooth'});
+                }
+            });
+        });
+    });
+    </script>
         <!-- Resume Section -->
         <section class="resume-section" style="background: rgba(255,255,255,0.12); border-radius: 18px; padding: 32px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); margin: 40px auto 32px auto; max-width: 420px; width: 100%;">
             <h2 style="color: #23272e; font-size: 2rem; margin-bottom: 18px; text-align: center;">Download My Resume</h2>
