@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ritesh-chauhan0x1.github.io/riteshchauhan/sitemap.xml
+
+# Disallow certain files
+Disallow: /*.ps1
+Disallow: /desktop-projects/
+Disallow: /projects/
+Disallow: /Blog-Platform/
+Disallow: /E-commerce-Platform/

@@ -364,4 +364,5 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-console.log('🎉 Portfolio Base Loaded - Navigation & Theme System Active');
+// Production - Remove console.log for performance
+// console.log('🎉 Portfolio Base Loaded - Navigation & Theme System Active');

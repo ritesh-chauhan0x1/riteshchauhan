@@ -413,4 +413,5 @@ if (navigator.hardwareConcurrency < 4 || navigator.connection?.effectiveType ===
     document.documentElement.style.setProperty('--reduce-motion', '1');
 }
 
-console.log('🚀 3D Enhanced Home Page Script Loaded');
+// Production - Remove console.log for performance
+// console.log('🚀 3D Enhanced Home Page Script Loaded');
