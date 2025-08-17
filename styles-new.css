@@ -1,3 +1,49 @@
+@media (max-width: 768px) {
+	.home-section {
+		flex-direction: column;
+		align-items: center;
+		gap: 28px;
+		padding: 32px 0 16px 0;
+	}
+	.profile-pic {
+		width: 120px;
+		height: 120px;
+		margin-bottom: 12px;
+	}
+	.bio-section {
+		max-width: 95vw;
+		padding: 0 8px;
+	}
+	.bio-section h1 {
+		font-size: 2rem;
+	}
+	.bio-section h2 {
+		font-size: 1.1rem;
+	}
+	.bio-section p, .bio-section .summary {
+		font-size: 1rem;
+	}
+	.code-block {
+		font-size: 0.98rem;
+		padding: 12px 10px;
+		max-width: 98vw;
+	}
+	.floating-social-icons {
+		top: unset;
+		bottom: 16px;
+		left: 50%;
+		transform: translateX(-50%);
+		flex-direction: row;
+		gap: 12px;
+		width: auto;
+		height: 44px;
+	}
+	.floating-social-icons a {
+		width: 38px;
+		height: 38px;
+		font-size: 1.2rem;
+	}
+}
 /* Floating Social Icons */
 .floating-social-icons {
 	position: fixed;
