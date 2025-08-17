@@ -92,7 +92,7 @@ class PortfolioBase {
                         <ul class="dropdown-menu">
                             <li><a href="education.html#school" class="dropdown-link">School</a></li>
                             <li><a href="education.html#college" class="dropdown-link">College</a></li>
-                            <li><a href="education.html#courses" class="dropdown-link">Courses</a></li>
+                            <li><a href="education.html#university" class="dropdown-link">University</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

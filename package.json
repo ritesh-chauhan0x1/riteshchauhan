@@ -1,0 +1,23 @@
+{
+  "name": "riteshchauhan-portfolio",
+  "version": "1.0.0",
+  "description": "Static portfolio site with build system for minification and bundling.",
+  "scripts": {
+    "build:js": "esbuild js/*.js --bundle --minify --outdir=dist/js",
+    "build:css": "npx postcss css/*.css -d dist/css/ --ext .min.css",
+    "copy:assets": "npx cpy index.html about.html achievements.html app-projects-updated.html app-projects.html awards.html career.html certification.html contact.html education.html resume.html projects.html web-projects.html index-new.html styles-new.css styles.css 1.jpeg 2.jpeg 3.jpeg icons dist/ --parents",
+    "copy:images": "npx cpy *.jpeg dist/",
+    "build": "npm run build:js && npm run build:css && npm run copy:assets && npm run copy:images",
+    "preview": "npx serve dist"
+  },
+  "devDependencies": {
+    "cpy-cli": "^4.2.0",
+    "cssnano": "^6.0.1",
+    "esbuild": "^0.19.0",
+    "serve": "^14.2.0"
+  },
+  "dependencies": {
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
+  }
+}
