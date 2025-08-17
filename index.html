@@ -32,15 +32,8 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-content">
-            <div class="loading-spinner-3d">
-                <div class="spinner-cube">
-                    <div class="cube-face front"></div>
-                    <div class="cube-face back"></div>
-                    <div class="cube-face right"></div>
-                    <div class="cube-face left"></div>
-                    <div class="cube-face top"></div>
-                    <div class="cube-face bottom"></div>
-                </div>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
             </div>
             <h2 class="loading-text">Connecting with Ritesh...</h2>
             <div class="loading-progress">
@@ -51,270 +44,32 @@
 
     <!-- Navigation will be inserted by JavaScript -->
 
-    <!-- 3D Floating Particles Background -->
-    <div class="particles-container" id="particles-container"></div>
+    <!-- Full-page background photo -->
+    <div class="home-bg-photo" style="background: url('1.jpeg') center center/cover no-repeat; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;"></div>
 
     <!-- Main Content Area -->
     <main class="main-content">
-        <!-- Hero Section with 3D Effects -->
-        <section class="hero-section">
-            <div class="hero-background">
-                <div class="floating-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
-                    <div class="shape shape-3"></div>
-                    <div class="shape shape-4"></div>
-                    <div class="shape shape-5"></div>
-                </div>
+        <section class="home-hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90vh; background: rgba(0,0,0,0.5);">
+            <img src="1.jpeg" alt="Ritesh Chauhan" style="width: 220px; height: 220px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 32px rgba(0,0,0,0.4); margin-top: 40px; border: 5px solid #fff;">
+            <h1 style="color: #fff; font-size: 3rem; margin: 24px 0 8px 0; text-shadow: 0 2px 8px #000;">Ritesh Chauhan</h1>
+            <p style="color: #e0e0e0; font-size: 1.3rem; margin-bottom: 24px; text-shadow: 0 1px 4px #000;">Full Stack Developer & Designer</p>
+            <div class="resume-section" style="background: rgba(255,255,255,0.12); border-radius: 18px; padding: 32px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); margin-bottom: 32px; max-width: 420px; width: 100%;">
+                <h2 style="color: #fff; font-size: 2rem; margin-bottom: 18px; text-align: center;">Download My Resume</h2>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 12px;"><a href="https://drive.google.com/file/d/112lV-aj8wEpzoV6cvhOQ2k1pScAH8vfd/view?usp=drive_link" target="_blank" style="color: #00e676; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 1</a></li>
+                    <li style="margin-bottom: 12px;"><a href="https://drive.google.com/file/d/18c8I4eJjBilzlmOrpzI9zmfGqgriwcFc/view?usp=drive_link" target="_blank" style="color: #00b0ff; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 2</a></li>
+                    <li style="margin-bottom: 12px;"><a href="https://drive.google.com/file/d/1n1kH_hoxxqWWtxN--vV373jntxo81iEe/view?usp=drive_link" target="_blank" style="color: #ffea00; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 3</a></li>
+                    <li style="margin-bottom: 12px;"><a href="https://docs.google.com/document/d/1qpK7u2kZKGBr9LNstSZY6FSkpThcchWb/edit?usp=drive_link&ouid=102737902431314668662&rtpof=true&sd=true" target="_blank" style="color: #ff1744; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 4</a></li>
+                    <li><a href="https://drive.google.com/file/d/112lV-aj8wEpzoV6cvhOQ2k1pScAH8vfd/view?usp=drive_link" target="_blank" style="color: #7c4dff; font-weight: 600; text-decoration: none;"><i class="fas fa-file-alt"></i> Resume 5</a></li>
+                </ul>
             </div>
-            
-            <div class="hero-content">
-                <div class="profile-card-3d" id="profile-card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="profile-image-container">
-                                <div class="profile-image">
-                                    <i class="fas fa-user-tie"></i>
-                                </div>
-                                <div class="status-indicator"></div>
-                            </div>
-                            <h1 class="profile-name">Ritesh Chauhan</h1>
-                            <p class="profile-title">Full Stack Developer & Designer</p>
-                            <div class="tech-stack-preview">
-                                <span class="tech-icon"><i class="fab fa-react"></i></span>
-                                <span class="tech-icon"><i class="fab fa-node-js"></i></span>
-                                <span class="tech-icon"><i class="fab fa-python"></i></span>
-                                <span class="tech-icon"><i class="fab fa-docker"></i></span>
-                            </div>
-                        </div>
-                        <div class="card-back">
-                            <div class="card-back-content">
-                                <h3>Let's Connect!</h3>
-                                <p>Ready to bring your ideas to life with cutting-edge technology.</p>
-                                <div class="contact-quick">
-                                    <a href="mailto:rites.chauhan11@gmail.com" class="contact-btn">
-                                        <i class="fas fa-envelope"></i>
-                                    </a>
-                                    <a href="tel:+91-9337940768" class="contact-btn">
-                                        <i class="fas fa-phone"></i>
-                                    </a>
-                                    <a href="https://linkedin.com/in/ritesh-chauhan" class="contact-btn">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-text">
-                    <h2 class="hero-title">
-                        <span class="title-line">Building Digital</span>
-                        <span class="title-line highlight">Experiences</span>
-                        <span class="title-line">That Matter</span>
-                    </h2>
-                    <p class="hero-description">
-                        Crafting innovative web and mobile applications with modern technologies. 
-                        Transforming ideas into reality through code, design, and passion.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="about.html" class="btn-3d btn-primary">
-                            <span class="btn-text">About Me</span>
-                            <span class="btn-icon"><i class="fas fa-user"></i></span>
-                        </a>
-                        <a href="contact.html" class="btn-3d btn-secondary">
-                            <span class="btn-text">Get In Touch</span>
-                            <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Interactive Stats Section -->
-        <section class="stats-section">
-            <div class="container">
-                <h3 class="section-title">By the Numbers</h3>
-                <div class="stats-grid">
-                    <div class="stat-card-3d" data-value="25">
-                        <div class="stat-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="stat-number">0</div>
-                        <div class="stat-label">Projects Completed</div>
-                        <div class="stat-bar">
-                            <div class="stat-progress"></div>
-                        </div>
-                    </div>
-                    <div class="stat-card-3d" data-value="8">
-                        <div class="stat-icon">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <div class="stat-number">0</div>
-                        <div class="stat-label">Technologies</div>
-                        <div class="stat-bar">
-                            <div class="stat-progress"></div>
-                        </div>
-                    </div>
-                    <div class="stat-card-3d" data-value="3">
-                        <div class="stat-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="stat-number">0</div>
-                        <div class="stat-label">Years Experience</div>
-                        <div class="stat-bar">
-                            <div class="stat-progress"></div>
-                        </div>
-                    </div>
-                    <div class="stat-card-3d" data-value="100">
-                        <div class="stat-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="stat-number">0</div>
-                        <div class="stat-label">% Passion</div>
-                        <div class="stat-bar">
-                            <div class="stat-progress"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3D Image Gallery Section -->
-        <section class="gallery-section">
-            <div class="container">
-                <h3 class="section-title">Enjoy All The Features</h3>
-                <p class="gallery-description">
-                    Explore our interactive 3D gallery showcasing portfolio highlights. 
-                    <strong>Experience the power of modern web technologies!</strong>
-                </p>
-                <div class="image-gallery-3d">
-                    <div class="gallery-card" data-tilt>
-                        <div class="image-container">
-                            <img src="1.jpeg" alt="Portfolio Feature 1" class="gallery-image">
-                            <div class="image-overlay">
-                                <div class="overlay-content">
-                                    <h4>Modern Design</h4>
-                                    <p>Experience cutting-edge UI/UX</p>
-                                    <i class="fas fa-search-plus expand-icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <h5>Interactive Elements</h5>
-                            <span class="feature-tag">3D Effects</span>
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-card" data-tilt>
-                        <div class="image-container">
-                            <img src="2.jpeg" alt="Portfolio Feature 2" class="gallery-image">
-                            <div class="image-overlay">
-                                <div class="overlay-content">
-                                    <h4>Responsive Layout</h4>
-                                    <p>Optimized for all devices</p>
-                                    <i class="fas fa-mobile-alt expand-icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <h5>Cross-Platform</h5>
-                            <span class="feature-tag">Mobile Ready</span>
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-card" data-tilt>
-                        <div class="image-container">
-                            <img src="3.jpeg" alt="Portfolio Feature 3" class="gallery-image">
-                            <div class="image-overlay">
-                                <div class="overlay-content">
-                                    <h4>Performance</h4>
-                                    <p>Lightning-fast loading</p>
-                                    <i class="fas fa-bolt expand-icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <h5>Optimized Code</h5>
-                            <span class="feature-tag">High Speed</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="enjoy-features-cta">
-                    <h4 class="cta-text">🎉 Enjoy All The Amazing Features! 🎉</h4>
-                    <p class="cta-subtext">
-                        Hover over the images to experience 3D interactions, 
-                        click to explore detailed views, and discover the magic of modern web development.
-                    </p>
-                    <div class="feature-highlights">
-                        <span class="highlight-item">
-                            <i class="fas fa-cube"></i> 3D Animations
-                        </span>
-                        <span class="highlight-item">
-                            <i class="fas fa-palette"></i> Modern Design
-                        </span>
-                        <span class="highlight-item">
-                            <i class="fas fa-rocket"></i> Fast Performance
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Work Preview -->
-        <section class="featured-work">
-            <div class="container">
-                <h3 class="section-title">Featured Work</h3>
-                <div class="work-showcase">
-                    <div class="work-card-3d">
-                        <div class="work-preview">
-                            <div class="preview-screen">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                        </div>
-                        <div class="work-info">
-                            <h4>Web Development</h4>
-                            <p>15+ Modern web apps built with React, Node.js, and more</p>
-                            <a href="about.html" class="work-link">
-                                Learn More <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="work-card-3d">
-                        <div class="work-preview">
-                            <div class="preview-phone">
-                                <div class="phone-screen">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-info">
-                            <h4>Mobile Development</h4>
-                            <p>12+ Cross-platform apps for iOS and Android</p>
-                            <a href="contact.html" class="work-link">
-                                Get In Touch <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action Section -->
-        <section class="cta-section">
-            <div class="cta-background">
-                <div class="cta-particles"></div>
-            </div>
-            <div class="container">
-                <div class="cta-content">
-                    <h3 class="cta-title">Ready to Start Your Project?</h3>
-                    <p class="cta-description">Let's collaborate and bring your vision to life with innovative solutions.</p>
-                    <a href="contact.html" class="cta-button">
-                        <span class="cta-text">Start Collaboration</span>
-                        <span class="cta-icon"><i class="fas fa-rocket"></i></span>
-                    </a>
-                </div>
+            <div class="code-snippet" style="background: #23272e; color: #fff; border-radius: 12px; padding: 18px 24px; font-family: 'Fira Mono', 'Consolas', monospace; font-size: 1.1rem; box-shadow: 0 2px 12px rgba(0,0,0,0.18); margin-bottom: 32px; max-width: 600px; width: 100%;">
+                <span style="color: #00e676;">// Welcome to my portfolio!</span><br>
+                <span style="color: #fff;">const</span> <span style="color: #00b0ff;">developer</span> <span style="color: #fff;">=</span> <span style="color: #ffea00;">"Ritesh Chauhan"</span><span style="color: #fff;">;</span><br>
+                <span style="color: #fff;">let</span> <span style="color: #ff1744;">skills</span> <span style="color: #fff;">=</span> <span style="color: #7c4dff;">["React", "Node.js", "Python", "UI/UX"]</span><span style="color: #fff;">;</span><br>
+                <span style="color: #fff;">function</span> <span style="color: #00b0ff;">build</span><span style="color: #fff;">(</span><span style="color: #ffea00;">dreams</span><span style="color: #fff;">)</span> <span style="color: #fff;">{</span><br>
+                &nbsp;&nbsp;<span style="color: #00e676;">return</span> <span style="color: #ffea00;">"with code & creativity!"</span><span style="color: #fff;">;</span><br>
+                <span style="color: #fff;">}</span><br>
             </div>
         </section>
     </main>
@@ -323,6 +78,5 @@
 
     <!-- JavaScript - Optimized Loading -->
     <script defer src="js/base.js?v=20250817"></script>
-    <script defer src="js/home.js?v=20250817"></script>
 </body>
 </html>
