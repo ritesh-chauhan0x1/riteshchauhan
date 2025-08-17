@@ -29,6 +29,8 @@ body {
     --accent: #007bff;
     --accent-secondary: #0056b3;
     --accent-rgb: 0, 123, 255;
+    --primary-color: #007bff;
+    --secondary-color: #6c63ff;
     --shadow: rgba(0, 0, 0, 0.1);
     --border: #dee2e6;
     --nav-height: 70px;
@@ -43,6 +45,8 @@ body {
     --accent: #1e90ff;
     --accent-secondary: #1c7ed6;
     --accent-rgb: 30, 144, 255;
+    --primary-color: #1e90ff;
+    --secondary-color: #6c63ff;
     --shadow: rgba(0, 0, 0, 0.3);
     --border: #404040;
 }
