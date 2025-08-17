@@ -66,7 +66,6 @@ class PortfolioBase {
     createNavigation() {
         const nav = document.createElement('nav');
         nav.className = 'navbar';
-        nav.innerHTML = `
             <div class="nav-container">
                 <a href="index.html" class="nav-brand">Ritesh Chauhan</a>
                 <ul class="nav-menu" id="nav-menu">
@@ -116,6 +115,56 @@ class PortfolioBase {
                 </div>
             </div>
         `;
+        nav.innerHTML = [
+            '<div class="nav-container">',
+                '<a href="index.html" class="nav-brand">Ritesh Chauhan</a>',
+                '<ul class="nav-menu" id="nav-menu">',
+                    '<li class="nav-item">',
+                        '<a href="index.html" class="nav-link" data-page="home">Home</a>',
+                    '</li>',
+                    '<li class="nav-item">',
+                        '<a href="about.html" class="nav-link" data-page="about">About</a>',
+                    '</li>',
+                    '<li class="nav-item dropdown">',
+                        '<a href="career.html" class="nav-link" data-page="career">',
+                            'Career <i class="fas fa-chevron-down dropdown-icon"></i>',
+                        '</a>',
+                        '<ul class="dropdown-menu">',
+                            '<li><a href="career.html#internship" class="dropdown-link">Internship</a></li>',
+                            '<li><a href="career.html#experience" class="dropdown-link">Job Experience</a></li>',
+                        '</ul>',
+                    '</li>',
+                    '<li class="nav-item dropdown">',
+                        '<a href="education.html" class="nav-link" data-page="education">',
+                            'Education <i class="fas fa-chevron-down dropdown-icon"></i>',
+                        '</a>',
+                        '<ul class="dropdown-menu">',
+                            '<li><a href="education.html#school" class="dropdown-link">School</a></li>',
+                            '<li><a href="education.html#college" class="dropdown-link">College</a></li>',
+                            '<li><a href="university.html" class="dropdown-link">University</a></li>',
+                        '</ul>',
+                    '</li>',
+                    '<li class="nav-item dropdown">',
+                        '<a href="achievements.html" class="nav-link" data-page="achievements">',
+                            'Achievements <i class="fas fa-chevron-down dropdown-icon"></i>',
+                        '</a>',
+                        '<ul class="dropdown-menu">',
+                            '<li><a href="certification.html" class="dropdown-link">Certificates</a></li>',
+                            '<li><a href="awards.html" class="dropdown-link">Awards</a></li>',
+                            '<li><a href="achievements.html#recognition" class="dropdown-link">Recognition</a></li>',
+                        '</ul>',
+                    '</li>',
+                    '<li class="nav-item">',
+                        '<a href="contact.html" class="nav-link" data-page="contact">Contact</a>',
+                    '</li>',
+                '</ul>',
+                '<div class="nav-toggle" id="nav-toggle">',
+                    '<span></span>',
+                    '<span></span>',
+                    '<span></span>',
+                '</div>',
+            '</div>'
+        ].join('');
         
         // Insert navigation at the beginning of body
         document.body.insertBefore(nav, document.body.firstChild);
@@ -288,26 +337,26 @@ class PortfolioBase {
         if (!socialNav) {
             socialNav = document.createElement('nav');
             socialNav.className = 'social-nav';
-            socialNav.innerHTML = `
-                <a href="https://instagram.com/riteshchauhan_15" class="social-link instagram" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/16oEJ9HJ6q/" class="social-link facebook" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://github.com/ritesh-chauhan0x1" class="social-link github" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://leetcode.com/u/riteshchauhn_15/" class="social-link leetcode" target="_blank" title="LeetCode">
-                    <span class="leetcode-text">LC</span>
-                </a>
-                <a href="https://wa.me/+919337940768" class="social-link whatsapp" target="_blank" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="mailto:22054368@kiit.ac.in" class="social-link gmail" target="_blank" title="Gmail">
-                    <i class="far fa-envelope"></i>
-                </a>
-            `;
+            socialNav.innerHTML = [
+                '<a href="https://instagram.com/riteshchauhan_15" class="social-link instagram" target="_blank" title="Instagram">',
+                    '<i class="fab fa-instagram"></i>',
+                '</a>',
+                '<a href="https://www.facebook.com/share/16oEJ9HJ6q/" class="social-link facebook" target="_blank" title="Facebook">',
+                    '<i class="fab fa-facebook-f"></i>',
+                '</a>',
+                '<a href="https://github.com/ritesh-chauhan0x1" class="social-link github" target="_blank" title="GitHub">',
+                    '<i class="fab fa-github"></i>',
+                '</a>',
+                '<a href="https://leetcode.com/u/riteshchauhn_15/" class="social-link leetcode" target="_blank" title="LeetCode">',
+                    '<span class="leetcode-text">LC</span>',
+                '</a>',
+                '<a href="https://wa.me/+919337940768" class="social-link whatsapp" target="_blank" title="WhatsApp">',
+                    '<i class="fab fa-whatsapp"></i>',
+                '</a>',
+                '<a href="mailto:22054368@kiit.ac.in" class="social-link gmail" target="_blank" title="Gmail">',
+                    '<i class="far fa-envelope"></i>',
+                '</a>'
+            ].join('');
             document.body.appendChild(socialNav);
         }
 
