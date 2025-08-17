@@ -253,7 +253,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 - **🌐 Portfolio**: [ritesh-chauhan0x1.github.io/riteshchauhan](https://ritesh-chauhan0x1.github.io/riteshchauhan/)
 - **📧 Email**: [Contact Form](https://ritesh-chauhan0x1.github.io/riteshchauhan/contact.html)
-- **💼 LinkedIn**: [Connect with me](https://linkedin.com/in/ritesh-chauhan)
+- **💼 LinkedIn**: [Connect with me]([https://linkedin.com/in/ritesh-chauhan](https://www.linkedin.com/in/ritesh-chauhan-79818a374/))
 - **🐙 GitHub**: [@ritesh-chauhan0x1](https://github.com/ritesh-chauhan0x1)
 - **🐦 Twitter**: [Follow me](https://twitter.com/ritesh_chauhan)
 
