@@ -9,7 +9,47 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation will be inserted by JavaScript -->
+    <!-- Navbar -->
+    <nav class="navbar modern-navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-brand" id="nav-brand">&lt;/&gt; Ritesh Chauhan</a>
+            <button class="refresh-btn" id="refresh-btn" title="Refresh Home"><i class="fas fa-sync-alt"></i></button>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="home.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li class="nav-item dropdown">
+                    <a href="career.html" class="nav-link"><i class="fas fa-briefcase"></i> Career <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="career.html#job" class="dropdown-link">Job</a></li>
+                        <li><a href="career.html#internship" class="dropdown-link">Internship</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="education.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Education <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="education.html#school" class="dropdown-link">School</a></li>
+                        <li><a href="education.html#college" class="dropdown-link">College</a></li>
+                        <li><a href="education.html#university" class="dropdown-link">University</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="projects.html" class="nav-link"><i class="fas fa-laptop-code"></i> Projects <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="projects.html#web" class="dropdown-link">Web Projects</a></li>
+                        <li><a href="projects.html#app" class="dropdown-link">App Projects</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="achievements.html" class="nav-link"><i class="fas fa-trophy"></i> Achievements <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="achievements.html#awards" class="dropdown-link">Awards</a></li>
+                        <li><a href="achievements.html#certifications" class="dropdown-link">Certifications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Main Content Area -->
     <main class="main-content">
