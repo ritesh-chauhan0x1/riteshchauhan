@@ -439,6 +439,11 @@
 
     .about-content {
         padding: 2rem;
+        font-size: 1.05rem;
+        color: var(--text-primary, #222);
+        background: var(--card-bg, #fff);
+        word-break: break-word;
+        line-height: 1.7;
     }
 
     .gallery-grid {
@@ -455,6 +460,18 @@
 
     .skill-category {
         padding: 1.5rem;
+    }
+
+    .about-content p, .about-content li, .about-content span, .about-content strong {
+        font-size: 1.05rem;
+        color: var(--text-primary, #222);
+        word-break: break-word;
+        line-height: 1.7;
+    }
+    .about-content h3, .about-content h2 {
+        font-size: 1.3rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
     }
 }
 
