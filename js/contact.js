@@ -65,7 +65,8 @@ class ContactPage {
             setTimeout(() => {
                 // Simulate success rate (90% success for demo)
                 if (Math.random() > 0.1) {
-                    console.log('Contact form data:', data);
+                    // Production: Form data processed successfully
+                    // console.log('Contact form data:', data);
                     resolve({ success: true });
                 } else {
                     reject(new Error('Simulated API error'));
@@ -245,7 +246,8 @@ class ContactPage {
 
     // Utility method to handle contact link clicks with analytics
     trackContactMethod(method) {
-        console.log(`Contact method used: ${method}`);
+        // Production: Method tracking (development only)
+        // console.log(`Contact method used: ${method}`);
         
         // Here you could integrate with analytics services
         // Example: gtag('event', 'contact_method_click', { method: method });
@@ -408,5 +410,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    console.log('Contact page initialized successfully');
+    // Production: Contact page initialization (development only)
+    // console.log('Contact page initialized successfully');
 });

@@ -30,7 +30,7 @@ class ProjectsPage {
                 title: "E-Commerce Platform",
                 description: "A full-stack e-commerce solution with React frontend and Node.js backend",
                 longDescription: "Complete e-commerce platform with user authentication, product catalog, shopping cart, payment integration, and admin dashboard.",
-                image: "https://via.placeholder.com/400x200/007bff/ffffff?text=E-Commerce",
+                image: "./1.jpeg",
                 technologies: ["React", "Node.js", "MongoDB", "Stripe", "Express"],
                 category: "web",
                 status: "completed",
@@ -43,7 +43,7 @@ class ProjectsPage {
                 title: "Task Management App",
                 description: "A mobile-first task management application with real-time updates",
                 longDescription: "Collaborative task management app with real-time updates, team collaboration features, and intuitive drag-and-drop interface.",
-                image: "https://via.placeholder.com/400x200/28a745/ffffff?text=Task+App",
+                image: "./2.jpeg",
                 technologies: ["React Native", "Firebase", "Redux", "TypeScript"],
                 category: "mobile",
                 status: "completed",
@@ -56,7 +56,7 @@ class ProjectsPage {
                 title: "Weather API Service",
                 description: "RESTful API service providing weather data with caching and rate limiting",
                 longDescription: "Scalable weather API service with advanced caching strategies, rate limiting, and comprehensive documentation.",
-                image: "https://via.placeholder.com/400x200/ffc107/ffffff?text=Weather+API",
+                image: "./3.jpeg",
                 technologies: ["Python", "FastAPI", "Redis", "PostgreSQL", "Docker"],
                 category: "api",
                 status: "completed",
@@ -68,7 +68,7 @@ class ProjectsPage {
                 title: "Code Generator Tool",
                 description: "CLI tool for generating boilerplate code for various frameworks",
                 longDescription: "Command-line tool that generates boilerplate code for React, Vue, Node.js projects with customizable templates.",
-                image: "https://via.placeholder.com/400x200/6f42c1/ffffff?text=Code+Gen",
+                image: "./1.jpeg",
                 technologies: ["Node.js", "Commander.js", "Handlebars", "Jest"],
                 category: "tools",
                 status: "in-progress",
@@ -80,7 +80,7 @@ class ProjectsPage {
                 title: "Portfolio Website",
                 description: "Responsive portfolio website with dark mode and smooth animations",
                 longDescription: "Personal portfolio website showcasing projects, skills, and experience with modern design principles.",
-                image: "https://via.placeholder.com/400x200/dc3545/ffffff?text=Portfolio",
+                image: "./2.jpeg",
                 technologies: ["HTML5", "CSS3", "JavaScript", "GSAP"],
                 category: "web",
                 status: "completed",
@@ -93,7 +93,7 @@ class ProjectsPage {
                 title: "Machine Learning Dashboard",
                 description: "Interactive dashboard for visualizing ML model performance and data insights",
                 longDescription: "Comprehensive dashboard for machine learning practitioners to visualize model performance, data insights, and training metrics.",
-                image: "https://via.placeholder.com/400x200/17a2b8/ffffff?text=ML+Dashboard",
+                image: "./3.jpeg",
                 technologies: ["Python", "Streamlit", "Pandas", "Plotly", "Scikit-learn"],
                 category: "web",
                 status: "planned",
@@ -187,9 +187,6 @@ class ProjectsPage {
         card.innerHTML = `
             <div class="project-image">
                 <img src="${project.image}" alt="${project.title}" loading="lazy">
-                <div class="project-placeholder">
-                    <i class="fas fa-code"></i>
-                </div>
             </div>
             <div class="project-content">
                 <h3 class="project-title">${project.title}</h3>
@@ -373,4 +370,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-console.log('💼 Projects Page Script Loaded');
+// Production - Remove console.log for performance
+// console.log('💼 Projects Page Script Loaded');

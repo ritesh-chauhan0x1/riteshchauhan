@@ -589,4 +589,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-console.log('👤 Professional About Page Script Loaded');
+// Production - Remove console.log for performance
+// console.log('👤 Professional About Page Script Loaded');

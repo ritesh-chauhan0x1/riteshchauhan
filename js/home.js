@@ -413,5 +413,253 @@ if (navigator.hardwareConcurrency < 4 || navigator.connection?.effectiveType ===
     document.documentElement.style.setProperty('--reduce-motion', '1');
 }
 
+// 3D Gallery Enhancement Functions
+class GalleryEnhancer {
+    constructor() {
+        this.initGallery();
+        this.initImageInteractions();
+        this.initParallaxEffects();
+    }
+
+    initGallery() {
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        
+        galleryCards.forEach((card, index) => {
+            // Add staggered animation delay
+            card.style.animationDelay = `${index * 0.2}s`;
+            
+            // Enhanced 3D tilt effect
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 768) return; // Skip on mobile
+                
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `
+                    translateY(-15px) 
+                    rotateX(${rotateX}deg) 
+                    rotateY(${rotateY}deg) 
+                    scale(1.02)
+                `;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+            
+            // Click handler for image expansion
+            card.addEventListener('click', () => {
+                this.expandImage(card);
+            });
+        });
+    }
+
+    initImageInteractions() {
+        const images = document.querySelectorAll('.gallery-image');
+        
+        images.forEach(img => {
+            // Add loading effect
+            img.addEventListener('load', () => {
+                img.style.opacity = '0';
+                img.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    img.style.transition = 'all 0.6s ease';
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1)';
+                }, 100);
+            });
+            
+            // Add error handling
+            img.addEventListener('error', () => {
+                const container = img.closest('.image-container');
+                container.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: linear-gradient(135deg, var(--accent), var(--primary-color)); color: white;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-image" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.7;"></i>
+                            <p>Image Loading...</p>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    }
+
+    initParallaxEffects() {
+        const gallerySection = document.querySelector('.gallery-section');
+        if (!gallerySection) return;
+
+        // Parallax scroll effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rect = gallerySection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible) {
+                const parallaxSpeed = scrolled * 0.5;
+                gallerySection.style.transform = `translateY(${parallaxSpeed * 0.1}px)`;
+                
+                // Animate feature highlights on scroll
+                const highlights = document.querySelectorAll('.highlight-item');
+                highlights.forEach((item, index) => {
+                    const delay = index * 0.1;
+                    const offset = Math.sin(scrolled * 0.01 + delay) * 5;
+                    item.style.transform = `translateY(${offset}px)`;
+                });
+            }
+        });
+    }
+
+    expandImage(card) {
+        const img = card.querySelector('.gallery-image');
+        const overlay = card.querySelector('.image-overlay');
+        
+        // Create modal for expanded view
+        const modal = document.createElement('div');
+        modal.className = 'image-modal';
+        modal.innerHTML = `
+            <div class="modal-backdrop">
+                <div class="modal-content">
+                    <img src="${img.src}" alt="${img.alt}" class="modal-image">
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="modal-info">
+                        <h4>${card.querySelector('h5').textContent}</h4>
+                        <p>${overlay.querySelector('p').textContent}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add modal styles
+        const modalStyles = `
+            .image-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: modalFadeIn 0.3s ease;
+            }
+            
+            .modal-backdrop {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+            }
+            
+            .modal-content {
+                position: relative;
+                max-width: 90vw;
+                max-height: 90vh;
+                background: var(--card-background);
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            }
+            
+            .modal-image {
+                width: 100%;
+                height: auto;
+                max-height: 70vh;
+                object-fit: contain;
+                display: block;
+            }
+            
+            .modal-close {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+            
+            .modal-close:hover {
+                background: rgba(0, 0, 0, 0.9);
+                transform: scale(1.1);
+            }
+            
+            .modal-info {
+                padding: 1.5rem;
+                text-align: center;
+            }
+            
+            @keyframes modalFadeIn {
+                from { opacity: 0; transform: scale(0.8); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        
+        // Add styles to document
+        if (!document.querySelector('#modal-styles')) {
+            const styleSheet = document.createElement('style');
+            styleSheet.id = 'modal-styles';
+            styleSheet.textContent = modalStyles;
+            document.head.appendChild(styleSheet);
+        }
+        
+        document.body.appendChild(modal);
+        
+        // Close modal handlers
+        const closeModal = () => {
+            modal.style.animation = 'modalFadeIn 0.3s ease reverse';
+            setTimeout(() => {
+                document.body.removeChild(modal);
+            }, 300);
+        };
+        
+        modal.querySelector('.modal-close').addEventListener('click', closeModal);
+        modal.querySelector('.modal-backdrop').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+        
+        // Escape key to close
+        const escapeHandler = (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                document.removeEventListener('keydown', escapeHandler);
+            }
+        };
+        document.addEventListener('keydown', escapeHandler);
+    }
+}
+
+// Initialize gallery enhancements
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        new GalleryEnhancer();
+    }, 500);
+});
+
 // Production - Remove console.log for performance
 // console.log('🚀 3D Enhanced Home Page Script Loaded');

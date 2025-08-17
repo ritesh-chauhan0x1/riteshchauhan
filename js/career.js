@@ -79,4 +79,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-console.log('💼 Career Page Script Loaded');
+// Production - Remove console.log for performance
+// console.log('💼 Career Page Script Loaded');

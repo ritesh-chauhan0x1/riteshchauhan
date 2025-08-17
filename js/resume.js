@@ -47,7 +47,8 @@ class ResumePage {
         // link.href = 'path/to/your/resume.pdf';
         // link.click();
         
-        console.log('Resume download initiated...');
+        // Production: Resume download tracking (development only)
+        // console.log('Resume download initiated...');
     }
 
     viewOnlineResume() {

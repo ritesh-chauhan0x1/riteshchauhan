@@ -140,12 +140,6 @@
     transform: scale(1.1);
 }
 
-.project-placeholder {
-    color: white;
-    font-size: 3rem;
-    opacity: 0.8;
-}
-
 .project-content {
     padding: 1.5rem;
 }

@@ -91,4 +91,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-console.log('🎓 Education Page Script Loaded');
+// Production - Remove console.log for performance
+// console.log('🎓 Education Page Script Loaded');
