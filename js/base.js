@@ -66,96 +66,47 @@ class PortfolioBase {
     createNavigation() {
         const nav = document.createElement('nav');
         nav.className = 'navbar';
-            <div class="nav-container">
-                <a href="index.html" class="nav-brand">Ritesh Chauhan</a>
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link" data-page="home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link" data-page="about">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="career.html" class="nav-link" data-page="career">
-                            Career <i class="fas fa-chevron-down dropdown-icon"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="career.html#internship" class="dropdown-link">Internship</a></li>
-                            <li><a href="career.html#experience" class="dropdown-link">Job Experience</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="education.html" class="nav-link" data-page="education">
-                            Education <i class="fas fa-chevron-down dropdown-icon"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="education.html#school" class="dropdown-link">School</a></li>
-                            <li><a href="education.html#college" class="dropdown-link">College</a></li>
-                            <li><a href="education.html#university" class="dropdown-link">University</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="achievements.html" class="nav-link" data-page="achievements">
-                            Achievements <i class="fas fa-chevron-down dropdown-icon"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="certification.html" class="dropdown-link">Certificates</a></li>
-                            <li><a href="awards.html" class="dropdown-link">Awards</a></li>
-                            <li><a href="achievements.html#recognition" class="dropdown-link">Recognition</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
-                    </li>
-                </ul>
-                <div class="nav-toggle" id="nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        `;
         nav.innerHTML = [
             '<div class="nav-container">',
-                '<a href="index.html" class="nav-brand">Ritesh Chauhan</a>',
+                '<a href="index.html" class="nav-brand"><i class="fas fa-code"></i> <span style="font-weight:700;letter-spacing:1px;">Ritesh Chauhan</span></a>',
                 '<ul class="nav-menu" id="nav-menu">',
                     '<li class="nav-item">',
-                        '<a href="index.html" class="nav-link" data-page="home">Home</a>',
+                        '<a href="index.html" class="nav-link" data-page="home"><i class="fas fa-home"></i> Home</a>',
                     '</li>',
                     '<li class="nav-item">',
-                        '<a href="about.html" class="nav-link" data-page="about">About</a>',
+                        '<a href="about.html" class="nav-link" data-page="about"><i class="fas fa-user"></i> About</a>',
                     '</li>',
                     '<li class="nav-item dropdown">',
                         '<a href="career.html" class="nav-link" data-page="career">',
-                            'Career <i class="fas fa-chevron-down dropdown-icon"></i>',
+                            '<i class="fas fa-briefcase"></i> Career <i class="fas fa-chevron-down dropdown-icon"></i>',
                         '</a>',
                         '<ul class="dropdown-menu">',
-                            '<li><a href="career.html#internship" class="dropdown-link">Internship</a></li>',
-                            '<li><a href="career.html#experience" class="dropdown-link">Job Experience</a></li>',
+                            '<li><a href="career.html#internship" class="dropdown-link"><i class="fas fa-user-graduate"></i> Internship</a></li>',
+                            '<li><a href="career.html#experience" class="dropdown-link"><i class="fas fa-building"></i> Job Experience</a></li>',
                         '</ul>',
                     '</li>',
                     '<li class="nav-item dropdown">',
                         '<a href="education.html" class="nav-link" data-page="education">',
-                            'Education <i class="fas fa-chevron-down dropdown-icon"></i>',
+                            '<i class="fas fa-graduation-cap"></i> Education <i class="fas fa-chevron-down dropdown-icon"></i>',
                         '</a>',
                         '<ul class="dropdown-menu">',
-                            '<li><a href="education.html#school" class="dropdown-link">School</a></li>',
-                            '<li><a href="education.html#college" class="dropdown-link">College</a></li>',
-                            '<li><a href="university.html" class="dropdown-link">University</a></li>',
+                            '<li><a href="education.html#school" class="dropdown-link"><i class="fas fa-school"></i> School</a></li>',
+                            '<li><a href="education.html#college" class="dropdown-link"><i class="fas fa-university"></i> College</a></li>',
+                            '<li><a href="university.html" class="dropdown-link"><i class="fas fa-university"></i> University</a></li>',
                         '</ul>',
                     '</li>',
                     '<li class="nav-item dropdown">',
                         '<a href="achievements.html" class="nav-link" data-page="achievements">',
-                            'Achievements <i class="fas fa-chevron-down dropdown-icon"></i>',
+                            '<i class="fas fa-trophy"></i> Achievements <i class="fas fa-chevron-down dropdown-icon"></i>',
                         '</a>',
                         '<ul class="dropdown-menu">',
-                            '<li><a href="certification.html" class="dropdown-link">Certificates</a></li>',
-                            '<li><a href="awards.html" class="dropdown-link">Awards</a></li>',
-                            '<li><a href="achievements.html#recognition" class="dropdown-link">Recognition</a></li>',
+                            '<li><a href="certification.html" class="dropdown-link"><i class="fas fa-certificate"></i> Certificates</a></li>',
+                            '<li><a href="awards.html" class="dropdown-link"><i class="fas fa-award"></i> Awards</a></li>',
+                            '<li><a href="achievements.html#recognition" class="dropdown-link"><i class="fas fa-star"></i> Recognition</a></li>',
                         '</ul>',
                     '</li>',
                     '<li class="nav-item">',
-                        '<a href="contact.html" class="nav-link" data-page="contact">Contact</a>',
+                        '<a href="contact.html" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a>',
                     '</li>',
                 '</ul>',
                 '<div class="nav-toggle" id="nav-toggle">',

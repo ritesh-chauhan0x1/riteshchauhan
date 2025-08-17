@@ -1,0 +1,149 @@
+/* Unique Home Page Styles */
+
+.hero-section {
+    padding: 5rem 2rem 2rem 2rem;
+    background: linear-gradient(135deg, #007bff 0%, #6c63ff 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.profile-card-3d {
+    background: #fff;
+    color: #222;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: 260px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    transform-style: preserve-3d;
+    opacity: 0.95;
+}
+
+.profile-image {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    background: #25d366;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: 2px solid #fff;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #e0e0e0;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-3d {
+    background: #fff;
+    color: #007bff;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+}
+
+.btn-3d:hover {
+    background: #6c63ff;
+    color: #fff;
+    transform: translateY(-3px) scale(1.05);
+}
+
+.unique-gallery-section {
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 2rem;
+}
+
+.unique-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.unique-gallery-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+    width: 220px;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+    position: relative;
+}
+
+.unique-gallery-card:hover {
+    transform: translateY(-10px) scale(1.04) rotateZ(2deg);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+}
+
+.unique-gallery-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.unique-gallery-info {
+    padding: 1rem;
+    font-size: 1.1rem;
+    color: #6c63ff;
+    font-weight: 600;
+    background: #f3f6ff;
+}
+
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .unique-gallery {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+}
