@@ -1,5 +1,92 @@
 /* Home Page with 3D Features */
 
+/* Navbar one-line layout and left-aligned brand */
+.modern-navbar .nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 64px;
+}
+.nav-branding {
+    display: flex;
+    align-items: center;
+    margin-right: 32px;
+}
+.nav-link {
+    font-size: 1.08rem;
+    color: #23272e;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background 0.18s, color 0.18s;
+    position: relative;
+}
+.nav-link:hover, .nav-link.active {
+    background: #f0f4ff;
+    color: #007bff;
+}
+.dropdown-icon {
+    font-size: 0.9em;
+    margin-left: 3px;
+    transition: transform 0.3s;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    padding: 0.5rem 0;
+    z-index: 1003;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.22s, transform 0.22s;
+}
+.nav-item.dropdown:hover > .dropdown-menu,
+.nav-item.dropdown:focus-within > .dropdown-menu,
+.nav-item.dropdown.open > .dropdown-menu {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+.dropdown-link {
+    display: block;
+    padding: 0.7rem 1.2rem;
+    color: #23272e;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background 0.18s, color 0.18s;
+}
+.dropdown-link:hover {
+    background: #f0f4ff;
+    color: #007bff;
+}
+@media (max-width: 900px) {
+    .modern-navbar .nav-container { padding: 0 0.5rem; }
+    .nav-menu { gap: 0.7rem; }
+    .nav-link { font-size: 1rem; padding: 0.5rem 0.7rem; }
+}
+@media (max-width: 700px) {
+    .modern-navbar .nav-container { flex-direction: column; height: auto; }
+    .nav-menu { flex-direction: column; align-items: flex-end; width: 100%; background: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.13); border-radius: 0 0 12px 12px; position: absolute; top: 64px; right: 0; display: none; }
+    .nav-menu.open { display: flex; }
+    .nav-item { width: 100%; }
+    .nav-link { width: 100%; justify-content: flex-end; }
+    .nav-branding { width: 100%; justify-content: space-between; }
+}
+
 /* Global 3D Perspective */
 * {
     transform-style: preserve-3d;

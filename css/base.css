@@ -10,64 +10,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     transition: all 0.3s ease;
-    scroll-behavior: smooth;
-    background: var(--primary-bg);
-    color: var(--text-primary);
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
 
-/* Enhanced Theme Variables - Light and Dark Mode */
-:root {
-    --primary-bg: #ffffff;
-    --secondary-bg: #f8f9fa;
-    --card-bg: #ffffff;
-    --text-primary: #000000;
-    --text-secondary: #6c757d;
-    --accent: #007bff;
-    --accent-secondary: #0056b3;
-    --accent-rgb: 0, 123, 255;
-    --primary-color: #007bff;
-    --secondary-color: #6c63ff;
-    --shadow: rgba(0, 0, 0, 0.1);
-    --border: #dee2e6;
-    --nav-height: 70px;
-}
-
-.theme-dark {
-    --primary-bg: #121212;
-    --secondary-bg: #1e1e1e;
-    --card-bg: #2d2d2d;
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b0;
-    --accent: #1e90ff;
-    --accent-secondary: #1c7ed6;
-    --accent-rgb: 30, 144, 255;
-    --primary-color: #1e90ff;
-    --secondary-color: #6c63ff;
-    --shadow: rgba(0, 0, 0, 0.3);
-    --border: #404040;
-}
-
-/* Navigation Bar */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--nav-height);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-
-.theme-dark .navbar {
-    background: rgba(18, 18, 18, 0.95);
-}
 
 .nav-container {
     max-width: 1200px;
@@ -282,7 +225,6 @@ body {
     flex: 1;
     margin-top: var(--nav-height);
     padding: 2rem;
-    padding-bottom: 8rem; /* Make room for social nav */
 }
 
 /* Social Media Navigation */
@@ -330,67 +272,6 @@ body {
 .social-link.facebook {
     background: #1877f2;
 }
-
-.social-link.github {
-    background: #333;
-}
-
-.social-link.leetcode {
-    background: #ffa116;
-    color: #000;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.social-link.whatsapp {
-    background: #25d366;
-}
-
-.social-link.gmail {
-    background: #ea4335;
-}
-
-.leetcode-text {
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-/* Desktop Responsive */
-@media (min-width: 769px) and (max-width: 1023px) {
-    .nav-container {
-        padding: 0 1.5rem;
-    }
-    
-    .nav-menu {
-        gap: 1rem;
-    }
-    
-    .nav-link {
-        padding: 0.5rem 0.8rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .nav-menu {
-        gap: 2rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .nav-container {
-        padding: 0 3rem;
-    }
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 1rem;
-    }
-
-    .nav-brand {
-        font-size: 1.3rem;
-    }
 
     .nav-menu {
         position: fixed;
