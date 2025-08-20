@@ -1,0 +1,127 @@
+/* Modal styles for image preview */
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+}
+.img-modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  animation: popIn 0.5s cubic-bezier(.5,1.8,.5,1);
+}
+.img-modal-close {
+  position: absolute;
+  top: 2.5vh;
+  right: 4vw;
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 0 2px 8px #000;
+  z-index: 10000;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ece2be 0%, #e6d3a3 100%);
+  color: #1e293b;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  animation: fadeInBg 1.2s ease;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(135,206,250,0.10);
+  padding: 2rem 1.5rem;
+  animation: slideInUp 1.1s cubic-bezier(.5,1.8,.5,1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #0f172a;
+}
+
+section {
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #f7fafc 60%, #e0f7fa 100%);
+  box-shadow: 0 4px 16px rgba(135,206,250,0.10);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeInSection 0.9s cubic-bezier(.5,1.8,.5,1);
+}
+section:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(135,206,250,0.18);
+}
+
+section h2 {
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+
+section img {
+  max-width: 150px;
+  margin: 5px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+p {
+  margin-top: 10px;
+}
+
+.box {
+  background: linear-gradient(90deg, #e0f7fa 60%, #f1f5f9 100%);
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  box-shadow: 0 2px 8px rgba(135,206,250,0.10);
+}
+
+.highlight {
+  background: #d1fae5;
+  color: #047857;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.08);
+  animation: popIn 0.7s cubic-bezier(.5,1.8,.5,1);
+@keyframes fadeInBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInSection {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+}

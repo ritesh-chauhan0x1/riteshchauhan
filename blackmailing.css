@@ -1,0 +1,3 @@
+/* blackmailing.css */
+body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #ece2be; }
+.main-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
