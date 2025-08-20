@@ -60,10 +60,10 @@ body {
 	font-size: 1.1em;
 }
 .bold-green {
-	color: #1b8a3b;
+	color: #e53935;
 }
 .bold-red {
-	color: #e53935;
+	color: #1b8a3b;
 }
 .result-box {
 	background: linear-gradient(90deg, #ffe5e5 60%, #fff8e1 100%);
