@@ -1,0 +1,124 @@
+.main-result-container {
+    color: white;
+
+    height: 60vh;
+    padding: .5em;
+    margin-top: 1.5em;
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(40px);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.389);
+    background-color: rgba(0, 0, 0, 0.142);
+
+    transition: .2s transform;
+
+    overflow-y: auto;
+}
+
+.main-result-container::-webkit-scrollbar {
+    border-radius: 100px;
+    overflow: hidden;
+    width: 5px;
+    height: 8px;
+    background-color: #ffffff77;
+}
+
+.main-result-container::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 100px;
+}
+
+.main-result-container:active {
+    transform: scale(1.05);
+}
+
+.main-result-container .result-window-container {
+    background-color: #00000056;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: calc(20px - .5em);
+}
+
+.main-result-container .person-outline {
+    font-size: large;
+}
+
+.main-result-container .result-top-bar {
+    padding: 1rem;
+
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    cursor: default;
+
+    border-bottom: 2px solid rgba(255, 255, 255, 0.166);
+}
+
+.main-result-container .result-window {
+    flex-grow: 1;
+}
+
+.main-result-container .text {
+    color: #ffffffad;
+    font-size: small;
+    padding-bottom: .5em;
+
+    gap: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-result-container .info-icon {
+    font-size: large;
+}
+
+.main-result-container table {
+    width: 100%;
+}
+
+.main-result-container table th {
+    padding-left: .5em;
+    text-align: left;
+}
+
+.main-result-container table td {
+    padding: .5em;
+}
+
+.main-result-container tr:nth-child(2n+1) {
+    background-color: #00000056;
+}
+
+.main-result-container .misc-container {
+    margin-top: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.main-result-container button {
+    width: 30%;
+    padding: 10px 16px;
+    border-radius: 10px;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bolder;
+    background-color: transparent;
+    border: 1px solid white;
+    transition: .1s;
+    margin-bottom: .5em;
+}
+
+.main-result-container button:hover {
+    background-color: white;
+    color: rgb(132, 0, 255);
+}
