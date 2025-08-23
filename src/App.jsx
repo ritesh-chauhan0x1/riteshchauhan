@@ -28,7 +28,7 @@ const App = () => {
             <Search />
             <Result />
             <div className="ritesh-box">
-                Ritesh Chauhan
+                - Ritesh Chauhan
             </div>
         </ResultContext.Provider>
     )
