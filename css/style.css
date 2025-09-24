@@ -1,0 +1,70 @@
+/* Starter style for portfolio site
+   - Floating social icons (vertical on desktop, horizontal bottom on mobile)
+   - Navbar with hover dropdowns and mobile toggle
+*/
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --nav:#0b1220;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
+
+/* Navbar */
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:var(--nav);color:#fff;position:fixed;top:0;left:0;right:0;z-index:60}
+.brand{color:#fff;text-decoration:none;font-weight:700}
+.nav-toggle{display:none;background:none;border:0;gap:4px;flex-direction:column}
+.nav-toggle span{display:block;height:3px;width:22px;background:#fff;border-radius:2px}
+
+.nav-menu{display:flex;position:relative}
+.nav-list{display:flex;list-style:none;gap:0.25rem;margin:0;padding:0;align-items:center}
+.nav-list a{color:#fff;text-decoration:none;padding:0.5rem 0.8rem;display:block}
+
+/* Dropdowns */
+.nav-item{position:relative}
+.dropdown-menu{position:absolute;left:0;top:calc(100% + 0.5rem);background:var(--nav);min-width:190px;border-radius:6px;padding:0.4rem 0;box-shadow:0 8px 20px rgba(2,6,23,0.6);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 180ms ease;z-index:80}
+.nav-item:hover .dropdown-menu,.nav-item:focus-within .dropdown-menu{opacity:1;visibility:visible;transform:none}
+.dropdown-menu a{display:block;padding:0.5rem 1rem;color:#fff}
+.dropdown-menu a:hover{background:rgba(255,255,255,0.05)}
+
+/* Hero */
+.main-content{padding-top:84px}
+.hero{min-height:calc(100vh - 84px);display:flex;align-items:center;justify-content:center;padding:3rem}
+.hero-inner{text-align:center;max-width:900px}
+.hero h1{font-size:2.6rem;margin-bottom:0.5rem}
+.muted{color:var(--muted)}
+
+/* Floating social icons - desktop (vertical right middle) */
+.social-icons{position:fixed;right:1.25rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0.75rem;z-index:50}
+.social{width:44px;height:44px;border-radius:999px;background:var(--nav);display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.social img{width:22px;height:22px;display:block}
+.social:hover{transform:translateX(-4px) scale(1.03)}
+
+/* Per-icon color variations (use original colored svgs or background tints) */
+.social.whatsapp{background:#25D366}
+.social.instagram{background:linear-gradient(45deg,#f58529,#dd2a7b,#515bd4)}
+.social.github{background:#2f3942}
+.social.facebook{background:#1877F2}
+.social.leetcode{background:#FFA116}
+.social.linkedin{background:#0077B5}
+
+.social.whatsapp img, .social.instagram img, .social.github img, .social.facebook img, .social.leetcode img, .social.linkedin img{
+  filter: none; /* allow SVGs to show their own colors */
+}
+
+/* Responsive - mobile: social icons bottom center horizontal */
+@media (max-width:780px){
+  .nav-toggle{display:flex}
+  .nav-menu{position:fixed;left:0;top:64px;right:0;bottom:0;background:var(--nav);padding:1rem;transform:translateX(100%);transition:transform 240ms ease}
+  .nav-menu.active{transform:translateX(0)}
+  .nav-list{flex-direction:column;gap:0.25rem}
+  .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;display:none;padding-left:0.5rem}
+  .nav-item.active .dropdown-menu{display:block}
+
+  .social-icons{position:fixed;left:0;right:0;bottom:12px;top:auto;transform:none;flex-direction:row;justify-content:center;background:transparent;padding:0.25rem;gap:1rem}
+  .social{width:40px;height:40px}
+  .hero h1{font-size:2rem}
+}

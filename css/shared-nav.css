@@ -1,0 +1,65 @@
+/* shared-nav.css - navbar and social icons shared across pages */
+:root{
+  --nav:#0b1220;
+  --nav-text:#fff;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
+.navbar{display:flex;align-items:center;justify-content:center;padding:0.75rem 1rem;background:var(--nav);color:var(--nav-text);position:fixed;top:0;left:0;right:0;z-index:60}
+/* Stronger rule to ensure homepage uses centered navbar even if other CSS loads */
+header.site-header .navbar{justify-content:center !important}
+.brand{color:var(--nav-text);text-decoration:none;font-weight:700;position:absolute;left:1rem}
+.nav-toggle{display:none;background:none;border:0;gap:4px;flex-direction:column;position:absolute;right:1rem}
+.nav-toggle span{display:block;height:3px;width:22px;background:var(--nav-text);border-radius:2px}
+.nav-menu{display:flex;position:relative;flex:1;justify-content:center}
+.nav-list{display:flex;list-style:none;gap:0.5rem;margin:0;padding:0;align-items:center}
+.nav-list a{color:var(--nav-text);text-decoration:none;padding:0.4rem 0.7rem;display:inline-flex;align-items:center;gap:0.5rem}
+.nav-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center}
+/* ensure inline svg inside nav-icon are sized and inherit color */
+.nav-icon svg{width:18px;height:18px;height:18px;fill:currentColor;display:block}
+.nav-item{position:relative}
+.dropdown-menu{position:absolute;left:0;top:calc(100% + 0.4rem);background:var(--nav);min-width:200px;border-radius:6px;padding:0.4rem 0;box-shadow:0 8px 20px rgba(2,6,23,0.6);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 180ms ease;z-index:80}
+.nav-item:hover .dropdown-menu,.nav-item:focus-within .dropdown-menu{opacity:1;visibility:visible;transform:none}
+.dropdown-menu a{display:block;padding:0.5rem 1rem;color:var(--nav-text)}
+.dropdown-menu a:hover{background:rgba(255,255,255,0.04)}
+.main-content{padding-top:72px}
+
+/* Social icons */
+.social-icons{position:fixed;right:1rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0.75rem;z-index:50}
+.social{width:44px;height:44px;border-radius:999px;background:var(--nav);display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.social img{width:20px;height:20px;display:block}
+.social.whatsapp{background:#25D366}
+.social.instagram{background:linear-gradient(45deg,#f58529,#dd2a7b,#515bd4)}
+.social.github{background:#2f3942}
+.social.facebook{background:#1877F2}
+.social.leetcode{background:#FFA116}
+.social.linkedin{background:#0077B5}
+
+/* Pop animation */
+.social{transition:transform 160ms cubic-bezier(.2,.9,.2,1), box-shadow 160ms}
+
+/* keyframes for pop/bounce */
+@keyframes pop-bounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); }
+  70% { transform: scale(0.98); }
+ 100% { transform: scale(1); }
+}
+
+.social.pop{animation: pop-bounce 260ms cubic-bezier(.2,.9,.2,1);box-shadow:0 10px 22px rgba(2,6,23,0.36)}
+.social:active{transform:scale(0.98)}
+.social:focus{outline:2px solid rgba(255,255,255,0.12);outline-offset:3px}
+
+@media (max-width:780px){
+  .nav-toggle{display:flex}
+  .brand{position:relative;left:auto}
+  .nav-toggle{position:relative;right:auto}
+  .nav-menu{position:fixed;left:0;top:56px;right:0;bottom:0;background:var(--nav);padding:1rem;transform:translateX(100%);transition:transform 240ms ease}
+  .nav-menu.active{transform:translateX(0)}
+  .nav-list{flex-direction:column;gap:0.5rem}
+  .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;display:none;padding-left:0.5rem}
+  .nav-item.active .dropdown-menu{display:block}
+  .social-icons{position:fixed;left:0;right:0;bottom:12px;top:auto;transform:none;flex-direction:row;justify-content:center;background:transparent;padding:0.25rem;gap:1rem}
+  .social{width:40px;height:40px}
+}
