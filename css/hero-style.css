@@ -1,0 +1,281 @@
+/* Hero Section Styling - Circular Image Design */
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 20px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1400px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 0 60px;
+}
+
+/* Left Side - Text Content */
+.hero-content {
+  z-index: 2;
+  animation: fadeInLeft 1s ease-out;
+}
+
+.greeting {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.hero-name {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+  letter-spacing: -1px;
+}
+
+.hero-description {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 12px 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #FDB813;
+  color: #1a1a1a;
+}
+
+.btn-primary:hover {
+  background-color: #e5a510;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(253, 184, 19, 0.3);
+}
+
+.btn-secondary {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Social Media Icons at Bottom Left */
+.hero-social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #1a1a1a;
+}
+
+.social-icon:hover {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  transform: translateY(-5px);
+}
+
+.social-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Right Side - Circular Image with Yellow Background */
+.hero-image-container {
+  position: relative;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.hero-image-circle {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: #FDB813;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(253, 184, 19, 0.3);
+  animation: fadeInRight 1s ease-out;
+}
+
+.hero-profile-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 2;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero-name {
+    font-size: 3rem;
+  }
+  
+  .hero-description {
+    font-size: 0.95rem;
+  }
+  
+  .hero-image-circle {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 968px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    padding: 0 30px;
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+  
+  .hero-name {
+    font-size: 2.8rem;
+  }
+  
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .hero-social-icons {
+    justify-content: center;
+  }
+  
+  .hero-image-container {
+    height: 450px;
+    order: -1;
+  }
+  
+  .hero-image-circle {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 60px 15px 15px;
+  }
+  
+  .greeting {
+    font-size: 1.2rem;
+  }
+  
+  .hero-name {
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .hero-image-container {
+    height: 350px;
+  }
+  
+  .hero-image-circle {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Ensure main-content doesn't add extra padding */
+.main-content {
+  padding: 0;
+  margin: 0;
+}
