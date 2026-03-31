@@ -6,28 +6,29 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
-.navbar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:#ffffff;color:var(--nav-text);position:fixed;top:0;left:0;right:0;z-index:60;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:transparent;color:#1a1a1a;position:fixed;top:0;left:0;right:0;z-index:9999;box-shadow:none;width:100%}
 /* Stronger rule to ensure homepage uses centered navbar even if other CSS loads */
 header.site-header .navbar{justify-content:space-between !important}
-.brand{color:#1a1a1a;text-decoration:none;font-weight:700;font-size:1.2rem}
+.brand{color:#1a1a1a;text-decoration:none;font-weight:700;font-size:1.2rem;text-shadow:none}
 .nav-toggle{display:none;background:none;border:0;gap:4px;flex-direction:column;position:absolute;right:1rem}
-.nav-toggle span{display:block;height:3px;width:22px;background:var(--nav-text);border-radius:2px}
+.nav-toggle span{display:block;height:3px;width:22px;background:#1a1a1a;border-radius:2px}
 .nav-menu{display:flex;position:relative;flex:1;justify-content:center}
 .nav-list{display:flex;list-style:none;gap:2rem;margin:0;padding:0;align-items:center}
-.nav-list a{color:#1a1a1a;text-decoration:none;padding:0.4rem 0.7rem;display:inline-flex;align-items:center;gap:0.5rem;font-weight:500;transition:color 0.3s ease}
-.nav-list a:hover{color:#666}
+.nav-list a{color:#1a1a1a;text-decoration:none;padding:0.4rem 0.7rem;display:inline-flex;align-items:center;gap:0.5rem;font-weight:500;transition:color 0.3s ease;text-shadow:none}
+.nav-list a:hover{color:#2563eb}
 .nav-icon{width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center}
 /* ensure inline svg inside nav-icon are sized and inherit color */
 .nav-icon svg{width:18px;height:18px;height:18px;fill:currentColor;display:block}
 .nav-item{position:relative}
-.dropdown-menu{position:absolute;left:0;top:calc(100% + 0.4rem);background:#ffffff;min-width:200px;border-radius:8px;padding:0.4rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.15);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 180ms ease;z-index:80}
+.dropdown-menu{position:absolute;left:0;top:calc(100% + 0.4rem);background:rgba(255,255,255,0.95);min-width:200px;border-radius:8px;padding:0.4rem 0;box-shadow:0 8px 30px rgba(0,0,0,0.15);opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 180ms ease;z-index:80;backdrop-filter:blur(10px)}
 .nav-item:hover .dropdown-menu,.nav-item:focus-within .dropdown-menu{opacity:1;visibility:visible;transform:none}
 .dropdown-menu a{display:block;padding:0.5rem 1rem;color:#1a1a1a}
 .dropdown-menu a:hover{background:rgba(0,0,0,0.05)}
-.main-content{padding-top:72px}
+.main-content{padding-top:72px}body{padding-top:0}
+header.site-header{z-index:9999;position:relative}
 
 /* Social icons */
-.social-icons{position:fixed;right:1rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0.75rem;z-index:50}
+.social-icons{position:fixed;right:1rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:0.75rem;z-index:9998}
 .social{width:44px;height:44px;border-radius:999px;background:var(--nav);display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
 .social img{width:20px;height:20px;display:block}
 .social.whatsapp{background:#25D366}
@@ -53,14 +54,14 @@ header.site-header .navbar{justify-content:space-between !important}
 .social:focus{outline:2px solid rgba(255,255,255,0.12);outline-offset:3px}
 
 @media (max-width:780px){
-  .nav-toggle{display:flex}
-  .brand{position:relative;left:auto}
-  .nav-toggle{position:relative;right:auto}
-  .nav-menu{position:fixed;left:0;top:56px;right:0;bottom:0;background:var(--nav);padding:1rem;transform:translateX(100%);transition:transform 240ms ease}
+  .navbar{padding:1rem;z-index:9999;background:transparent}
+  .nav-toggle{display:flex;z-index:100}
+  .brand{position:relative;left:auto;font-size:1rem;color:#1a1a1a}
+  .nav-menu{position:fixed;left:0;top:56px;right:0;bottom:0;background:var(--nav);padding:1rem;transform:translateX(100%);transition:transform 240ms ease;z-index:99;overflow-y:auto}
   .nav-menu.active{transform:translateX(0)}
   .nav-list{flex-direction:column;gap:0.5rem}
-  .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;display:none;padding-left:0.5rem}
+  .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;display:none;padding-left:0.5rem;background:rgba(255,255,255,0.1)}
   .nav-item.active .dropdown-menu{display:block}
-  .social-icons{position:fixed;left:0;right:0;bottom:12px;top:auto;transform:none;flex-direction:row;justify-content:center;background:transparent;padding:0.25rem;gap:1rem}
+  .social-icons{position:fixed;left:0;right:0;bottom:12px;top:auto;transform:none;flex-direction:row;justify-content:center;background:transparent;padding:0.25rem;gap:1rem;z-index:9998}
   .social{width:40px;height:40px}
 }

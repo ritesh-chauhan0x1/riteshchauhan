@@ -5,21 +5,100 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Achievements — Ritesh Chauhan</title>
   <link rel="stylesheet" href="../css/shared-nav.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #1a1a1a;
+    }
+    p {
+      text-align: center;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
   <div id="site-navbar"></div>
 
-  <main class="main-content">
-    <section class="page-section">
-      <div class="container">
-        <h1>Achievements</h1>
-        <p class="muted">Showcase hackathons, competitions and awards.</p>
-      </div>
-    </section>
+  <main class="page-content">
+    <h1>Achievements</h1>
+    <p>Showcase hackathons, competitions and awards.</p>
   </main>
 
   <script src="../js/navbar.js"></script>
   <script>insertNavbar('../');</script>
+  <script src="../js/script.js"></script>
   <script src="../js/clickspark.js"></script>
+</body>
+</html>
+      <header class="site-header">
+        <nav class="navbar">
+          <div class="nav-left">
+            <a class="brand" href="${basePath}index.html">Ritesh Chauhan</a>
+          </div>
+          <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-menu" id="main-nav">
+            <ul class="nav-list">
+              <li><a href="${basePath}index.html" class="nav-link">Home</a></li>
+              <li><a href="${basePath}pages/about.html" class="nav-link">About</a></li>
+              <li><a href="${basePath}pages/web-development.html" class="nav-link">Projects</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>`;
+      document.body.insertAdjacentHTML('afterbegin', nav);
+    }
+  </script>
+  <script>
+    // clickspark.js
+    (function() {
+      const DURATION = 420; // ms
+      const SPARKS_PER_CLICK = 10;
+      const SPARK_LENGTH = 18;
+      const canvas = document.createElement('canvas');
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9999';
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize() {
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.ceil(window.innerWidth * dpr);
+        canvas.height = Math.ceil(window.innerHeight * dpr);
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
+  <script>
+    // script.js
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+          const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+          this.setAttribute('aria-expanded', String(!expanded));
+          navMenu.classList.toggle('active');
+        });
+      }
+    });
+  </script>
 </body>
 </html>

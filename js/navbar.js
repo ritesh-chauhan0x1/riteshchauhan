@@ -37,6 +37,7 @@ function insertNavbar(basePath) {
             <ul class="dropdown-menu">
               <li><a href="${basePath}pages/tech-blogs.html">Tech Blogs</a></li>
               <li><a href="${basePath}pages/personal-blogs.html">Personal Blogs</a></li>
+              <li><a href="${basePath}pages/hostel-life.html">Hostel Days</a></li>
             </ul>
           </li>
 
@@ -127,6 +128,14 @@ function setupNavbarBehavior() {
       const siblings = parentItem.parentElement.querySelectorAll('.nav-item');
       siblings.forEach(s => { if (s !== parentItem) s.classList.remove('active'); });
     }
+  });
+
+  // Add pop animation to social icons on click
+  document.querySelectorAll('.social').forEach(icon => {
+    icon.addEventListener('click', function() {
+      this.classList.add('pop');
+      setTimeout(() => this.classList.remove('pop'), 260);
+    });
   });
 
   // Keyboard handling for accessibility (Enter/Space opens, Escape closes)

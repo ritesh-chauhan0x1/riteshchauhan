@@ -7,52 +7,346 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/shared-nav.css">
   <link rel="stylesheet" href="css/hero-style.css">
+  <style>
+    /* Reusable Components & Enhancements */
+    .hero-full-screen {
+      position: relative;
+      height: 100vh;
+      background-image: url('images/backgroundimage.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .hero-text-content {
+      text-align: center;
+      color: white;
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero-text-content h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin: 0;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-text-content p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Image Grid - Reusable Component */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .image-grid-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .image-grid-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-grid-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Text Card - Reusable Component */
+    .text-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .text-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .text-card h3 {
+      margin-top: 0;
+      color: #1a1a1a;
+      font-size: 1.3rem;
+    }
+
+    .text-card p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 60px 20px;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: #1a1a1a;
+    }
+
+    /* Education Grid */
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .education-card {
+      text-align: center;
+    }
+
+    .education-card img {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-text-content h1 {
+        font-size: 2.5rem;
+      }
+      .hero-text-content p {
+        font-size: 1.2rem;
+      }
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+      section {
+        padding: 40px 15px;
+      }
+      section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="site-navbar"></div>
 
   <main class="main-content">
-    <section class="hero-section">
-      <div class="hero-container">
-        <div class="hero-content">
-          <div class="hero-text">
-            <p class="greeting">Hello, my name is</p>
-            <h1 class="hero-name">Ritesh Chauhan</h1>
-            <p class="hero-description">Short text with details about you, what you do and so on. You can add more information.</p>
-            <div class="hero-buttons">
-              <a href="#" class="btn-primary">Projects</a>
-              <a href="pages/contact.html" class="btn-secondary">LinkedIn</a>
-            </div>
-          </div>
-          
-          <!-- Social Media Icons -->
-          <div class="hero-social-icons">
-            <a href="mailto:your-email@example.com" class="social-icon" aria-label="Email">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="10"/>
-                <text x="12" y="16" font-size="12" text-anchor="middle" fill="white">@</text>
-              </svg>
-            </a>
-            <a href="https://github.com/yourusername" target="_blank" class="social-icon" aria-label="GitHub">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-              </svg>
-            </a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-icon" aria-label="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        
-        <div class="hero-image-container">
-          <div class="hero-image-circle">
-            <img src="images/main.png" alt="Ritesh Chauhan" class="hero-profile-image">
-          </div>
+    <!-- Hero Section -->
+    <section class="hero-full-screen">
+      <div class="hero-overlay">
+        <div class="hero-text-content">
+          <h1>Ritesh Chauhan</h1>
+          <p>CSE Engineer | Solo Traveller</p>
         </div>
       </div>
     </section>
+
+    <!-- About Section -->
+     <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About — Ritesh Chauhan</title>
+  <link rel="stylesheet" href="../css/shared-nav.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background: #ffffff;
+      color: #333;
+      margin: 0;
+    }
+
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #1a1a1a;
+    }
+
+    p.intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      line-height: 1.8;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .education-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .education-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .education-card img {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .education-card h3 {
+      margin: 15px 0 10px;
+      color: #1a1a1a;
+    }
+
+    .education-card p {
+      color: #666;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+      .page-content {
+        padding: 80px 15px 40px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .education-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-navbar"></div>
+
+  <main class="page-content">
+    <h1>About Me</h1>
+    <p class="intro">
+      I am a B.Tech Computer Science and Engineering student at Kalinga Institute of Industrial Technology (2022–2026) with a strong passion for software development, problem-solving, and technology innovation. 
+      I'm skilled in Python, C, Data Structures and Algorithms, and Web Development. I'm also an avid sports enthusiast excelling in badminton, basketball, and cricket.
+    </p>
+
+    <h2 style="text-align: center; font-size: 1.8rem; margin-top: 50px;">Education Background</h2>
+    <div class="education-grid">
+      <div class="education-card">
+        <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774919319/2a0029d565fa7e75a9b14fd93ad4513f_gbcuk7.png" alt="KIIT Logo">
+        <h3>KIIT - Kalinga Institute of Industrial Technology</h3>
+        <p><strong>Bachelor of Technology - BTech, CSE</strong></p>
+        <p>Jul 2022 – Jul 2026</p>
+      </div>
+      <div class="education-card">
+        <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774919392/download_btkox3.jpg" alt="National Infotech College Logo">
+        <h3>National Infotech College</h3>
+        <p><strong>+2</strong></p>
+        <p>Jun 2020 – Jun 2022</p>
+        <p><strong>Activities:</strong> Swimming, Basketball, Cricket, Badminton, Table Tennis</p>
+      </div>
+      <div class="education-card">
+        <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774919461/download_2_dv74f0.jpg" alt="Mount Edmund School">
+        <h3>Mount Edmund Sec School</h3>
+        <p><strong>School</strong></p>
+        <p>May 2008 – Jun 2020</p>
+        <p><strong>Activities:</strong> Basketball, Cricket, Badminton, Table Tennis, Football</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/navbar.js"></script>
+  <script>insertNavbar('../');</script>
+  <script src="../js/script.js"></script>
+  <script src="../js/clickspark.js"></script>
+</body>
+</html>
+
+    <!-- Travel Gallery Section -->
+    <section>
+      <h2>Travel Gallery</h2>
+      <div class="image-grid">
+        <div class="image-grid-item">
+          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923339/IMG-20260314-WA0035_txyddi.jpg" alt="Travel Photo 1">
+        </div>
+        <div class="image-grid-item">
+          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923338/IMG-20260314-WA0040_egbpau.jpg" alt="Travel Photo 2">
+        </div>
+        <div class="image-grid-item">
+          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923337/IMG-20260314-WA0047_hqyfik.jpg" alt="Travel Photo 3">
+        </div>
+        <div class="image-grid-item">
+          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923336/IMG-20260314-WA0051_r2that.jpg" alt="Travel Photo 4">
+        </div>
+        <div class="image-grid-item">
+          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774922839/20251230_144800_alpyux.jpg" alt="Travel Photo 5">
+        </div>
+        <div class="image-grid-item">
+          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774922837/IMG_1192.HEIC_ursjuy.heic" alt="Travel Photo 6">
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script src="js/navbar.js"></script>

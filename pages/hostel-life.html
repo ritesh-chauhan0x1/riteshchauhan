@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hostel Days — Ritesh Chauhan</title>
+  <link rel="stylesheet" href="../css/shared-nav.css">
+  <style>
+    body {
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background: #ffffff;
+      color: #333;
+    }
+
+    .page-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #1a1a1a;
+    }
+
+    p.intro {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto 50px;
+      line-height: 1.8;
+    }
+
+    /* Image Grid */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .image-grid-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .image-grid-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-grid-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .page-content {
+        padding: 80px 15px 40px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-navbar"></div>
+
+  <main class="page-content">
+    <h1>Hostel Days</h1>
+    <p class="intro">
+      My hostel days at KIIT have been an incredible journey filled with unforgettable memories, lasting friendships, and personal growth. 
+      Here are some glimpses of my daily life, adventures, and the amazing moments we share together in the hostel.
+    </p>
+
+    <div class="image-grid">
+      <div class="image-grid-item">
+        <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923569/IMG-20251001-WA0012_rohyik.jpg" alt="Hostel Life">
+      </div>
+      <div class="image-grid-item">
+        <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923593/IMG-20250806-WA0017_nrxxwe.jpg" alt="Hostel Life">
+      </div>
+      <div class="image-grid-item">
+        <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923593/IMG-20250802-WA0003_u2z4ci.jpg" alt="Hostel Life">
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/navbar.js"></script>
+  <script>insertNavbar('../');</script>
+  <script src="../js/script.js"></script>
+  <script src="../js/clickspark.js"></script>
+</body>
+</html>
