@@ -7,6 +7,17 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
 .navbar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3rem;background:transparent;color:#1a1a1a;position:fixed;top:0;left:0;right:0;z-index:9999;box-shadow:none;width:100%}
+
+/* Homepage navbar - transparent with image background showing through */
+header.homepage .navbar{background:transparent;color:#fff;backdrop-filter:blur(3px);text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+header.homepage .brand{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+header.homepage .nav-list a{color:#fff;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+header.homepage .nav-list a:hover{color:#2563eb;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
+header.homepage .nav-toggle span{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.5)}
+header.homepage .dropdown-menu{background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
+header.homepage .dropdown-menu a{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.4)}
+header.homepage .dropdown-menu a:hover{background:rgba(255,255,255,0.12)}
+
 /* Stronger rule to ensure homepage uses centered navbar even if other CSS loads */
 header.site-header .navbar{justify-content:space-between !important}
 .brand{color:#1a1a1a;text-decoration:none;font-weight:700;font-size:1.2rem;text-shadow:none}

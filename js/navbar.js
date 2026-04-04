@@ -1,8 +1,10 @@
 // navbar.js - injects a shared navbar + social icons into pages
 function insertNavbar(basePath) {
   basePath = basePath || '';
+  const isHomepage = basePath === '';
+  const headerClass = isHomepage ? 'site-header homepage' : 'site-header';
   const nav = `
-  <header class="site-header">
+  <header class="${headerClass}">
     <nav class="navbar">
       <div class="nav-left">
         <a class="brand" href="${basePath}index.html">Ritesh Chauhan</a>
@@ -15,7 +17,6 @@ function insertNavbar(basePath) {
       <div class="nav-menu" id="main-nav">
         <ul class="nav-list">
           <li><a href="${basePath}index.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-8.5z"/></svg></span>Home</a></li>
-          <li><a href="${basePath}pages/about.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-4 0-7 2-7 4v1h14v-1c0-2-3-4-7-4z"/></svg></span>About</a></li>
           <li class="nav-item dropdown"><a href="${basePath}pages/web-development.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 4h18v8H3v-8z"/></svg></span>Projects</a>
             <ul class="dropdown-menu">
               <li><a href="${basePath}pages/web-development.html">Web Development</a></li>
