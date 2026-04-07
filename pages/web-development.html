@@ -1,24 +1,564 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Web Development - Portfolio</title>
   <link rel="stylesheet" href="../css/shared-nav.css">
+  <link rel="stylesheet" href="../css/projects-style.css">
 </head>
 <body>
   <div id="site-navbar"></div>
 
   <main class="main-content">
-    <section class="page">
+    <!-- Hero Section -->
+    <section class="projects-hero">
+      <div class="hero-content">
+        <h1>Web Development Projects</h1>
+        <p>Full-stack web applications built with modern frameworks and cutting-edge technologies</p>
+      </div>
+    </section>
+
+    <!-- Projects Layout: Sidebar + Content -->
+    <div class="projects-layout">
+      <!-- Filter Toggle Button (Mobile) -->
+      <button class="filter-toggle-btn" aria-label="Toggle filters" id="filterToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Filter Sidebar -->
+      <section class="filter-section">
+        <div class="filter-buttons">
+          <div class="filter-header">Filters</div>
+          <button class="filter-btn active" data-filter="all">✓ All Projects</button>
+          <button class="filter-btn" data-filter="frontend">Frontend</button>
+          <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+          <button class="filter-btn" data-filter="backend">Backend</button>
+          <button class="filter-btn" data-filter="games">Interactive</button>
+        </div>
+      </section>
+
+      <!-- Projects Content -->
+      <section class="projects-section">
+        <div class="container">
+        <!-- Frontend Projects -->
+        <h2 class="category-title">⚛️ Frontend Projects</h2>
+        <div class="projects-grid">
+          <!-- React Dashboard -->
+          <div class="project-card glass-card" data-category="frontend">
+            <div class="project-header">
+              <div>
+                <h3>Advanced React Dashboard</h3>
+                <div class="project-badges">
+                  <span class="badge">React</span>
+                  <span class="badge">TypeScript</span>
+                </div>
+              </div>
+              <div class="project-meta">
+                <span class="project-date">Jan 15, 2023 · 6 days</span>
+                <div class="project-stars">
+                  <span class="star-icon">★</span>
+                  <span>14</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Feature-rich admin dashboard with real-time data visualization, complex state management, and responsive design. Includes charts, tables, and user management.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React 18</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Redux</span>
+              <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Chart.js</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/react-dashboard" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/react-dashboard" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Vue.js E-commerce -->
+          <div class="project-card glass-card featured" data-category="frontend">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Vue.js E-Commerce Store</h3>
+                <div class="project-badges">
+                  <span class="badge">Vue.js</span>
+                  <span class="badge">Progressive</span>
+                </div>
+              </div>
+              <div class="project-meta">
+                <span class="project-date">Feb 10, 2023 · 15 days</span>
+                <div class="project-stars">
+                  <span class="star-icon">★</span>
+                  <span>22</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Complete e-commerce storefront with product filtering, shopping cart, checkout process, and payment integration. Optimized for mobile shopping.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Vue 3</span>
+              <span class="tech-tag">Vuex</span>
+              <span class="tech-tag">Bootstrap Vue</span>
+              <span class="tech-tag">Stripe API</span>
+              <span class="tech-tag">PWA</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/vue-ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/vue-ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Angular App -->
+          <div class="project-card glass-card" data-category="frontend">
+            <div class="project-header">
+              <div>
+                <h3>Angular Project Management</h3>
+                <div class="project-badges">
+                  <span class="badge">Angular</span>
+                  <span class="badge">TypeScript</span>
+                </div>
+              </div>
+              <div class="project-meta">
+                <span class="project-date">Mar 05, 2023 · 5 days</span>
+                <div class="project-stars">
+                  <span class="star-icon">★</span>
+                  <span>39</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Collaborative project management tool with real-time updates, team communication, task tracking, and progress visualization for teams.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Angular 17</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">RxJS</span>
+              <span class="tech-tag">Material UI</span>
+              <span class="tech-tag">WebSocket</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/angular-project-manager" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/angular-project-manager" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full-Stack Projects -->
+        <h2 class="category-title">🚀 Full-Stack Projects</h2>
+        <div class="projects-grid">
+          <!-- Next.js Full Stack -->
+          <div class="project-card glass-card featured" data-category="fullstack">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Next.js SaaS Platform</h3>
+                <div class="project-badges">
+                  <span class="badge">Next.js</span>
+                  <span class="badge">Full-Stack</span>
+                </div>
+              </div>
+              <div class="project-meta">
+                <span class="project-date">Apr 20, 2023 · 18 days</span>
+                <div class="project-stars">
+                  <span class="star-icon">★</span>
+                  <span>23</span>
+                </div>
+              </div>
+            </div>
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Next.js 14</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Prisma ORM</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Vercel</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/nextjs-saas" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/nextjs-saas" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- MERN Stack -->
+          <div class="project-card glass-card" data-category="fullstack">
+            <div class="project-header">
+              <div>
+                <h3>MERN Social Network</h3>
+                <div class="project-badges">
+                  <span class="badge">MERN</span>
+                  <span class="badge">Real-time</span>
+                </div>
+              </div>
+              <div class="project-meta">
+                <span class="project-date">May 12, 2023 · 12 days</span>
+                <div class="project-stars">
+                  <span class="star-icon">★</span>
+                  <span>29</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Social network platform with user profiles, posts, messaging, notifications, and multimedia sharing. Real-time updates using Socket.io.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">MongoDB</span>
+              <span class="tech-tag">Express.js</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Socket.io</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/mern-social" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/mern-social" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Svelte App -->
+          <div class="project-card glass-card" data-category="fullstack">
+            <div class="project-header">
+              <div>
+                <h3>Svelte Todo Manager</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Svelte</span>
+                  <span class=\"badge\">SvelteKit</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jun 08, 2023 · 7 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>14</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              High-performance todo application with advanced filtering, tagging, and productivity analytics. Built with Svelte for optimal performance.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Svelte</span>
+              <span class="tech-tag">SvelteKit</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">TailwindCSS</span>
+              <span class="tech-tag">Adaptive UI</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/svelte-todo" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/svelte-todo" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend Projects -->
+        <h2 class="category-title">⚙️ Backend & API Projects</h2>
+        <div class="projects-grid">
+          <!-- Django REST API -->
+          <div class="project-card glass-card" data-category="backend">
+            <div class="project-header">
+              <div>
+                <h3>Django REST API</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Python</span>
+                  <span class=\"badge\">Django</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jul 22, 2023 · 8 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>32</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Robust REST API with authentication, pagination, filtering, and comprehensive documentation. Production-ready with testing and deployment setup.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Django</span>
+              <span class="tech-tag">DRF</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Docker</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/django-rest-api" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/django-rest-api" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Documentation
+              </a>
+            </div>
+          </div>
+
+          <!-- Node.js Microservices -->
+          <div class="project-card glass-card featured" data-category="backend">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Node.js Microservices</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Node.js</span>
+                  <span class=\"badge\">Microservices</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Aug 15, 2023 · 20 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>44</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Scalable microservices architecture with service discovery, load balancing, and inter-service communication. Production-ready setup with monitoring.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Express</span>
+              <span class="tech-tag">RabbitMQ</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Kubernetes</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/nodejs-microservices" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/nodejs-microservices" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Architecture
+              </a>
+            </div>
+          </div>
+
+          <!-- PHP Laravel -->
+          <div class="project-card glass-card" data-category="backend">
+            <div class="project-header">
+              <div>
+                <h3>Laravel Web Framework</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">PHP</span>
+                  <span class=\"badge\">Laravel</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Sep 03, 2023 · 10 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>165</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Enterprise-level webapp with authentication, authorization, database migrations, and API endpoints. Includes admin panel and user management.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">Laravel</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">Blade Templates</span>
+              <span class="tech-tag">Eloquent ORM</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/laravel-webapp" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/laravel-webapp" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Projects -->
+        <h2 class="category-title">🎮 Interactive Web Games</h2>
+        <div class="projects-grid">
+          <!-- Snake Game -->
+          <div class="project-card glass-card" data-category="games">
+            <div class="project-header">
+              <div>
+                <h3>Advanced Snake Game</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">JavaScript</span>
+                  <span class=\"badge\">Game</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Oct 11, 2023 · 5 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>156</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Classic snake game with modern UI, power-ups, difficulty levels, and global leaderboard. Responsive design works on all devices.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Canvas API</span>
+              <span class="tech-tag">LocalStorage</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/snake-game" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/snake-game" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Play Game
+              </a>
+            </div>
+          </div>
+
+          <!-- 2048 Game -->
+          <div class="project-card glass-card" data-category="games">
+            <div class="project-header">
+              <div>
+                <h3>2048 Web Game</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">React</span>
+                  <span class=\"badge\">Game</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Nov 02, 2023 · 4 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>189</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Addictive 2048 puzzle game with smooth animations, touch support, and persistent scoring. Built with React for optimal performance.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">CSS Animations</span>
+              <span class="tech-tag">Touch Events</span>
+              <span class="tech-tag">Game Logic</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/2048-game" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/2048-game" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Play Game
+              </a>
+            </div>
+          </div>
+
+          <!-- Tic Tac Toe -->
+          <div class="project-card glass-card featured" data-category="games">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Tic Tac Toe AI</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">React</span>
+                  <span class=\"badge\">AI</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Dec 18, 2023 · 9 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>23</span>\n                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Interactive tic-tac-toe with unbeatable AI opponent using minimax algorithm. Beautiful UI with game statistics and animations.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Minimax Algorithm</span>
+              <span class="tech-tag">Game AI</span>
+              <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Responsive</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/tic-tac-toe" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/tic-tac-toe" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Play Game
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
       <div class="container">
-        <h1>Web Development</h1>
-        <p>Projects, case studies and demos for web development.</p>
+        <div class="cta-content">
+          <h2>More Projects & Code Samples</h2>
+          <p>Explore additional projects, contributions, and code repositories on my GitHub profile.</p>
+          <a href="https://github.com/ritesh-chauhan0x1" target="_blank" rel="noopener noreferrer" class="cta-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Visit GitHub
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <script src="../js/navbar.js"></script>
+  <script src="../js/projects-filter.js"></script>
   <script>insertNavbar('../');</script>
 </body>
 </html>

@@ -17,8 +17,9 @@ function insertNavbar(basePath) {
       <div class="nav-menu" id="main-nav">
         <ul class="nav-list">
           <li><a href="${basePath}index.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-8.5z"/></svg></span>Home</a></li>
-          <li class="nav-item dropdown"><a href="${basePath}pages/web-development.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 4h18v8H3v-8z"/></svg></span>Projects</a>
+          <li class="nav-item dropdown"><a href="${basePath}pages/projects.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 4h18v8H3v-8z"/></svg></span>Projects</a>
             <ul class="dropdown-menu">
+              <li><a href="${basePath}pages/projects.html">All Projects</a></li>
               <li><a href="${basePath}pages/web-development.html">Web Development</a></li>
               <li><a href="${basePath}pages/mobile-apps.html">Mobile Apps</a></li>
               <li><a href="${basePath}pages/ui-ux-designs.html">UI/UX Designs</a></li>

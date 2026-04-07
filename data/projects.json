@@ -1,0 +1,171 @@
+{
+  "projects": [
+    {
+      "id": "ai-image-generator",
+      "title": "AI Image Generator",
+      "category": "ai",
+      "featured": false,
+      "description": "Advanced AI-powered image generation using state-of-the-art models. Generate stunning visuals from text prompts with real-time processing.",
+      "badges": ["AI", "Python"],
+      "technologies": ["Python", "Flask", "TensorFlow", "API"],
+      "github": "https://github.com/ritesh-chauhan/ai-image-generator",
+      "demo": "https://ritesh-chauhan.github.io/ai-image-generator",
+      "status": "active"
+    },
+    {
+      "id": "ai-chatbot",
+      "title": "Advanced AI Chatbot",
+      "category": "ai",
+      "featured": false,
+      "description": "Intelligent conversational AI with natural language understanding. Multi-turn conversations with context awareness and sentiment analysis.",
+      "badges": ["AI", "NLP"],
+      "technologies": ["Python", "NLP", "Transformers", "WebSocket"],
+      "github": "https://github.com/ritesh-chauhan/ai-chatbot",
+      "demo": "https://ritesh-chauhan.github.io/ai-chatbot",
+      "status": "active"
+    },
+    {
+      "id": "image-classifier",
+      "title": "Image Classification System",
+      "category": "ai",
+      "featured": false,
+      "description": "Deep learning model for accurate image classification. Supports 1000+ object categories with 95%+ accuracy using CNN architecture.",
+      "badges": ["ML", "Deep Learning"],
+      "technologies": ["Python", "PyTorch", "CNN", "Computer Vision"],
+      "github": "https://github.com/ritesh-chauhan/image-classifier",
+      "demo": "https://ritesh-chauhan.github.io/image-classifier",
+      "status": "active"
+    },
+    {
+      "id": "whatsapp-clone",
+      "title": "WhatsApp Clone",
+      "category": "web",
+      "featured": false,
+      "description": "Full-featured real-time chat application with message encryption, user status, and media sharing capabilities. Production-ready WebSocket implementation.",
+      "badges": ["React", "Real-time"],
+      "technologies": ["React", "Firebase", "WebSocket", "Tailwind CSS"],
+      "github": "https://github.com/ritesh-chauhan/whatsapp-clone",
+      "demo": "https://ritesh-chauhan.github.io/whatsapp-clone",
+      "status": "active"
+    },
+    {
+      "id": "weather-dashboard",
+      "title": "Weather Dashboard",
+      "category": "web",
+      "featured": false,
+      "description": "Beautiful weather application with real-time data, 7-day forecast, and interactive maps. Location-based search with geolocation support.",
+      "badges": ["React", "API"],
+      "technologies": ["React", "OpenWeather API", "Mapbox", "Chart.js"],
+      "github": "https://github.com/ritesh-chauhan/weather-dashboard",
+      "demo": "https://ritesh-chauhan.github.io/weather-dashboard",
+      "status": "active"
+    },
+    {
+      "id": "ecommerce-platform",
+      "title": "E-commerce Platform",
+      "category": "web",
+      "featured": false,
+      "description": "Scalable e-commerce platform with product management, shopping cart, payment gateway integration, and admin dashboard for inventory control.",
+      "badges": ["Vue.js", "Backend"],
+      "technologies": ["Vue.js", "Node.js", "MongoDB", "Stripe"],
+      "github": "https://github.com/ritesh-chauhan/ecommerce-platform",
+      "demo": "https://ritesh-chauhan.github.io/ecommerce-platform",
+      "status": "active"
+    },
+    {
+      "id": "ai-travel-planner",
+      "title": "AI Travel Planner Agent",
+      "category": "agents",
+      "featured": true,
+      "description": "Intelligent travel planning agent with real-time recommendations. Autonomous decision-making for itineraries, hotels, flights, and tourism activities.",
+      "badges": ["AI Agent", "LLM"],
+      "technologies": ["Python", "LangChain", "OpenAI API", "Agent Orchestration"],
+      "github": "https://github.com/ritesh-chauhan/ai-travel-planner",
+      "demo": "https://ritesh-chauhan.github.io/ai-travel-planner",
+      "status": "active"
+    },
+    {
+      "id": "ai-code-assistant",
+      "title": "AI Code Assistant Agent",
+      "category": "agents",
+      "featured": true,
+      "description": "Autonomous coding assistant with code analysis, debugging, optimization, and documentation generation. Multi-language support with architecture understanding.",
+      "badges": ["AI Agent", "LLM"],
+      "technologies": ["Python", "Claude API", "AST Parser", "Agent Tools"],
+      "github": "https://github.com/ritesh-chauhan/ai-code-assistant",
+      "demo": "https://ritesh-chauhan.github.io/ai-code-assistant",
+      "status": "active"
+    },
+    {
+      "id": "ai-media-generator",
+      "title": "AI Media Generator Agent",
+      "category": "agents",
+      "featured": true,
+      "description": "Multi-modal content generation agent creating images, videos, and audio from text descriptions. Autonomous workflow orchestration with quality optimization.",
+      "badges": ["AI Agent", "Generative AI"],
+      "technologies": ["Python", "DALL-E", "Eleven Labs", "Agent Framework"],
+      "github": "https://github.com/ritesh-chauhan/ai-media-generator",
+      "demo": "https://ritesh-chauhan.github.io/ai-media-generator",
+      "status": "active"
+    },
+    {
+      "id": "snake-game",
+      "title": "Snake Game",
+      "category": "games",
+      "featured": false,
+      "description": "Classic snake game with modern UI. Includes leaderboard, difficulty levels, power-ups, and smooth animations for nostalgic gaming.",
+      "badges": ["JavaScript", "Game"],
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Canvas API"],
+      "github": "https://github.com/ritesh-chauhan/snake-game",
+      "demo": "https://ritesh-chauhan.github.io/snake-game",
+      "status": "active"
+    },
+    {
+      "id": "tic-tac-toe",
+      "title": "Tic Tac Toe AI",
+      "category": "games",
+      "featured": false,
+      "description": "Interactive tic-tac-toe with intelligent AI opponent. Unbeatable minimax algorithm with beautiful UI and game statistics tracking.",
+      "badges": ["React", "AI"],
+      "technologies": ["React", "Minimax Algorithm", "Tailwind CSS", "Game Logic"],
+      "github": "https://github.com/ritesh-chauhan/tic-tac-toe",
+      "demo": "https://ritesh-chauhan.github.io/tic-tac-toe",
+      "status": "active"
+    }
+  ],
+  "categories": [
+    {
+      "id": "all",
+      "name": "All Projects",
+      "icon": "📌"
+    },
+    {
+      "id": "ai",
+      "name": "AI & ML",
+      "icon": "🤖"
+    },
+    {
+      "id": "web",
+      "name": "Web Development",
+      "icon": "🌐"
+    },
+    {
+      "id": "agents",
+      "name": "AI Agents",
+      "icon": "🧠"
+    },
+    {
+      "id": "games",
+      "name": "Games",
+      "icon": "🎮"
+    }
+  ],
+  "stats": {
+    "totalProjects": 11,
+    "aiProjects": 3,
+    "webProjects": 3,
+    "agentProjects": 3,
+    "gameProjects": 2,
+    "featuredProjects": 3
+  }
+}

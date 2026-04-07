@@ -1,24 +1,442 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mobile Apps - Portfolio</title>
   <link rel="stylesheet" href="../css/shared-nav.css">
+  <link rel="stylesheet" href="../css/projects-style.css">
 </head>
 <body>
   <div id="site-navbar"></div>
 
   <main class="main-content">
-    <section class="page">
+    <!-- Hero Section -->
+    <section class="projects-hero">
+      <div class="hero-content">
+        <h1>Mobile Applications</h1>
+        <p>Native and cross-platform mobile apps for Android, iOS, and Web</p>
+      </div>
+    </section>
+
+    <!-- Projects Layout: Sidebar + Content -->
+    <div class="projects-layout">
+      <!-- Filter Toggle Button (Mobile) -->
+      <button class="filter-toggle-btn" aria-label="Toggle filters" id="filterToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Filter Sidebar -->
+      <section class="filter-section">
+        <div class="filter-buttons">
+          <div class="filter-header">Filters</div>
+          <button class="filter-btn active" data-filter="all">✓ All Apps</button>
+          <button class="filter-btn" data-filter="android">Android</button>
+          <button class="filter-btn" data-filter="ios">iOS</button>
+          <button class="filter-btn" data-filter="crossplatform">Cross-Platform</button>
+          <button class="filter-btn" data-filter="games">Games</button>
+        </div>
+      </section>
+
+      <!-- Projects Content -->
+      <section class="projects-section">
+        <div class="container">
+        <!-- Android Projects -->
+        <h2 class="category-title">🤖 Android Apps (Kotlin)</h2>
+        <div class="projects-grid">
+          <!-- Chat App -->
+          <div class="project-card glass-card" data-category="android">
+            <div class="project-header">
+              <div>
+                <h3>Real-time Chat App</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Kotlin</span>
+                  <span class=\"badge\">Android</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Feb 20, 2023 · 14 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>24</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Modern chat application with real-time messaging, user authentication, group conversations, and media sharing using Firebase backend.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Kotlin</span>
+              <span class="tech-tag">Android Studio</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">Material Design</span>
+              <span class="tech-tag">MVVM Architecture</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/android-chat-app" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/android-chat-app" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Fitness Tracker -->
+          <div class="project-card glass-card featured" data-category="android">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Fitness Tracker</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Kotlin</span>
+                  <span class=\"badge\">Android</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Mar 18, 2023 · 16 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>45</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Comprehensive fitness tracking app with workout logging, progress analytics, calorie counter, and health metrics visualization.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Kotlin</span>
+              <span class="tech-tag">Room Database</span>
+              <span class="tech-tag">Charts Library</span>
+              <span class="tech-tag">Sensors API</span>
+              <span class="tech-tag">Jetpack Compose</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/fitness-tracker" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/fitness-tracker" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- E-commerce App -->
+          <div class="project-card glass-card" data-category="android">
+            <div class="project-header">
+              <div>
+                <h3>E-Commerce Store</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Kotlin</span>
+                  <span class=\"badge\">Android</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Apr 25, 2023 · 12 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>16</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Full-featured shopping app with product catalog, cart management, checkout, order tracking, and secure payment integration.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Kotlin</span>
+              <span class="tech-tag">Retrofit API</span>
+              <span class="tech-tag">Room Database</span>
+              <span class="tech-tag">Razorpay Payment</span>
+              <span class="tech-tag">MVVM + Repository</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/android-ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/android-ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- iOS Projects -->
+        <h2 class="category-title">🍎 iOS Apps (Swift)</h2>
+        <div class="projects-grid">
+          <!-- Note Taking App -->
+          <div class="project-card glass-card" data-category="ios">
+            <div class="project-header">
+              <div>
+                <h3>Advanced Note App</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Swift</span>
+                  <span class=\"badge\">iOS</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">May 30, 2023 · 10 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>34</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Feature-rich note-taking app with rich text editing, image attachments, cloud sync, search functionality, and offline support using Core Data.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Swift</span>
+              <span class="tech-tag">SwiftUI</span>
+              <span class="tech-tag">Core Data</span>
+              <span class="tech-tag">CloudKit</span>
+              <span class="tech-tag">iCloud Sync</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/ios-notes" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/ios-notes" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Social Network -->
+          <div class="project-card glass-card featured" data-category="ios">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Social Network App</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Swift</span>
+                  <span class=\"badge\">iOS</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jun 28, 2023 · 18 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>21</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Modern social networking app with user profiles, feed, direct messaging, notifications, and photo sharing capabilities with beautiful UI.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Swift</span>
+              <span class="tech-tag">SwiftUI</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">Combine</span>
+              <span class="tech-tag">Async/Await</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/ios-social" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/ios-social" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Weather App -->
+          <div class="project-card glass-card" data-category="ios">
+            <div class="project-header">
+              <div>
+                <h3>Weather Forecast</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Swift</span>
+                  <span class=\"badge\">iOS</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jul 14, 2023 · 8 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>38</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Beautiful weather app with detailed forecasts, location services, weather alerts, and widget support. Uses modern SwiftUI and async/await.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Swift</span>
+              <span class="tech-tag">SwiftUI</span>
+              <span class="tech-tag">Core Location</span>
+              <span class="tech-tag">Weather API</span>
+              <span class="tech-tag">WidgetKit</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/ios-weather" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/ios-weather" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-Platform Projects -->
+        <h2 class="category-title">🚀 Cross-Platform Apps (Flutter & React Native)</h2>
+        <div class="projects-grid">
+          <!-- Flutter App -->
+          <div class="project-card glass-card featured" data-category="crossplatform">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Flutter E-Commerce</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Dart</span>
+                  <span class=\"badge\">Flutter</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Aug 22, 2023 · 15 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>28</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Full-featured e-commerce app built with Flutter for both iOS and Android with beautiful animations, state management, and payment integration.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Dart</span>
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">GetX State Management</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">Stripe API</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/flutter-ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/flutter-ecommerce" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- React Native App -->
+          <div class="project-card glass-card" data-category="crossplatform">
+            <div class="project-header">
+              <div>
+                <h3>React Native Marketplace</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">JavaScript</span>
+                  <span class=\"badge\">React Native</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Sep 09, 2023 · 12 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>41</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Marketplace app built with React Native for seamless cross-platform experience. Features user authentication, product listings, and real-time notifications.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">React Native</span>
+              <span class="tech-tag">Redux</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">Native Modules</span>
+              <span class="tech-tag">Expo</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/rn-marketplace" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/rn-marketplace" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Expo Game -->
+          <div class="project-card glass-card" data-category="crossplatform">
+            <div class="project-header">
+              <div>
+                <h3>Mobile Game Studio</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Expo</span>
+                  <span class=\"badge\">Game</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Oct 05, 2023 · 13 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>19</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Cross-platform games built with Expo and Phaser. Features multiple games with high scores, achievements, and smooth animations.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Expo</span>
+              <span class="tech-tag">Phaser Engine</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Mobile Gaming</span>
+              <span class="tech-tag">Cloud Save</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/expo-games" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/expo-games" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Play
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
       <div class="container">
-        <h1>Mobile Apps</h1>
-        <p>Mobile app projects and portfolio pieces.</p>
+        <div class="cta-content">
+          <h2>More Mobile Projects</h2>
+          <p>Explore additional mobile applications and development projects on my GitHub profile.</p>
+          <a href="https://github.com/ritesh-chauhan0x1" target="_blank" rel="noopener noreferrer" class="cta-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Visit GitHub
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <script src="../js/navbar.js"></script>
+  <script src="../js/projects-filter.js"></script>
   <script>insertNavbar('../');</script>
 </body>
 </html>

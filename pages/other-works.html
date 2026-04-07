@@ -1,17 +1,549 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Other Works - Portfolio</title>
   <link rel="stylesheet" href="../css/shared-nav.css">
+  <link rel="stylesheet" href="../css/projects-style.css">
 </head>
 <body>
   <div id="site-navbar"></div>
+
   <main class="main-content">
-    <section class="page"><div class="container"><h1>Other Works</h1><p>Miscellaneous projects and experiments.</p></div></section>
+    <!-- Hero Section -->
+    <section class="projects-hero">
+      <div class="hero-content">
+        <h1>Other Projects & Experiments</h1>
+        <p>Systems programming, algorithms, competitive coding, and diverse language implementations</p>
+      </div>
+    </section>
+
+    <!-- Projects Layout: Sidebar + Content -->
+    <div class="projects-layout">
+      <!-- Filter Toggle Button (Mobile) -->
+      <button class="filter-toggle-btn" aria-label="Toggle filters" id="filterToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Filter Sidebar -->
+      <section class="filter-section">
+        <div class="filter-buttons">
+          <div class="filter-header">Filters</div>
+          <button class="filter-btn active" data-filter="all">✓ All Projects</button>
+          <button class="filter-btn" data-filter="systems">Systems</button>
+          <button class="filter-btn" data-filter="algorithms">Algorithms</button>
+          <button class="filter-btn" data-filter="competitive">Competitive</button>
+          <button class="filter-btn" data-filter="tools">Tools & CLIs</button>
+        </div>
+      </section>
+
+      <!-- Projects Content -->
+      <section class="projects-section">
+        <div class="container">
+        <!-- Systems Programming -->
+        <h2 class="category-title">⚙️ Systems Programming</h2>
+        <div class="projects-grid">
+          <!-- C Operating System -->
+          <div class="project-card glass-card" data-category="systems">
+            <div class="project-header">
+              <div>
+                <h3>Operating System Components</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">C</span>
+                  <span class=\"badge\">Systems</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jan 20, 2023 · 15 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>35</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Low-level OS components written in C including process scheduling, memory management, file system implementation, and interrupt handling routines.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C</span>
+              <span class="tech-tag">Assembly</span>
+              <span class="tech-tag">Memory Management</span>
+              <span class="tech-tag">Process Scheduling</span>
+              <span class="tech-tag">File Systems</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/os-components" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/os-components" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Documentation
+              </a>
+            </div>
+          </div>
+
+          <!-- C++ Game Engine -->
+          <div class="project-card glass-card featured" data-category="systems">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Game Engine Framework</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">C++</span>
+                  <span class=\"badge\">Game Dev</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Feb 28, 2023 · 25 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>14</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              High-performance 3D game engine written in modern C++ with graphics pipeline, physics engine, entity-component system, and scripting support.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++17</span>
+              <span class="tech-tag">OpenGL</span>
+              <span class="tech-tag">Physics</span>
+              <span class="tech-tag">ECS Architecture</span>
+              <span class="tech-tag">Scripting</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/game-engine" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/game-engine" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Explore
+              </a>
+            </div>
+          </div>
+
+          <!-- Rust Web Server -->
+          <div class="project-card glass-card" data-category="systems">
+            <div class="project-header">
+              <div>
+                <h3>Async Web Server</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Rust</span>
+                  <span class=\"badge\">Networking</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Apr 10, 2023 · 12 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>40</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              High-performance async web server built with Rust, featuring HTTP/2 support, connection pooling, and advanced routing with minimal allocations.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Rust</span>
+              <span class="tech-tag">Tokio Async</span>
+              <span class="tech-tag">HTTP/2</span>
+              <span class="tech-tag">Connection Pool</span>
+              <span class="tech-tag">Memory Safe</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/rust-webserver" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/rust-webserver" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Algorithms & Data Structures -->
+        <h2 class="category-title">📊 Algorithms & Data Structures</h2>
+        <div class="projects-grid">
+          <!-- Advanced Data Structures -->
+          <div class="project-card glass-card" data-category="algorithms">
+            <div class="project-header">
+              <div>
+                <h3>Advanced Data Structures</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Java</span>
+                  <span class=\"badge\">Algorithms</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">May 05, 2023 · 10 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>22</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Comprehensive implementation of advanced data structures including AVL trees, B-trees, segment trees, tries, and union-find with detailed documentation.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">Data Structures</span>
+              <span class="tech-tag">Tree Algorithms</span>
+              <span class="tech-tag">Graph Algorithms</span>
+              <span class="tech-tag">Unit Tests</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/dsa-java" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/dsa-java" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Documentation
+              </a>
+            </div>
+          </div>
+
+          <!-- Graph Algorithms -->
+          <div class="project-card glass-card featured" data-category="algorithms">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Graph Algorithm Visualizer</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Python</span>
+                  <span class=\"badge\">Algorithms</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jun 18, 2023 · 14 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>37</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Interactive graph algorithm visualizer with BFS, DFS, Dijkstra's, A* pathfinding, and minimum spanning tree algorithms with animations and performance metrics.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Matplotlib</span>
+              <span class="tech-tag">Graph Theory</span>
+              <span class="tech-tag">Visualization</span>
+              <span class="tech-tag">Performance Analysis</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/graph-visualizer" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/graph-visualizer" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Visualize
+              </a>
+            </div>
+          </div>
+
+          <!-- Sorting Algorithms -->
+          <div class="project-card glass-card" data-category="algorithms">
+            <div class="project-header">
+              <h3>Sorting Algorithm Suite</h3>
+              <div class="project-badges">
+                <span class="badge">Go</span>
+                <span class="badge">Algorithms</span>
+              </div>
+            </div>
+            <p class="project-description">
+              Comprehensive sorting algorithm implementations and analysis including bubble, merge, quick, heap sorts, with benchmarks and complexity analysis.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Go (Golang)</span>
+              <span class="tech-tag">Sorting Algorithms</span>
+              <span class="tech-tag">Benchmarking</span>
+              <span class="tech-tag">Time Complexity</span>
+              <span class="tech-tag">Performance Testing</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/sorting-algorithms-go" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/sorting-algorithms" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Benchmarks
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Competitive Programming -->
+        <h2 class="category-title">🏆 Competitive Programming</h2>
+        <div class="projects-grid">
+          <!-- LeetCode Solutions -->
+          <div class="project-card glass-card featured" data-category="competitive">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>LeetCode Problem Solutions</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Python & Java</span>
+                  <span class=\"badge\">Competitive</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Jul 22, 2023 · 20 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>25</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Solutions to 500+ LeetCode problems with explanations and multiple approaches, covering dynamic programming, graphs, trees, and string algorithms.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">Problem Solving</span>
+              <span class="tech-tag">Optimization</span>
+              <span class="tech-tag">Time Complexity</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/leetcode-solutions" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/leetcode" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Browse Solutions
+              </a>
+            </div>
+          </div>
+
+          <!-- CodeForces Problems -->
+          <div class="project-card glass-card" data-category="competitive">
+            <div class="project-header">
+              <div>
+                <h3>CodeForces Contest Solutions</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">C++</span>
+                  <span class=\"badge\">Competitive</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Aug 15, 2023 · 18 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>42</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Solutions to 200+ CodeForces problems from Div1 and Div2 contests covering advanced topics like combinatorics, number theory, and advanced DP.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">Competitive Programming</span>
+              <span class="tech-tag">Number Theory</span>
+              <span class="tech-tag">Combinatorics</span>
+              <span class="tech-tag">Advanced DP</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/codeforces-solutions" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/codeforces" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                View Solutions
+              </a>
+            </div>
+          </div>
+
+          <!-- Hackathon Solutions -->
+          <div class="project-card glass-card" data-category="competitive">
+            <div class="project-header">
+              <div>
+                <h3>Hackathon & Contest Wins</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Multiple Languages</span>
+                  <span class=\"badge\">Hackathon</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Sep 30, 2023 · 7 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>18</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Award-winning hackathon solutions and contest submissions showcasing innovative problem-solving and rapid prototyping skills across various domains.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Rapid Prototyping</span>
+              <span class="tech-tag">Innovation</span>
+              <span class="tech-tag">Teamwork</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/hackathon-solutions" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/hackathons" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                View Portfolio
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLI Tools & Utilities -->
+        <h2 class="category-title">🛠️ CLI Tools & Utilities</h2>
+        <div class="projects-grid">
+          <!-- Database Management -->
+          <div class="project-card glass-card" data-category="tools">
+            <div class="project-header">
+              <div>
+                <h3>CLI Database Manager</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Ruby</span>
+                  <span class=\"badge\">CLI Tool</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Oct 20, 2023 · 11 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>33</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              Command-line tool for managing databases with migration support, query optimization, and backup automation. Built with Ruby for ease of use.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Ruby</span>
+              <span class="tech-tag">CLI</span>
+              <span class="tech-tag">Database Management</span>
+              <span class="tech-tag">Migrations</span>
+              <span class="tech-tag">Automation</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/db-cli-tool" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/db-cli" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Documentation
+              </a>
+            </div>
+          </div>
+
+          <!-- System Utilities -->
+          <div class="project-card glass-card featured" data-category="tools">
+            <div class="featured-badge">⭐ Featured</div>
+            <div class="project-header">
+              <div>
+                <h3>Cross-Platform System Utilities</h3>
+                <div class=\"project-badges\">
+                  <span class=\"badge\">Go</span>
+                  <span class=\"badge\">System Tool</span>
+                </div>
+              </div>
+              <div class=\"project-meta\">
+                <span class=\"project-date\">Nov 10, 2023 · 13 days</span>
+                <div class=\"project-stars\">
+                  <span class=\"star-icon\">★</span>
+                  <span>29</span>
+                </div>
+              </div>
+            </div>
+            <p class="project-description">
+              High-performance system utilities written in Go for file processing, monitoring, and automation tasks. Single binary deployment for all platforms.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Go (Golang)</span>
+              <span class="tech-tag">System Programming</span>
+              <span class="tech-tag">Cross-platform</span>
+              <span class="tech-tag">File I/O</span>
+              <span class="tech-tag">Performance</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/system-utils" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/system-utils" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Details
+              </a>
+            </div>
+          </div>
+
+          <!-- Machine Learning Tools -->
+          <div class="project-card glass-card" data-category="tools">
+            <div class="project-header">
+              <h3>ML Model Training Pipeline</h3>
+              <div class="project-badges">
+                <span class="badge">Python</span>
+                <span class="badge">ML Tool</span>
+              </div>
+            </div>
+            <p class="project-description">
+              Command-line tool for automated machine learning model training, hyperparameter tuning, and model evaluation with extensive reporting capabilities.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">ML Pipeline</span>
+              <span class="tech-tag">AutoML</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/ritesh-chauhan0x1/ml-pipeline-cli" target="_blank" rel="noopener noreferrer" class="link-btn github-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              <a href="https://ritesh-chauhan0x1.github.io/ml-pipeline" target="_blank" rel="noopener noreferrer" class="link-btn demo-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><path d="M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14"></path></svg>
+                Explore
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>More Projects & Repositories</h2>
+          <p>Explore additional projects, contributions, and experimental work on my GitHub profile.</p>
+          <a href="https://github.com/ritesh-chauhan0x1" target="_blank" rel="noopener noreferrer" class="cta-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Visit GitHub
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
+
   <script src="../js/navbar.js"></script>
+  <script src="../js/projects-filter.js"></script>
   <script>insertNavbar('../');</script>
 </body>
 </html>
