@@ -37,13 +37,11 @@
    * Generate project card HTML
    */
   function generateProjectCard(project) {
-    const featuredBadge = project.featured ? '<div class="featured-badge">⭐ Featured</div>' : '';
     const badgesHTML = project.badges.map(badge => `<span class="badge">${badge}</span>`).join('');
     const techTagsHTML = project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('');
 
     return `
-      <div class="project-card glass-card ${project.featured ? 'featured' : ''}" data-category="${project.category}">
-        ${featuredBadge}
+      <div class="project-card glass-card" data-category="${project.category}">
         <div class="project-header">
           <h3>${project.title}</h3>
           <div class="project-badges">

@@ -229,29 +229,7 @@ body {
   position: relative;
 }
 
-.project-card.featured {
-  grid-column: auto;
-  border: 2px solid var(--accent-purple);
-  background: #ffffff;
-}
 
-.project-card.featured:hover {
-  border-color: var(--accent-purple);
-  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.15);
-}
-
-.featured-badge {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: #ffd700;
-  color: #333;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  z-index: 2;
-}
 
 .project-header {
   margin-bottom: 20px;
@@ -697,10 +675,7 @@ body {
     flex: 1;
   }
 
-  .featured-badge {
-    font-size: 0.7rem;
-    padding: 6px 12px;
-  }
+
 
   .projects-section {
     padding: 40px 15px;
