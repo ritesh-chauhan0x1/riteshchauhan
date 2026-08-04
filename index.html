@@ -163,7 +163,12 @@
         font-size: 1.2rem;
       }
       .image-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        padding: 8px;
+      }
+      .image-grid-item img {
+        height: 110px;
       }
       section {
         padding: 40px 15px;
@@ -191,22 +196,22 @@
 
     <!-- About Section -->
     <section style="background: #f5f5f5; padding: 60px 20px;">
-     <h2>About Me</h2>
-<p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 20px; line-height: 1.8;">
-  I am a B.Tech Computer Science and Engineering student at Kalinga Institute of Industrial Technology (2022–2026) with a strong passion for software development, problem-solving, and technology innovation.
-</p>
+      <h2>About Me</h2>
+      <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 20px; line-height: 1.8;">
+        I'm just an average student with an extraordinary curiosity to learn, build, and explore new ideas. I believe success isn't about being the smartest in the room—it's about staying consistent, thinking differently, and never stopping the learning process.
+      </p>
 
-<p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 20px; line-height: 1.8;">
-  I am skilled in Python, C, Data Structures and Algorithms, and Web Development, and I enjoy building scalable and real-world applications.
-</p>
+      <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 20px; line-height: 1.8;">
+        Technology has always fascinated me. Whether it's creating software, experimenting with new ideas, or solving real-world problems, I enjoy turning imagination into reality. I have an entrepreneurial mindset and love building products that can make people's lives easier while constantly exploring new opportunities to create something meaningful.
+      </p>
 
-<p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 20px; line-height: 1.8;">
-  Alongside my technical journey, I am actively working on building a startup focused on delivering tech products and service-based solutions, including SAP services. I aim to create impactful digital solutions for businesses while also developing innovative platforms to promote tourism through technology.
-</p>
+      <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 20px; line-height: 1.8;">
+        Beyond technology, I'm passionate about sports. From badminton and basketball to cricket and almost any game, I enjoy the thrill of competition, teamwork, and continuous self-improvement. Sports have taught me discipline, resilience, and the importance of never giving up.
+      </p>
 
-<p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 50px; line-height: 1.8;">
-  Beyond academics and tech, I am an avid sports enthusiast, actively participating in badminton, basketball, and cricket, which helps me maintain discipline, teamwork, and a competitive mindset.
-</p>
+      <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 50px; line-height: 1.8;">
+        For me, every challenge is a chance to grow, every failure is a lesson, and every new idea is the beginning of another exciting journey. I believe that with creativity, consistency, and the courage to take risks, ordinary people can build extraordinary things.
+      </p>
 
       <h3 style="text-align: center; font-size: 1.8rem; margin-top: 50px; margin-bottom: 40px;">Education Background</h3>
       <div class="education-grid">
@@ -237,7 +242,7 @@
     <!-- Travel Gallery Section -->
     <section>
       <h2>Travel Gallery</h2>
-      <div class="image-grid">
+      <div class="image-grid" id="travel-gallery">
         <div class="image-grid-item">
           <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774923339/IMG-20260314-WA0035_txyddi.jpg" alt="Travel Photo 1">
         </div>
@@ -253,9 +258,6 @@
         <div class="image-grid-item">
           <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774922839/20251230_144800_alpyux.jpg" alt="Travel Photo 5">
         </div>
-        <div class="image-grid-item">
-          <img src="https://res.cloudinary.com/dj85g5tsx/image/upload/v1774922837/IMG_1192.HEIC_ursjuy.heic" alt="Travel Photo 6">
-        </div>
       </div>
     </section>
 
@@ -263,6 +265,17 @@
 
   <script src="js/navbar.js"></script>
   <script>insertNavbar('');</script>
+  <script>
+    const travelBase='https://res.cloudinary.com/dj85g5tsx/image/upload/';
+    const hostelTravel=[
+      'v1774923499/IMG-20260102-WA0049_jrzb7n.jpg',
+      'v1774922835/IMG_1193.HEIC_ydv9du.heic','v1774922836/IMG_1191.HEIC_xb55ve.heic','v1785822226/20251229_103243_tiaesh.jpg','v1785822219/20251229_102535_k5jstc.jpg','v1785822218/20251229_103128_waa2en.jpg','v1785822218/20251229_103303_yzsaps.jpg','v1785822217/20251229_103113_n9etx4.jpg','v1785822217/20251229_102945_jflvpn.jpg','v1785822217/20251229_103105_yqzpds.jpg',
+      'v1785822233/20251230_143140_bnyp4o.jpg','v1785822246/20251230_144731_ji0ag4.jpg','v1785822238/20251230_152233_jywsbo.jpg','v1785822238/20251230_150952_krdclb.jpg','v1785822237/20251230_150753_ld4j9s.jpg','v1785822235/20251230_144722_n9i6lg.jpg','v1785822234/20251230_143150_fqbtx7.jpg',
+      'v1774922835/IMG_0726.HEIC_tooxmr.heic','v1785822245/BCD40252-CAA4-4FB9-8A7E-B5BB70F8540C_tayjyg.jpg','v1785822245/20260101_130439_klzxti.jpg','v1785822245/20260102_113244_uggccb.jpg','v1785822241/20251230_154247_kozqdx.jpg','v1785822241/20251231_100247_rslaez.jpg','v1785822239/20251230_154247_1_c2oyaw.jpg','v1785822237/20251230_133411_ufi4pp.jpg','v1785822233/20251230_112039_ophdwl.jpg','v1785822232/20251230_140713_ryasbr.jpg','v1785822230/20251230_134558_ggzgpk.jpg','v1785822230/20251230_134601_zfn947.jpg','v1785822229/20251230_134553_py0xr2.jpg','v1785822229/20251230_133539_ut03uq.jpg','v1785822229/20251230_133956_faw0sl.jpg','v1785822228/20251230_112035_vptytj.jpg','v1785822226/20251229_170144_1_yatzwi.jpg','v1785822226/20251229_170144_l0fewy.jpg','v1785822225/20251229_162948_zb22pv.jpg','v1785822224/20251229_142406_s3dum1.jpg','v1785822220/20251229_134926_1_eubzqo.jpg','v1785822219/20251229_114531_muydeb.jpg',
+      'v1785822213/20251001_145426_ttb4mc.jpg','v1785822209/20251001_145418_zf6yti.jpg','v1785822210/20251001_145435_hfcl6l.jpg','v1785822214/20251219_124650_j1ooqr.jpg','v1785822213/20251219_124645_nkrmcp.jpg','v1785822212/20251219_123502_rtnzhw.jpg','v1785822212/20251219_124634_ocbw2z.jpg','v1785822209/20250919_180624_kpbqax.jpg','v1785822209/20250919_181517_k6xfvg.jpg'
+    ];
+    document.getElementById('travel-gallery').insertAdjacentHTML('beforeend',hostelTravel.filter((_,i)=>![1,2,17].includes(i)).map((path,i)=>`<div class="image-grid-item"><img src="${travelBase+path}" alt="Hostel travel memory ${i+1}" loading="lazy"></div>`).join(''));
+  </script>
   <script src="js/script.js"></script>
   <script src="js/clickspark.js"></script>
 </body>

@@ -21,7 +21,7 @@ header.homepage .dropdown-menu a:hover{background:rgba(255,255,255,0.12)}
 /* Stronger rule to ensure homepage uses centered navbar even if other CSS loads */
 header.site-header .navbar{justify-content:space-between !important}
 .brand{color:#1a1a1a;text-decoration:none;font-weight:700;font-size:1.2rem;text-shadow:none}
-.nav-toggle{display:none;background:none;border:0;gap:4px;flex-direction:column;position:absolute;right:1rem}
+.nav-toggle{display:none;background:none;border:0;gap:4px;flex-direction:column;position:absolute;right:1rem;touch-action:manipulation}
 .nav-toggle span{display:block;height:3px;width:22px;background:#1a1a1a;border-radius:2px}
 .nav-menu{display:flex;position:relative;flex:1;justify-content:center}
 .nav-list{display:flex;list-style:none;gap:2rem;margin:0;padding:0;align-items:center}
@@ -68,11 +68,41 @@ header.site-header{z-index:9999;position:relative}
   .navbar{padding:1rem;z-index:9999;background:transparent}
   .nav-toggle{display:flex;z-index:100}
   .brand{position:relative;left:auto;font-size:1rem;color:#1a1a1a}
-  .nav-menu{position:fixed;left:0;top:56px;right:0;bottom:0;background:var(--nav);padding:1rem;transform:translateX(100%);transition:transform 240ms ease;z-index:99;overflow-y:auto}
-  .nav-menu.active{transform:translateX(0)}
-  .nav-list{flex-direction:column;gap:0.5rem}
-  .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;display:none;padding-left:0.5rem;background:rgba(255,255,255,0.1)}
+  .nav-menu{display:none;position:fixed;left:0;top:56px;bottom:0;width:min(60vw, 320px);max-width:320px;background:#ffffff;padding:1rem;transform:translateX(-110%);opacity:0;pointer-events:none;transition:transform 240ms ease, opacity 240ms ease;z-index:99;overflow-y:auto;box-shadow:18px 0 40px rgba(0,0,0,0.14);border-right:1px solid #e5e7eb;border-radius:0 18px 18px 0}
+  .nav-menu.active{display:flex;transform:translateX(0) !important;opacity:1 !important;pointer-events:auto !important}
+  .nav-list{flex-direction:column;align-items:stretch;gap:0.65rem}
+  .nav-list a{display:flex;align-items:center;justify-content:flex-start;width:100%;padding:0.9rem 1rem;border-radius:12px;background:#111111;color:#ffffff;font-weight:700}
+  .nav-list a:hover{color:#ffffff;background:#111111}
+  .dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;display:none;padding:0.35rem 0 0.15rem 0.25rem;background:transparent;box-shadow:none;border:0}
   .nav-item.active .dropdown-menu{display:block}
+  .dropdown-menu a{background:#ffffff;color:#111111;padding:0.7rem 0.85rem;border:1px solid #e5e7eb;border-radius:10px;margin-top:0.35rem;font-weight:600}
   .social-icons{position:fixed;left:0;right:0;bottom:12px;top:auto;transform:none;flex-direction:row;justify-content:center;background:transparent;padding:0.25rem;gap:1rem;z-index:9998}
   .social{width:40px;height:40px}
 }
+
+/* Reusable mobile drawer: replaces the desktop navigation below 1024px. */
+.nav-overlay{display:none}
+@media (max-width:1023px){
+  .navbar{padding:1rem;background:transparent}
+  .nav-toggle{display:flex;position:fixed;top:16px;right:16px;z-index:10002;padding:10px;border-radius:12px;background:#111;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+  .nav-toggle span{background:#fff}
+  .nav-menu{display:none!important}
+  .nav-list{width:100%;display:flex;flex-direction:column;align-items:stretch;gap:12px}
+  .nav-list a,header.homepage .nav-list a{display:flex;width:100%;padding:16px;border-radius:14px;background:#111;color:#fff;text-shadow:none;font-weight:600}
+  .nav-list a:hover,header.homepage .nav-list a:hover{background:#111;color:#fff}
+  .nav-item.active>.nav-link{border-left:4px solid #2563eb;box-shadow:0 7px 16px rgba(0,0,0,.18)}
+  .dropdown-menu{position:static;display:none;min-width:0;margin:0;padding:0;background:transparent!important;box-shadow:none;border:0;opacity:1;visibility:visible;transform:none}
+  .nav-item.active .dropdown-menu{display:grid;gap:8px;margin-top:-4px}
+  .dropdown-menu a{background:#f3f4f6!important;color:#111!important;border:1px solid #e5e7eb;margin:0;padding:12px!important;text-shadow:none!important}
+  .nav-overlay{display:block;position:fixed;inset:0;z-index:10000;background:rgba(2,6,23,.62);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 300ms ease-in-out,visibility 0s linear 300ms}
+  .nav-overlay.active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity 300ms ease-in-out}
+  body.drawer-open{overflow:hidden}
+  .social-icons{display:none}
+  .mobile-drawer{display:block;position:fixed;top:0;right:0;width:60vw;max-width:420px;height:100vh;height:100dvh;padding:82px 16px 24px;background:#fff;transform:translateX(100%);visibility:hidden;pointer-events:none;transition:transform 300ms ease-in-out,visibility 0s linear 300ms;z-index:10001;border-radius:24px 0 0 24px;box-shadow:-18px 0 48px rgba(0,0,0,.22);overflow-y:auto;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
+  .mobile-drawer.active{transform:translateX(0);visibility:visible;pointer-events:auto;transition:transform 300ms ease-in-out}
+  .mobile-drawer-links{display:grid;gap:12px}.mobile-drawer-links>a,.mobile-drawer summary{display:block;width:100%;padding:16px;border:0;border-radius:14px;background:#111;color:#fff;text-decoration:none;font-size:16px;font-weight:600;line-height:1.2;cursor:pointer}.mobile-drawer details{position:relative;display:block}.mobile-drawer summary{list-style:none}.mobile-drawer summary::-webkit-details-marker{display:none}.mobile-drawer details[open]{z-index:2}.mobile-drawer details a{display:none;padding:12px 14px;border-radius:10px;background:#f3f4f6;color:#111;text-decoration:none;font-weight:600;box-shadow:0 8px 18px rgba(15,23,42,.12)}.mobile-drawer details[open] a{display:block;position:absolute;left:0;right:0;top:62px}.mobile-drawer details[open] a:nth-of-type(2){top:112px}.mobile-drawer details[open] a:nth-of-type(3){top:162px}.mobile-drawer a:active,.mobile-drawer summary:active{transform:scale(.98)}
+}
+@media (min-width:1024px){.mobile-drawer{display:none!important}}
+
+/* Overview cards used by the direct Projects, Skills, and Contact pages. */
+.content-hubs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;max-width:1200px;margin:32px auto;padding:0 20px}.content-hub{display:block;padding:22px;border:1px solid #e5e7eb;border-radius:16px;background:#fff;color:#111827;text-decoration:none;box-shadow:0 8px 24px rgba(15,23,42,.06);transition:transform .2s,box-shadow .2s}.content-hub:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(15,23,42,.12)}.content-hub h3{margin:0 0 8px}.content-hub p{margin:0;color:#6b7280;line-height:1.55;font-size:.9rem}

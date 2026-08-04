@@ -1,8 +1,9 @@
-// navbar.js - injects a shared navbar + social icons into pages
-function insertNavbar(basePath) {
+// navbar.js - injects a shared navbar + optional social icons into pages
+function insertNavbar(basePath, options = {}) {
   basePath = basePath || '';
   const isHomepage = basePath === '';
   const headerClass = isHomepage ? 'site-header homepage' : 'site-header';
+  const showSocialIcons = options.showSocialIcons !== false;
   const nav = `
   <header class="${headerClass}">
     <nav class="navbar">
@@ -17,23 +18,9 @@ function insertNavbar(basePath) {
       <div class="nav-menu" id="main-nav">
         <ul class="nav-list">
           <li><a href="${basePath}index.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-8.5z"/></svg></span>Home</a></li>
-          <li class="nav-item dropdown"><a href="${basePath}pages/projects.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 4h18v8H3v-8z"/></svg></span>Projects</a>
-            <ul class="dropdown-menu">
-              <li><a href="${basePath}pages/projects.html">All Projects</a></li>
-              <li><a href="${basePath}pages/web-development.html">Web Development</a></li>
-              <li><a href="${basePath}pages/mobile-apps.html">Mobile Apps</a></li>
-              <li><a href="${basePath}pages/ui-ux-designs.html">UI/UX Designs</a></li>
-              <li><a href="${basePath}pages/other-works.html">Other Works</a></li>
-            </ul>
-          </li>
+          <li><a href="${basePath}pages/projects.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 4h18v8H3v-8z"/></svg></span>Projects</a></li>
 
-          <li class="nav-item dropdown"><a href="${basePath}pages/programming-languages.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l4 4-4 4-4-4 4-4zm0 6l4 4-4 4-4-4 4-4z"/></svg></span>Skills</a>
-            <ul class="dropdown-menu">
-              <li><a href="${basePath}pages/programming-languages.html">Programming Languages</a></li>
-              <li><a href="${basePath}pages/frameworks-tools.html">Frameworks & Tools</a></li>
-              <li><a href="${basePath}pages/certifications.html">Certifications</a></li>
-            </ul>
-          </li>
+          <li><a href="${basePath}pages/programming-languages.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l4 4-4 4-4-4 4-4zm0 6l4 4-4 4-4-4 4-4z"/></svg></span>Skills</a></li>
 
           <li class="nav-item dropdown"><a href="${basePath}pages/tech-blogs.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 4h16v12H5.17L4 17.17V4zM6 6v8h12V6H6z"/></svg></span>Blog</a>
             <ul class="dropdown-menu">
@@ -51,18 +38,24 @@ function insertNavbar(basePath) {
             </ul>
           </li>
 
-          <li class="nav-item dropdown"><a href="${basePath}pages/email.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 6l10 7 10-7v12H2V6zm10 5L2 4h20L12 11z"/></svg></span>Contact</a>
-            <ul class="dropdown-menu">
-              <li><a href="${basePath}pages/email.html">Email</a></li>
-              <li><a href="${basePath}pages/social-links.html">Social Links</a></li>
-              <li><a href="${basePath}pages/resume.html">Resume (Download)</a></li>
-            </ul>
-          </li>
+          <li><a href="${basePath}pages/email.html" class="nav-link"><span class="nav-icon">${''}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 6l10 7 10-7v12H2V6zm10 5L2 4h20L12 11z"/></svg></span>Contact</a></li>
         </ul>
       </div>
     </nav>
   </header>
+  <div class="nav-overlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <nav class="mobile-drawer-links">
+      <a href="${basePath}index.html">Home</a>
+      <a href="${basePath}pages/projects.html">Projects</a>
+      <a href="${basePath}pages/programming-languages.html">Skills</a>
+      <details><summary>Blog</summary><a href="${basePath}pages/tech-blogs.html">Tech Blogs</a><a href="${basePath}pages/personal-blogs.html">Personal Blogs</a><a href="${basePath}pages/hostel-life.html">Hostel Days</a></details>
+      <details><summary>Achievements</summary><a href="${basePath}pages/hackathons.html">Hackathons</a><a href="${basePath}pages/competitions.html">Competitions</a><a href="${basePath}pages/awards.html">Awards</a></details>
+      <a href="${basePath}pages/email.html">Contact</a>
+    </nav>
+  </aside>
 
+  ${showSocialIcons ? `
   <div class="social-icons" aria-hidden="false">
     <a class="social whatsapp" href="https://wa.me/919337940768" aria-label="WhatsApp" target="_blank" rel="noopener"><img src="${basePath}icons/whatsapp.svg" alt="WhatsApp"></a>
     <a class="social instagram" href="https://www.instagram.com/riteshchauhan_15/" aria-label="Instagram" target="_blank" rel="noopener"><img src="${basePath}icons/instagram.svg" alt="Instagram"></a>
@@ -71,6 +64,7 @@ function insertNavbar(basePath) {
     <a class="social leetcode" href="https://leetcode.com/u/riteshchauhn_15/" aria-label="LeetCode" target="_blank" rel="noopener"><img src="${basePath}icons/leetcode.svg" alt="LeetCode"></a>
     <a class="social linkedin" href="https://www.linkedin.com/in/ritesh-chauhan-79818a374/" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="${basePath}icons/linkedin.svg" alt="LinkedIn"></a>
   </div>
+  ` : ''}
 `;
 
   // Inject into page
@@ -82,16 +76,39 @@ function insertNavbar(basePath) {
   }
 }
 
-function setupNavbarBehavior() {
+function legacyNavbarBehavior() {
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
   const navbar = document.querySelector('.navbar');
 
+  const closeMobileMenu = () => {
+    navMenu && navMenu.classList.remove('active');
+    navToggle && navToggle.setAttribute('aria-expanded', 'false');
+    document.querySelectorAll('.nav-item.active').forEach(i => i.classList.remove('active'));
+  };
+
+  const toggleMobileMenu = (event) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (!navToggle || !navMenu) return;
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+    const shouldOpen = !expanded;
+    navToggle.setAttribute('aria-expanded', String(shouldOpen));
+    navMenu.classList.toggle('active', shouldOpen);
+  };
+
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function () {
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', String(!expanded));
-      navMenu.classList.toggle('active');
+    navToggle.addEventListener('pointerdown', function (event) {
+      if (window.innerWidth <= 780) {
+        toggleMobileMenu(event);
+      }
+    }, { passive: false });
+    navToggle.addEventListener('click', function (event) {
+      if (window.innerWidth > 780) {
+        toggleMobileMenu(event);
+      }
     });
   }
 
@@ -143,9 +160,7 @@ function setupNavbarBehavior() {
   // Keyboard handling for accessibility (Enter/Space opens, Escape closes)
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
-      // close everything
-      navMenu && navMenu.classList.remove('active');
-      navToggle && navToggle.setAttribute('aria-expanded', 'false');
+      closeMobileMenu();
       document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active');
         const pl = item.querySelector('a');
@@ -177,11 +192,13 @@ function setupNavbarBehavior() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
     if (!navbar.contains(e.target)) {
-      const nm = document.querySelector('.nav-menu');
-      nm && nm.classList.remove('active');
-      document.querySelectorAll('.nav-item.active').forEach(i => i.classList.remove('active'));
-      const nt = document.querySelector('.nav-toggle');
-      nt && nt.setAttribute('aria-expanded', 'false');
+      closeMobileMenu();
+    }
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 780) {
+      closeMobileMenu();
     }
   });
 
@@ -199,6 +216,46 @@ function setupNavbarBehavior() {
     s.addEventListener('touchstart', function () { triggerPop(); }, {passive:true});
     s.addEventListener('mousedown', function () { triggerPop(); });
     s.addEventListener('focus', function () { triggerPop(); });
+  });
+}
+
+// Shared mobile drawer controller used by every HTML page that calls insertNavbar().
+function setupNavbarBehavior() {
+  const toggle = document.querySelector('.nav-toggle');
+  const drawer = document.querySelector('.mobile-drawer');
+  const overlay = document.querySelector('.nav-overlay');
+  if (!toggle || !drawer || !overlay) return;
+
+  const mobile = () => window.matchMedia('(max-width: 1023px)').matches;
+  const close = () => {
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.classList.remove('drawer-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+  };
+  const open = () => {
+    if (!mobile()) return;
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    document.body.classList.add('drawer-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    drawer.setAttribute('aria-hidden', 'false');
+  };
+
+  toggle.addEventListener('click', event => {
+    if (!mobile()) return;
+    event.preventDefault();
+    drawer.classList.contains('active') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if (!mobile()) close(); });
+
+  drawer.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (!link) return;
+    close();
   });
 }
 
