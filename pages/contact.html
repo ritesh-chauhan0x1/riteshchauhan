@@ -1,25 +1,5 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Contact — Ritesh Chauhan</title>
-  <link rel="stylesheet" href="../css/shared-nav.css">
-</head>
-<body>
-  <div id="site-navbar"></div>
-
-  <main class="main-content">
-    <section class="page-section">
-      <div class="container">
-        <h1>Contact</h1>
-        <p class="muted">Email: you@example.com — Add social links and resume download link here.</p>
-      </div>
-    </section>
-  </main>
-
-  <script src="../js/navbar.js"></script>
-  <script>insertNavbar('../');</script>
-  <script src="../js/clickspark.js"></script>
-</body>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Contact Ritesh Chauhan for product, full stack, mobile, and UI/UX work."><title>Contact — Ritesh Chauhan</title><link rel="stylesheet" href="../css/shared-nav.css"><link rel="stylesheet" href="../css/content-pages.css"></head>
+<body><div id="site-navbar"></div><main class="page-main"><header class="page-hero"><p class="page-eyebrow">Start a conversation</p><h1>Have a product problem worth solving?</h1><p>I’m open to thoughtful conversations about products, engineering, logistics, and building useful digital experiences.</p></header><section class="content-grid"><article class="content-card"><h2>Contact details</h2><p><a class="text-link" href="mailto:riteshchauhan0x1@gmail.com">riteshchauhan0x1@gmail.com</a></p><p style="margin-top:12px">Based in Nepal · available remotely</p><div class="tag-list"><a class="tag" href="https://github.com/ritesh-chauhan0x1" target="_blank" rel="noopener">GitHub</a><a class="tag" href="https://www.linkedin.com/in/ritesh-chauhan-79818a374/" target="_blank" rel="noopener">LinkedIn</a></div></article><article class="content-card"><h2>What I can help with</h2><ul><li>Full stack web applications</li><li>Mobile product development</li><li>Backend architecture and APIs</li><li>UI/UX direction for early products</li></ul></article></section><section style="margin-top:32px"><h2 style="margin:0 0 16px;font-size:1.35rem">Send a message</h2><form class="contact-form" id="contactForm" novalidate><label>Name<input name="name" autocomplete="name" required></label><label>Email<input name="email" type="email" autocomplete="email" required></label><label>Message<textarea name="message" required></textarea></label><button class="button" type="submit">Prepare email</button><p class="form-status" id="formStatus" aria-live="polite"></p></form></section></main><script src="../js/navbar.js"></script><script>insertNavbar('../');document.getElementById('contactForm').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.checkValidity()){f.reportValidity();return}const d=new FormData(f);const subject=encodeURIComponent('Portfolio enquiry from '+d.get('name'));const body=encodeURIComponent('Name: '+d.get('name')+'\nEmail: '+d.get('email')+'\n\n'+d.get('message'));document.getElementById('formStatus').textContent='Opening your email client…';location.href='mailto:riteshchauhan0x1@gmail.com?subject='+subject+'&body='+body;});</script><script src="../js/clickspark.js"></script></body>
 </html>
